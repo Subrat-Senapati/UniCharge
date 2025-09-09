@@ -3,6 +3,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const connectToDb = require("./database/db");
+const passport = require("./config/passport");
+const session = require("express-session");
 
 const userRoutes = require("./routes/users.routes");
 
@@ -20,6 +22,16 @@ app.get("/", (req, res) => {
   res.send("🚀 Backend server is running!");
 });
 
+// Add session middleware (needed for passport)
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/users", userRoutes);
 
