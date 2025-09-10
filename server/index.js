@@ -7,6 +7,7 @@ const passport = require("./config/passport");
 const session = require("express-session");
 
 const userRoutes = require("./routes/users.routes");
+const walletRoutes = require("./routes/wallet.routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,6 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/api/users", userRoutes);
+app.use("/api/wallet", walletRoutes);
 
 
 app.listen(PORT, () => {

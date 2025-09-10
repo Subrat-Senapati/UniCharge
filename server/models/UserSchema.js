@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema(
     passwordHash: { type: String, required: true },
     role: { type: String, enum: ["user", "admin", "provider"], default: "user" },
     createdAt: { type: Date, default: Date.now },
+    walletBalance: { type: Number, default: 0 }
   },
   {
     versionKey: false,
