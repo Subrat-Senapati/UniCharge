@@ -18,15 +18,17 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   (req, res) => {
-    const token = jwt.sign({ id: req.user._id, email: req.user.email }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      { id: req.user._id, email: req.user.email.toLowerCase() },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000 // ⬅️ 7 days in ms
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     res.json({ user: req.user, token });
