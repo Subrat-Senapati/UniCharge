@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, profile } = require("../controllers/user.controller");
+const { register, login, profile, logout } = require("../controllers/user.controller");
 const { authMiddleware } = require("../middleware/auth");
 const { registerValidation, loginValidation, validate } = require("../validators/user.validator");
 const passport = require("passport");
@@ -24,7 +24,7 @@ router.get(
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000 // ⬅️ 7 days in ms
     });
@@ -35,5 +35,7 @@ router.get(
 
 // Protected
 router.get("/profile", authMiddleware, profile);
+
+router.post("/logout", logout);
 
 module.exports = router;

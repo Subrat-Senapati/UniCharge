@@ -38,4 +38,13 @@ async function profile(req, res) {
   res.json({ user: req.user }); // user from JWT
 }
 
-module.exports = { register, login, profile };
+async function logout(req, res) {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  res.json({ message: "Logged out successfully" });
+}
+
+module.exports = { register, login, profile, logout };
