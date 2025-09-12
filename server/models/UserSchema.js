@@ -51,6 +51,17 @@ const UserSchema = new mongoose.Schema(
       },
     ],
 
+    location: {
+      city: { type: String },
+      state: { type: String },
+      country: { type: String },
+      coordinates: {
+        lat: { type: Number },
+        lng: { type: Number }
+      },
+      isProvided: { type: Boolean, default: false },
+    },
+
     preferences: {
       preferredLanguage: { type: String, default: "en" },
       notificationsEnabled: { type: Boolean, default: true },
