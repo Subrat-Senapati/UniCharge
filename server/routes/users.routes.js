@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, profile } = require("../controllers/user.controller");
+const { register, login, profile, logout } = require("../controllers/user.controller");
 const { authMiddleware } = require("../middleware/auth");
 const { registerValidation, loginValidation, validate } = require("../validators/user.validator");
 const passport = require("passport");
@@ -18,9 +18,17 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   (req, res) => {
-    // Generate JWT for logged-in user
-    const token = jwt.sign({ id: req.user._id, email: req.user.email }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
+    const token = jwt.sign(
+      { id: req.user._id, email: req.user.email.toLowerCase() },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     res.json({ user: req.user, token });
@@ -28,6 +36,8 @@ router.get(
 );
 
 // Protected
-router.get("/me", authMiddleware, profile);
+router.get("/profile", authMiddleware, profile);
+
+router.post("/logout", logout);
 
 module.exports = router;
