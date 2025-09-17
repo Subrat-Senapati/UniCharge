@@ -1,0 +1,1522 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+/* Header CSS */
+
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.header-top-left ul li:first-child::after {
+    content: '';
+    height: 100%;
+    left: auto;
+    position: relative;
+    right: -10px;
+    width: auto;
+    border-left: 1px solid #F7F7F757;
+}
+
+.header-socials a {
+    font-size: 14px;
+    height: 34px;
+    width: 34px;
+    line-height: 33px;
+}
+
+.header-socials a:hover {
+    background-color: #87C332;
+    color: #fff;
+    border-color: #87C332 !important;
+}
+
+.navbar-nav .nav-link {
+    padding: 13px 20px;
+    color: #fff;
+}
+
+.navbar-nav .nav-item.no-after::after {
+    display: none;
+}
+
+.dropdown-menu>li>a {
+    font-size: 16px;
+    padding: 13px 36px !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.show {
+    color: #87C332;
+}
+
+.dropdown-menu>li>a:hover {
+    background-color: #69A316;
+    color: #ffffff;
+}
+
+@media (min-width: 1180px) {
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+        top: auto;
+    }
+    .dropdown-menu {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .dropdown:hover>.dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transition: all .3s ease-in-out;
+    }
+    .dropdown>.dropdown-toggle:active {
+        /*Without this, clicking will make it sticky*/
+        pointer-events: none;
+    }
+    ul.dropdown-menu {
+        max-height: 630px !important;
+        overflow-y: auto !important;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        /* scrollbar-width: none; */
+        /* Firefox */
+    }
+    .navbar-nav .nav-link.active {
+        color: #87C332;
+    }
+    .dropdown-item.active {
+        background-color: #69A316;
+    }
+}
+
+@media (min-width: 1181px) and (max-width: 1380px) {
+    .navbar-logo img {
+        width: 70% !important;
+    }
+}
+
+@media (max-width: 1180px) {
+    div#slicknav-mobile {
+        display: block;
+    }
+    .header-top,
+    .navbar-button,
+    .navbar-sticky-in,
+    #responsive-menu {
+        display: none;
+    }
+    .slicknav_menu {
+        display: block;
+    }
+    .nav-link {
+        padding: 12px 36px !important;
+        margin: 0 !important;
+    }
+    .slicknav_btn {
+        position: absolute;
+        right: 70px;
+    }
+    .slicknav_btn.slicknav_open:before,
+    .slicknav_btn.slicknav_collapsed:before {
+        left: 0;
+        top: 30px;
+        padding: 8px;
+        position: absolute;
+    }
+    .dropdown-menu {
+        border-radius: 0 !important;
+    }
+    .slicknav_btn.slicknav_open:before {
+        color: #69A316;
+    }
+    .slicknav_nav {
+        top: 80px;
+        left: 0;
+        background-color: #F5F5F5;
+        position: absolute;
+        height: 280px;
+        overflow: auto;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.12);
+    }
+    .slicknav_nav a:hover,
+    li.nav-item.dropdown.slicknav_parent.slicknav_open>a>a {
+        background-color: #69A316 !important;
+        color: #fff;
+    }
+    .slicknav_nav a,
+    .dropdown-menu>li>a {
+        font-size: 16px;
+        background-color: #F5F5F5;
+        color: #33373d;
+        text-transform: capitalize !important;
+        border: none !important;
+        font-weight: 400 !important;
+    }
+    .dropdown-menu>li>a {
+        padding-left: 42px !important;
+    }
+    .dropdown-toggle::after {
+        display: none;
+    }
+    .slicknav_nav .active,
+    .fa-angle-up:before {
+        background-color: #69A316;
+        color: #fff;
+    }
+}
+
+@media (max-width: 1100px) {
+    .slicknav_nav .slicknav_item a {
+        pointer-events: none;
+    }
+}
+
+/* Popup hidden by default */
+
+#search1 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#search1 input {
+    width: 400px;
+}
+
+#search1.open {
+    display: flex;
+}
+
+#search1 .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Banner CSS */
+
+.banner {
+    /* min-height: 800px; */
+    background-image: url(../images/ev-vehicle.jpg);
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: -8%;
+}
+
+.banner .overlay {
+    background-image: linear-gradient(180deg, #052730 0%, #052730 100%);
+    opacity: .7;
+}
+
+@media (max-width: 1400px) {
+    .banner {
+        margin-top: -11%;
+    }
+    .banner-inner {
+        padding-top: 80px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        margin-top: -21%;
+    }
+    .spin-container {
+        margin: 0 100px;
+    }
+    .banner-btn li a,
+    .download-btn li a {
+        width: 75%;
+    }
+}
+
+/* Spin Animation  */
+
+.spin {
+    display: inline-block;
+    animation: spin 2s ease-in-out forwards;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    40% {
+        transform: rotateY(360deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Feature CSS */
+
+.feature-inner {
+    margin-top: -150px;
+}
+
+@media (max-width: 992px) {
+    .feature-box2 {
+        border-right: none !important;
+        padding-right: 0 !important;
+    }
+    .feature-box3 {
+        border-top: 1px solid #5F5F5F21;
+        padding-top: 40px;
+        padding-left: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .feature-box2 {
+        border: none !important;
+        border-top: 1px solid #5F5F5F21 !important;
+        padding-top: 40px;
+        padding-left: 0 !important;
+    }
+    .feature-box1 {
+        padding-right: 0 !important;
+    }
+}
+
+/* About CSS */
+
+.about {
+    background-image: linear-gradient(90deg, #F5FAEE 20%, #F5FAEE00 100%);
+    margin-top: -140px;
+}
+
+.about-service-box {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+@media (max-width: 1200px) {
+    .about .section-title h2,
+    .more-about .section-title h2,
+    .review .section-title h2,
+    .mobile-app .section-title h2,
+    .career-faq .section-title h2,
+    .faq .section-title h2,
+    .about1 .section-title h2 {
+        border: none !important;
+        padding: 0 !important
+    }
+    ;
+}
+
+@media (max-width: 768px) {
+    .about-service-box {
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+}
+
+/* Why US CSS */
+
+.why-us .overlay {
+    background-image: linear-gradient(90deg, #F5FAEE 50%, #FFFFFF00 0%);
+    opacity: .9;
+}
+
+.ev-logo img {
+    height: 80px;
+    width: 80px;
+}
+
+.ev-logo {
+    top: 5%;
+    right: 40%;
+}
+
+.service-image img {
+    margin-bottom: -35px;
+}
+
+@media (min-width: 768px) and (max-width:1200px) {
+    .service-image img {
+        width: 50% !important;
+    }
+    .ev-logo {
+        top: 2%;
+    }
+}
+
+@media (max-width: 768px) {
+    .why-us .section-title-left h2 {
+        border: none !important;
+        padding: 0 !important
+    }
+    ;
+}
+
+/* Work CSS */
+
+.work-image img {
+    width: 150px;
+    height: 150px;
+}
+
+.work-box-number {
+    top: -20px;
+    left: 40%;
+}
+
+.work-box-number h4 {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+}
+
+.work {
+    margin-right: 5%;
+    background-image: url(../images/electric-car-charging-connected-to-the-grid-2023-02-07-21-01-15-utc.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.work .overlay {
+    background-image: linear-gradient(90deg, #052730 0%, #69A316 100%);
+    opacity: 0.9;
+}
+
+@media (min-width: 768px) and (max-width:1200px) {
+    .work-box {
+        margin: 0 !important;
+        margin-top: 20px !important;
+    }
+    .work {
+        padding-bottom: 100px !important;
+    }
+}
+
+@media (max-width:768px) {
+    .work,
+    .work .overlay {
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+/* Mission */
+
+@media (max-width: 992px) {
+    .partner-slider,
+    .mission h2,
+    .partner h3 {
+        border: none !important;
+        padding: 0 !important;
+    }
+}
+
+/* More About CSS */
+
+.more-about {
+    margin: 0 5%;
+    background-color: #052730;
+    background-image: url(../images/img15_circle.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+}
+
+.percentage-wrapper::after {
+    position: absolute;
+    content: "";
+    bottom: -7px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 3px;
+    height: 8px;
+    background-color: #87C332;
+}
+
+.percentage-wrapper {
+    top: -50px;
+    left: 100%;
+    /* Move it along the width of progress */
+    transform: translateX(-50%);
+    font-size: 13px;
+    transition: left 3s ease-in-out;
+}
+
+.percentage-wrapper::after {
+    position: absolute;
+    content: "";
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 8px;
+    background-color: #87C332;
+}
+
+.progress-bar {
+    animation: progressBar 3s ease-in-out forwards;
+}
+
+.about-video-play {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+@keyframes waves {
+    0% {
+        -webkit-transform: scale(0.2, 0.2);
+        transform: scale(0.2, 0.2);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.9;
+    }
+    100% {
+        -webkit-transform: scale(0.9, 0.9);
+        transform: scale(0.9, 0.9);
+        opacity: 0;
+    }
+}
+
+.waves {
+    width: 150px;
+    height: 150px;
+    background: #87C33230;
+    opacity: 0;
+    right: -50px;
+    bottom: -50px;
+    -webkit-animation: waves 3s ease-in-out infinite;
+    animation: waves 3s ease-in-out infinite;
+}
+
+.wave-1 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+.wave-2 {
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+.wave-3 {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+}
+
+@keyframes progressBar {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: width;
+    }
+}
+
+@media (min-width: 1200px) {
+    .more-about-quote {
+        width: 75%;
+        margin: 0 0 -40% -20%;
+    }
+    .more-about-inner {
+        padding: 0 !important;
+    }
+    .more-about {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .more-about-inner .section-left {
+        margin-bottom: -100px;
+    }
+}
+
+/* Review CSS */
+
+.reviewer-bio img {
+    height: 70px;
+    width: 70px;
+}
+
+.review .overlay {
+    background-image: url(../images/shape-ev.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.qoute-icon {
+    top: 20px;
+    right: 30px;
+}
+
+@media (max-width: 1200px) {
+    .review-inner {
+        padding: 0px !important;
+    }
+}
+
+/* Moblie App CSS */
+
+.download-btn i {
+    font-size: 21px;
+}
+
+.mobile-app {
+    background-image: url(../images/electric-car-plugged-in-outside-house-2022-05-01-23-53-51-utc.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.mobile-app .overlay {
+    background-image: linear-gradient(90deg, #69A316 0%, #052730 100%);
+    opacity: .9;
+}
+
+.mobile-app .section-left {
+    margin-bottom: -200px;
+}
+
+@media (max-width: 768px) {
+    .mobile-app .section-left {
+        margin-bottom: -100px;
+    }
+}
+
+/* Blog CSS */
+
+.blog {
+    background-image: linear-gradient(180deg, #F5FAEE 50%, #F2295B00 100%);
+    margin-top: -50px;
+}
+
+.blog-image a::after {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, .35), transparent 75%);
+    background-repeat: no-repeat;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transition: all .3s ease-in-out;
+}
+
+.blog-box:hover .blog-image a::after {
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+/* Footer CSS */
+
+footer {
+    background-image: linear-gradient(180deg, #052730 0%, #1B1A1A 100%);
+}
+
+.footer-socials a {
+    font-size: 16px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    transition: all .3s ease-in-out;
+}
+
+.footer-socials a:hover {
+    background-color: #69A316;
+    color: #fff;
+    transition: all .3s ease-in-out;
+}
+
+@media (min-width: 768px) and (max-width:1200px) {
+    .footer-logo img {
+        width: 40% !important;
+    }
+}
+
+.newsletter {
+    margin-bottom: -100px
+}
+
+@media (max-width: 768px) {
+    .search-bar a {
+        margin: 10px 0 !important;
+        width: 100%;
+    }
+}
+
+.copyright .overlay {
+    opacity: .15;
+}
+
+/* ========================================= */
+
+/*          About US page CSS                */
+
+/* ========================================= */
+
+.team-member-image img {
+    height: 130px;
+    width: 130px;
+}
+
+.team {
+    background-image: linear-gradient(180deg, #F5FAEE 20%, #F5FAEE00 100%);
+}
+
+.team-socials a {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    transition: all ease-in-out .3s;
+}
+
+.team-socials a:hover {
+    background-color: #87C332;
+    color: #fff;
+    transition: all ease-in-out .3s;
+}
+
+@media (max-width: 1200px) {
+    .breadcrumb .banner-inner {
+        padding-top: 20px !important;
+    }
+}
+
+/* ========================================= */
+
+/*          Our Team page CSS                */
+
+/* ========================================= */
+
+.our-team,
+.team-detail,
+.price,
+.project-list,
+.about1 {
+    background-image: linear-gradient(180deg, #F5FAEE00 40%, #F5FAEE 100%);
+}
+
+/* ========================================= */
+
+/*           Career page CSS                 */
+
+/* ========================================= */
+
+.career-box img,
+.perk-box img {
+    height: 36px;
+    width: 36px;
+}
+
+.perk-icon {
+    height: 80px;
+    min-width: 80px;
+}
+
+.career-inner {
+    margin-bottom: -100px;
+}
+
+.faq .accordion-button,
+.career-faq .accordion-button {
+    background-color: #F5FAEE;
+    color: #676767;
+    font-size: 15px;
+}
+
+.faq .accordion-button:not(.collapsed),
+.career-faq .accordion-button:not(.collapsed) {
+    color: #87C332;
+}
+
+.career-detail .nav-link:hover {
+    background-color: #ffffff !important;
+}
+
+.accordion-button:focus,
+.accordion-button:hover {
+    z-index: 0;
+}
+
+.cv-icon i {
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+}
+
+.cv-box {
+    background-image: linear-gradient(180deg, #69A316 0%, #052730 100%);
+}
+
+.cv-sperator span::before,
+.cv-sperator span::after {
+    content: '';
+    border-top: 1px solid #fff;
+    display: block;
+    flex-grow: 1;
+    margin-top: 10px;
+}
+
+.cv-box .overlay {
+    background-image: url(../images/electric-car-plugged-in-outside-house-2022-05-01-23-53-51-utc.jpg);
+    opacity: 0.15;
+}
+
+.career-detail-tabs .nav-tabs .nav-link {
+    color: #1B1A1A;
+    font-size: 15px;
+}
+
+.career-detail-tabs .nav-tabs .nav-link.active {
+    color: #87C332 !important;
+}
+
+/* ========================================= */
+
+/*           Gallery page CSS                */
+
+/* ========================================= */
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* 6 equal columns to allow for half-width items */
+    gap: 10px;
+    /* Space between images */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px !important;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item.wide {
+    grid-column: span 3;
+}
+
+.gallery-item.mid {
+    grid-column: span 2;
+}
+
+.gallery-item.small {
+    grid-column: span 1;
+}
+
+.gallery-item .overlay {
+    background-color: #87C332;
+    background-blend-mode: hue;
+    mix-blend-mode: hue;
+    opacity: 0;
+    transition: all ease-in-out .3s;
+}
+
+.gallery-item:hover .overlay {
+    opacity: .7;
+    transition: all ease-in-out .3s;
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .gallery-item.wide {
+        grid-column: span 2;
+    }
+    .gallery-item.small {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+    .gallery-item.wide,
+    .gallery-item.small {
+        grid-column: span 1;
+    }
+}
+
+/* ========================================= */
+
+/*         Testimonial page CSS              */
+
+/* ========================================= */
+
+.reviewer-image img,
+.author-image img,
+.blog-qoute img {
+    height: 100px;
+    width: 100px;
+}
+
+/* ========================================= */
+
+/*               Faq page CSS                */
+
+/* ========================================= */
+
+.faq {
+    background-image: linear-gradient(180deg, #F5FAEE00 0%, #F5FAEE 100%);
+}
+
+.faq-qoute {
+    margin-top: -50px;
+}
+
+.faq .section-right {
+    margin-bottom: -50px;
+}
+
+/* ========================================= */
+
+/*              Error page CSS               */
+
+/* ========================================= */
+
+.error h1 {
+    font-size: 70px;
+    -webkit-text-stroke: 1px #69A316;
+}
+
+.error .search-bar a:hover,
+.search-again .search-bar a:hover {
+    background-color: #87C332;
+}
+
+@media (max-width: 768px) {
+    .error .search-bar,
+    .search-again .search-bar {
+        background-color: transparent;
+    }
+}
+
+/* ========================================= */
+
+/*          Search Result page CSS           */
+
+/* ========================================= */
+
+.search-result {
+    background-image: linear-gradient(180deg, #F5FAEE00 0%, #F5FAEE 100%);
+}
+
+/* ========================================= */
+
+/*            Contact US page CSS            */
+
+/* ========================================= */
+
+.contact-icon i,
+.summary-icon i {
+    height: 60px;
+    width: 60px;
+    font-size: 30px;
+    line-height: 60px;
+}
+
+.branch-icon i {
+    height: 80px;
+    width: 80px;
+    font-size: 40px;
+    line-height: 80px;
+}
+
+.contact {
+    background-image: linear-gradient(180deg, #87C33200 50%, #F5FAEE 100%);
+}
+
+.contact .overlay {
+    background-image: url(../images/shape-ev.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.branch-inner {
+    margin-top: -50px;
+}
+
+@media (max-width: 992px) {
+    .contact .section-title h2 {
+        border: none !important;
+        padding: 0 !important
+    }
+    ;
+}
+
+/* ========================================= */
+
+/*              Product page CSS             */
+
+/* ========================================= */
+
+.range-slider {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    margin: 20px 0;
+    background-color: #676767;
+}
+
+.range-selected {
+    position: absolute;
+    top: 50%;
+    height: 4px;
+    background-color: #87C332;
+    transform: translateY(-50%);
+}
+
+.range-slider input[type="range"] {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    pointer-events: none;
+    /* -webkit-appearance: none; */
+    background: none;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 20px;
+    height: 20px;
+    background-color: #87C332;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.add-to-cart-btn {
+    opacity: 0;
+    bottom: 10%;
+    left: 27%;
+    transition: all ease-in-out .3s;
+}
+
+.related-product .add-to-cart-btn {
+    left: 20%;
+}
+
+.product-image:hover .add-to-cart-btn {
+    opacity: 1;
+    transition: all ease-in-out .3s;
+}
+
+.product-box .product-image:hover img {
+    filter: blur(2px);
+    transition: all ease-in-out .3s;
+}
+
+.media-link a::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .12), transparent);
+    z-index: 0;
+}
+
+.product-img-nav img {
+    height: 115px;
+    width: 115px;
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+}
+
+.product-img-nav img:hover,
+.slider-nav .slick-current img {
+    opacity: 1 !important;
+    transition: all ease-in-out .2s;
+}
+
+.slick-list {
+    padding: 0 !important;
+}
+
+.product-tabs .nav-link {
+    border-radius: 20px;
+}
+
+.product-tabs .nav-link:hover {
+    color: #676767;
+}
+
+.nav-tabs .nav-link.active:hover {
+    color: #052730;
+}
+
+/* Product Review Stars */
+
+.star-rating-inner {
+    transform: rotateY(180deg);
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    width: 15px;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.star-rating label .star-stroke {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: #294145;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.star-rating label .star-stroke .star-fill {
+    width: 50%;
+    aspect-ratio: 1;
+    background: transparent;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.star-rating input:hover~label .star-stroke,
+.star-rating input:checked~label .star-stroke {
+    background: #6EA343;
+    transition: all .2s ease-in-out;
+}
+
+.star-rating input:checked~label .star-stroke .star-fill {
+    background: #6EA343;
+    transition: all .2s ease-in-out;
+}
+
+.quantity {
+    width: 100px !important;
+}
+
+.cart img {
+    height: 100px;
+    width: 100px;
+}
+
+/* ========================================= */
+
+/*            Comming-Soon page CSS          */
+
+/* ========================================= */
+
+.coming-soon .overlay {
+    background-color: transparent;
+    background-image: url(../images/map-evcharge.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .2;
+}
+
+.divider-pattern {
+    background: repeating-linear-gradient(-55deg, #fff, #fff 1px, transparent 1px, transparent 6px);
+}
+
+.coming-soon .footer-socials i:hover {
+    border-radius: 50%;
+}
+
+.countdown span {
+    font-size: 80px;
+}
+
+@media (max-width: 992px) {
+    .coming-soon span {
+        font-size: 54px;
+    }
+    .coming-soon p {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 800px) and (max-width:996px) {
+    .coming-soon {
+        height: 170vh !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .coming-soon span {
+        font-size: 42px;
+    }
+}
+
+.popular-tag {
+    top: 25px;
+    left: -40px;
+    transform: rotate(-45deg);
+}
+
+/* Banner Section */
+
+.banner-1 {
+    background-image: linear-gradient(180deg, #052730 100%, #F5FAEE 100%);
+    margin-top: -100px;
+}
+
+.banner-1 .slick-list.draggable {
+    overflow: visible;
+    overflow-x: clip;
+}
+
+.banner-1 .slick-dots {
+    bottom: 25%;
+    left: 66%;
+    position: absolute;
+}
+
+.banner-1 .text {
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+    fill: #fff;
+    font-size: 21px;
+}
+
+.banner-1 #rotatingText {
+    animation-name: rotate-circle;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotate-circle {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.banner-1 .spin-demo-main {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.banner-1 .spin-demo-main img {
+    position: absolute;
+    left: 40%
+}
+
+.banner-1 .section-title-right img {
+    height: 75px;
+    width: 75px;
+}
+
+.banner-1 .section-title-right span {
+    left: 70% !important;
+}
+
+.banner-1 .btn1:hover {
+    background-color: #fff !important;
+}
+
+.banner-1 .slick-dots li button::after {
+    background: #fff;
+}
+
+.banner-1 .slick-dots li.slick-active button::after {
+    background: #69A316 !important;
+}
+
+.banner-1 .overlay {
+    background-image: url(../images/map-evcharge.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .05;
+}
+
+.banner-1-image-inner {
+    margin-bottom: -120px;
+}
+
+@media (min-width: 1400px) {
+    .banner-1 h1 {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+    .banner-1 .spin-demo-main img {
+        left: 37%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .banner-1-inner {
+        padding-top: 50px !important;
+        padding-bottom: 50px;
+    }
+    .banner-1-image-inner {
+        margin-bottom: 0px;
+    }
+    .banner-1 .slick-dots {
+        left: 48%;
+        bottom: 0%;
+    }
+    .banner-1 .feature-list {
+        margin-bottom: 30px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .banner-1 .section-title h1,
+    .index-2 .about-us .section-title h2,
+    .service .section-title h2,
+    .index-2 .pricing .section-title h2,
+    .project .section-title h2,
+    .blog-title-left h2,
+    .mobile-app1-title h2,
+    .contact-us-title h2 {
+        border: none !important;
+        padding-left: 0 !important;
+    }
+    .banner-1 .section-title {
+        margin-bottom: 60px !important;
+    }
+    .banner-1 {
+        padding: 75px 0 0 0 !important;
+    }
+    .banner-1-image img {
+        margin-top: 20px !important;
+    }
+    .banner-1 .overlay::after {
+        width: 100%;
+        left: 0;
+    }
+    .banner-1 .spin-demo-main img {
+        left: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-1 li {
+        margin: 0 10px !important;
+    }
+    .banner-1 .spin-demo-main img {
+        left: 40%;
+    }
+}
+
+/* About Us Section */
+
+.index-2 .about-us,
+.index-2 .pricing,
+.index-2 .blog {
+    background-image: linear-gradient(180deg, #F5FAEE00 20%, #F5FAEE 100%);
+}
+
+.about-counter-box img {
+    height: 50px;
+    width: 50px;
+}
+
+.about-counter-box {
+    top: 20px;
+    right: -30px;
+}
+
+.about-us {
+    margin-top: -50px;
+}
+
+@media (max-width: 1200px) {
+    .about-us-inner {
+        padding-top: 50px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-counter-box {
+        position: static !important;
+    }
+}
+
+/* Service Section */
+
+.index-2 .service,
+.project,
+.contact-mobile {
+    background-image: linear-gradient(180deg, #F5FAEE 60%, #F5FAEE00 100%);
+}
+
+.index-2 .service-box {
+    background-image: url(../images/img15_circle.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.index-2 .service-box:hover {
+    /* border-color: #69A316 !important; */
+    transition: all .3s ease-in-out;
+    background-color: #052730 !important;
+}
+
+.index-2 .service-box:hover h4 a,
+.index-2 .service-box:hover p {
+    color: #fff;
+    transition: all .3s ease-in-out;
+}
+
+.index-2 .service-box:hover a {
+    border: none !important;
+    transition: all ease-in-out .3s;
+}
+
+/* Who we are section */
+
+.index-2 .more-about .section-right {
+    margin-bottom: -50px;
+}
+
+@media (max-width: 1200px) {
+    .index-2 .more-about .section-left {
+        padding-bottom: 0 !important;
+    }
+}
+
+@media (max-width: 786px) {
+    .index-2 .more-about .counter-box {
+        border-bottom: 1px solid #F7F7F757;
+    }
+}
+
+/* How we work CSS*/
+
+.how-work .section-body::after {
+    content: '';
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    border-right: 2px dashed #67676750;
+    top: 10%;
+    left: -50%;
+}
+
+.index-2 .work-info {
+    background-color: #e6f1d7;
+}
+
+.timeline .work-info:after {
+    content: "";
+    position: absolute;
+    top: 42%;
+    height: 20px;
+    width: 20px;
+    z-index: -1;
+    background: #87C332;
+    right: -10px;
+    border-bottom: 0;
+    border-left: 0;
+    transform: rotate(-135deg);
+}
+
+.timeline-row:nth-child(even) .work-info:after {
+    left: -10px;
+}
+
+@media (max-width: 768px) {
+    .how-work .section-body::after,
+    .timeline .work-info:after {
+        display: none;
+    }
+    .how-work .work-info {
+        margin: 0 !important;
+    }
+    .how-work .work-box-number {
+        position: static !important;
+        transform: none !important;
+    }
+}
+
+/* Project CSS */
+
+.index-2 .project-info {
+    bottom: -40px;
+    left: 0;
+    transition: all .5s ease-in-out;
+}
+
+.index-2 .project-image {
+    cursor: pointer;
+}
+
+.index-2 .project h5 a:hover {
+    color: #6EA343;
+}
+
+.index-2 .project-image:hover img {
+    filter: blur(1px);
+    transition: all .3s ease-in-out;
+}
+
+.index-2 .project-image:hover .project-info {
+    bottom: 0;
+    transition: all .5s ease-in-out;
+}
+
+.index-2 .project-info .overlay {
+    opacity: .88;
+}
+
+/* Testimonial CSS */
+
+.testimonial-1 {
+    margin-right: 5%;
+    background-image: url(../images/electric-vehicle-fuels-up-with-clean-energy-charging-station-enveloped-blue-power-aura-natural-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.testimonial-1 .overlay {
+    background-image: linear-gradient(90deg, #052730 40%, #676767CC 100%);
+    opacity: .9;
+}
+
+.testimonial-1 .slick-dots {
+    bottom: 100px;
+    right: 100px;
+    left: auto;
+    position: absolute;
+}
+
+.testimonial-1 .qoute-icon {
+    top: 0;
+}
