@@ -1121,7 +1121,6 @@ p {
 .slick-dots li {
     position: relative;
     visibility: hidden;
-    left: 45%;
     top: 25px;
 }
 

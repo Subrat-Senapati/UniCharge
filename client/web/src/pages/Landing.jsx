@@ -70,12 +70,12 @@ const Landing = () => {
             <header className="position-relative z-3">
                 <div className="header-nav-menu navbar-sticky-in" id="header-nav-menu">
                     <div className="container">
-                        <div className="header-nav-menu-inner py-4">
+                        <div className="header-nav-menu-inner">
                             <div className="row align-items-center justify-content-between">
                                 <div className="d-block d-xl-none col-lg-2 col-md-3 col-5">
                                     <div className="navbar-logo m-0">
-                                        <h3 style={{ color: "white" }}>Your Brand Logo</h3>
-                                        {/* <a href="index.html"><img src="images/ev-logo-04.png" alt="Logo" class="w-100"></a> */}
+                                        {/* <h3 style={{ color: "white" }}>Your Brand Logo</h3> */}
+                                        <a href="index.html"><img src="/Unicharge_logo_text.png" alt="Logo" class="w-50" /></a>
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
@@ -182,9 +182,11 @@ const Landing = () => {
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li className=" mx-2 text-center d-none d-xl-block">
-                                                <h3 style={{ color: "green" }}>Your Logo</h3>
-                                                {/* <a class="px-3 py-0 text-uppercase fw-medium active text-center" aria-current="page" href="index.html"><img src="images/ev-logo-04.png" alt="Logo" class="w-50"></a> */}
+                                            <li className="  text-center d-none d-xl-block">
+                                                {/* <h3 style={{ color: "green" }}>Your Logo</h3> */}
+                                                <a class="text-uppercase fw-medium active text-center" aria-current="page" href="index.html">
+                                                    <img src="Unicharge_logo_text.png" alt="Logo" class="w-50" />
+                                                </a>
                                             </li>
                                             <li className="nav-item dropdown">
                                                 <a
@@ -587,7 +589,6 @@ const Landing = () => {
                     </div>
                 </div>
             </section>
-
             {/* Banner Section Ends */}
             {/* About Us Section Starts */}
             <section className="about-us bg-lightgreen py-10">
@@ -1346,7 +1347,7 @@ const Landing = () => {
                                                     <i className="fa fa-quote-right green" aria-hidden="true" />
                                                 </div>
                                                 <div className="review-star mb-3">
-                                                    <ul className="list-unstyled d-flex justify-content-center justify-content-md-start">
+                                                    <ul className="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
                                                         <li><i className="fa fa-star green" /></li>
                                                         <li><i className="fa fa-star green" /></li>
                                                         <li><i className="fa fa-star green" /></li>
@@ -1378,7 +1379,7 @@ const Landing = () => {
                                                     <i><i class="fa fa-quote-right green" aria-hidden="true"></i></i>
                                                 </div>
                                                 <div class="review-star mb-3">
-                                                    <ul class="list-unstyled d-flex justify-content-center justify-content-md-start">
+                                                    <ul class="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
                                                         <li><i class="fa fa-star green" aria-hidden="true"></i></li>
                                                         <li><i class="fa fa-star green" aria-hidden="true"></i></li>
                                                         <li><i class="fa fa-star green" aria-hidden="true"></i></li>
@@ -1408,7 +1409,7 @@ const Landing = () => {
                                                     <i><i class="fa fa-quote-right green" aria-hidden="true"></i></i>
                                                 </div>
                                                 <div class="review-star mb-3">
-                                                    <ul class="list-unstyled d-flex justify-content-center justify-content-md-start">
+                                                    <ul class="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
                                                         <li><i class="fa fa-star green" aria-hidden="true"></i></li>
                                                         <li><i class="fa fa-star green" aria-hidden="true"></i></li>
                                                         <li><i class="fa fa-star green" aria-hidden="true"></i></li>
@@ -1436,32 +1437,41 @@ const Landing = () => {
 
                             <div className="col-lg-5">
                                 <div class="section-right position-relative h-100">
-                                    <div class="section-right-inner text-center mt-10">
-                                        <ul class="list-unstyled d-flex me-3 justify-content-center mb-2">
-                                            <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                        </ul>
-                                        <p class="text-white fw-medium"><span class="fw-bold">99.9% Customer Satisfaction</span> based on 550+ reviews of 2,250 Completed Projects, and 2,820 Happy Customers trust us.</p>
-                                    </div>
-                                    <div class="about-video position-absolute top-50 start-50 translate-middle">
-                                        <div class="lightgallery-box position-relative">
-                                            <div class="promo-video">
-                                                <div class="waves-block">
-                                                    <div class="waves wave-1 position-absolute rounded-circle z-n1"></div>
-                                                    <div class="waves wave-2 position-absolute rounded-circle z-n1"></div>
-                                                    <div class="waves wave-3 position-absolute rounded-circle z-n1"></div>
+                                    <div className="section-right-inner text-center mt-5">
+                                        <div className="about-video mb-3">
+                                            <div className="lightgallery-box position-relative d-inline-block">
+                                                <div className="promo-video position-relative d-inline-block">
+                                                    <div className="waves-block position-relative d-inline-block">
+                                                        <div className="waves wave-1 position-absolute rounded-circle z-n1"></div>
+                                                        <div className="waves wave-2 position-absolute rounded-circle z-n1"></div>
+                                                        <div className="waves wave-3 position-absolute rounded-circle z-n1"></div>
+
+                                                        <a
+                                                            data-src="https://youtu.be/VhBl3dHT5SY"
+                                                            className="about-video-play video-popup mfp-iframe bg-green rounded-circle text-center text-white d-inline-flex align-items-center justify-content-center"
+                                                            style={{ width: "60px", height: "60px", position: "relative", zIndex: 2 }}
+                                                        >
+                                                            <i className="fa fa-play fa-lg" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div id="lightgallery-video">
-                                                <a data-src="https://youtu.be/VhBl3dHT5SY" class="about-video-play video-popup mfp-iframe bg-green rounded-circle text-center text-white d-inline-block ">
-                                                    <i class="fa fa-play" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
                                         </div>
+
+                                        <ul className="list-unstyled d-flex justify-content-center mb-2 gap-1">
+                                            <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                            <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                            <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                            <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                            <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                        </ul>
+
+                                        <p className="text-white fw-medium">
+                                            <span className="fw-bold">99.9% Customer Satisfaction</span> based on 550+ reviews of 2,250 Completed Projects, and 2,820 Happy Customers trust us.
+                                        </p>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -1831,8 +1841,9 @@ const Landing = () => {
                                 <div className="col-lg-6">
                                     <div className="footer-logo1">
                                         <div className="footer-logo-image text-lg-start">
-                                            <h3 style={{ color: "white" }}>Your Brand Logo</h3>
-                                            {/* <img src="images/ev-logo-04.png" alt="footer logo" class="w-lg-40 w-md-30 w-50"> */}
+                                            {/* <h3 style={{ color: "white" }}>Your Brand Logo</h3> */}
+                                            <img src="Unicharge_logo.png" alt="footer logo" class="w-lg-10 w-md-10 w-10"/>
+                                            <img src="Unicharge_logo_text.png" alt="footer logo" class="w-lg-30 w-md-30 w-30"/>
                                         </div>
                                     </div>
                                 </div>

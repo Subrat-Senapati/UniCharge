@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import 'font-awesome/css/font-awesome.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'lightgallery/css/lightgallery.css';
