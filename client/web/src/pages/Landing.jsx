@@ -1,4 +1,5 @@
 import Slider from "react-slick";
+import { Link } from 'react-router-dom';
 
 import '../css/plugin.css';
 import '../css/default.css';
@@ -70,332 +71,76 @@ const Landing = () => {
             <header className="position-relative z-3">
                 <div className="header-nav-menu navbar-sticky-in" id="header-nav-menu">
                     <div className="container">
-                        <div className="header-nav-menu-inner">
-                            <div className="row align-items-center justify-content-between">
-                                <div className="d-block d-xl-none col-lg-2 col-md-3 col-5">
-                                    <div className="navbar-logo m-0">
-                                        {/* <h3 style={{ color: "white" }}>Your Brand Logo</h3> */}
-                                        <a href="index.html"><img src="/Unicharge_logo_text.png" alt="Logo" class="w-50" /></a>
-                                    </div>
+                        <nav className="navbar navbar-expand-xl">
+                            {/* Mobile logo (visible only on small screens) */}
+                            <a className="navbar-brand d-xl-none" href="index.html">
+                                <img src="/Unicharge_logo_text.png" alt="Logo" className="w-50" />
+                            </a>
+
+                            {/* Mobile toggle button */}
+                            <button
+                                className="navbar-toggler"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav"
+                                aria-controls="navbarNav"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div className="collapse navbar-collapse" id="navbarNav">
+                                <div className="d-flex py-1 w-100 align-items-center justify-content-between">
+                                    {/* Left nav links */}
+                                    <ul className="navbar-nav flex-row gap-3">
+                                        <li className="nav-item">
+                                            <a className="nav-link text-uppercase fw-medium active" href="#">
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link text-uppercase fw-medium" href="about.html">
+                                                About
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link text-uppercase fw-medium" href="#">
+                                                Services
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link text-uppercase fw-medium" href="contact.html">
+                                                Contact
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    {/* Center logo (desktop only) */}
+                                    <a className="navbar-brand position-absolute start-50 translate-middle-x d-none d-xl-block text-center" href="index.html">
+                                        <img src="/Unicharge_logo_text.png" alt="Logo" className="w-40" />
+                                    </a>
+
+                                    {/* Right nav links */}
+                                    <ul className="navbar-nav flex-row gap-3">
+                                        <li className="nav-item">
+                                            <Link className="nav-link text-uppercase fw-medium" to="/signup">
+                                                SignUp
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link text-uppercase fw-medium" to="/login">
+                                                Login
+                                            </Link>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div className="col-lg-12">
-                                    <div
-                                        className="navbar-collapse"
-                                        id="bs-example-navbar-collapse-1"
-                                    >
-                                        <ul
-                                            className="navbar-nav align-items-center justify-content-between flex-row"
-                                            id="responsive-menu"
-                                        >
-                                            <li className="nav-item dropdown">
-                                                <a
-                                                    className="nav-link dropdown-toggle px-3 white text-uppercase fw-medium active"
-                                                    href="#"
-                                                    role="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    Home
-                                                </a>
-                                                <ul className="dropdown-menu bg-grey p-0 rounded1 bg-off-white border-0">
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0 "
-                                                            href="index.html"
-                                                        >
-                                                            Homepage{" "}
-                                                        </a>
-                                                    </li>
-                                                    <li className="border-0">
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize border-0 dark-grey active"
-                                                            href="index-2.html"
-                                                        >
-                                                            Homepage 2
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a
-                                                    className="nav-link px-3 py-0 white text-uppercase fw-medium"
-                                                    href="about.html"
-                                                >
-                                                    About
-                                                </a>
-                                            </li>
-                                            <li className="nav-item dropdown">
-                                                <a
-                                                    className="nav-link dropdown-toggle px-3 white text-uppercase fw-medium"
-                                                    href="#"
-                                                    role="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    Services
-                                                </a>
-                                                <ul className="dropdown-menu bg-grey p-0 border-0 rounded1 bg-off-white">
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize border-0 dark-grey"
-                                                            href="service-list.html"
-                                                        >
-                                                            Service List
-                                                        </a>
-                                                    </li>
-                                                    <li className="border-0">
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize border-0 dark-grey"
-                                                            href="service-detail.html"
-                                                        >
-                                                            Service Details
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="nav-item dropdown">
-                                                <a
-                                                    className="nav-link dropdown-toggle px-3 white text-uppercase fw-medium"
-                                                    href="#"
-                                                    role="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    Projects
-                                                </a>
-                                                <ul className="dropdown-menu bg-grey p-0 rounded1 bg-off-white border-0">
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="project-list.html"
-                                                        >
-                                                            Project List
-                                                        </a>
-                                                    </li>
-                                                    <li className="border-0">
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize border-0 dark-grey"
-                                                            href="project-detail.html"
-                                                        >
-                                                            Project Detail
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="  text-center d-none d-xl-block">
-                                                {/* <h3 style={{ color: "green" }}>Your Logo</h3> */}
-                                                <a class="text-uppercase fw-medium active text-center" aria-current="page" href="index.html">
-                                                    <img src="Unicharge_logo_text.png" alt="Logo" class="w-50" />
-                                                </a>
-                                            </li>
-                                            <li className="nav-item dropdown">
-                                                <a
-                                                    className="nav-link dropdown-toggle px-3 white text-uppercase fw-medium"
-                                                    href="#"
-                                                    role="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    Pages
-                                                </a>
-                                                <ul className="dropdown-menu bg-grey p-0 rounded1 bg-off-white border-0">
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="team.html"
-                                                        >
-                                                            Our Team
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="team-detail.html"
-                                                        >
-                                                            Team Detail
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="career-list.html"
-                                                        >
-                                                            Career List
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="career-detail.html"
-                                                        >
-                                                            Career Detail
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="gallery.html"
-                                                        >
-                                                            Gallery
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="testimonial.html"
-                                                        >
-                                                            Testimonials
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="faq.html"
-                                                        >
-                                                            Faq
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="price.html"
-                                                        >
-                                                            Pricing
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="product-list.html"
-                                                        >
-                                                            Product List
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="product-detail.html"
-                                                        >
-                                                            Product Single
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="coming-soon.html"
-                                                        >
-                                                            Coming Soon
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="error.html"
-                                                        >
-                                                            404 Error
-                                                        </a>
-                                                    </li>
-                                                    <li className="border-0">
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey"
-                                                            href="search.html"
-                                                        >
-                                                            Search Result
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="nav-item dropdown">
-                                                <a
-                                                    className="nav-link dropdown-toggle px-3 white text-uppercase fw-medium"
-                                                    href="#"
-                                                    role="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    Shop
-                                                </a>
-                                                <ul className="dropdown-menu bg-grey p-0 rounded1 bg-off-white border-0">
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="product-list.html"
-                                                        >
-                                                            Product List
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="product-detail.html"
-                                                        >
-                                                            Product Detail
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="cart.html"
-                                                        >
-                                                            Cart
-                                                        </a>
-                                                    </li>
-                                                    <li className="border-0">
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize border-0 dark-grey"
-                                                            href="checkout.html"
-                                                        >
-                                                            Checkout
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="nav-item dropdown">
-                                                <a
-                                                    className="nav-link dropdown-toggle px-3 white text-uppercase fw-medium"
-                                                    href="#"
-                                                    role="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    Blogs
-                                                </a>
-                                                <ul className="dropdown-menu bg-grey p-0 rounded1 bg-off-white border-0">
-                                                    <li>
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize dark-grey border-0"
-                                                            href="blog-list.html"
-                                                        >
-                                                            Blog List
-                                                        </a>
-                                                    </li>
-                                                    <li className="border-0">
-                                                        <a
-                                                            className="dropdown-item py-2 px-7 text-capitalize border-0 dark-grey"
-                                                            href="blog-detail.html"
-                                                        >
-                                                            Blog single
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a
-                                                    className="nav-link px-3 py-0 white text-uppercase fw-medium"
-                                                    href="contact.html"
-                                                >
-                                                    Contact
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="slicknav-mobile" />
                             </div>
-                        </div>
+                        </nav>
                     </div>
                 </div>
             </header>
+
             {/* Header Section Ends */}
             {/* Banner Section Starts */}
             <section className="banner-1 pt-8 mt-1  position-relative rounded3 rounded-top-0">
@@ -1842,8 +1587,8 @@ const Landing = () => {
                                     <div className="footer-logo1">
                                         <div className="footer-logo-image text-lg-start">
                                             {/* <h3 style={{ color: "white" }}>Your Brand Logo</h3> */}
-                                            <img src="Unicharge_logo.png" alt="footer logo" class="w-lg-10 w-md-10 w-10"/>
-                                            <img src="Unicharge_logo_text.png" alt="footer logo" class="w-lg-30 w-md-30 w-30"/>
+                                            <img src="Unicharge_logo.png" alt="footer logo" class="w-lg-10 w-md-10 w-10" />
+                                            <img src="Unicharge_logo_text.png" alt="footer logo" class="w-lg-30 w-md-30 w-30" />
                                         </div>
                                     </div>
                                 </div>

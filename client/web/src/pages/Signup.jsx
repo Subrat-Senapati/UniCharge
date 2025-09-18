@@ -9,9 +9,9 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    address: '',
     phone: ''
   });
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -22,21 +22,19 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Validate passwords match
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-    
-    // Add your signup logic here
+
     setSuccess(true);
     setTimeout(() => navigate('/login'), 2000);
   };
 
   if (success) {
     return (
-      <div className="login-container">
+      <div className="login-wrapper">
         <Container>
           <Row className="justify-content-center">
             <Col md={6}>
@@ -51,50 +49,41 @@ const Signup = () => {
   }
 
   return (
-    <div className="login-container">
+    <div className="login-wrapper">
+      <img src="/Unicharge_logo_text.png" alt="App Logo" className="app-logo" />
       <Container>
-        <Row className="justify-content-center">
-          <Col md={8} lg={6}>
-            <div className="text-center mb-4">
-              <h1 className="logo-animation">UNICHARGE</h1>
-            </div>
-            <Card className="login-card">
-              <Card.Body>
-                <Form onSubmit={handleSubmit}>
-                  {error && <Alert variant="danger">{error}</Alert>}
-                  <Row>
-                    <Col md={6}>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Full Name</Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="name"
-                          placeholder="Enter full name"
-                          onChange={handleChange}
-                          required
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                          type="email"
-                          name="email"
-                          placeholder="Enter email"
-                          onChange={handleChange}
-                          required
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
+        <Row className="align-items-center min-vh-100">
+          <Col md={6} className="left-content text-center text-md-start mb-5 mb-md-0">
+            <h1 className="display-4 fw-bold text-white">Welcome to UNICHARGE</h1>
+            <p className="lead text-light">Power up your journey with seamless EV charging.</p>
+          </Col>
 
+          <Col md={6} className="right-content">
+            <Card className="signup-card shadow-lg">
+              <Card.Body>
+                <div className="text-center mb-4">
+                  <h3 className="mb-4 text-center text-dark fw-semibold">Create New Account</h3>
+                </div>
+
+                {error && <Alert variant="danger">{error}</Alert>}
+                <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3">
-                    <Form.Label>Address</Form.Label>
+                    <Form.Label>Full Name</Form.Label>
                     <Form.Control
                       type="text"
-                      name="address"
-                      placeholder="Enter full address"
+                      name="name"
+                      placeholder="Enter full name"
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="email"
+                      placeholder="Enter Email"
                       onChange={handleChange}
                       required
                     />
@@ -126,7 +115,7 @@ const Signup = () => {
                       </Form.Group>
                     </Col>
                   </Row>
-                  
+
                   <Form.Group className="mb-3">
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
@@ -138,12 +127,18 @@ const Signup = () => {
                     />
                   </Form.Group>
 
-                  <Button variant="primary" type="submit" className="w-100">
+                  <Button type="submit" className="w-100" style={{ background: '#69A316', border: 'none', borderRadius: '8px' }}>
                     Sign Up
                   </Button>
                 </Form>
+
                 <div className="text-center mt-3">
-                  <Link to="/login">Already have an account? Login</Link>
+                  <small className="text-muted">
+                    Already have an account?{' '}
+                    <Link to="/login" className="text-decoration-none fw-semibold" style={{ color: '#052730' }}>
+                      Login
+                    </Link>
+                  </small>
                 </div>
               </Card.Body>
             </Card>
