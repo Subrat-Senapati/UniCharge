@@ -11,53 +11,57 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // if (email === 'user@example.com' && password === 'password') {
-    //   navigate('/home');
-    // } else {
-    //   setError('Invalid email or password');
-    // }
-
-    navigate('/home');
+    e.preventDefault();
+    // simple demo login
+    if (email === 'user@example.com' && password === 'password') {
+      navigate('/home');
+    } else {
+      setError('Invalid email or password');
+    }
   };
 
   const handleGoogleLogin = () => {
-    // Simulate Google login success
     navigate('/');
-  }
+  };
 
   return (
-    <div className="login-wrapper h-100">
-      {/* Top-left logo */}
-      <img src="/Unicharge_logo_text.png" alt="Logo" className="app-logo" />
+    <div
+      className="login-wrapper d-flex align-items-center justify-content-center"
+      style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #69A316, #052730)',
+      }}
+    >
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={6} lg={5}>
+            <Card className="shadow-lg border-0 rounded-4 overflow-hidden">
+              <Card.Body className="p-5">
+                {/* Logo */}
+                <div className="text-center mb-4">
+                  <img
+                    src="/Unicharge_logo_text.png"
+                    alt="Logo"
+                    style={{ height: '60px' }}
+                  />
+                  <h4 className="fw-bold mt-3 text-dark">Welcome Back ⚡</h4>
+                  <p className="text-muted small">
+                    Charge your world with <strong>UNICHARGE</strong>
+                  </p>
+                </div>
 
-      <Container fluid className="h-100">
-        <Row className="h-100">
-          {/* Left side */}
-          <Col md={6} className="d-flex align-items-center justify-content-center text-white left-content">
-            <div className="text-center px-5">
-              <h1 className="display-4 fw-bold">Welcome Back ⚡</h1>
-              <p className="lead mt-3">
-                Charge your world with <span className="fw-bold">UNICHARGE</span>
-              </p>
-            </div>
-          </Col>
-
-          {/* Right side */}
-          <Col md={6} className="d-flex align-items-center justify-content-center right-content">
-            <Card className="login-card shadow-lg p-4 border-0">
-              <Card.Body>
-                <h3 className="mb-4 text-center text-dark fw-semibold">Login to Your Account</h3>
+                {/* Form */}
                 <Form onSubmit={handleSubmit}>
                   {error && <Alert variant="danger">{error}</Alert>}
 
                   <Form.Group className="mb-3">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Email Address</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="Enter email"
+                      placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      className="rounded-3"
                       required
                     />
                   </Form.Group>
@@ -66,53 +70,54 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                       type="password"
-                      placeholder="Password"
+                      placeholder="Enter your password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      className="rounded-3"
                       required
                     />
                   </Form.Group>
 
                   <Button
                     type="submit"
-                    className="w-100 py-2"
-                    style={{ background: '#69A316', border: 'none', borderRadius: '8px' }}
+                    className="w-100 py-2 rounded-3 fw-semibold"
+                    style={{ background: '#69A316', border: 'none' }}
                   >
                     Login
                   </Button>
                 </Form>
 
                 {/* Divider */}
-                <div className="text-center my-2">
-                  <hr />
-                  <span className="text-muted">OR</span>
-                  <hr />
+                <div className="d-flex align-items-center my-3">
+                  <hr className="flex-grow-1" />
+                  <span className="px-2 text-muted">OR</span>
+                  <hr className="flex-grow-1" />
                 </div>
 
-                {/* Google login */}
+                {/* Google Login */}
                 <Button
-                  className="google-login-btn w-100 mb-3 d-flex align-items-center justify-content-center gap-3"
+                  variant="light"
+                  className="w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 shadow-sm"
                   onClick={handleGoogleLogin}
                 >
                   <img
                     src="https://developers.google.com/identity/images/g-logo.png"
                     alt="Google Logo"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      backgroundColor: "transparent",
-                      borderRadius: "10px",
-                      pointerEvents: "none"
-                    }}
+                    style={{ width: '20px', height: '20px' }}
                   />
-                  Login with Google
+                  <span className="fw-semibold">Login with Google</span>
                 </Button>
 
-                <div className="text-center mt-3">
+                {/* Signup link */}
+                <div className="text-center mt-4">
                   <small className="text-muted">
-                    Don't have an account?{' '}
-                    <Link to="/signup" className="text-decoration-none fw-semibold" style={{ color: '#052730' }}>
-                      Sign up
+                    Don’t have an account?{' '}
+                    <Link
+                      to="/signup"
+                      className="fw-semibold"
+                      style={{ color: '#69A316' }}
+                    >
+                      Sign Up
                     </Link>
                   </small>
                 </div>
