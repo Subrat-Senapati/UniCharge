@@ -76,7 +76,7 @@ body,
   border-color: #052730;
   box-shadow: 0 0 8px rgba(105, 163, 22, 0.7);
   background: rgba(255, 255, 255, 0.3);
-  color: #fff;
+  color: black;
 }
 
 .google-login-btn {

@@ -11,12 +11,14 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email === 'user@example.com' && password === 'password') {
-      navigate('/');
-    } else {
-      setError('Invalid email or password');
-    }
+    // e.preventDefault();
+    // if (email === 'user@example.com' && password === 'password') {
+    //   navigate('/home');
+    // } else {
+    //   setError('Invalid email or password');
+    // }
+
+    navigate('/home');
   };
 
   const handleGoogleLogin = () => {
