@@ -101,7 +101,9 @@ body {
     url('https://images.unsplash.com/photo-1593941707882-a5bba533a3cd?auto=format&fit=crop&w=2070&q=80')
       no-repeat center center/cover;
   color: white;
-  padding: 80px 0;
+  padding: 80px 0 130px;
+  position: relative;
+  top: 50px;
 }
 
 .statBox {
@@ -115,71 +117,6 @@ body {
   margin-bottom: 10px;
 }
 
-/* Footer */
-.footer {
-  background-color: var(--dark-color);
-  color: white;
-  padding: 60px 0 30px;
-}
-
-.footer h5 {
-  color: white;
-  margin-bottom: 20px;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.footer h5::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--primary-color);
-}
-
-.footerLinks li {
-  margin-bottom: 10px;
-  list-style: none;
-}
-
-.footerLinks a {
-  color: #aaa;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footerLinks a:hover {
-  color: white;
-}
-
-.socialIcons a {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  text-align: center;
-  line-height: 40px;
-  margin-right: 10px;
-  color: white;
-  transition: all 0.3s;
-}
-
-.socialIcons a:hover {
-  background: var(--primary-color);
-  transform: translateY(-5px);
-}
-
-.copyright {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
-  margin-top: 40px;
-  text-align: center;
-  color: #aaa;
-  font-size: 14px;
-}
 
 /* Buttons */
 .btnPrimary {

@@ -5,6 +5,7 @@ import '../css/plugin.css';
 import '../css/default.css';
 import '../css/landing.css';
 import LandingHeader from "../components/LandingHeader";
+import Footer from "../components/Footer";
 
 const Landing = () => {
     const banner_settings = {
@@ -131,7 +132,7 @@ const Landing = () => {
                             <Slider {...banner_settings} className="banner-slider">
                                 {/* Slide 1 */}
                                 <div className="slide">
-                                    <div class="section-body">
+                                    <div className="section-body">
                                         <div className="row gx-lg-5">
                                             <div className="col-xl-8 order-2 order-xl-1 align-self-end">
                                                 <div className="banner-1-image text-center">
@@ -196,7 +197,7 @@ const Landing = () => {
 
                                 {/* Slide 2 */}
                                 <div className="slide">
-                                    <div class="section-body">
+                                    <div className="section-body">
                                         <div className="row gx-lg-5">
                                             <div className="col-xl-8 order-2 order-xl-1 align-self-end">
                                                 <div className="banner-1-image text-center">
@@ -1428,175 +1429,7 @@ const Landing = () => {
             </section>
             {/* Contact Us section Ends */}
             {/* Footer Section Starts */}
-            <footer className="rounded-bottom-0 pb-6 pt-9 rounded3 position-relative text-center text-xl-start">
-                <div className="container">
-                    <div className="footer-inner">
-                        <div className="footer-middle mb-6 pb-8 border-bottom border-1 border-grey">
-                            <div className="row gy-5 align-items-center">
-                                <div className="col-xl-8">
-                                    <div className="newsletter m-0">
-                                        <div className="newsletter-title mb-4">
-                                            <h6 className="text-uppercase fw-medium mb-1 text-white">
-                                                Subscribe Newsletter
-                                            </h6>
-                                            <h2 className="text-white">
-                                                Don't miss our future updates! Get subscribed today!
-                                            </h2>
-                                        </div>
-                                        <div className="newsletter-body">
-                                            <div className="search-bar">
-                                                <input
-                                                    type="email"
-                                                    placeholder="Email Address"
-                                                    className=" w-md-50"
-                                                />
-                                                <a href="" className="btn btn2 mx-1 my-2">
-                                                    subscribe
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-xl-2 col-md-6">
-                                    <div className="quick-links">
-                                        <h3 className="text-white mb-2">Quick Link</h3>
-                                        <div className="seperator w-25 border-bottom border-1 border-white mb-6 ms-xl-1 m-auto" />
-                                        <ul className="list-unstyled">
-                                            <li className="mb-4">
-                                                <a href="about.html">About Us</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="service-list.html">Services</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="">Attorneys</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="blog-list.html">News &amp; Articles</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="">Policies</a>
-                                            </li>
-                                            <li>
-                                                <a href="contact.html">Contact Us</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-xl-2 col-md-6">
-                                    <div className="quick-links">
-                                        <h3 className="text-white mb-2">Features</h3>
-                                        <div className="seperator w-25 border-bottom border-1 border-white mb-6 ms-xl-1 m-auto" />
-                                        <ul className="list-unstyled">
-                                            <li className="mb-4">
-                                                <a href="">Support Plans</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="">Benifits</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="">Subscriptions</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="">Payment Methods</a>
-                                            </li>
-                                            <li className="mb-4">
-                                                <a href="">Onsite Payment</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Merchant Refund</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="footer-bottom pb-5">
-                            <div className="row gy-3 align-items-center">
-                                <div className="col-lg-6">
-                                    <div className="footer-logo1">
-                                        <div className="footer-logo-image text-lg-start">
-                                            {/* <h3 style={{ color: "white" }}>Your Brand Logo</h3> */}
-                                            <img src="Unicharge_logo.png" alt="footer logo" class="w-lg-10 w-md-10 w-10" />
-                                            <img src="Unicharge_logo_text.png" alt="footer logo" class="w-lg-30 w-md-30 w-30" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6">
-                                    <div className="footer-socials d-flex justify-content-center justify-content-lg-end">
-                                        <a
-                                            href=""
-                                            className="rounded-circle text-center me-1 bg-lightdark"
-                                        >
-                                            <i className="fa fa-facebook" aria-hidden="true" />
-                                        </a>
-                                        <a
-                                            href=""
-                                            className="rounded-circle text-center me-1 bg-lightdark"
-                                        >
-                                            <i className="fa fa-twitter" aria-hidden="true" />
-                                        </a>
-                                        <a
-                                            href=""
-                                            className="rounded-circle text-center me-1 bg-lightdark"
-                                        >
-                                            <i className="fa fa-google-plus" aria-hidden="true" />
-                                        </a>
-                                        <a href="" className="rounded-circle text-center bg-lightdark">
-                                            <i className="fa fa-instagram" aria-hidden="true" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="copyright px-4 py-2 rounded2 text-center position-relative">
-                            <div className="overlay bg-white rounded2" />
-                            <div className="copyright-inner position-relative">
-                                <div className="row gy-4 align-items-center">
-                                    <div className="col-xl-8">
-                                        <div className="copyright-links">
-                                            <ul className="list-unstyled small d-md-flex text-white justify-content-center justify-content-xl-start">
-                                                <li className="me-4 my-2">
-                                                    <i className="fa fa-map-marker me-1" aria-hidden="true" />{" "}
-                                                    256 Elizaberth Ave, CA, 90025
-                                                </li>
-                                                <li className="me-4 my-2">
-                                                    <a href="tel:+4733378901" className="text-white">
-                                                        <i className="fa fa-phone me-1" aria-hidden="true" />{" "}
-                                                        +569 2316 2156
-                                                    </a>
-                                                </li>
-                                                <li className="my-2">
-                                                    <a
-                                                        href="/cdn-cgi/l/email-protection#60090e060f20170502130914054e030f0d"
-                                                        className="text-white"
-                                                    >
-                                                        <i
-                                                            className="fa fa-envelope-o me-1"
-                                                            aria-hidden="true"
-                                                        />{" "}
-                                                        <span
-                                                            className="__cf_email__"
-                                                            data-cfemail="84edeae2ebc4e1f2e0f6edf2e1fcaae7ebe9"
-                                                        >
-                                                            [email&nbsp;protected]
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-xl-4">
-                                        <div className="copyright-info text-xl-end text-white">
-                                            <p className="small">2025 Brand Name. All rights reserved.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
             {/* Footer Section Starts */}
             {/*Back-to-top Button start*/}
             <div id="back-to-top">

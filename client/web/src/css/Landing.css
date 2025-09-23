@@ -627,47 +627,6 @@ body{
     transition: all .3s ease-in-out;
 }
 
-/* Footer CSS */
-
-footer {
-    background-image: linear-gradient(180deg, #052730 0%, #1B1A1A 100%);
-}
-
-.footer-socials a {
-    font-size: 16px;
-    height: 40px;
-    width: 40px;
-    line-height: 40px;
-    transition: all .3s ease-in-out;
-}
-
-.footer-socials a:hover {
-    background-color: #69A316;
-    color: #fff;
-    transition: all .3s ease-in-out;
-}
-
-@media (min-width: 768px) and (max-width:1200px) {
-    .footer-logo img {
-        width: 40% !important;
-    }
-}
-
-.newsletter {
-    margin-bottom: -100px
-}
-
-@media (max-width: 768px) {
-    .search-bar a {
-        margin: 10px 0 !important;
-        width: 100%;
-    }
-}
-
-.copyright .overlay {
-    opacity: .15;
-}
-
 /* ========================================= */
 
 /*          About US page CSS                */
