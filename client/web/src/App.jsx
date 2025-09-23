@@ -14,6 +14,7 @@ import Location from './components/Location'
 import Vehicle from './components/Vehicle'
 import Wallet from './components/Wallet'
 import History from './components/History'
+import About from './pages/About'
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
+
+      <Route path="/about" element={<About />} />
 
       {/* Protected/Home routes */}
       <Route

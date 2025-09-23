@@ -21,7 +21,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   return (
@@ -97,7 +97,7 @@ const Login = () => {
                 {/* Google Login */}
                 <Button
                   variant="light"
-                  className="w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 shadow-sm"
+                  className="google-login-btn w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-3 shadow-sm"
                   onClick={handleGoogleLogin}
                 >
                   <img

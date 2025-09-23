@@ -1,9 +1,10 @@
 import Slider from "react-slick";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import '../css/plugin.css';
 import '../css/default.css';
 import '../css/landing.css';
+import LandingHeader from "../components/LandingHeader";
 
 const Landing = () => {
     const banner_settings = {
@@ -68,78 +69,7 @@ const Landing = () => {
     return (
         <div className="App index-2">
             {/* Header Section Starts */}
-            <header className="position-relative z-3">
-                <div className="header-nav-menu navbar-sticky-in" id="header-nav-menu">
-                    <div className="container">
-                        <nav className="navbar navbar-expand-xl">
-                            {/* Mobile logo (visible only on small screens) */}
-                            <a className="navbar-brand d-xl-none" href="index.html">
-                                <img src="/Unicharge_logo_text.png" alt="Logo" className="w-50" />
-                            </a>
-
-                            {/* Mobile toggle button */}
-                            <button
-                                className="navbar-toggler"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#navbarNav"
-                                aria-controls="navbarNav"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation"
-                            >
-                                <span className="navbar-toggler-icon"></span>
-                            </button>
-
-                            <div className="collapse navbar-collapse" id="navbarNav">
-                                <div className="d-flex py-1 w-100 align-items-center justify-content-between">
-                                    {/* Left nav links */}
-                                    <ul className="navbar-nav flex-row gap-3">
-                                        <li className="nav-item">
-                                            <a className="nav-link text-uppercase fw-medium active" href="#">
-                                                Home
-                                            </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link text-uppercase fw-medium" href="about.html">
-                                                About
-                                            </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link text-uppercase fw-medium" href="#">
-                                                Services
-                                            </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link text-uppercase fw-medium" href="contact.html">
-                                                Contact
-                                            </a>
-                                        </li>
-                                    </ul>
-
-                                    {/* Center logo (desktop only) */}
-                                    <a className="navbar-brand position-absolute start-50 translate-middle-x d-none d-xl-block text-center" href="index.html">
-                                        <img src="/Unicharge_logo_text.png" alt="Logo" className="w-40" />
-                                    </a>
-
-                                    {/* Right nav links */}
-                                    <ul className="navbar-nav flex-row gap-3">
-                                        <li className="nav-item">
-                                            <Link className="nav-link text-uppercase fw-medium" to="/signup">
-                                                SignUp
-                                            </Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link text-uppercase fw-medium" to="/login">
-                                                Login
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </header>
+            <LandingHeader />
 
             {/* Header Section Ends */}
             {/* Banner Section Starts */}
