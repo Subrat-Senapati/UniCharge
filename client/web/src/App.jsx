@@ -36,7 +36,9 @@ function App() {
         element={
           <>
             <Header />
-            <Home />
+            <main className="main-content">
+              <Home />
+            </main>
             <Footer />
           </>
         }
