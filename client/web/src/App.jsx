@@ -15,6 +15,7 @@ import Vehicle from './components/Vehicle'
 import Wallet from './components/Wallet'
 import History from './components/History'
 import About from './pages/About'
+import Service from './pages/Service'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       <Route path="/about" element={<About />} />
+      <Route path="/services" element={<Service />} />
 
       {/* Protected/Home routes */}
       <Route
