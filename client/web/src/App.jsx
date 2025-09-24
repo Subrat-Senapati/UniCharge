@@ -16,6 +16,7 @@ import Wallet from './components/Wallet'
 import History from './components/History'
 import About from './pages/About'
 import Service from './pages/Service'
+import Contact from './pages/Contact'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
 
       <Route path="/about" element={<About />} />
       <Route path="/services" element={<Service />} />
+      <Route path="/contact" element={<Contact />} />
 
       {/* Protected/Home routes */}
       <Route
