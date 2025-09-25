@@ -80,13 +80,17 @@ body,
 }
 
 .google-login-btn {
-  border: 2px solid #db4437 !important;
+  border: 2px solid rgba(105, 163, 22, 0.7) !important;
   border: none;
   color: black !important;
   border-radius: 10px;
 }
 
 .google-login-btn:hover {
-  background-color: #db4437 !important;  /* Prevent color change on hover */
+  background-color: rgba(105, 163, 22, 0.7) !important;
   color: white !important;
+}
+
+.google-login-btn img{
+  border-radius: 50%;
 }

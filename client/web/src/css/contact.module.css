@@ -1,0 +1,31 @@
+.container {
+    position: relative;
+    top: 100px;
+    margin-bottom: 100px;
+    padding: 50px;
+}
+
+.contactCard {
+    min-height: 220px;
+    /* increase height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #87C332;
+    color: white !important;
+}
+
+.contactCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.contactCard h6 {
+    font-size: 1.5rem;
+}
+
+.contactCard p {
+    font-size: 1rem;
+    font-weight: 500;
+}
