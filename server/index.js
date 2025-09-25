@@ -8,6 +8,7 @@ const session = require("express-session");
 
 const userRoutes = require("./routes/users.routes");
 const walletRoutes = require("./routes/wallet.routes");
+const feedbackRoutes = require("./routes/feedback.routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +37,7 @@ app.use(passport.session());
 
 app.use("/api/users", userRoutes);
 app.use("/api/wallet", walletRoutes);
+app.use("/api/feedback", feedbackRoutes);
 
 
 app.listen(PORT, () => {

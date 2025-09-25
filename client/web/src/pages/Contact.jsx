@@ -12,14 +12,40 @@ const Contact = () => {
         review: "",
     });
 
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
     const handleChange = (e) => {
         setFeedback({ ...feedback, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(`✅ Thank you ${feedback.name}, your feedback is submitted!`);
-        setFeedback({ name: "", email: "", subject: "", review: "" });
+        setLoading(true);
+        setMessage("");
+
+        try {
+            const apiUrl = import.meta.env.VITE_SERVER_URL;
+            const res = await fetch(`${apiUrl}/api/feedback`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(feedback),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setMessage("✅ Thank you! Your feedback has been submitted.");
+                setFeedback({ name: "", email: "", subject: "", review: "" });
+            } else {
+                setMessage(data.message || "❌ Something went wrong, please try again.");
+            }
+        } catch (err) {
+            console.error(err);
+            setMessage("⚠️ Server error. Please try later.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -91,7 +117,7 @@ const Contact = () => {
                                 <div className="accordion-item border-0 rounded-3">
                                     <h2 className="accordion-header rounded-3" id="faq1">
                                         <button
-                                            className="accordion-button fw-semibold"
+                                            className="accordion-button collapsed fw-semibold"
                                             type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#collapse1"
@@ -101,7 +127,7 @@ const Contact = () => {
                                     </h2>
                                     <div
                                         id="collapse1"
-                                        className="accordion-collapse collapse show rounded-3"
+                                        className="accordion-collapse collapse rounded-3"
                                         data-bs-parent="#faqAccordion"
                                     >
                                         <div className="accordion-body text-muted">
@@ -291,10 +317,14 @@ const Contact = () => {
                                 <button
                                     type="submit"
                                     className="btn btn-primary w-100 rounded-3 fw-semibold shadow-sm"
+                                    disabled={loading}
                                 >
-                                    Submit Feedback 🚀
+                                    {loading ? "Submitting..." : "Submit Feedback 🚀"}
                                 </button>
                             </form>
+
+                            {/* Success/Error message */}
+                            {message && <p className="mt-3 text-center">{message}</p>}
                         </div>
                     </div>
                 </div>
