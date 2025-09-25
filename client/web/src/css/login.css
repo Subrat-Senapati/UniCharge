@@ -1,0 +1,92 @@
+html,
+body,
+.login-wrapper {
+  height: 100vh !important;
+  margin: 0;
+}
+
+.login-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Gradient background layer */
+.login-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #69A316 30%, #052730 60%);
+  filter: blur(40px);           /* 🔹 Blur amount */
+  transform: scale(1.1);        /* Prevent blur cutoff at edges */
+  z-index: -1;                  /* Put behind everything */
+}
+
+.app-logo {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  height: 50px;
+}
+
+.left-content {
+  color: #fff;
+}
+
+.right-content .login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.right-content .signup-card {
+  width: 100%;
+  max-width: 620px;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s ease;
+}
+
+.signup-card:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s ease;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+/* ✨ Custom border for inputs */
+.form-control {
+  border: 2px solid #69A316 !important;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.form-control:focus {
+  border-color: #052730;
+  box-shadow: 0 0 8px rgba(105, 163, 22, 0.7);
+  background: rgba(255, 255, 255, 0.3);
+  color: black;
+}
+
+.google-login-btn {
+  border: 2px solid #db4437 !important;
+  border: none;
+  color: black !important;
+  border-radius: 10px;
+}
+
+.google-login-btn:hover {
+  background-color: #db4437 !important;  /* Prevent color change on hover */
+  color: white !important;
+}
