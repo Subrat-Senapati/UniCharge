@@ -51,6 +51,19 @@ const UserSchema = new mongoose.Schema(
       },
     ],
 
+    paymentHistory: [
+      {
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+        type: { type: String, enum: ["credit", "debit"], required: true }, // credit = add money, debit = spend
+        amount: { type: Number, required: true },
+        method: { type: String }, // e.g., "UPI", "Card", "Wallet Adjustment"
+        description: { type: String }, // optional note like "Recharge" / "Charging Session"
+        referenceId: { type: String }, // txn id from payment gateway if available
+        status: { type: String, enum: ["pending", "completed", "failed"], default: "completed" },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
+
     location: {
       city: { type: String },
       state: { type: String },
