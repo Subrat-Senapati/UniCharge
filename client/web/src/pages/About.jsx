@@ -19,6 +19,7 @@ import SubratImg from "../assets/subrat.jpg";
 import RajibImg from "../assets/rajib.jpg";
 import SkdImg from "../assets/skd.jpg";
 import Footer from "../components/Footer";
+import AllStation from "../components/AllStation";
 
 const About = () => {
     const teamMembers = [
@@ -29,7 +30,7 @@ const About = () => {
     ];
 
     const stats = [
-        { number: "500+", label: "Charging Stations" },
+        { number: "1000+", label: "Charging Stations" },
         { number: "25", label: "Cities Across India" },
         { number: "50,000+", label: "Happy EV Owners" },
         { number: "24/7", label: "Customer Support" },
@@ -83,6 +84,23 @@ const About = () => {
                                 className="img-fluid rounded shadow"
                             />
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* All Station */}
+            <section className={styles.allStationSection}>
+                <div className="container text-center">
+                    <h2 className={`${styles.sectionTitle} ${styles.center}`}>
+                        Our Charging Network
+                    </h2>
+                    <p>
+                        With 1000+ stations in 25 cities, we ensure you're never far from a
+                        charge. Explore our extensive network designed for convenience and
+                        reliability.
+                    </p>
+                    <div id="all-stations" className="my-4">
+                        <AllStation />
                     </div>
                 </div>
             </section>
