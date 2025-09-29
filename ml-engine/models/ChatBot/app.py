@@ -8,7 +8,7 @@ CORS(app) # Enable CORS for all routes, important for local development
 
 # Initialize the GenAI client with your API key
 # IMPORTANT: Replace "YOUR_API_KEY" with your actual API key
-genai_api_key = "AIzaSyCMgG5vTclxs7OiPeY0K-YBxXEqov6wR8k" # Make sure this is your correct key
+genai_api_key = "" # Make sure this is your correct key
 client = genai.Client(api_key=genai_api_key)
 
 @app.route('/')
