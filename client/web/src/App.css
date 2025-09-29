@@ -3,6 +3,16 @@
   padding-bottom: 70px;
 }
 
-.text-success{
-    color: rgb(204, 242, 13) !important;
+.text-success {
+  color: rgb(204, 242, 13) !important;
+}
+
+.wallet-link {
+  border: 2px solid transparent;
+}
+
+.wallet-link:hover {
+  border-color: #fff;
+  border-radius: 8px;
+  color: #fff !important;
 }
