@@ -1,15 +1,9 @@
 import {
-    FaBolt,
     FaBullseye,
     FaEye,
     FaHandshake,
-    FaFacebookF,
     FaTwitter,
-    FaInstagram,
     FaLinkedinIn,
-    FaMapMarkerAlt,
-    FaPhone,
-    FaEnvelope,
 } from "react-icons/fa";
 import styles from "../css/about.module.css";
 import LandingHeader from "../components/LandingHeader";
@@ -24,7 +18,7 @@ import AllStation from "../components/AllStation";
 const About = () => {
     const teamMembers = [
         { name: "Thakur Ashutosh Dash", role: "CEO", img: ThakurImg },
-        { name: "Subhrat Senapati", role: "Founder", img: SubratImg },
+        { name: "Subrat Senapati", role: "Founder", img: SubratImg },
         { name: "Rajib Kumar Maharana", role: "Head of Operations", img: RajibImg },
         { name: "Subham Kumar Das", role: "Marketing Director", img: SkdImg },
     ];
@@ -99,7 +93,7 @@ const About = () => {
                         charge. Explore our extensive network designed for convenience and
                         reliability.
                     </p>
-                    <div id="all-stations" className="my-4">
+                    <div id="all-stations" className="my-4 mb-9">
                         <AllStation />
                     </div>
                 </div>
@@ -154,14 +148,6 @@ const About = () => {
                                     <img src={m.img} alt={m.name} />
                                     <h5>{m.name}</h5>
                                     <p>{m.role}</p>
-                                    <div className={styles.socialIcons}>
-                                        <a href="#">
-                                            <FaLinkedinIn />
-                                        </a>
-                                        <a href="#">
-                                            <FaTwitter />
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         ))}

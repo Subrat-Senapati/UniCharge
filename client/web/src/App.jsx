@@ -17,6 +17,7 @@ import History from './components/History'
 import About from './pages/About'
 import Service from './pages/Service'
 import Contact from './pages/Contact'
+import Notification from './components/Notification'
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="vehicle" element={<Vehicle />} />
         <Route path="wallet" element={<Wallet />} />
         <Route path="history" element={<History />} />
+        <Route path="notifications" element={<Notification />} />
       </Route>
     </Routes>
   )
