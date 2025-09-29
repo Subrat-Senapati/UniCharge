@@ -64,6 +64,22 @@ const UserSchema = new mongoose.Schema(
       },
     ],
 
+    notifications: [
+      {
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+        title: { type: String, required: true },
+        message: { type: String, required: true },
+        type: {
+          type: String,
+          enum: ["info", "alert", "promo", "transaction"],
+          default: "info",
+        },
+        isRead: { type: Boolean, default: false },
+        createdAt: { type: Date, default: Date.now },
+        expiresAt: { type: Date, default: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
+      },
+    ],
+
     location: {
       city: { type: String },
       state: { type: String },

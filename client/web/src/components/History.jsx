@@ -30,7 +30,7 @@ const TransactionDetailModal = ({ transaction, onClose, styles }) => {
           
           <div className="modal-body p-0">
             <div className={`py-3 text-center rounded-bottom-4 ${transaction.type === "credit" ? 'bg-light-green' : 'bg-light-red'}`}>
-              <small className="text-muted text-uppercase d-block mb-1">Transaction Amount</small>
+              <small className="text-dark fw-bold text-uppercase d-block mb-1">Transaction Amount</small>
               <h3 className={amountClass}>
                 {amountSign}₹{transaction.amount}
               </h3>

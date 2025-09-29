@@ -2,8 +2,6 @@ import {
     FaBullseye,
     FaEye,
     FaHandshake,
-    FaTwitter,
-    FaLinkedinIn,
 } from "react-icons/fa";
 import styles from "../css/about.module.css";
 import LandingHeader from "../components/LandingHeader";
