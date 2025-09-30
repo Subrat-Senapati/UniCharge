@@ -20,15 +20,19 @@ const UserSchema = new mongoose.Schema(
     },
     providerUid: { type: String },
 
-    vehicle: {
-      make: String,
-      model: String,
-      batteryCapacityKwh: Number,
-      preferredConnector: {
-        type: String,
-        enum: ["CCS2", "CHAdeMO", "Type2", "GB/T"],
+    vehicles: [
+      {
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+        make: String,
+        model: String,
+        batteryCapacityKwh: Number,
+        preferredConnector: {
+          type: String,
+          enum: ["CCS2", "CHAdeMO", "Type2", "GB/T"],
+        },
+        createdAt: { type: Date, default: Date.now },
       },
-    },
+    ],
 
     wallet: {
       balance: { type: Number, default: 0.0 },

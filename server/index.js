@@ -10,6 +10,7 @@ const userRoutes = require("./routes/users.routes");
 const walletRoutes = require("./routes/wallet.routes");
 const feedbackRoutes = require("./routes/feedback.routes");
 const notificationRoutes = require("./routes/notification.routes");
+const vehicleRoutes = require("./routes/vehicle.routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -40,6 +41,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/wallet", walletRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api", vehicleRoutes);
 
 
 app.listen(PORT, () => {
