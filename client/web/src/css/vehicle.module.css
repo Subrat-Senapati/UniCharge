@@ -1,0 +1,80 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.connectorBadge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.editButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0px 10px !important;
+}
+
+.cancelBtn {
+  transition: all 0.3s;
+}
+
+.cancelBtn:hover {
+  background-color: red !important;
+  border-color: red !important;
+}
+
+.saveBtn {
+  transition: all 0.3s;
+}
+
+.saveBtn:hover {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+.dropdown {
+  border: 2px solid #69A316;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background-color: #f8f9fa;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+/* Remove default Bootstrap focus styles */
+.dropdown:focus {
+  border-color: #69A316 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: #fff;
+}
+
+
+/* Connector colors */
+.ccs2 {
+  background-color: #28a745;
+  /* green */
+}
+
+.chademo {
+  background-color: #ffc107;
+  /* yellow */
+  color: #212529;
+  /* dark text for contrast */
+}
+
+.type2 {
+  background-color: #0d6efd;
+  /* blue */
+}
+
+.gbt {
+  background-color: #6f42c1;
+  /* purple */
+}
