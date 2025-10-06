@@ -1,0 +1,100 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.typeBadge{
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: white;
+}
+
+.upi {
+    background-color: #007bff;
+}
+.card {
+    background-color: #17a2b8;
+}
+
+.editButton:hover {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+}
+
+.deleteButton:hover {
+    background-color: red !important;
+    border-color: red !important;
+}
+
+.cancelBtn {
+    transition: all 0.3s;
+}
+
+.cancelBtn:hover {
+    background-color: red !important;
+    border-color: red !important;
+}
+
+.saveBtn {
+    transition: all 0.3s;
+}
+
+.saveBtn:hover {
+    background-color: green !important;
+    border-color: green !important;
+}
+
+.dropdown {
+  border: 2px solid #69A316;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background-color: #f8f9fa;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+/* Remove default Bootstrap focus styles */
+.dropdown:focus {
+  border-color: #69A316 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: #fff;
+}
+
+
+/* Custom checkbox style */
+.checkbox-green {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid #69A316;
+  border-radius: 0.25rem;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Checked state */
+.checkbox-green:checked {
+  background-color: #69A316;
+  border-color: #69A316;
+}
+
+.checkbox-green:checked::after {
+  /* content: "✔"; */
+  color: #fff;
+  font-size: 0.9rem;
+  position: absolute;
+  top: -3px;
+  left: 2px;
+}
+
+/* Focus state */
+.checkbox-green:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

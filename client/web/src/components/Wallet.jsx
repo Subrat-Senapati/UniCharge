@@ -1,8 +1,13 @@
 import React from 'react'
+import Payment from './Payment'
 
 const Wallet = () => {
   return (
-    <div>Wallet</div>
+    <div>
+      <div>Wallet</div>
+      <Payment />
+
+    </div>
   )
 }
 
