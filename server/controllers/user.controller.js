@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require("../services/user.service");
+const { registerUser, loginUser , userProfile} = require("../services/user.service");
 
 async function register(req, res) {
   try {
@@ -34,9 +34,20 @@ async function login(req, res) {
   }
 }
 
-async function profile(req, res) {
-  res.json({ user: req.user }); // user from JWT
-}
+const profile = async (req, res) => {
+  try {
+    const user = await userProfile(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.json({ user });
+  } catch (error) {
+    console.error("Profile Fetch Error:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
 
 async function logout(req, res) {
   res.clearCookie("token", {

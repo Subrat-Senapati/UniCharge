@@ -36,4 +36,9 @@ async function loginUser({ email, password }) {
   return { user, token };
 }
 
-module.exports = { registerUser, loginUser };
+const userProfile = async (userId) => {
+  const user = await User.findById(userId).select("-passwordHash");
+  return user;
+};
+
+module.exports = { registerUser, loginUser, userProfile };

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Card } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/login.css';
 
 const Login = () => {
+  const { setUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -35,6 +37,7 @@ const Login = () => {
       }
 
       localStorage.setItem("token", data.token);
+      setUser(data.user);
       console.log("Logged in:", data.user);
 
       navigate("/home");

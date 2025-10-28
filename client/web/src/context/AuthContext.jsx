@@ -9,20 +9,19 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchUser = async () => {
+    const fetchProfile = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/profile`, {
+        method: "GET",
         credentials: "include",
       });
+      console.log("Profile status:", res.status);
 
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      } else {
-        setUser(null);
-      }
-    } catch (error) {
-      console.log("Auth check failed", error);
+      if (!res.ok) throw new Error("Not authenticated");
+      const data = await res.json();
+      setUser(data.user);
+      console.log("Fetched profile:", data.user);
+    } catch {
       setUser(null);
     } finally {
       setLoading(false);
@@ -30,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchUser();
+    fetchProfile();
   }, []);
 
   const logout = async () => {
@@ -48,8 +47,10 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         loading,
         logout,
+        fetchProfile,
         isAuthenticated: !!user,
       }}
     >

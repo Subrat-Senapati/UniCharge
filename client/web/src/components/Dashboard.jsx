@@ -1,69 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Form, Modal, Spinner } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
-
-  // Track which section modal is open
+  const { user, setUser } = useAuth();
   const [editSection, setEditSection] = useState(null);
   const [formData, setFormData] = useState({});
 
-  // 🔹 Fetch user details (dummy for now)
-  useEffect(() => {
-    const fetchUser = async () => {
-      const dummyData = {
-        fullName: "John Doe",
-        email: "johndoe@example.com",
-        phoneNumber: "9876543210",
-        role: "user",
-        authProvider: "local",
-        vehicle: {
-          make: "Tesla",
-          model: "Model 3",
-          batteryCapacityKwh: 75,
-          preferredConnector: "CCS2",
-        },
-        wallet: {
-          balance: 500.75,
-          loyaltyPoints: 120,
-          defaultPaymentMethod: "Card - 1234",
-        },
-        paymentMethods: [
-          {
-            _id: "1",
-            type: "card",
-            card: {
-              cardNumberMasked: "1234",
-              cardHolder: "John Doe",
-              expiryMonth: "12",
-              expiryYear: "25",
-            },
-            isDefault: true,
-          },
-          {
-            _id: "2",
-            type: "upi",
-            upiId: "johndoe@upi",
-            isDefault: false,
-          },
-        ],
-        location: {
-          city: "Bengaluru",
-          state: "Karnataka",
-          country: "India",
-          coordinates: { lat: 12.9716, lng: 77.5946 },
-        },
-        preferences: {
-          preferredLanguage: "en",
-          notificationsEnabled: true,
-          renewablePriority: false,
-        },
-      };
-      setUser(dummyData);
-    };
-
-    fetchUser();
-  }, []);
+  if (!user) {
+    return <p>Loading user data...</p>;
+  }
 
   const handleOpenEdit = (section) => {
     setEditSection(section);
