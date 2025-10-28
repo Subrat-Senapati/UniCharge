@@ -17,7 +17,10 @@ const PORT = process.env.PORT || 3000;
 connectToDb();
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

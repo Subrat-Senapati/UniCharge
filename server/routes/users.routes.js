@@ -16,13 +16,12 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 // Google callback
 router.get(
   "/google/callback",
-  passport.authenticate("google", { session: false }),
+  passport.authenticate("google", {
+    failureRedirect: `${process.env.CLIENT_URL}/login`,
+    session: false,
+  }),
   (req, res) => {
-    const token = jwt.sign(
-      { id: req.user._id, email: req.user.email.toLowerCase() },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const { user, token } = req.user;
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -31,7 +30,7 @@ router.get(
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
-    res.json({ user: req.user, token });
+    res.redirect(`${process.env.CLIENT_URL}/home`);
   }
 );
 

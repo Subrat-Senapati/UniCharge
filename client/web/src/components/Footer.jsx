@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="row">
           <div className="col-lg-4">
             <div className="footer-logo-image text-lg-start mb-1">
-              <img src="Unicharge_logo.png" alt="footer logo" class="w-lg-20 w-md-20 w-20" />
-              <img src="Unicharge_logo_text.png" alt="footer logo" class="w-lg-50 w-md-50 w-50" />
+              <img src="Unicharge_logo.png" alt="footer logo" className="w-lg-20 w-md-20 w-20" />
+              <img src="Unicharge_logo_text.png" alt="footer logo" className="w-lg-50 w-md-50 w-50" />
             </div>
             <p className="mb-3">Leading EV revolution in India with reliable charging.</p>
             <div className="socialIcons">

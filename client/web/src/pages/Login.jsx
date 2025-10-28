@@ -10,18 +10,42 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // simple demo login
-    if (email === 'user@example.com' && password === 'password') {
-      navigate('/home');
-    } else {
-      setError('Invalid email or password');
+    setError("");
+
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Login failed");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      console.log("Logged in:", data.user);
+
+      navigate("/home");
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong");
     }
   };
 
   const handleGoogleLogin = () => {
-    navigate('/home');
+    window.location.href = `${import.meta.env.VITE_SERVER_URL}/api/users/google`;
   };
 
   return (

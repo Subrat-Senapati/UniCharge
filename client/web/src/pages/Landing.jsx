@@ -1050,29 +1050,29 @@ const Landing = () => {
 
                                         {/* Slide 2 */}
                                         <div className="slide">
-                                            <div class="review-box p-6 py-8 position-relative">
-                                                <div class="qoute-icon p-3 h2 bg-lightgreen1 position-absolute rounded2">
-                                                    <i><i class="fa fa-quote-right green" aria-hidden="true"></i></i>
+                                            <div className="review-box p-6 py-8 position-relative">
+                                                <div className="qoute-icon p-3 h2 bg-lightgreen1 position-absolute rounded2">
+                                                    <i><i className="fa fa-quote-right green" aria-hidden="true"></i></i>
                                                 </div>
-                                                <div class="review-star mb-3">
-                                                    <ul class="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
+                                                <div className="review-star mb-3">
+                                                    <ul className="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
                                                     </ul>
                                                 </div>
-                                                <div class="review-info mb-6">
-                                                    <p class="h4 fw-normal fst-italic lh-base mb-0">"Duis aute irure dolor in repre hend in volu ptate velites mollit anim id. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt."</p>
+                                                <div className="review-info mb-6">
+                                                    <p className="h4 fw-normal fst-italic lh-base mb-0">"Duis aute irure dolor in repre hend in volu ptate velites mollit anim id. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt."</p>
                                                 </div>
-                                                <div class="reviewer-bio d-flex align-items-center justify-content-center justify-content-md-start">
-                                                    <div class="reviewer-image me-4">
-                                                        <img src="images/review3.jpg" alt="review-image" class="rounded-circle object-fit-cover" />
+                                                <div className="reviewer-bio d-flex align-items-center justify-content-center justify-content-md-start">
+                                                    <div className="reviewer-image me-4">
+                                                        <img src="images/review3.jpg" alt="review-image" className="rounded-circle object-fit-cover" />
                                                     </div>
-                                                    <div class="review-info">
-                                                        <h6 class="grey mb-1">Tyler Herro</h6>
-                                                        <span class="green1 fw-medium">Technician, Compton</span>
+                                                    <div className="review-info">
+                                                        <h6 className="grey mb-1">Tyler Herro</h6>
+                                                        <span className="green1 fw-medium">Technician, Compton</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1080,29 +1080,29 @@ const Landing = () => {
 
                                         {/* Slide 3 */}
                                         <div className="slide">
-                                            <div class="review-box p-6 py-8 position-relative">
-                                                <div class="qoute-icon p-3 h2 bg-lightgreen1 position-absolute rounded2">
-                                                    <i><i class="fa fa-quote-right green" aria-hidden="true"></i></i>
+                                            <div className="review-box p-6 py-8 position-relative">
+                                                <div className="qoute-icon p-3 h2 bg-lightgreen1 position-absolute rounded2">
+                                                    <i><i className="fa fa-quote-right green" aria-hidden="true"></i></i>
                                                 </div>
-                                                <div class="review-star mb-3">
-                                                    <ul class="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star green" aria-hidden="true"></i></li>
+                                                <div className="review-star mb-3">
+                                                    <ul className="list-unstyled d-flex justify-content-center justify-content-md-start gap-1">
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
+                                                        <li><i className="fa fa-star green" aria-hidden="true"></i></li>
                                                     </ul>
                                                 </div>
-                                                <div class="review-info mb-6">
-                                                    <p class="h4 fw-normal fst-italic lh-base mb-0">"Duis aute irure dolor in repre hend in volu ptate velites mollit anim id. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt."</p>
+                                                <div className="review-info mb-6">
+                                                    <p className="h4 fw-normal fst-italic lh-base mb-0">"Duis aute irure dolor in repre hend in volu ptate velites mollit anim id. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt."</p>
                                                 </div>
-                                                <div class="reviewer-bio d-flex align-items-center justify-content-center justify-content-md-start">
-                                                    <div class="reviewer-image me-4">
-                                                        <img src="images/review4.jpg" alt="review-image" class="rounded-circle object-fit-cover" />
+                                                <div className="reviewer-bio d-flex align-items-center justify-content-center justify-content-md-start">
+                                                    <div className="reviewer-image me-4">
+                                                        <img src="images/review4.jpg" alt="review-image" className="rounded-circle object-fit-cover" />
                                                     </div>
-                                                    <div class="review-info">
-                                                        <h6 class="grey mb-1">Kendrick Mathers</h6>
-                                                        <span class="green1 fw-medium">Driver, LA</span>
+                                                    <div className="review-info">
+                                                        <h6 className="grey mb-1">Kendrick Mathers</h6>
+                                                        <span className="green1 fw-medium">Driver, LA</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1112,7 +1112,7 @@ const Landing = () => {
                             </div>
 
                             <div className="col-lg-5">
-                                <div class="section-right position-relative h-100">
+                                <div className="section-right position-relative h-100">
                                     <div className="section-right-inner text-center mt-5">
                                         <div className="about-video mb-3">
                                             <div className="lightgallery-box position-relative d-inline-block">

@@ -20,16 +20,44 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccess(false);
 
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+    const { name: fullName, email, phone: phoneNumber, password, confirmPassword } = formData;
+
+    if (!fullName || !email || !phoneNumber || !password || !confirmPassword) {
+      setError("All fields are required");
       return;
     }
 
-    setSuccess(true);
-    setTimeout(() => navigate('/login'), 2000);
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/register`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, email, phoneNumber, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Registration failed");
+        return;
+      }
+
+      setSuccess(true);
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong, please try again");
+    }
   };
 
   if (success) {

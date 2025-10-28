@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/UserSchema");
+const jwt = require("jsonwebtoken");
 
 passport.use(
   new GoogleStrategy(
@@ -11,18 +12,15 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Try to find user by providerUid + authProvider
         let user = await User.findOne({
           providerUid: profile.id,
           authProvider: "google"
         });
 
-        // If not found, maybe user registered manually with same email
         if (!user) {
           user = await User.findOne({ email: profile.emails[0].value });
         }
 
-        // If still not found, create new
         if (!user) {
           user = await User.create({
             fullName: profile.displayName,
@@ -31,7 +29,6 @@ passport.use(
             passwordHash: "GOOGLE_OAUTH",
             authProvider: "google",
             providerUid: profile.id,
-
             vehicle: {},
             wallet: { balance: 0, loyaltyPoints: 0, defaultPaymentMethod: "wallet" },
             preferences: {
@@ -41,13 +38,18 @@ passport.use(
             }
           });
         } else {
-          // update provider info if logging with google first time
           user.authProvider = "google";
           user.providerUid = profile.id;
           await user.save();
         }
 
-        return done(null, user);
+        const token = jwt.sign(
+          { id: user._id, email: user.email.toLowerCase() },
+          process.env.JWT_SECRET,
+          { expiresIn: "7d" }
+        );
+
+        return done(null, { user, token });
       } catch (err) {
         done(err, null);
       }
