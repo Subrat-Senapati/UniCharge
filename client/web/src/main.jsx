@@ -9,11 +9,14 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'lightgallery/css/lightgallery.css';
 import App from './App.jsx'
+import { AuthProvider } from './context/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <StrictMode>
-      <App />
-    </StrictMode>
+    <AuthProvider>
+      <StrictMode>
+        <App />
+      </StrictMode>
+    </AuthProvider>
   </BrowserRouter>,
 )

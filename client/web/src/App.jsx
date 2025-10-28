@@ -18,6 +18,7 @@ import About from './pages/About'
 import Service from './pages/Service'
 import Contact from './pages/Contact'
 import Notification from './components/Notification'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -35,16 +36,16 @@ function App() {
       <Route
         path="/home"
         element={
-          <>
+          <ProtectedRoute>
             <Header />
             <main className="main-content">
               <Home />
             </main>
             <Footer />
-          </>
+          </ProtectedRoute>
         }
       >
-        {/* ✅ Default redirect to /home/location */}
+        {/* Default redirect to /home/location */}
         <Route index element={<Navigate to="location" replace />} />
 
         <Route path="dashboard" element={<Dashboard />} />
