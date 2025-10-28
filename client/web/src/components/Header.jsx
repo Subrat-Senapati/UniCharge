@@ -1,7 +1,12 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaUserCircle, FaBell, FaWallet } from "react-icons/fa"; // icons
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
+  const { user } = useAuth();
+  const notificationsData = user?.notifications || [];
+  const unreadCount = notificationsData.filter(n => !n.isRead).length;
+
   return (
     <header className="position-relative z-3 shadow-sm">
       <div className="header-nav-menu navbar-sticky-in text-white" id="header-nav-menu">
@@ -73,7 +78,7 @@ const Header = () => {
                       className="position-absolute mt-1 top-65 start-65 translate-middle badge rounded-pill bg-danger"
                       style={{ fontSize: "0.6rem" }}
                     >
-                      3
+                      {unreadCount}
                     </span>
                   </NavLink>
                 </li>
@@ -84,7 +89,7 @@ const Header = () => {
                     to="/home/wallet" className="wallet-link d-flex align-items-center py-1 px-2"
                   >
                     <FaWallet size={22} className="me-2 text-white" />
-                    <span className="fw-bold">₹0</span>
+                    <span className="fw-bold">₹{user.wallet.balance}</span>
                   </NavLink>
                 </li>
 

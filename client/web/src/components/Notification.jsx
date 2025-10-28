@@ -1,54 +1,7 @@
 import { useState } from 'react';
 import { FaBell, FaExclamationCircle, FaWallet, FaTag } from "react-icons/fa"; // Icons
+import { useAuth } from "../context/AuthContext";
 
-// --- 1. Demo Data (Keeping the same schema-aligned data) ---
-const notificationsData = [
-  {
-    _id: "65b4c1a5e1c0c1b0f5b4c1d1",
-    title: "Charging Complete",
-    message: "Your charging session at Station A is complete. Total cost: ₹200. This is a very long descriptive message that needs to be truncated and end with an ellipsis to fit within the width of the container.",
-    type: "transaction",
-    isRead: false,
-    createdAt: new Date(Date.now() - 5 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-  },
-  {
-    _id: "65b4c1a5e1c0c1b0f5b4c1d2",
-    title: "Wallet Topped Up",
-    message: "Wallet recharge of ₹500 successful. Current balance: ₹1500.",
-    type: "transaction",
-    isRead: true,
-    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-  },
-  {
-    _id: "65b4c1a5e1c0c1b0f5b4c1d3",
-    title: "New Station Alert",
-    message: "New charging station (Bhubaneswar Tech Park) has been added to the network.",
-    type: "info",
-    isRead: false,
-    createdAt: new Date(Date.now() - 25 * 60 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-  },
-  {
-    _id: "65b4c1a5e1c0c1b0f5b4c1d4",
-    title: "Payment Failure",
-    message: "Action Required: Your payment method for Station C failed. Please update it.",
-    type: "alert",
-    isRead: true,
-    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
-  },
-  {
-    _id: "65b4c1a5e1c0c1b0f5b4c1d5",
-    title: "Special Offer",
-    message: "Get 10% extra credit on your next recharge of ₹1000 or more!",
-    type: "promo",
-    isRead: false,
-    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-  },
-];
 
 // --- Utility Function to format time elapsed ---
 const timeAgo = (date) => {
@@ -128,15 +81,32 @@ const NotificationDetailModal = ({ notification, onClose }) => {
 
 // --- Main Notification Component ---
 const Notification = () => {
+  const { user } = useAuth();
+
+  const notificationsData = user?.notifications || [];
   const [selectedNotification, setSelectedNotification] = useState(null);
 
   const unreadCount = notificationsData.filter(n => !n.isRead).length;
 
   // Handler to open the modal
-  const handleNotificationClick = (notification) => {
+  const handleNotificationClick = async (notification) => {
     setSelectedNotification(notification);
-    // In a real app, you would also trigger an API call here to mark the notification as read
+
+    if (!notification.isRead) {
+      try {
+        await fetch(`${import.meta.env.VITE_SERVER_URL}/api/notifications/${user._id}/${notification._id}/read`, {
+          method: "PATCH",
+          credentials: "include",
+        });
+
+        // Update UI instantly
+        notification.isRead = true;
+      } catch (err) {
+        console.error("Failed to mark notification as read:", err);
+      }
+    }
   };
+
 
   // Handler to close the modal
   const handleCloseModal = () => {

@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Edit3, Plus, Battery } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Edit3, Plus, Battery, Trash } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 import styles from "../css/vehicle.module.css";
 
 // Connector badge
@@ -24,7 +25,7 @@ const ConnectorBadge = ({ connector }) => {
   return <span className={`${styles.connectorBadge} ${colorClass}`}>{connector}</span>;
 };
 
-const VehicleCard = ({ vehicle, onEdit }) => {
+const VehicleCard = ({ vehicle, onEdit, onDelete }) => {
   return (
     <div className={`card shadow-sm w-100 ${styles.cardContainer}`}>
       <div className="card-body d-flex flex-wrap flex-column justify-content-between">
@@ -33,14 +34,19 @@ const VehicleCard = ({ vehicle, onEdit }) => {
           <h5 className="card-title mb-0">
             {vehicle.make}
           </h5>
-          <button
-            onClick={() => onEdit(vehicle)}
-            className={`btn btn-outline-success btn-sm ${styles.editButton}`}
-            title="Edit Vehicle"
-          >
-            <Edit3 size={12} strokeWidth={3}/>
-            <span>Edit</span>
-          </button>
+          <div className="d-flex gap-2">
+            <button
+              onClick={() => onEdit(vehicle)}
+              className={`btn btn-outline-success btn-sm ${styles.editButton}`}
+              title="Edit Vehicle"
+            >
+              <Edit3 size={12} strokeWidth={3} />
+              <span>Edit</span>
+            </button>
+            <button className={`btn btn-outline-danger btn-sm ${styles.deleteButton}`} onClick={() => onDelete(vehicle._id)}>
+              <Trash size={14} />
+            </button>
+          </div>
         </div>
         <h5 className="card-title mb-0">
           <span className="text-primary">{vehicle.model}</span>
@@ -61,46 +67,18 @@ const VehicleCard = ({ vehicle, onEdit }) => {
   );
 };
 
-// Demo Data
-const demoVehicles = [
-  {
-    _id: "665c026857f6d28a3f8a42b1",
-    make: "Tesla",
-    model: "Model 3 Long Range",
-    batteryCapacityKwh: 75,
-    preferredConnector: "Type2",
-    createdAt: new Date("2024-05-30T10:00:00Z"),
-  },
-  {
-    _id: "665c026857f6d28a3f8a42b2",
-    make: "Nissan",
-    model: "Leaf Plus",
-    batteryCapacityKwh: 62,
-    preferredConnector: "CHAdeMO",
-    createdAt: new Date("2024-05-28T15:30:00Z"),
-  },
-  {
-    _id: "665c026857f6d28a3f8a42b3",
-    make: "Porsche",
-    model: "Taycan Turbo S",
-    batteryCapacityKwh: 93,
-    preferredConnector: "CCS2",
-    createdAt: new Date("2024-05-31T08:15:00Z"),
-  },
-  {
-    _id: "665c026857f6d28a3f8a42b4",
-    make: "BYD",
-    model: "Atto 3",
-    batteryCapacityKwh: 60,
-    preferredConnector: "GB/T",
-    createdAt: new Date("2024-06-01T12:00:00Z"),
-  },
-];
 
 const Vehicle = () => {
-  const [vehicles, setVehicles] = useState(demoVehicles);
+  const { fetchProfile } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [vehicles, setVehicles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState(null);
+  const [error, setError] = useState("");
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [vehicleToDelete, setVehicleToDelete] = useState(null);
+
   const [formData, setFormData] = useState({
     make: "",
     model: "",
@@ -129,15 +107,74 @@ const Vehicle = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (editingVehicle) {
-      setVehicles(vehicles.map(v => v._id === editingVehicle._id ? { ...v, ...formData } : v));
-    } else {
-      const newVehicle = { _id: Date.now().toString(), ...formData };
-      setVehicles([...vehicles, newVehicle]);
+  const fetchVehicles = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/vehicles`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      setVehicles(data || []);
+    } catch (err) {
+      console.error("Fetch Vehicles Error:", err);
+    } finally {
+      setLoading(false);
     }
-    setShowModal(false);
+  };
+
+  useEffect(() => {
+    fetchVehicles();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const method = editingVehicle ? "PUT" : "POST";
+    const url = editingVehicle
+      ? `${import.meta.env.VITE_SERVER_URL}/api/vehicles/${editingVehicle._id}`
+      : `${import.meta.env.VITE_SERVER_URL}/api/vehicles`;
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to save vehicle");
+
+      await fetchVehicles();
+      await fetchProfile();
+      setShowModal(false);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+
+  const confirmDelete = (vehicle) => {
+    setVehicleToDelete(vehicle);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirmed = async () => {
+    if (!vehicleToDelete) return;
+
+    try {
+      await fetch(`${import.meta.env.VITE_SERVER_URL}/api/vehicles/${vehicleToDelete._id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      await fetchVehicles();
+      await fetchProfile();
+    } catch (err) {
+      alert("Delete failed");
+    } finally {
+      setShowDeleteModal(false);
+      setVehicleToDelete(null);
+    }
   };
 
   return (
@@ -153,18 +190,20 @@ const Vehicle = () => {
         <span>Add New Vehicle</span>
       </button>
 
-      {demoVehicles.length === 0 ? (
+      {loading ? (
+        <p>Loading vehicles...</p>
+      ) : vehicles.length === 0 ? (
         <div className="alert alert-info text-center" role="alert">
           No vehicles added yet. Click "Add New Vehicle" to get started!
         </div>
       ) : (
         <div className="row g-3">
-          {demoVehicles.map((v) => (
+          {vehicles.map((v) => (
             <div
               key={v._id}
               className="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-wrap"
             >
-              <VehicleCard vehicle={v} onEdit={openEditModal} />
+              <VehicleCard vehicle={v} onEdit={openEditModal} onDelete={() => confirmDelete(v)} />
             </div>
           ))}
         </div>
@@ -246,6 +285,51 @@ const Vehicle = () => {
 
       {/* Modal backdrop */}
       {showModal && <div className="modal-backdrop fade show"></div>}
+
+      {showDeleteModal && (
+        <>
+          <div className="modal show fade d-block" tabIndex="-1">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header bg-danger text-white">
+                  <h5 className="modal-title text-white">Confirm Deletion</h5>
+                  <button
+                    className="btn-close btn-close-white"
+                    onClick={() => setShowDeleteModal(false)}
+                  ></button>
+                </div>
+
+                <div className="modal-body text-center">
+                  <p className="mb-0">
+                    Are you sure you want to delete: <br />
+                    <strong>{vehicleToDelete?.make} {vehicleToDelete?.model}</strong>?
+                  </p>
+                  <p className="text-secondary small mt-2">
+                    This action cannot be undone.
+                  </p>
+                </div>
+
+                <div className="modal-footer justify-content-center">
+                  <button
+                    className="btn btn-success px-3 py-1"
+                    onClick={() => setShowDeleteModal(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className={`btn btn-danger px-4 py-1 ${styles.deleteButton}`}
+                    onClick={handleDeleteConfirmed}
+                  >
+                    Confirm Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="modal-backdrop fade show"></div>
+        </>
+      )}
     </div>
   );
 };

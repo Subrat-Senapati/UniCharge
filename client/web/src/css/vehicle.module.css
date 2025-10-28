@@ -19,6 +19,18 @@
   padding: 0px 10px !important;
 }
 
+.deleteButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0px 10px;
+}
+
+.deleteButton:hover {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
 .cancelBtn {
   transition: all 0.3s;
 }
