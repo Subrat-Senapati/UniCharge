@@ -1,25 +1,42 @@
 const express = require("express");
-const router = express.Router();
-const walletController = require("../controllers/wallet.controller");
-const {
-  addMoneyValidation,
-  verifyPaymentValidation,
-  spendValidation,
-} = require("../validators/wallet.validator");
 const { validationResult } = require("express-validator");
+const {
+  handleGetWallet,
+  handleCreateRazorpayOrder,
+  handleVerifyRazorpayPayment,
+} = require("../controllers/wallet.controller");
+const {
+  validateCreateOrder,
+  validateVerifyPayment,
+} = require("../validators/wallet.validator");
+const { authMiddleware } = require("../middleware/auth");
 
-// Middleware to check validation errors
-const validate = (req, res, next) => {
+const router = express.Router();
+
+const validateRequest = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
-    return res.status(422).json({ success: false, errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   next();
 };
 
-router.post("/create-order", addMoneyValidation, validate, walletController.createOrder);
-router.post("/verify-payment", verifyPaymentValidation, validate, walletController.verifyPayment);
-router.post("/spend", spendValidation, validate, walletController.spend);
-router.get("/balance", walletController.getBalance);
-router.get("/history", walletController.getHistory);
+// ✅ Routes
+router.get("/", authMiddleware, handleGetWallet);
+
+router.post(
+  "/create-order",
+  authMiddleware,
+  validateCreateOrder,
+  validateRequest,
+  handleCreateRazorpayOrder
+);
+
+router.post(
+  "/verify-payment",
+  authMiddleware,
+  validateVerifyPayment,
+  validateRequest,
+  handleVerifyRazorpayPayment
+);
 
 module.exports = router;

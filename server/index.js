@@ -11,6 +11,7 @@ const walletRoutes = require("./routes/wallet.routes");
 const feedbackRoutes = require("./routes/feedback.routes");
 const notificationRoutes = require("./routes/notification.routes");
 const vehicleRoutes = require("./routes/vehicle.routes");
+const paymentMethodRoutes = require("./routes/paymentMethod.routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -45,6 +46,7 @@ app.use("/api/wallet", walletRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api", vehicleRoutes);
+app.use("/api/payment-methods", paymentMethodRoutes);
 
 
 app.listen(PORT, () => {

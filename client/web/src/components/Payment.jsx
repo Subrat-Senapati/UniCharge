@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Edit3, Plus, CreditCard, Wallet, Trash2 } from "lucide-react";
 import styles from "../css/payment.module.css";
 
@@ -62,7 +62,7 @@ const PaymentCard = ({ payment, onEdit, onDelete }) => {
                         </small>
                     )}
                     <div className="align-self-end">
-                    <PaymentTypeBadge type={payment.type} />
+                        <PaymentTypeBadge type={payment.type} />
                     </div>
                 </div>
             </div>
@@ -70,29 +70,9 @@ const PaymentCard = ({ payment, onEdit, onDelete }) => {
     );
 };
 
-// Demo Data
-const demoPayments = [
-    {
-        _id: "665c026857f6d28a3f8a42b1",
-        type: "upi",
-        upiId: "user@upi",
-        isDefault: true,
-    },
-    {
-        _id: "665c026857f6d28a3f8a42b2",
-        type: "card",
-        card: {
-            cardNumberMasked: "1234",
-            cardHolder: "John Doe",
-            expiryMonth: "08",
-            expiryYear: "27",
-        },
-        isDefault: false,
-    },
-];
 
 const Payment = () => {
-    const [payments, setPayments] = useState(demoPayments);
+    const [payments, setPayments] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [editingPayment, setEditingPayment] = useState(null);
     const [formData, setFormData] = useState({
@@ -106,6 +86,24 @@ const Payment = () => {
         },
         isDefault: false,
     });
+
+    useEffect(() => {
+        fetchPayments();
+    }, []);
+
+    const fetchPayments = async () => {
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/payment-methods`,
+                { credentials: "include" }
+            );
+            if (!res.ok) throw new Error("Failed to fetch payments");
+            const data = await res.json();
+            setPayments(data.paymentMethods);
+        } catch (err) {
+            console.error("Error fetching payments:", err);
+        }
+    };
 
     const openAddModal = () => {
         setEditingPayment(null);
@@ -137,25 +135,50 @@ const Payment = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.isDefault) {
-            payments.forEach((p) => (p.isDefault = false));
+        try {
+            const method = editingPayment ? "PUT" : "POST";
+            console.log(editingPayment._id)
+            const url = editingPayment
+                ? `${import.meta.env.VITE_SERVER_URL}/api/payment-methods/${editingPayment._id}`
+                : `${import.meta.env.VITE_SERVER_URL}/api/payment-methods`;
+
+            const res = await fetch(url, {
+                method,
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(formData),
+            });
+
+            if (!res.ok) {
+                const errData = await res.json();
+                throw new Error(errData.message || "Failed to save payment method");
+            }
+
+            await fetchPayments();
+            setShowModal(false);
+        } catch (err) {
+            console.error("Error saving payment:", err);
+            alert("Error saving payment: " + err.message);
         }
-        if (editingPayment) {
-            setPayments(
-                payments.map((p) => (p._id === editingPayment._id ? { ...p, ...formData } : p))
-            );
-        } else {
-            const newPayment = { _id: Date.now().toString(), ...formData };
-            setPayments([...payments, newPayment]);
-        }
-        setShowModal(false);
     };
 
-    const handleDelete = (id) => {
-        if (window.confirm("Are you sure you want to delete this payment method?")) {
-            setPayments(payments.filter((p) => p._id !== id));
+    const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this payment method?"))
+            return;
+
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/payment-methods/${id}`,
+                { method: "DELETE", credentials: "include" }
+            );
+
+            if (!res.ok) throw new Error("Failed to delete payment method");
+            await fetchPayments();
+        } catch (err) {
+            console.error("Error deleting payment:", err);
+            alert("Error deleting payment: " + err.message);
         }
     };
 
