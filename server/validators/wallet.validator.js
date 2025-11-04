@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-const validateCreateOrder = [
+exports.validateCreateOrder = [
   body("amount")
     .isNumeric()
     .withMessage("Amount must be numeric")
@@ -8,11 +8,14 @@ const validateCreateOrder = [
     .withMessage("Amount must be greater than 0"),
 ];
 
-const validateVerifyPayment = [
+exports.validateVerifyPayment = [
   body("razorpay_order_id").notEmpty().withMessage("Order ID is required"),
   body("razorpay_payment_id").notEmpty().withMessage("Payment ID is required"),
   body("razorpay_signature").notEmpty().withMessage("Signature is required"),
   body("amount").isNumeric().withMessage("Amount must be numeric"),
 ];
 
-module.exports = { validateCreateOrder, validateVerifyPayment };
+exports.spendValidator = [
+  body("amount").isFloat({ gt: 0 }).withMessage("Invalid amount"),
+  body("description").optional().isString(),
+];

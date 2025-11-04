@@ -1,13 +1,10 @@
 const express = require("express");
 const { validationResult } = require("express-validator");
-const {
-  handleGetWallet,
-  handleCreateRazorpayOrder,
-  handleVerifyRazorpayPayment,
-} = require("../controllers/wallet.controller");
+const walletController = require("../controllers/wallet.controller");
 const {
   validateCreateOrder,
   validateVerifyPayment,
+  spendValidator,
 } = require("../validators/wallet.validator");
 const { authMiddleware } = require("../middleware/auth");
 
@@ -21,14 +18,14 @@ const validateRequest = (req, res, next) => {
 };
 
 // ✅ Routes
-router.get("/", authMiddleware, handleGetWallet);
+router.get("/", authMiddleware, walletController.handleGetWallet);
 
 router.post(
   "/create-order",
   authMiddleware,
   validateCreateOrder,
   validateRequest,
-  handleCreateRazorpayOrder
+  walletController.handleCreateRazorpayOrder
 );
 
 router.post(
@@ -36,7 +33,9 @@ router.post(
   authMiddleware,
   validateVerifyPayment,
   validateRequest,
-  handleVerifyRazorpayPayment
+  walletController.handleVerifyRazorpayPayment
 );
+
+router.post("/spend", authMiddleware, spendValidator, validateRequest, walletController.spend);
 
 module.exports = router;

@@ -1,12 +1,6 @@
-const Razorpay = require("razorpay");
 const crypto = require("crypto");
+const razorpay = require("../config/razorpay");
 const User = require("../models/UserSchema");
-
-// ✅ Initialize Razorpay
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
 
 async function getWallet(userId) {
   const user = await User.findById(userId).select("wallet");
@@ -61,8 +55,42 @@ async function verifyAndAddBalance(userId, { razorpay_order_id, razorpay_payment
   return user.wallet;
 }
 
+// ✅ 3. Spend from wallet
+const spendFromWallet = async (userId, amount, description, metadata = {}) => {
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found");
+
+  if (user.wallet.balance < amount) {
+    throw new Error("Insufficient wallet balance");
+  }
+
+  // Deduct and reward points
+  user.wallet.balance -= amount;
+  const earnedPoints = Math.floor(amount / 100);
+  user.wallet.loyaltyPoints += earnedPoints;
+
+  // ✅ Add transaction record
+  user.paymentHistory.push({
+    type: "debit",
+    amount,
+    description: description || "Wallet spend",
+    vehicleName: metadata.vehicleName || null,
+    stationName: metadata.stationName || null,
+    status: "completed",
+  });
+
+  await user.save();
+
+  return {
+    message: `₹${amount} spent successfully`,
+    newBalance: user.wallet.balance,
+    earnedPoints,
+  };
+};
+
 module.exports = {
   getWallet,
   createRazorpayOrder,
   verifyAndAddBalance,
+  spendFromWallet
 };

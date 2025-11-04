@@ -4,7 +4,7 @@ const {
   verifyAndAddBalance,
 } = require("../services/wallet.service");
 
-async function handleGetWallet(req, res) {
+exports.handleGetWallet = async (req, res) => {
   try {
     const wallet = await getWallet(req.user.id);
     res.json({ wallet });
@@ -14,7 +14,7 @@ async function handleGetWallet(req, res) {
 }
 
 // ✅ Step 1: Create order
-async function handleCreateRazorpayOrder(req, res) {
+exports.handleCreateRazorpayOrder = async (req, res) => {
   try {
     const { amount } = req.body;
     const order = await createRazorpayOrder(req.user.id, amount);
@@ -29,7 +29,7 @@ async function handleCreateRazorpayOrder(req, res) {
 }
 
 // ✅ Step 2: Verify payment and add balance
-async function handleVerifyRazorpayPayment(req, res) {
+exports.handleVerifyRazorpayPayment = async (req, res) => {
   try {
     const wallet = await verifyAndAddBalance(req.user.id, req.body);
     res.json({ message: "Payment verified and wallet updated", wallet });
@@ -38,8 +38,16 @@ async function handleVerifyRazorpayPayment(req, res) {
   }
 }
 
-module.exports = {
-  handleGetWallet,
-  handleCreateRazorpayOrder,
-  handleVerifyRazorpayPayment,
+// Spend from wallet
+exports.spend = async (req, res) => {
+  try {
+    const { amount, description, vehicleName, stationName } = req.body;
+    const result = await walletService.spendFromWallet(req.user.id, amount, description, {
+      vehicleName,
+      stationName,
+    });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
