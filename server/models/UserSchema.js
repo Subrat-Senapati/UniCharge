@@ -64,6 +64,8 @@ const UserSchema = new mongoose.Schema(
         description: { type: String }, // optional note like "Recharge" / "Charging Session"
         referenceId: { type: String }, // txn id from payment gateway if available
         status: { type: String, enum: ["pending", "completed", "failed"], default: "completed" },
+        vehicleName: { type: String }, // e.g., "Tata Nexon EV"
+        stationName: { type: String }, // e.g., "EVGo Charger, MG Road"
         createdAt: { type: Date, default: Date.now },
       },
     ],
