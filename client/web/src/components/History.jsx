@@ -1,70 +1,111 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import styles from "../css/history.module.css";
 
 const TransactionDetailModal = ({ transaction, onClose, styles }) => {
-  if (!transaction) {
-    return null;
-  }
+  if (!transaction) return null;
 
-  const formattedDate = transaction.createdAt.toLocaleString('en-IN', {
-    year: 'numeric', month: 'long', day: 'numeric',
-    hour: '2-digit', minute: '2-digit', second: '2-digit'
+  const formattedDate = new Date(transaction.createdAt).toLocaleString("en-IN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
-  // Determine styles for the amount display
-  const amountClass = transaction.type === "credit"
+  const isCredit = transaction.type === "credit";
+  const amountSign = isCredit ? "+" : "-";
+  const amountClass = isCredit
     ? `${styles.walletSuccess} fw-bold`
     : `${styles.walletDanger} fw-bold`;
 
-  const amountSign = transaction.type === "credit" ? "+" : "-";
-
   return (
-    <div className="modal fade show" style={{ display: 'block', zIndex: 1060, borderRadius: '2rem' }} tabIndex="-1" role="dialog" onClick={onClose}>
-      <div className="modal-dialog modal-dialog-centered modal-lg text-white" role="document" onClick={e => e.stopPropagation()}>
-        <div className="modal-content shadow-lg border-0 rounded-4" >
-
-          <div className={`modal-header border-0 rounded-top-4 text-white ${styles.modalHeaderBg || 'bg-dark'}`}>
-            <h5 className="modal-title fw-bold text-white">Transaction Details</h5>
-            <button type="button" className="btn-close btn-close-white" aria-label="Close" onClick={onClose}></button>
+    <div
+      className="modal fade show"
+      style={{ display: "block", zIndex: 1060 }}
+      tabIndex="-1"
+      role="dialog"
+      onClick={onClose}
+    >
+      <div
+        className="modal-dialog modal-dialog-centered modal-lg text-white"
+        role="document"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-content shadow-lg border-0 rounded-4">
+          <div
+            className={`modal-header border-0 rounded-top-4 text-white ${styles.modalHeaderBg || "bg-dark"}`}
+          >
+            <h5 className="modal-title fw-bold text-white">
+              Transaction Details
+            </h5>
+            <button
+              type="button"
+              className="btn-close btn-close-white"
+              aria-label="Close"
+              onClick={onClose}
+            ></button>
           </div>
 
           <div className="modal-body p-0">
-            <div className={`py-3 text-center rounded-bottom-4 ${transaction.type === "credit" ? 'bg-light-green' : 'bg-light-red'}`}>
-              <small className="text-dark fw-bold text-uppercase d-block mb-1">Transaction Amount</small>
+            <div
+              className={`py-3 text-center rounded-bottom-4 ${isCredit ? "bg-light-green" : "bg-light-red"
+                }`}
+            >
+              <small className="text-dark fw-bold text-uppercase d-block mb-1">
+                Transaction Amount
+              </small>
               <h3 className={amountClass}>
                 {amountSign}₹{transaction.amount}
               </h3>
             </div>
 
             <ul className="list-group list-group-flush border-top">
-
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 <strong>Reference ID:</strong>
                 <span className="text-muted small">{transaction.referenceId}</span>
               </li>
-
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 <strong>Date:</strong>
                 <span className="text-muted">{formattedDate}</span>
               </li>
-
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                <strong>Description:</strong> <br />
+                <strong>Description:</strong>
                 <span className="text-wrap">{transaction.description}</span>
               </li>
-
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                <strong>Type:</strong>
-                <span className="text-capitalize badge bg-info">{transaction.type}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                <strong>Status:</strong>
-                <span className="text-capitalize badge bg-success">{transaction.status}</span>
-              </li>
-
+              {!isCredit && (
+                <>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>Vehicle:</strong>
+                    <span className="text-wrap">{transaction.vehicleName}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>Station:</strong>
+                    <span className="text-wrap">{transaction.stationName}</span>
+                  </li>
+                </>
+              )}
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 <strong>Method:</strong>
                 <span className="text-wrap">{transaction.method}</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Type:</strong>
+                <span className="text-capitalize badge bg-info">
+                  {transaction.type}
+                </span>
+              </li>
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Status:</strong>
+                <span
+                  className={`text-capitalize badge ${transaction.status === "completed"
+                    ? "bg-success"
+                    : transaction.status === "pending"
+                      ? "bg-warning text-dark"
+                      : "bg-danger"
+                    }`}
+                >
+                  {transaction.status}
+                </span>
               </li>
             </ul>
           </div>
@@ -74,109 +115,202 @@ const TransactionDetailModal = ({ transaction, onClose, styles }) => {
   );
 };
 
-// --- 2. DEMO DATA ---
-
-const paymentHistory = [
-  {
-    _id: "1",
-    type: "credit",
-    amount: 500,
-    method: "UPI",
-    description: "Wallet Recharge",
-    referenceId: "TXN12345",
-    status: "completed",
-    createdAt: new Date("2025-09-20T10:30:00"),
-  },
-  {
-    _id: "2",
-    type: "debit",
-    amount: 200,
-    method: "Card",
-    description: "Charging Session",
-    referenceId: "TXN12346",
-    status: "completed",
-    createdAt: new Date("2025-09-21T14:15:00"),
-  },
-  {
-    _id: "3",
-    type: "credit",
-    amount: 1000,
-    method: "UPI",
-    description: "Wallet Recharge",
-    referenceId: "TXN12347",
-    status: "completed",
-    createdAt: new Date("2025-09-22T09:00:00"),
-  },
-];
-
-
 const History = () => {
+  const [paymentHistory, setPaymentHistory] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [filters, setFilters] = useState({
+    type: "all",
+    status: "all",
+    method: "all",
+  });
+  const [loading, setLoading] = useState(true);
 
-  const handleRowClick = (txn) => {
-    setSelectedTransaction(txn);
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+
+  const fetchHistory = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/wallet/history`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // optional, if your API uses cookies/session
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setPaymentHistory(data.paymentHistory || []);
+      setFilteredTransactions(data.paymentHistory || []);
+    } catch (error) {
+      console.error("Error fetching payment history:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleCloseModal = () => {
-    setSelectedTransaction(null);
-  };
+
+  // Extract unique payment methods
+  const uniqueMethods = [
+    "all",
+    ...new Set(paymentHistory.map((txn) => txn.method)),
+  ];
+
+  // Filter logic
+  useEffect(() => {
+    const filtered = paymentHistory.filter((txn) => {
+      const matchType =
+        filters.type === "all" || txn.type === filters.type;
+      const matchStatus =
+        filters.status === "all" || txn.status === filters.status;
+      const matchMethod =
+        filters.method === "all" || txn.method === filters.method;
+      return matchType && matchStatus && matchMethod;
+    });
+    setFilteredTransactions(filtered);
+  }, [filters, paymentHistory]);
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4">Payment History</h2>
+      <h2 className="mb-4 fw-bold">Payment History</h2>
       <hr className="mb-4" />
 
-      {paymentHistory.length === 0 ? (
-        <div className="alert alert-info text-center" role="alert">
-          No payment history available.
+      {/* 🔍 Filter Section */}
+      <div className="row mb-4 g-3">
+        <div className="col-md-4">
+          <label className="form-label fw-semibold">Type</label>
+          <select
+            className="form-select"
+            value={filters.type}
+            onChange={(e) =>
+              setFilters({ ...filters, type: e.target.value })
+            }
+          >
+            <option value="all">All</option>
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+          </select>
+        </div>
+
+        <div className="col-md-4">
+          <label className="form-label fw-semibold">Status</label>
+          <select
+            className="form-select"
+            value={filters.status}
+            onChange={(e) =>
+              setFilters({ ...filters, status: e.target.value })
+            }
+          >
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+
+        <div className="col-md-4">
+          <label className="form-label fw-semibold">Method</label>
+          <select
+            className="form-select"
+            value={filters.method}
+            onChange={(e) =>
+              setFilters({ ...filters, method: e.target.value })
+            }
+          >
+            {uniqueMethods.map((method) => (
+              <option key={method} value={method}>
+                {method === "all" ? "All" : method}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* 🧾 Cards */}
+      {loading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary"></div>
+          <p className="mt-3 fw-semibold">Loading history...</p>
+        </div>
+      ) : filteredTransactions.length === 0 ? (
+        <div className="alert alert-info text-center">
+          No transactions found.
         </div>
       ) : (
-        <table className="table table-striped table-bordered">
-          <thead className={`table-dark ${styles.tableDark}`}>
-            <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Amount</th>
-              <th>Method</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paymentHistory.map((txn) => (
-              <tr
-                key={txn._id}
-                onClick={() => handleRowClick(txn)}
-                style={{ cursor: 'pointer' }}
-                title="Click for details"
-              >
-                <td>{txn.createdAt.toLocaleString()}</td>
-                <td className="text-capitalize">{txn.type}</td>
-                <td
-                  className={
-                    txn.type === "credit"
-                      ? `${styles.walletSuccess} fw-bold`
-                      : `${styles.walletDanger} fw-bold`
-                  }
+        <div className="d-flex flex-column gap-3">
+          {filteredTransactions.map((txn) => (
+            <div
+              key={txn._id}
+              className={`card shadow-sm p-3 border-0 rounded-4 ${styles.historyCard}`}
+              onClick={() => setSelectedTransaction(txn)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                  <h6 className="fw-bold mb-1">{txn.description}</h6>
+                  <small className="text-muted">
+                    {new Date(txn.createdAt).toLocaleString("en-IN")}
+                  </small>
+                </div>
+
+                <div>
+                  <span
+                    className={`badge me-2 ${txn.type === "credit" ? "bg-success" : "bg-danger"
+                      }`}
+                  >
+                    {txn.type}
+                  </span>
+                  <span
+                    className={`fw-bold ${txn.type === "credit"
+                        ? styles.walletSuccess
+                        : styles.walletDanger
+                      }`}
+                  >
+                    {txn.type === "credit" ? "+" : "-"}₹{txn.amount}
+                  </span>
+                </div>
+              </div>
+
+              <div className="d-flex justify-content-between align-items-center mt-2 flex-wrap">
+                <small className="text-muted">
+                  Method: <strong>{txn.method}</strong>
+                </small>
+                <span
+                  className={`badge text-capitalize ${txn.status === "completed"
+                      ? "bg-success"
+                      : txn.status === "pending"
+                        ? "bg-warning text-dark"
+                        : "bg-danger"
+                    }`}
                 >
-                  {txn.type === "credit" ? "+" : "-"}₹{txn.amount}
-                </td>
-                <td>{txn.method}</td>
-                <td>{txn.description}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  {txn.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
+
+      {/* Modal */}
       {selectedTransaction && (
-        <TransactionDetailModal
-          transaction={selectedTransaction}
-          onClose={handleCloseModal}
-          styles={styles}
-        />
+        <>
+          <TransactionDetailModal
+            transaction={selectedTransaction}
+            onClose={() => setSelectedTransaction(null)}
+            styles={styles}
+          />
+          <div className="modal-backdrop fade show"></div>
+        </>
       )}
-
-      {selectedTransaction && <div className="modal-backdrop fade show"></div>}
     </div>
   );
 };

@@ -22,3 +22,20 @@
 .bg-light-red {
     background-color: #f8d7da; /* Light red for debit/danger */
 }
+
+.historyCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.walletSuccess {
+  color: #16a34a;
+}
+
+.walletDanger {
+  color: #dc2626;
+}
+
+.tableDark {
+  background-color: #222;
+}

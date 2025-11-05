@@ -88,9 +88,25 @@ const spendFromWallet = async (userId, amount, description, metadata = {}) => {
   };
 };
 
+/* Fetch all payment history for a user */
+const getPaymentHistory = async (userId) => {
+  const user = await User.findById(userId).select("paymentHistory");
+
+  if (!user) throw new Error("User not found");
+
+  // Sort by createdAt descending (most recent first)
+  const sortedHistory = user.paymentHistory.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  return sortedHistory;
+};
+
+
 module.exports = {
   getWallet,
   createRazorpayOrder,
   verifyAndAddBalance,
-  spendFromWallet
+  spendFromWallet,
+  getPaymentHistory
 };

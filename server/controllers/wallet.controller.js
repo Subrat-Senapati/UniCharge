@@ -2,6 +2,7 @@ const {
   getWallet,
   createRazorpayOrder,
   verifyAndAddBalance,
+  getPaymentHistory,
 } = require("../services/wallet.service");
 
 exports.handleGetWallet = async (req, res) => {
@@ -49,5 +50,17 @@ exports.spend = async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+//  Get payment history
+exports.getPaymentHistory = async (req, res) => {
+  try {
+    const userId = req.user.id; // added by auth middleware
+    const paymentHistory = await getPaymentHistory(userId);
+    res.status(200).json({ paymentHistory });
+  } catch (error) {
+    console.error("Error fetching payment history:", error);
+    res.status(500).json({ message: error.message });
   }
 };

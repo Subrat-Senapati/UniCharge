@@ -178,7 +178,7 @@ const Vehicle = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 px-4">
+    <div className="container mx-auto mt-5 px-4">
       <h2 className="mb-4">Vehicle Inventory</h2>
       <hr className="mb-4" />
 

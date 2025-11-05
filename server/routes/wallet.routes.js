@@ -38,4 +38,7 @@ router.post(
 
 router.post("/spend", authMiddleware, spendValidator, validateRequest, walletController.spend);
 
+// GET all transactions
+router.get("/history", authMiddleware, walletController.getPaymentHistory);
+
 module.exports = router;
