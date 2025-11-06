@@ -19,6 +19,7 @@ import Service from './pages/Service'
 import Contact from './pages/Contact'
 import Notification from './components/Notification'
 import ProtectedRoute from './components/ProtectedRoute'
+import ChatbotButton from './components/ChatbotButton'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Header />
             <main className="main-content">
               <Home />
+              <ChatbotButton />
             </main>
             <Footer />
           </ProtectedRoute>

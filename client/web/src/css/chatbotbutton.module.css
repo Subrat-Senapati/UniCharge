@@ -1,0 +1,184 @@
+/* Floating Chat Button */
+.chatbotButton {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.chatbotButton:hover {
+  background-color: green;
+  transform: scale(1.1);
+}
+
+/* Popup Container */
+.chatbotPopup {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 500px;
+  height: 420px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Header */
+.chatHeader {
+  background-color: green;
+  color: white;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatHeader h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Body */
+.chatBody {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message bubbles */
+.message {
+  margin-bottom: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.userMessage {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.botMessage {
+  background-color: #f1f0f0;
+  color: #2c2b2b;
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+/* Footer */
+.chatFooter {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.inputBox {
+  flex: 1;
+  padding: 5px 15px !important;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.sendBtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px 12px;
+  margin-left: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.sendBtn:hover {
+  background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Responsive Design */
+
+/* For Tablets (width ≤ 768px) */
+@media (max-width: 768px) {
+  .chatbotPopup {
+    width: 85%;
+    height: 60vh;
+    bottom: 80px;
+    right: 8%;
+  }
+}
+
+/* For Small Phones (width ≤ 480px) */
+@media (max-width: 480px) {
+  .chatbotPopup {
+    width: 94%;
+    height: 65vh;
+    bottom: 80px;
+    right: 3%;
+    border-radius: 10px;
+  }
+
+  .chatHeader h4 {
+    font-size: 0.9rem;
+  }
+
+  .inputBox {
+    font-size: 0.85rem;
+  }
+
+  .sendBtn {
+    padding: 6px 10px;
+  }
+
+  .chatbotButton {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
