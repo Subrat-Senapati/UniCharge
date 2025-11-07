@@ -98,15 +98,15 @@ body{
 }
 
 @media (max-width: 1180px) {
-    div#slicknav-mobile {
+    /* #slicknav-mobile {
         display: block;
-    }
-    .header-top,
+    } */
+    /* .header-top,
     .navbar-button,
     .navbar-sticky-in,
     #responsive-menu {
         display: none;
-    }
+    } */
     .slicknav_menu {
         display: block;
     }

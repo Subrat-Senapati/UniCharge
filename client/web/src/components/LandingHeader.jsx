@@ -6,27 +6,34 @@ const LandingHeader = () => {
       <div className="header-nav-menu navbar-sticky-in" id="header-nav-menu">
         <div className="container">
           <nav className="navbar navbar-expand-xl">
-            {/* Mobile logo (visible only on small screens) */}
-            <a className="navbar-brand d-xl-none" href="/">
-              <img
-                src="/Unicharge_logo_text.png"
-                alt="Logo"
-                className="w-50"
-              />
-            </a>
 
-            {/* Mobile toggle button */}
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+            <div id="slicknav-mobile-tab" className="d-flex align-items-center justify-content-between w-100 d-xl-none">
+              {/* Mobile logo (visible only on small screens) */}
+              <a className="navbar-brand d-xl-none" href="/">
+                <img
+                  src="/Unicharge_logo_text.png"
+                  alt="Logo"
+                  className="w-20"
+                />
+              </a>
+
+              {/* Mobile toggle button */}
+              <button
+                className="navbar-toggler slicknav_btn text-white"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                style={{
+                  color: "white !important",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <span className="navbar-toggler-icon text-white"></span>
+              </button>
+            </div>
 
             <div className="collapse navbar-collapse" id="navbarNav">
               <div className="d-flex py-1 w-100 align-items-center justify-content-between">
@@ -36,8 +43,7 @@ const LandingHeader = () => {
                     <NavLink
                       to="/"
                       className={({ isActive }) =>
-                        `nav-link text-uppercase fw-medium ${
-                          isActive ? "text-success fw-bold" : ""
+                        `nav-link text-uppercase fw-medium ${isActive ? "text-success fw-bold" : ""
                         }`
                       }
                     >
@@ -48,8 +54,7 @@ const LandingHeader = () => {
                     <NavLink
                       to="/about"
                       className={({ isActive }) =>
-                        `nav-link text-uppercase fw-medium ${
-                          isActive ? "text-success fw-bold" : ""
+                        `nav-link text-uppercase fw-medium ${isActive ? "text-success fw-bold" : ""
                         }`
                       }
                     >
@@ -60,8 +65,7 @@ const LandingHeader = () => {
                     <NavLink
                       to="/services"
                       className={({ isActive }) =>
-                        `nav-link text-uppercase fw-medium ${
-                          isActive ? "text-success fw-bold" : ""
+                        `nav-link text-uppercase fw-medium ${isActive ? "text-success fw-bold" : ""
                         }`
                       }
                     >
@@ -72,8 +76,7 @@ const LandingHeader = () => {
                     <NavLink
                       to="/contact"
                       className={({ isActive }) =>
-                        `nav-link text-uppercase fw-medium ${
-                          isActive ? "text-success fw-bold" : ""
+                        `nav-link text-uppercase fw-medium ${isActive ? "text-success fw-bold" : ""
                         }`
                       }
                     >

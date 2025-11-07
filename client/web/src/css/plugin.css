@@ -346,14 +346,14 @@ Change the following styles to modify the appearance of the menu.
     display: none;
 }
 
-@media(min-width: 1100px) {
-    div#slicknav-mobile {
+/* @media(min-width: 1100px) {
+    #slicknav-mobile {
         display: none;
     }
 }
 
 @media(max-width: 1099px) {
-    div#slicknav-mobile {
+    #slicknav-mobile {
         display: block;
     }
     #responsive-menu {
@@ -362,7 +362,7 @@ Change the following styles to modify the appearance of the menu.
     .slicknav_menu {
         display: block;
     }
-}
+} */
 
 @media (max-width: 767px) {
     nav.navbar.navbar-default.navbar-fixed-top.with-slicknav {
