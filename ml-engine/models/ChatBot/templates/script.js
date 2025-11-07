@@ -3,13 +3,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
 
+    // Function to escape HTML for user messages
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
     // Function to add a message to the chat display
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', `${sender}-message`);
-        messageDiv.innerHTML = `<p>${text}</p>`;
+
+        if (sender === 'bot') {
+            // Use marked (markdown -> HTML) if available, otherwise fall back to plain text
+            if (window.marked) {
+                messageDiv.innerHTML = window.marked.parse(text || '');
+            } else {
+                messageDiv.innerHTML = `<p>${escapeHtml(text || '')}</p>`;
+            }
+        } else {
+            // user message should be escaped
+            messageDiv.innerHTML = `<p>${escapeHtml(text)}</p>`;
+        }
+
         chatMessages.appendChild(messageDiv);
-        // Scroll to the bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -20,9 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         addMessage(message, 'user');
         userInput.value = ''; // Clear input
+        sendButton.disabled = true;
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/chat', { // Make sure this matches your Flask port
+            const response = await fetch('/chat', { // relative URL is better (avoids CORS issues while developing)
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,13 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Fetch error:', error);
             addMessage('Oops! Something went wrong. Please try again later.', 'bot');
+        } finally {
+            sendButton.disabled = false;
+            userInput.focus();
         }
     }
 
     // Event listeners
     sendButton.addEventListener('click', sendMessage);
-    userInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
+
+    userInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
             sendMessage();
         }
     });
