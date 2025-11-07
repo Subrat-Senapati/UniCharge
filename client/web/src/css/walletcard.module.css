@@ -23,7 +23,8 @@
 /* Content section - takes available space */
 .contentSection {
   flex: 1;
-  min-width: 0; /* Prevents flex item from overflowing */
+  min-width: 0;
+  /* Prevents flex item from overflowing */
 }
 
 /* Image section - fixed width for large screens */
@@ -43,7 +44,7 @@
   margin-bottom: 1rem;
 }
 
-.textSuccess{
+.textSuccess {
   color: green !important;
 }
 
@@ -79,7 +80,7 @@
 }
 
 /* Edit button */
-.editButton {
+.addButton {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -89,7 +90,7 @@
   white-space: nowrap;
 }
 
-.editButton:hover {
+.addButton:hover {
   background-color: #69A316;
   color: white;
   border-color: #69A316;
@@ -104,6 +105,42 @@
   opacity: 0.9;
 }
 
+.cancelBtn {
+  transition: all 0.3s;
+}
+
+.cancelBtn:hover {
+  background-color: red !important;
+  border-color: red !important;
+}
+
+.saveBtn {
+  transition: all 0.3s;
+}
+
+.saveBtn:hover {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+.dropdown {
+  border: 2px solid #69A316;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background-color: #f8f9fa;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+/* Remove default Bootstrap focus styles */
+.dropdown:focus {
+  border-color: #69A316 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: #fff;
+}
+
 /* Mobile styles - stack vertically and hide image */
 @media (max-width: 768px) {
   .cardBody {
@@ -113,7 +150,8 @@
   }
 
   .imageSection {
-    display: none; /* Completely hide image on mobile */
+    display: none;
+    /* Completely hide image on mobile */
   }
 
   .header {
@@ -137,7 +175,7 @@
     align-items: stretch;
   }
 
-  .editButton {
+  .addButton {
     align-self: flex-start;
   }
 }

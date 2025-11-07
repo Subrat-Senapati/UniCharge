@@ -20,6 +20,7 @@ import Contact from './pages/Contact'
 import Notification from './components/Notification'
 import ProtectedRoute from './components/ProtectedRoute'
 import ChatbotButton from './components/ChatbotButton'
+import EVChargeHub from './components/EVChargeHub'
 
 function App() {
   return (
@@ -48,9 +49,10 @@ function App() {
         }
       >
         {/* Default redirect to /home/location */}
-        <Route index element={<Navigate to="location" replace />} />
+        <Route index element={<Navigate to="chargehub" replace />} />
 
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="chargehub" element={<EVChargeHub />} />
         <Route path="location" element={<Location />} />
         <Route path="vehicle" element={<Vehicle />} />
         <Route path="wallet" element={<Wallet />} />

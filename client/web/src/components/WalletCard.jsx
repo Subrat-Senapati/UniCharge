@@ -196,7 +196,7 @@ const WalletCard = () => {
             </h3>
             <button
               onClick={() => setShowModal(true)}
-              className={`btn btn-outline-success btn-sm ${styles.editButton}`}
+              className={`btn btn-outline-success btn-sm ${styles.addButton}`}
               title="Add Balance"
             >
               <Plus size={12} strokeWidth={3} />
@@ -278,7 +278,7 @@ const WalletCard = () => {
                     <label className="form-label">Enter Amount (₹)</label>
                     <input
                       type="number"
-                      className="form-control"
+                      className="form-control px-4 py-2 rounded-3"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="Enter amount"
@@ -290,7 +290,7 @@ const WalletCard = () => {
                   <div className="mb-3">
                     <label className="form-label">Select Payment Method</label>
                     <select
-                      className="form-select"
+                      className={`form-select ${styles.dropdown}`}
                       value={selectedMethod}
                       onChange={(e) => setSelectedMethod(e.target.value)}
                       required
@@ -314,14 +314,14 @@ const WalletCard = () => {
                 <div className="modal-footer gap-2">
                   <button
                     type="button"
-                    className="btn btn-danger px-3"
+                    className={`btn btn-danger px-2 py-1 ${styles.cancelBtn}`}
                     onClick={() => setShowModal(false)}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="btn btn-success px-3"
+                    className={`btn btn-success px-2 py-1 ${styles.saveBtn}`}
                     disabled={loading}
                   >
                     {loading ? "Processing..." : "Proceed to Pay"}

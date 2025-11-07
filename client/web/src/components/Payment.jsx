@@ -139,7 +139,6 @@ const Payment = () => {
         e.preventDefault();
         try {
             const method = editingPayment ? "PUT" : "POST";
-            console.log(editingPayment._id)
             const url = editingPayment
                 ? `${import.meta.env.VITE_SERVER_URL}/api/payment-methods/${editingPayment._id}`
                 : `${import.meta.env.VITE_SERVER_URL}/api/payment-methods`;
@@ -219,7 +218,7 @@ const Payment = () => {
             {/* Modal */}
             {showModal && (
                 <div className="modal show fade d-block" tabIndex="-1">
-                    <div className="modal-dialog modal-lg">
+                    <div className="modal-dialog modal-lg modal-dialog-centered">
                         <form className="modal-content" onSubmit={handleSubmit}>
                             <div className="modal-header">
                                 <h5 className="modal-title">

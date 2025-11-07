@@ -24,7 +24,7 @@ const Header = () => {
 
                 <li className="nav-item">
                   <NavLink
-                    to="/home/location"
+                    to="/home/chargehub"
                     className={({ isActive }) =>
                       `nav-link text-uppercase fw-medium ${isActive ? "text-success fw-bold" : ""}`
                     }

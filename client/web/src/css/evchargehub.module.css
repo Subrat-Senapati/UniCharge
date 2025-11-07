@@ -1,0 +1,364 @@
+/* =============================
+   EVChargeHub.module.css
+   ============================= */
+
+.page {
+  background-color: #f5f7fa;
+  color: #202124;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* =============================
+   Map Section
+   ============================= */
+.mapSection {
+  height: 500px;
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #4a9aff, #1a73e8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  flex-direction: column;
+  position: relative;
+}
+
+/* =============================
+   Booking Section
+   ============================= */
+.bookingSection {
+  padding: 30px 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+}
+
+.bookingPanel {
+  width: 100%;
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Header */
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: #1a73e8;
+  color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.panelTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Form Layout */
+.searchForm {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.formControl {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.formControl:focus {
+  border-color: #1a73e8;
+}
+
+/* Buttons */
+.btnPrimary {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.btnPrimary:hover {
+  background-color: #0d47a1;
+}
+
+/* Collapsed state (optional if toggle used) */
+.bookingPanel.collapsed {
+  transform: scaleY(0.98);
+  opacity: 0.9;
+}
+
+/* =============================
+   Responsive Adjustments
+   ============================= */
+@media (max-width: 768px) {
+  .mapSection {
+    height: 400px;
+  }
+
+  .panelHeader {
+    padding: 12px 18px;
+  }
+
+  .searchForm {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =============================
+   Brands Section
+   ============================= */
+.brandsSection {
+  padding: 30px 20px;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sectionTitle h2 {
+  font-size: 2rem;
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.brandsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.brandCard {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brandCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.brandHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.brandLogo {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a73e8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandRating {
+  color: #fbbc05;
+  font-weight: 500;
+}
+
+.brandDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #555;
+}
+
+.price {
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.bookBtn {
+  margin-top: 10px;
+  background-color: #34a853;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.bookBtn:hover {
+  background-color: #2c8e46;
+}
+
+/* =============================
+   Modal Styling
+   ============================= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex; /* ✅ make visible when rendered */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalIcon {
+  color: #34a853;
+  font-size: 3rem;
+  /* margin-bottom: 10px; */
+}
+
+.modalButtons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.modalBtn {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modalBtn.confirm {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.modalBtn.confirm:hover {
+  background-color: #0d47a1;
+}
+
+.modalBtn.cancel {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.modalBtn.cancel:hover {
+  background-color: red !important;
+  color: white !important;
+}
+
+/* =============================
+   Responsive Design
+   ============================= */
+@media (max-width: 768px) {
+  .mapSection {
+    height: 400px;
+  }
+  .searchForm {
+    grid-template-columns: 1fr;
+  }
+  .brandCard {
+    padding: 15px;
+  }
+}
