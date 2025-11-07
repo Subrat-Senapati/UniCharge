@@ -1,19 +1,38 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS # To handle Cross-Origin Resource Sharing
-from google import genai
-from google.genai import types
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-app = Flask(__name__)
-CORS(app) # Enable CORS for all routes, important for local development
+load_dotenv()
+# Get the directory where this script is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+
+app = Flask(__name__, template_folder=TEMPLATES_DIR)
+CORS(app) 
 
 # Initialize the GenAI client with your API key
 # IMPORTANT: Replace "YOUR_API_KEY" with your actual API key
-genai_api_key = "" # Make sure this is your correct key
-client = genai.Client(api_key=genai_api_key)
+
+genai_api_key = os.getenv("GENAI_API_KEY")
+genai.configure(api_key=genai_api_key)
+model = genai.GenerativeModel(
+    model_name="gemini-2.5-flash",
+    system_instruction="Your name is UniCharge, and you are an EV guider. You can guide users on any sort of FAQ related to the Electric Vehicle sector, guide politely. If anything unrelated to the EV sector is asked, just behave politely to the user and ask them to ask relatable things to your domain."
+)
 
 @app.route('/')
 def home():
-    return "UniCharge Chatbot Backend is running!"
+    return render_template('index.html')
+
+@app.route('/style.css')
+def style():
+    return send_from_directory(TEMPLATES_DIR, 'style.css')
+
+@app.route('/script.js')
+def script():
+    return send_from_directory(TEMPLATES_DIR, 'script.js')
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -22,12 +41,7 @@ def chat():
         return jsonify({"error": "No message provided"}), 400
 
     try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            config=types.GenerateContentConfig(
-                system_instruction="Your name is UniCharge, and you are an EV guider. You can guide users on any sort of FAQ related to the Electric Vehicle sector, guide politely. If anything unrelated to the EV sector is asked, just behave politely to the user and ask them to ask relatable things to your domain."),
-            contents=user_message
-        )
+        response = model.generate_content(user_message)
         return jsonify({"response": response.text})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
