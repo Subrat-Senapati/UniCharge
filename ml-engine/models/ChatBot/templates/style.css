@@ -104,3 +104,30 @@ body {
 .chat-input button:hover {
     background-color: #45a049;
 }
+
+.bot-message {
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bot-message h3 {
+  margin-top: 0;
+  color: #0077cc;
+}
+
+.bot-message h4 {
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.bot-message ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.bot-message li {
+  margin-bottom: 6px;
+}
