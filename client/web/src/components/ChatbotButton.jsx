@@ -15,6 +15,16 @@ const ChatbotButton = () => {
         }
     }, [messages]);
 
+    // Escape HTML to prevent XSS for user messages
+    const escapeHtml = (unsafe) => {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    };
+
     // Add a message
     const addMessage = (text, sender) => {
         setMessages((prev) => [...prev, { text, sender }]);
@@ -29,7 +39,7 @@ const ChatbotButton = () => {
         setUserInput("");
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/chat", {
+            const response = await fetch(`${import.meta.env.VITE_CHATBOT_API}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message }),
@@ -66,6 +76,33 @@ const ChatbotButton = () => {
         });
     };
 
+    // Render bot messages safely (markdown or escaped HTML)
+    const renderMessage = (msg) => {
+        if (msg.sender === "bot") {
+            if (window.marked) {
+                return (
+                    <div
+                        className={`${styles.message} ${styles.botMessage}`}
+                        dangerouslySetInnerHTML={{ __html: window.marked.parse(msg.text || "") }}
+                    />
+                );
+            } else {
+                return (
+                    <div className={`${styles.message} ${styles.botMessage}`}>
+                        <p dangerouslySetInnerHTML={{ __html: escapeHtml(msg.text || "") }}></p>
+                    </div>
+                );
+            }
+        } else {
+            // user message (always escaped)
+            return (
+                <div className={`${styles.message} ${styles.userMessage}`}>
+                    <p dangerouslySetInnerHTML={{ __html: escapeHtml(msg.text) }}></p>
+                </div>
+            );
+        }
+    };
+
     return (
         <>
             {/* Floating Button */}
@@ -85,13 +122,7 @@ const ChatbotButton = () => {
 
                     <div className={styles.chatBody} id="chat-messages" ref={chatRef}>
                         {messages.map((msg, index) => (
-                            <div
-                                key={index}
-                                className={`${styles.message} ${msg.sender === "user" ? styles.userMessage : styles.botMessage
-                                    }`}
-                            >
-                                <p>{msg.text}</p>
-                            </div>
+                            <div key={index} > {renderMessage(msg)} </div>
                         ))}
                     </div>
 
