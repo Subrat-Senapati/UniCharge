@@ -1,0 +1,81 @@
+.dashboardContainer {
+  padding: 2rem 1rem;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+}
+
+.dashboardTitle {
+  text-align: center;
+  color: #1a73e8;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+/* Changed from grid to stacked layout */
+.cardStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+  background-color: #fff;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.cardHeader {
+  background-color: #e9f2ff;
+  color: #1a73e8;
+  font-size: large;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.walletBalance {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c7be5;
+}
+
+.walletSub {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.vehicleItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vehicleDetails {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.readNotification {
+  background-color: #f9fafc;
+}
+
+.unreadNotification {
+  background-color: #e3f2fd;
+}
+
+.loadingContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

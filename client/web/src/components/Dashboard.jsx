@@ -1,358 +1,165 @@
-import { useEffect, useState } from "react";
-import { Card, Button, Form, Modal, Spinner } from "react-bootstrap";
+import { useState } from "react";
+import { Card, Button, ListGroup, Badge } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
+import styles from "../css/Dashboard.module.css";
 
 const Dashboard = () => {
-  const { user, setUser } = useAuth();
-  const [editSection, setEditSection] = useState(null);
-  const [formData, setFormData] = useState({});
-
-  if (!user) {
-    return <p>Loading user data...</p>;
-  }
-
-  const handleOpenEdit = (section) => {
-    setEditSection(section);
-    setFormData(user[section] || {}); // load only that section's data
-  };
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSave = () => {
-    setUser((prev) => ({
-      ...prev,
-      [editSection]: formData,
-    }));
-    console.log("Updated", editSection, formData);
-    setEditSection(null);
-  };
+  const { user } = useAuth();
+  const [expanded, setExpanded] = useState(false);
 
   if (!user) {
     return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
-      >
-        <Spinner animation="border" />
+      <div className={styles.loadingContainer}>
+        <div className="spinner-border text-primary" role="status"></div>
       </div>
     );
   }
 
+  const latestTransaction = user.paymentHistory?.[0];
+  const defaultPayment =
+    user.paymentMethods?.find((m) => m._id === user.wallet?.defaultPaymentMethod);
+
   return (
-    <div className="container mt-4">
-      <h2 className="mb-4 text-center">User Dashboard</h2>
+    <div className={styles.dashboardContainer}>
+      <h2 className={styles.dashboardTitle}>Welcome, {user.fullName}</h2>
 
-      {/* Profile Section */}
-      <Card className="mb-3 shadow-sm">
-        <Card.Header className="d-flex justify-content-between">
-          <span>Profile</span>
-          <Button
-            variant="outline-primary"
-            size="sm"
-            onClick={() => handleOpenEdit("profile")}
-          >
-            Edit
-          </Button>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            <strong>Name:</strong> {user.fullName}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-          <p>
-            <strong>Phone:</strong> {user.phoneNumber}
-          </p>
-          <p>
-            <strong>Role:</strong> {user.role}
-          </p>
-          <p>
-            <strong>Auth Provider:</strong> {user.authProvider}
-          </p>
-        </Card.Body>
-      </Card>
+      <div className={styles.cardStack}>
+        {/* ===== PROFILE CARD ===== */}
+        <Card className={styles.card}>
+          <Card.Header className={styles.cardHeader}>Profile</Card.Header>
+          <Card.Body>
+            <p><strong>Name:</strong> {user.fullName}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Phone:</strong> {user.phoneNumber}</p>
+            <p><strong>Role:</strong> {user.role}</p>
+            <p><strong>Auth Provider:</strong> {user.authProvider}</p>
+            <p><strong>Joined:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
+          </Card.Body>
+        </Card>
 
-      {/* Vehicle Section */}
-      <Card className="mb-3 shadow-sm">
-        <Card.Header className="d-flex justify-content-between">
-          <span>Vehicle</span>
-          <Button
-            variant="outline-primary"
-            size="sm"
-            onClick={() => handleOpenEdit("vehicle")}
-          >
-            Edit
-          </Button>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            <strong>Make:</strong> {user.vehicle?.make}
-          </p>
-          <p>
-            <strong>Model:</strong> {user.vehicle?.model}
-          </p>
-          <p>
-            <strong>Battery:</strong> {user.vehicle?.batteryCapacityKwh} kWh
-          </p>
-          <p>
-            <strong>Connector:</strong> {user.vehicle?.preferredConnector}
-          </p>
-        </Card.Body>
-      </Card>
+        {/* ===== WALLET CARD ===== */}
+        <Card className={styles.card}>
+          <Card.Header className={styles.cardHeader}>Wallet</Card.Header>
+          <Card.Body>
+            <h4 className={styles.walletBalance}>₹{user.wallet?.balance || 0}</h4>
+            <p className={styles.walletSub}>Loyalty Points: {user.wallet?.loyaltyPoints}</p>
+            <hr />
+            <p>
+              <strong>Default Payment:</strong>{" "}
+              {defaultPayment
+                ? defaultPayment.type === "upi"
+                  ? `${defaultPayment.upiId} (UPI)`
+                  : `****${defaultPayment.card.cardNumberMasked} (Card)`
+                : "N/A"}
+            </p>
+          </Card.Body>
+        </Card>
 
-      {/* Wallet Section */}
-      <Card className="mb-3 shadow-sm">
-        <Card.Header className="d-flex justify-content-between">
-          <span>Wallet</span>
-          <Button
-            variant="outline-primary"
-            size="sm"
-            onClick={() => handleOpenEdit("wallet")}
-          >
-            Edit
-          </Button>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            <strong>Balance:</strong> ₹{user.wallet?.balance}
-          </p>
-          <p>
-            <strong>Loyalty Points:</strong> {user.wallet?.loyaltyPoints}
-          </p>
-          <p>
-            <strong>Default Payment Method:</strong>{" "}
-            {user.wallet?.defaultPaymentMethod}
-          </p>
-        </Card.Body>
-      </Card>
-
-      {/* Location Section */}
-      <Card className="mb-3 shadow-sm">
-        <Card.Header className="d-flex justify-content-between">
-          <span>Location</span>
-          <Button
-            variant="outline-primary"
-            size="sm"
-            onClick={() => handleOpenEdit("location")}
-          >
-            Edit
-          </Button>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            <strong>City:</strong> {user.location?.city}
-          </p>
-          <p>
-            <strong>State:</strong> {user.location?.state}
-          </p>
-          <p>
-            <strong>Country:</strong> {user.location?.country}
-          </p>
-          <p>
-            <strong>Coordinates:</strong>{" "}
-            {user.location?.coordinates?.lat}, {user.location?.coordinates?.lng}
-          </p>
-        </Card.Body>
-      </Card>
-
-      {/* Preferences Section */}
-      <Card className="mb-3 shadow-sm">
-        <Card.Header className="d-flex justify-content-between">
-          <span>Preferences</span>
-          <Button
-            variant="outline-primary"
-            size="sm"
-            onClick={() => handleOpenEdit("preferences")}
-          >
-            Edit
-          </Button>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            <strong>Language:</strong> {user.preferences?.preferredLanguage}
-          </p>
-          <p>
-            <strong>Notifications:</strong>{" "}
-            {user.preferences?.notificationsEnabled ? "Enabled" : "Disabled"}
-          </p>
-          <p>
-            <strong>Renewable Priority:</strong>{" "}
-            {user.preferences?.renewablePriority ? "Yes" : "No"}
-          </p>
-        </Card.Body>
-      </Card>
-
-      {/* Edit Modal */}
-      <Modal show={!!editSection} onHide={() => setEditSection(null)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit {editSection}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            {editSection === "profile" && (
-              <>
-                <Form.Group className="mb-2">
-                  <Form.Label>Full Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={formData.email || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Phone</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </>
+        {/* ===== VEHICLES CARD ===== */}
+        <Card className={styles.card}>
+          <Card.Header className={styles.cardHeader}>
+            Vehicles
+            {user.vehicles?.length > 3 && (
+              <Button
+                className="py-1 px-2 text-decoration-none"
+                variant="link"
+                size="sm"
+                onClick={() => setExpanded(!expanded)}
+              >
+                {expanded ? "Hide" : "Show All"}
+              </Button>
             )}
+          </Card.Header>
+          <ListGroup variant="flush">
+            {(expanded ? user.vehicles : user.vehicles?.slice(0, 3))?.map((v) => (
+              <ListGroup.Item key={v._id}>
+                <div className={styles.vehicleItem}>
+                  <div>
+                    <strong>{v.make} {v.model}</strong>
+                    <div className={styles.vehicleDetails}>
+                      {v.batteryCapacityKwh} kWh • {v.preferredConnector}
+                    </div>
+                  </div>
+                  <Badge bg="light" text="dark">
+                    {new Date(v.createdAt).toLocaleDateString()}
+                  </Badge>
+                </div>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Card>
 
-            {editSection === "vehicle" && (
-              <>
-                <Form.Group className="mb-2">
-                  <Form.Label>Make</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="make"
-                    value={formData.make || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Model</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="model"
-                    value={formData.model || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Battery (kWh)</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="batteryCapacityKwh"
-                    value={formData.batteryCapacityKwh || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </>
-            )}
+        {/* ===== PAYMENT METHODS ===== */}
+        <Card className={styles.card}>
+          <Card.Header className={styles.cardHeader}>Payment Methods</Card.Header>
+          <ListGroup variant="flush">
+            {user.paymentMethods?.map((method) => (
+              <ListGroup.Item key={method._id}>
+                {method.type === "upi" ? (
+                  <>
+                    <strong>UPI:</strong> {method.upiId}
+                    {method.isDefault && <Badge bg="success" className="ms-2">Default</Badge>}
+                  </>
+                ) : (
+                  <>
+                    <strong>Card:</strong> ****{method.card.cardNumberMasked} •{" "}
+                    {method.card.cardHolder} ({method.card.expiryMonth}/{method.card.expiryYear})
+                    {method.isDefault && <Badge bg="success" className="ms-2">Default</Badge>}
+                  </>
+                )}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Card>
 
-            {editSection === "wallet" && (
-              <>
-                <Form.Group className="mb-2">
-                  <Form.Label>Balance</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="balance"
-                    value={formData.balance || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Loyalty Points</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="loyaltyPoints"
-                    value={formData.loyaltyPoints || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </>
-            )}
+        {/* ===== PAYMENT HISTORY ===== */}
+        <Card className={styles.card}>
+          <Card.Header className={styles.cardHeader}>Recent Transaction</Card.Header>
+          {latestTransaction ? (
+            <Card.Body>
+              <p><strong>Type:</strong> {latestTransaction.type}</p>
+              <p><strong>Amount:</strong> ₹{latestTransaction.amount}</p>
+              <p><strong>Method:</strong> {latestTransaction.method}</p>
+              <p><strong>Vehicle:</strong> {latestTransaction.vehicleName}</p>
+              <p><strong>Station:</strong> {latestTransaction.stationName}</p>
+              <p><strong>Status:</strong> <Badge bg="info">{latestTransaction.status}</Badge></p>
+              <p><small>{new Date(latestTransaction.createdAt).toLocaleString()}</small></p>
+            </Card.Body>
+          ) : (
+            <Card.Body>No recent transactions.</Card.Body>
+          )}
+        </Card>
 
-            {editSection === "location" && (
-              <>
-                <Form.Group className="mb-2">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="city"
-                    value={formData.city || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>State</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="state"
-                    value={formData.state || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Country</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="country"
-                    value={formData.country || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </>
+        {/* ===== NOTIFICATIONS ===== */}
+        <Card className={styles.card}>
+          <Card.Header className={styles.cardHeader}>Notifications</Card.Header>
+          <ListGroup variant="flush">
+            {user.notifications?.length > 0 ? (
+              user.notifications.map((n) => (
+                <ListGroup.Item
+                  key={n._id}
+                  className={n.isRead ? styles.readNotification : styles.unreadNotification}
+                >
+                  <div className="d-flex justify-content-between align-items-start">
+                    <div>
+                      <strong>{n.title}</strong>
+                      <div>{n.message}</div>
+                    </div>
+                    <Badge bg={n.isRead ? "secondary" : "primary"}>
+                      {n.type}
+                    </Badge>
+                  </div>
+                  <small className="text-muted">
+                    {new Date(n.createdAt).toLocaleString()}
+                  </small>
+                </ListGroup.Item>
+              ))
+            ) : (
+              <ListGroup.Item>No notifications available.</ListGroup.Item>
             )}
-
-            {editSection === "preferences" && (
-              <>
-                <Form.Group className="mb-2">
-                  <Form.Label>Language</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="preferredLanguage"
-                    value={formData.preferredLanguage || ""}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Check
-                  type="checkbox"
-                  label="Enable Notifications"
-                  name="notificationsEnabled"
-                  checked={formData.notificationsEnabled || false}
-                  onChange={handleChange}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Renewable Priority"
-                  name="renewablePriority"
-                  checked={formData.renewablePriority || false}
-                  onChange={handleChange}
-                />
-              </>
-            )}
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setEditSection(null)}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handleSave}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </ListGroup>
+        </Card>
+      </div>
     </div>
   );
 };

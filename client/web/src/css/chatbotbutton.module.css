@@ -98,6 +98,18 @@
   width: fit-content;
 }
 
+/* Make sure bullet points stay inside the message bubble */
+.botMessage ul,
+.botMessage ol {
+  margin: 6px 0 6px 16px;  /* small left indent, not too big */
+  padding-left: 16px;      /* tighter padding to stay inside bubble */
+}
+
+.botMessage li {
+  margin-bottom: 4px;
+  word-wrap: break-word;
+}
+
 /* Footer */
 .chatFooter {
   display: flex;

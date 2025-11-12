@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import { marked } from "marked";
 import styles from "../css/chatbotbutton.module.css";
 
 const ChatbotButton = () => {
@@ -79,20 +80,12 @@ const ChatbotButton = () => {
     // Render bot messages safely (markdown or escaped HTML)
     const renderMessage = (msg) => {
         if (msg.sender === "bot") {
-            if (window.marked) {
-                return (
+            return (
                     <div
                         className={`${styles.message} ${styles.botMessage}`}
-                        dangerouslySetInnerHTML={{ __html: window.marked.parse(msg.text || "") }}
+                        dangerouslySetInnerHTML={{ __html: marked.parse(msg.text || "") }}
                     />
                 );
-            } else {
-                return (
-                    <div className={`${styles.message} ${styles.botMessage}`}>
-                        <p dangerouslySetInnerHTML={{ __html: escapeHtml(msg.text || "") }}></p>
-                    </div>
-                );
-            }
         } else {
             // user message (always escaped)
             return (
