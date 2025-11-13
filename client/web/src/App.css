@@ -16,3 +16,9 @@
   border-radius: 8px;
   color: #fff !important;
 }
+
+
+.leaflet-control-attribution,
+.leaflet-control {
+  display: none !important;
+}
