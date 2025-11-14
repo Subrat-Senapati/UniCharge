@@ -1,21 +1,51 @@
-City,Station,Brand,Latitude,Longitude,Power kW,Price per kWh
-Bhubaneswar,Statiq Nexus Esplanade Mall,Statiq,20.289576,85.856582,60,"AC 11, DC 16"
-Bhubaneswar,Wonderla Statiq Charger,Statiq,20.20815,85.64414,60,"AC 11, DC 16"
-Bhubaneswar,Tata Power Dion Automobiles,Tata Power EZ Charge,20.4798,85.81866,25,Varies App
-Bhubaneswar,Ather Grid Ather Space Patia,Ather Grid,20.344744,85.803818,7,Varies App
-Bhubaneswar,Tata Power DN Regalia Mall,Tata Power EZ Charge,20.283526,85.827547,25,Varies App
-Bhubaneswar,Tata Power MG Bhubaneswar,Tata Power EZ Charge,20.291429,85.839506,50,Varies App
-Bhubaneswar,Statiq Welcom Hotel,Statiq,20.305856,85.843332,60,"AC 11, DC 16"
-Bhubaneswar,Tata Power Utkal Signature,Tata Power EZ Charge,20.330452,85.870156,25,Varies App
-Bhubaneswar,HPCL Saheed Nagar,HPCL,20.320542,85.839841,7.2,AC TYPE 2
-Bhubaneswar,TML Tirupati Enterprises,TML,20.329658,85.838524,60,"CCS-II, CHAdeMO"
-Bhubaneswar,Geetanjali Acharya Vihar,Geetanjali,20.324751,85.842215,3.7,16 Amp
-Bhubaneswar,Jio-bp Pulse Bhubaneswar,Jio-bp Pulse,20.310245,85.850123,60,15.99 per kWh
-Bhubaneswar,Ather Grid Mancheswar,Ather Grid,20.325841,85.945123,7,Varies App
-Bhubaneswar,Statiq CRP Square Krishna Plaza,Statiq,20.290456,85.841567,60,"AC 11, DC 16"
-Bhubaneswar,Kazam Rasulgarh,Kazam,20.314567,85.833456,7.5,Bharat DC-001
-Bhubaneswar,EVgo Bhubaneswar,EVgo,20.318945,85.848234,50,Varies App
-Bhubaneswar,ChargeZone Bhubaneswar,ChargeZone,20.316234,85.844567,22,Varies App
-Bhubaneswar,Eaton EV Charger,Eaton,20.325612,85.851234,11,"AC 7.4, AC 22"
-Bhubaneswar,PMRF EV Hub,PMRF,20.308945,85.860234,7,₹12 per kWh
-Bhubaneswar,Sigma EV Charging,Sigma,20.312456,85.835678,50,DC Fast Charging
+Station	Brand	Latitude	Longitude	Max_kW	Price_per_kWh_Rs	Num_Ports
+Bhubaneswar City Center Charging	Tata Power	20.296059	85.824539	60	14.5	4
+Infocity EV Station	Ather	20.35384	85.817268	25	15	6
+Nalco Square Charging Point	Jio BP	20.260901	85.854194	120	13.75	8
+KIIT University Charging Hub	Bolt	20.352482	85.816268	30	14	10
+Vani Vihar EV Point	Statique	20.288194	85.83356	45	15.25	4
+Janpath Charging Station	Tata Power	20.292041	85.833859	60	14.5	6
+Bhubaneswar Railway Station EV	Jio BP	20.260416	85.828553	90	13.75	8
+Nayapalli Charging Hub	Ather	20.305268	85.824539	25	15	6
+BDA Complex Charging Point	Bolt	20.321839	85.807268	30	14	4
+Patia Electric Zone	Statique	20.340268	85.807268	45	15.25	6
+Jagamara EV Station	Tata Power	20.332194	85.788553	60	14.5	4
+Bhubaneswar Airport Charging	Jio BP	20.244194	85.817759	120	13.75	8
+Saheed Nagar Charging Point	Ather	20.284839	85.828553	25	15	6
+IRC Village EV Hub	Bolt	20.299041	85.833859	30	14	4
+Bhubaneswar Golf Link Charging	Statique	20.268553	85.788553	45	15.25	4
+Esplanade One Mall Charging	Tata Power	20.322456	85.809123	60	14.5	6
+Odisha University Charging	Jio BP	20.289456	85.765432	90	13.75	4
+Rasulgarh EV Station	Bolt	20.315678	85.845678	30	14	4
+Bhubaneswar Industrial Estate	Statique	20.375432	85.798765	45	15.25	8
+SUM Hospital Charging Point	Ather	20.365432	85.812345	25	15	4
+Acharya Vihar EV Hub	Tata Power	20.285678	85.823456	60	14.5	6
+CRPF Square Charging Station	Jio BP	20.345678	85.832109	120	13.75	6
+Bhubaneswar Club Charging	Bolt	20.275432	85.84321	30	14	4
+Maitri Vihar EV Point	Statique	20.298765	85.798765	45	15.25	4
+Jaydev Vihar Charging Hub	Ather	20.312345	85.809876	25	15	6
+Bhubaneswar Development Authority	Tata Power	20.321098	85.821234	60	14.5	4
+Capital Hospital Charging	Jio BP	20.298765	85.832109	90	13.75	6
+Bapuji Nagar EV Station	Bolt	20.287654	85.84321	30	14	4
+Sahid Nagar Market Charging	Statique	20.284321	85.829876	45	15.25	4
+Bhubaneswar Sports Complex	Ather	20.276543	85.812345	25	15	6
+Kalpana Square Charging Hub	Tata Power	20.265432	85.798765	60	14.5	4
+Bhubaneswar Police Station EV	Jio BP	20.254321	85.809876	120	13.75	4
+Rail Sadan Charging Point	Bolt	20.263456	85.821098	30	14	6
+Bhubaneswar Metro Station	Statique	20.272345	85.832109	45	15.25	4
+Kalinga Hospital Charging	Ather	20.281234	85.798765	25	15	4
+Bhubaneswar Bus Stand EV	Tata Power	20.292109	85.809876	60	14.5	8
+Nandan Kanan Road Charging	Jio BP	20.302109	85.765432	90	13.75	6
+Bhubaneswar IT Park Station	Bolt	20.332109	85.798765	30	14	10
+Bhubaneswar Convention Center	Statique	20.312345	85.821098	45	15.25	6
+Bhubaneswar Golf Course EV	Ather	20.268765	85.787654	25	15	4
+Bhubaneswar Museum Charging	Tata Power	20.287654	85.84321	60	14.5	4
+Bhubaneswar Temple Point	Jio BP	20.276543	85.832109	120	13.75	6
+Bhubaneswar Park Charging	Bolt	20.298765	85.809876	30	14	4
+Bhubaneswar Market EV	Statique	20.302109	85.821098	45	15.25	6
+Bhubaneswar Residential Complex	Ather	20.315678	85.798765	25	15	4
+Bhubaneswar Tech Park Charging	Tata Power	20.325678	85.812345	60	14.5	8
+Bhubaneswar Shopping Mall EV	Jio BP	20.335678	85.823456	90	13.75	6
+Bhubaneswar Hotel Charging	Bolt	20.345678	85.834567	30	14	4
+Bhubaneswar Restaurant Point	Statique	20.355678	85.845678	45	15.25	4
+Bhubaneswar Corporate Park	Ather	20.365678	85.856789	25	15	6

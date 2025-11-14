@@ -81,6 +81,7 @@ const EVChargeHub = () => {
                     setUserPosition([pos.coords.latitude, pos.coords.longitude]);
                 },
                 (err) => {
+                    setUserPosition(defaultCenter); // Bhubaneswar fallback
                     console.error("❌ Location error:", err);
                     alert("Unable to get your location, showing Bhubaneswar as default.");
                 }

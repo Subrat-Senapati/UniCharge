@@ -32,8 +32,9 @@ const loadStationsFromCSV = () => {
         brand: row["Brand"] || "Unknown",
         latitude: parseFloat(row["Latitude"]),
         longitude: parseFloat(row["Longitude"]),
-        powerKW: row["Power kW"] || "N/A",
-        pricePerKWh: row["Price per kWh"] || "N/A",
+        powerKW: row["Max_kW"] || "N/A",
+        pricePerKWh: row["Price_per_kWh_Rs"] || "N/A",
+        PortNum : row["Num_Ports"] || "N/A",
       }));
 
     console.log(`✅ Loaded ${stationsCache.length} stations`);
