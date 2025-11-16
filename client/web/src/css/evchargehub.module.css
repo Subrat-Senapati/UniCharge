@@ -23,7 +23,7 @@
   background: #f9f9f9;
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .leaflet-control-attribution,
@@ -49,6 +49,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: all 0.3s ease;
+  padding-bottom: 20px;
 }
 
 /* Header */
@@ -71,11 +72,12 @@
 /* Form Layout */
 .searchForm {
   padding: 25px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
+/* Form Groups */
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -94,13 +96,134 @@
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .formControl:focus {
   border-color: #1a73e8;
 }
 
-/* Buttons */
+/* =============================
+   Custom Layout Rows
+   ============================= */
+
+/* Pickup Row (Desktop: horizontal) */
+.rowGroup {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.flexGrow {
+  flex: 1;
+  /* Make input take available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.flexGrow .formControl {
+  width: 100%;
+  /* Ensure full width within flex container */
+}
+
+/* Full width rows */
+.fullRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.fullRow .formControl {
+  width: 100%;
+}
+
+/* Right-aligned button row */
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* =============================
+   Suggestion List Styling
+   ============================= */
+
+.suggestionList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 100px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 4px;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  /* Ensure it matches parent width */
+  box-sizing: border-box;
+  /* Include borders in width calculation */
+}
+
+.suggestionItem {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestionItem:hover {
+  background-color: #f8f9fa;
+}
+
+.suggestionItem:last-child {
+  border-bottom: none;
+}
+
+/* Make the input container relative for absolute positioning */
+.flexGrow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Important for absolute positioning of suggestions */
+}
+
+/* Ensure input takes full width */
+.flexGrow .formControl {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =============================
+   Responsive (Mobile)
+   ============================= */
+@media (max-width: 768px) {
+  .suggestionList {
+    position: relative;
+    /* Change to relative on mobile if needed */
+    width: 100%;
+  }
+
+  .suggestionItem {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+}
+
+/* =============================
+   Buttons
+   ============================= */
+
 .btnPrimary {
   background-color: #1a73e8;
   color: white;
@@ -114,47 +237,116 @@
   gap: 8px;
   justify-content: center;
   transition: background 0.3s;
+  min-width: 150px;
 }
 
 .btnPrimary:hover {
   background-color: #0d47a1;
 }
 
-/* Collapsed state (optional if toggle used) */
-.bookingPanel.collapsed {
-  transform: scaleY(0.98);
-  opacity: 0.9;
+.liveBtn {
+  background: #198754;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: 0.2s ease;
+  min-width: 140px;
+  height: fit-content;
+}
+
+.liveBtn:hover {
+  background: #146c43;
 }
 
 /* =============================
-   Responsive Adjustments
+   Responsive (Mobile)
    ============================= */
 @media (max-width: 768px) {
-  .mapSection {
-    height: 400px;
-  }
-
-  .panelHeader {
-    padding: 12px 18px;
-  }
-
   .searchForm {
-    grid-template-columns: 1fr;
+    padding: 20px 15px;
+  }
+
+  /* Convert Pickup Row into stacked layout */
+  .rowGroup {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .liveBtn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+
+  .btnPrimary {
+    width: 100%;
+    min-width: auto;
   }
 }
-
 
 /* =============================
-   Brands Section
+   Station Section
    ============================= */
-.brandsSection {
-  padding: 30px 20px;
-  background-color: #f8f9fa;
-}
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  background-color: transparent !important;
+}
+
+.brandsSection{
+  background-color: transparent !important;
+  padding: 20px;
+}
+
+.stationCard {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stationCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.stationLogo {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a73e8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stationName {
+  font-weight: 600;
+  color: #333;
+  text-align: right;
+}
+
+.stationRating {
+  color: #fbbc05;
+  font-weight: 500;
 }
 
 .sectionTitle {
@@ -174,45 +366,6 @@
   gap: 25px;
 }
 
-.brandCard {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.brandCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.brandHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.brandLogo {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #1a73e8;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.brandRating {
-  color: #fbbc05;
-  font-weight: 500;
-}
-
-.brandDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
 .detailRow {
   display: flex;
@@ -264,7 +417,8 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex; /* ✅ make visible when rendered */
+  display: flex;
+  /* ✅ make visible when rendered */
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -275,6 +429,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -296,6 +451,7 @@
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -351,9 +507,11 @@
   .mapSection {
     height: 400px;
   }
+
   .searchForm {
     grid-template-columns: 1fr;
   }
+
   .brandCard {
     padding: 15px;
   }
