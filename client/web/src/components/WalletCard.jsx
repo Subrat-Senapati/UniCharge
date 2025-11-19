@@ -8,14 +8,26 @@ import {
   Star,
 } from "lucide-react";
 import styles from "../css/walletcard.module.css";
+import { useAuth } from "../context/AuthContext";
 
 const WalletCard = () => {
+  const { user, fetchProfile } = useAuth()
+
   const [wallet, setWallet] = useState(null);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [amount, setAmount] = useState("");
   const [selectedMethod, setSelectedMethod] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showOtherOption, setShowOtherOption] = useState(false);
+  const [otherPaymentDetails, setOtherPaymentDetails] = useState({
+    type: "",
+    upiId: "",
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
+    nameOnCard: ""
+  });
 
   const minBalance = 500;
 
@@ -24,7 +36,18 @@ const WalletCard = () => {
     fetchPaymentMethods();
   }, []);
 
-  // ✅ Fetch wallet info
+  useEffect(() => {
+    fetchProfile();
+  }, [wallet]);
+
+  // Set default payment method when modal opens or payment methods change
+  useEffect(() => {
+    if (showModal && wallet?.defaultPaymentMethod) {
+      setSelectedMethod(wallet.defaultPaymentMethod);
+    }
+  }, [showModal, wallet?.defaultPaymentMethod, paymentMethods]);
+
+  // Fetch wallet info
   const fetchWallet = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/wallet`, {
@@ -38,7 +61,7 @@ const WalletCard = () => {
     }
   };
 
-  // ✅ Fetch payment methods
+  // Fetch payment methods
   const fetchPaymentMethods = async () => {
     try {
       const res = await fetch(
@@ -53,7 +76,7 @@ const WalletCard = () => {
     }
   };
 
-  // ✅ Loyalty level helper
+  // Loyalty level helper
   const getLoyaltyLevel = (points) => {
     if (points >= 1000) return { label: "Platinum", color: "text-primary" };
     if (points >= 500) return { label: "Gold", color: "text-warning" };
@@ -61,7 +84,7 @@ const WalletCard = () => {
     return { label: "New Member", color: "text-muted" };
   };
 
-  // ✅ Load Razorpay script
+  // Load Razorpay script
   const loadRazorpayScript = () =>
     new Promise((resolve) => {
       const script = document.createElement("script");
@@ -71,7 +94,115 @@ const WalletCard = () => {
       document.body.appendChild(script);
     });
 
-  // ✅ Handle Add Balance (Razorpay)
+  // Handle Other Payment Method
+  const handleOtherPayment = async (e) => {
+    e.preventDefault();
+    if (!amount) {
+      alert("Please enter amount");
+      return;
+    }
+
+    if (!otherPaymentDetails.type) {
+      alert("Please select payment type");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      
+      if (otherPaymentDetails.type === "razorpay") {
+        // Use Razorpay for other payments
+        const res = await fetch(
+          `${import.meta.env.VITE_SERVER_URL}/api/wallet/create-order`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ amount: parseFloat(amount) }),
+          }
+        );
+        const data = await res.json();
+        if (!data.success) throw new Error("Failed to create Razorpay order");
+
+        const loaded = await loadRazorpayScript();
+        if (!loaded) {
+          alert("Razorpay SDK failed to load");
+          return;
+        }
+
+        const options = {
+          key: data.key,
+          amount: data.order.amount,
+          currency: data.order.currency,
+          name: "MyApp Wallet",
+          description: "Add balance to wallet",
+          order_id: data.order.id,
+          handler: async function (response) {
+            try {
+              const verifyRes = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/wallet/verify-payment`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  credentials: "include",
+                  body: JSON.stringify({
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+                    amount: parseFloat(amount),
+                  }),
+                }
+              );
+
+              const verifyData = await verifyRes.json();
+              if (!verifyRes.ok)
+                throw new Error(verifyData.message || "Payment verification failed");
+
+              setShowModal(false);
+              setAmount("");
+              setSelectedMethod("");
+              setShowOtherOption(false);
+              setOtherPaymentDetails({
+                type: "",
+                upiId: "",
+                cardNumber: "",
+                expiry: "",
+                cvv: "",
+                nameOnCard: ""
+              });
+              alert("Payment successful! Wallet updated.");
+              await fetchWallet();
+            } catch (err) {
+              alert("Error verifying payment: " + err.message);
+            }
+          },
+          upi: {
+            flow: "intent",
+          },
+          prefill: {
+            name: user.fullName || "User",
+            email: user.email || "user@example.com",
+            contact: user.phoneNumber || "9999999999",
+          },
+          theme: { color: "#198754" },
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      } else {
+        // Handle other payment types (custom implementation)
+        alert(`Processing ${otherPaymentDetails.type} payment...`);
+        // Add your custom payment processing logic here
+      }
+    } catch (err) {
+      console.error("Error processing payment:", err);
+      alert("Error processing payment: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle Add Balance (Existing payment methods)
   const handleAddBalance = async (e) => {
     e.preventDefault();
     if (!amount || !selectedMethod) {
@@ -87,7 +218,10 @@ const WalletCard = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ amount: parseFloat(amount) }),
+          body: JSON.stringify({ 
+            amount: parseFloat(amount),
+            paymentMethodId: selectedMethod 
+          }),
         }
       );
       const data = await res.json();
@@ -119,6 +253,7 @@ const WalletCard = () => {
                   razorpay_payment_id: response.razorpay_payment_id,
                   razorpay_signature: response.razorpay_signature,
                   amount: parseFloat(amount),
+                  paymentMethodId: selectedMethod,
                 }),
               }
             );
@@ -127,19 +262,22 @@ const WalletCard = () => {
             if (!verifyRes.ok)
               throw new Error(verifyData.message || "Payment verification failed");
 
-            alert("Payment successful! Wallet updated.");
-            await fetchWallet();
             setShowModal(false);
             setAmount("");
             setSelectedMethod("");
+            alert("Payment successful! Wallet updated.");
+            await fetchWallet();
           } catch (err) {
             alert("Error verifying payment: " + err.message);
           }
         },
+        upi: {
+          flow: "intent",
+        },
         prefill: {
-          name: "User",
-          email: "user@example.com",
-          contact: "9999999999",
+          name: user.fullName || "User",
+          email: user.email || "user@example.com",
+          contact: user.phoneNumber || "9999999999",
         },
         theme: { color: "#198754" },
       };
@@ -154,7 +292,22 @@ const WalletCard = () => {
     }
   };
 
-  // ✅ Loading state
+  // Reset modal state when closed
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setShowOtherOption(false);
+    setSelectedMethod(wallet?.defaultPaymentMethod || "");
+    setOtherPaymentDetails({
+      type: "",
+      upiId: "",
+      cardNumber: "",
+      expiry: "",
+      cvv: "",
+      nameOnCard: ""
+    });
+  };
+
+  // Loading state
   if (!wallet) {
     return (
       <div className="text-center py-5">
@@ -180,7 +333,6 @@ const WalletCard = () => {
         : `Card: **** ${defaultPaymentMethod.card?.cardNumberMasked || "XXXX"}`
       : "None";
 
-
   return (
     <div
       className={`card shadow-sm w-100 ${styles.cardContainer} ${isLowBalance ? styles.lowBalance : ""
@@ -191,7 +343,6 @@ const WalletCard = () => {
         <div className={styles.contentSection}>
           <div className={styles.header}>
             <h3 className="card-title mb-0 d-flex align-items-center gap-2">
-              {/* <Wallet2 size={24} className={styles.textSuccess} /> */}
               Wallet
             </h3>
             <button
@@ -263,13 +414,18 @@ const WalletCard = () => {
         <>
           <div className="modal show fade d-block" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
-              <form className="modal-content" onSubmit={handleAddBalance}>
+              <form 
+                className="modal-content" 
+                onSubmit={showOtherOption ? handleOtherPayment : handleAddBalance}
+              >
                 <div className="modal-header">
-                  <h5 className="modal-title">Add Balance</h5>
+                  <h5 className="modal-title">
+                    {showOtherOption ? "Other Payment Method" : "Add Balance"}
+                  </h5>
                   <button
                     type="button"
                     className="btn-close"
-                    onClick={() => setShowModal(false)}
+                    onClick={handleCloseModal}
                   ></button>
                 </div>
 
@@ -287,44 +443,103 @@ const WalletCard = () => {
                     />
                   </div>
 
-                  <div className="mb-3">
-                    <label className="form-label">Select Payment Method</label>
-                    <select
-                      className={`form-select ${styles.dropdown}`}
-                      value={selectedMethod}
-                      onChange={(e) => setSelectedMethod(e.target.value)}
-                      required
-                    >
-                      <option value="">Choose Method</option>
-                      {paymentMethods.length > 0 ? (
-                        paymentMethods.map((m) => (
-                          <option key={m._id} value={m._id}>
-                            {m.type === "upi"
-                              ? `UPI: ${m.upiId}`
-                              : `Card: **** ${m.card?.cardNumberMasked}`}
-                          </option>
-                        ))
-                      ) : (
-                        <option disabled>No methods found</option>
+                  {!showOtherOption ? (
+                    <>
+                      <div className="mb-3">
+                        <label className="form-label">Select Payment Method</label>
+                        <select
+                          className={`form-select ${styles.dropdown}`}
+                          value={selectedMethod}
+                          onChange={(e) => setSelectedMethod(e.target.value)}
+                          required
+                        >
+                          <option value="">Choose Method</option>
+                          {paymentMethods.length > 0 ? (
+                            paymentMethods.map((m) => (
+                              <option key={m._id} value={m._id}>
+                                {m.type === "upi"
+                                  ? `UPI: ${m.upiId}`
+                                  : `Card: **** ${m.card?.cardNumberMasked}`}
+                                {m._id === wallet.defaultPaymentMethod && " (Default)"}
+                              </option>
+                            ))
+                          ) : (
+                            <option disabled>No methods found</option>
+                          )}
+                          <option value="other">Other Payment Method</option>
+                        </select>
+                      </div>
+
+                      {selectedMethod === "other" && (
+                        <div className="mb-3">
+                          <button
+                            type="button"
+                            className="btn btn-outline-primary w-100"
+                            onClick={() => setShowOtherOption(true)}
+                          >
+                            Add New Payment Method
+                          </button>
+                        </div>
                       )}
-                    </select>
-                  </div>
+                    </>
+                  ) : (
+                    <div className="other-payment-options">
+                      <div className="mb-3">
+                        <label className="form-label">Select Payment Type</label>
+                        <select
+                          className="form-select"
+                          value={otherPaymentDetails.type}
+                          onChange={(e) => setOtherPaymentDetails({
+                            ...otherPaymentDetails,
+                            type: e.target.value
+                          })}
+                          required
+                        >
+                          <option value="">Choose Payment Type</option>
+                          <option value="razorpay">Razorpay (Credit/Debit Card, UPI, Net Banking)</option>
+                          <option value="paypal">PayPal</option>
+                          <option value="stripe">Stripe</option>
+                          <option value="bank_transfer">Bank Transfer</option>
+                        </select>
+                      </div>
+
+                      {otherPaymentDetails.type === "razorpay" && (
+                        <div className="alert alert-info">
+                          <small>
+                            You will be redirected to Razorpay secure payment gateway to complete your transaction.
+                          </small>
+                        </div>
+                      )}
+
+                      {/* Add more payment type specific fields here if needed */}
+                    </div>
+                  )}
                 </div>
 
                 <div className="modal-footer gap-2">
+                  {showOtherOption && (
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => setShowOtherOption(false)}
+                    >
+                      Back to Saved Methods
+                    </button>
+                  )}
                   <button
                     type="button"
-                    className={`btn btn-danger px-2 py-1 ${styles.cancelBtn}`}
-                    onClick={() => setShowModal(false)}
+                    className={`btn btn-danger ${styles.cancelBtn}`}
+                    onClick={handleCloseModal}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className={`btn btn-success px-2 py-1 ${styles.saveBtn}`}
+                    className={`btn btn-success ${styles.saveBtn}`}
                     disabled={loading}
                   >
-                    {loading ? "Processing..." : "Proceed to Pay"}
+                    {loading ? "Processing..." : 
+                     showOtherOption ? "Proceed with Other Payment" : "Proceed to Pay"}
                   </button>
                 </div>
               </form>
