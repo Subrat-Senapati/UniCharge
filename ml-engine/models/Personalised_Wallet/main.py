@@ -3,13 +3,16 @@ from pydantic import BaseModel
 import numpy as np
 import pandas as pd
 import pickle
+from pathlib import Path
 
 # Paths (must stay in sync with 03_Model_Training.ipynb)
-MODEL_PATH = r"C:\Users\user\Desktop\ML WORKSHOP\UniCharge\ml-engine\models\Personalised_Wallet\artifacts\RandomForest_wallet_model.pkl"
-SCALER_PATH = r"C:\Users\user\Desktop\ML WORKSHOP\UniCharge\ml-engine\models\Personalised_Wallet\artifacts\scaler.pkl"
-ENCODERS_PATH = r"C:\Users\user\Desktop\ML WORKSHOP\UniCharge\ml-engine\models\Personalised_Wallet\artifacts\label_encoders.pkl"
-FEATURE_COLUMNS_PATH = r"C:\Users\user\Desktop\ML WORKSHOP\UniCharge\ml-engine\models\Personalised_Wallet\artifacts\feature_columns.pkl"
-NUMERIC_COLS_PATH = r"C:\Users\user\Desktop\ML WORKSHOP\UniCharge\ml-engine\models\Personalised_Wallet\artifacts\numeric_cols.pkl"
+BASE_DIR = Path(__file__).resolve().parent
+ARTIFACTS_DIR = BASE_DIR / "artifacts"
+MODEL_PATH = ARTIFACTS_DIR / "RandomForest_wallet_model.pkl"
+SCALER_PATH = ARTIFACTS_DIR / "scaler.pkl"
+ENCODERS_PATH = ARTIFACTS_DIR / "label_encoders.pkl"
+FEATURE_COLUMNS_PATH = ARTIFACTS_DIR / "feature_columns.pkl"
+NUMERIC_COLS_PATH = ARTIFACTS_DIR / "numeric_cols.pkl"
 
 def load_pickle(path: str):
     with open(path, "rb") as f:
