@@ -18,10 +18,20 @@ import {
     faMapPin,
     faExclamationTriangle,
     faInfoCircle,
+    faRoute,
+    faLocationArrow,
+    faWalking,
+    faCar,
+    faDirections,
+    faCompass,
+    faCreditCard
 } from "@fortawesome/free-solid-svg-icons";
 
 import { MapContainer, TileLayer, Marker, Popup, Circle, useMap, Polyline } from "react-leaflet";
 import L from "leaflet";
+import EnhancedBookingModal from "./EnhancedBookingModal";
+import NavigationModal from './NavigationModal';
+import { useAuth } from "../context/AuthContext";
 
 // Marker icons
 const stationIcon = new L.Icon({
@@ -34,12 +44,16 @@ const userIcon = new L.Icon({
     iconSize: [30, 30],
 });
 
+const destinationIcon = new L.Icon({
+    iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+    iconSize: [25, 25],
+});
+
 // Helper component to re-center map dynamically on route
 const RecenterMap = ({ center, routePath }) => {
     const map = useMap();
     useEffect(() => {
         if (routePath && routePath.length > 0) {
-            // Create bounds that include both user position and route path
             const bounds = L.latLngBounds(routePath);
             if (center) {
                 bounds.extend(center);
@@ -73,6 +87,19 @@ const EVChargeHub = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [destinationSuggestions, setDestinationSuggestions] = useState([]);
     const [showDestinationSuggestions, setShowDestinationSuggestions] = useState(false);
+
+    // NEW STATES FOR LOCATION VERIFICATION
+    const [navigationModalOpen, setNavigationModalOpen] = useState(false);
+    const [userAtStation, setUserAtStation] = useState(false);
+    const [distanceToStation, setDistanceToStation] = useState(null);
+    const [checkingLocation, setCheckingLocation] = useState(false);
+    const [navigationRoute, setNavigationRoute] = useState(null);
+    const [navigationInstructions, setNavigationInstructions] = useState([]);
+    const [locationWatchId, setLocationWatchId] = useState(null);
+
+    // Distance threshold for considering user "at station" (in meters)
+    const LOCATION_THRESHOLD = 100; // 100 meters
+    const { user } = useAuth()
 
     // Fetch stations from backend
     const fetchStations = async () => {
@@ -131,20 +158,177 @@ const EVChargeHub = () => {
 
     const defaultCenter = [20.2961, 85.8245]; // Bhubaneswar fallback
 
-    // Booking logic
-    const handleBookClick = (station) => {
-        setSelectedStation(station);
-        setModalOpen(true);
+    // NEW: Check if user is at station location
+    const checkUserAtStation = (station) => {
+        if (!userPosition || !station) return false;
+
+        const stationLat = parseFloat(station.latitude);
+        const stationLng = parseFloat(station.longitude);
+
+        const distance = calculateDistance(
+            userPosition[0], userPosition[1],
+            stationLat, stationLng
+        );
+
+        setDistanceToStation(distance * 1000); // Convert to meters
+        return distance * 1000 <= LOCATION_THRESHOLD; // Convert to meters and check
     };
 
-    const confirmBooking = () => {
-        alert(`Booking confirmed at ${selectedStation.station}! Confirmation sent to your email.`);
-        setModalOpen(false);
-        setSelectedStation(null);
+    // NEW: Enhanced booking logic with location verification
+    const handleBookClick = async (station) => {
+        setSelectedStation(station);
+        setCheckingLocation(true);
+
+        // Get fresh user location
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                async (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    setUserPosition([lat, lng]);
+
+                    const isAtStation = checkUserAtStation(station);
+                    setUserAtStation(isAtStation);
+
+                    if (isAtStation) {
+                        // User is at station - proceed to booking
+                        setModalOpen(true);
+                    } else {
+                        // User is not at station - show navigation
+                        await generateNavigationRoute(station);
+                        setNavigationModalOpen(true);
+                    }
+                    setCheckingLocation(false);
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                    alert("Unable to verify your location. Please enable location services.");
+                    setCheckingLocation(false);
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        }
+    };
+
+    // NEW: Generate navigation route to station
+    const generateNavigationRoute = async (station) => {
+        if (!userPosition) return;
+
+        try {
+            const stationCoords = [parseFloat(station.latitude), parseFloat(station.longitude)];
+            const route = await getRoute(userPosition, stationCoords);
+
+            if (route && route.coordinates) {
+                setNavigationRoute(route);
+                generateNavigationInstructions(route, station);
+            }
+        } catch (error) {
+            console.error("Error generating route:", error);
+        }
+    };
+
+    // NEW: Generate step-by-step navigation instructions
+    const generateNavigationInstructions = (route, station) => {
+        const instructions = [
+            "Start from your current location",
+            `Head towards ${station.station}`,
+            `Follow the route for approximately ${Math.ceil(route.distance)} km`,
+            `Estimated travel time: ${Math.ceil(route.duration)} minutes`,
+            "You'll see the charging station on your arrival"
+        ];
+        setNavigationInstructions(instructions);
+    };
+
+    // NEW: Continuous location monitoring for navigation
+    const startLocationMonitoring = () => {
+        if (!selectedStation) return;
+
+        // Clear any existing watcher
+        if (locationWatchId) {
+            navigator.geolocation.clearWatch(locationWatchId);
+        }
+
+        const watchId = navigator.geolocation.watchPosition(
+            (pos) => {
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                setUserPosition([lat, lng]);
+
+                const isAtStation = checkUserAtStation(selectedStation);
+                setUserAtStation(isAtStation);
+
+                if (isAtStation) {
+                    // User reached the station - stop monitoring and enable booking
+                    navigator.geolocation.clearWatch(watchId);
+                    setLocationWatchId(null);
+                    setNavigationModalOpen(false);
+                    setModalOpen(true);
+                }
+            },
+            (error) => {
+                console.error("Error monitoring location:", error);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            }
+        );
+
+        setLocationWatchId(watchId);
+    };
+
+    // NEW: Stop location monitoring
+    const stopLocationMonitoring = () => {
+        if (locationWatchId) {
+            navigator.geolocation.clearWatch(locationWatchId);
+            setLocationWatchId(null);
+        }
+    };
+
+    const confirmBooking = async (bookingData) => {
+        try {
+            setBookingLoading(true);
+
+            const bookingPayload = {
+                stationId: bookingData.station._id,
+                vehicleId: bookingData.vehicle._id,
+                scheduledStart: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes from now
+                scheduledEnd: new Date(Date.now() + 90 * 60 * 1000),   // 1.5 hours from now
+                estimatedKwh: bookingData.vehicle.batteryCapacityKwh * 0.8,
+                estimatedCost: bookingData.estimatedCost
+            };
+
+            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/bookings`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(bookingPayload)
+            });
+
+            if (response.ok) {
+                const booking = await response.json();
+                alert(`Booking confirmed! Reference: ${booking._id}`);
+                setModalOpen(false);
+                setSelectedStation(null);
+            } else {
+                const error = await response.json();
+                alert(`Booking failed: ${error.message}`);
+            }
+        } catch (error) {
+            console.error('Booking error:', error);
+            alert('Booking failed. Please try again.');
+        } finally {
+            setBookingLoading(false);
+        }
     };
 
     const cancelBooking = () => {
+        stopLocationMonitoring();
         setModalOpen(false);
+        setNavigationModalOpen(false);
         setSelectedStation(null);
     };
 
@@ -195,7 +379,6 @@ const EVChargeHub = () => {
             setFilteredStations(stations5km);
             setSearchRadius("5km");
             setShowBrands(true);
-            alert(`Found ${stations5km.length} charging stations within 5km of your location`);
             return;
         }
 
@@ -219,7 +402,6 @@ const EVChargeHub = () => {
             setFilteredStations(stations10km);
             setSearchRadius("10km");
             setShowBrands(true);
-            alert(`No stations found within 5km. Found ${stations10km.length} charging stations within 10km of your location`);
             return;
         }
 
@@ -229,7 +411,6 @@ const EVChargeHub = () => {
         setSearchRadius("");
         setShowBrands(true);
         setLoading(false);
-        // alert("No charging stations found within 10km of your location. Please try a different location or expand your search.");
     };
 
     // SEARCH FUNCTION 2: When destination IS provided
@@ -264,7 +445,6 @@ const EVChargeHub = () => {
                 setFilteredStations(allStations);
                 setSearchRadius("route");
                 setShowBrands(true);
-                alert(`Could not calculate route. Showing all ${allStations.length} stations in the area.`);
                 return;
             }
 
@@ -288,8 +468,6 @@ const EVChargeHub = () => {
             setRoutePath(route.coordinates);
             setLoading(false);
 
-            // alert(`Found ${stationsAlongRoute.length} charging stations along your route to ${destination}`);
-
         } catch (error) {
             console.error("Route search error:", error);
             // Fallback to showing all stations
@@ -297,17 +475,23 @@ const EVChargeHub = () => {
             setFilteredStations(allStations);
             setSearchRadius("route");
             setShowBrands(true);
-            alert(`Error calculating route. Showing all ${allStations.length} stations in the area.`);
         }
     };
 
     // Get route from current location to destination using OSRM
-    const getRoute = async (start, destinationName) => {
+    const getRoute = async (start, destination) => {
         try {
-            // First, geocode destination to get coordinates
-            const destCoords = await geocodeAddress(destinationName);
-            if (!destCoords) {
-                throw new Error("Could not find destination coordinates");
+            let destCoords;
+
+            // Check if destination is coordinates or address string
+            if (Array.isArray(destination)) {
+                destCoords = destination;
+            } else {
+                // Geocode destination to get coordinates
+                destCoords = await geocodeAddress(destination);
+                if (!destCoords) {
+                    throw new Error("Could not find destination coordinates");
+                }
             }
 
             // Use OSRM API to get route
@@ -331,24 +515,6 @@ const EVChargeHub = () => {
             return null;
         } catch (error) {
             console.error("Route calculation error:", error);
-            return null;
-        }
-    };
-
-    // Geocode address to coordinates
-    const geocodeAddress = async (address) => {
-        try {
-            const response = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(address)}&limit=1`
-            );
-            const data = await response.json();
-
-            if (data && data.length > 0) {
-                return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-            }
-            return null;
-        } catch (error) {
-            console.error("Geocoding error:", error);
             return null;
         }
     };
@@ -380,21 +546,69 @@ const EVChargeHub = () => {
         return R * c; // Distance in km
     };
 
-    // Convert lat/lng -> human-readable location
+    // Updated geocoding functions with working proxies
     const getPlaceNameFromCoords = async (lat, lng) => {
         try {
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in`
-            );
-            const data = await res.json();
-            return data.display_name || "Unknown Location";
+            // Try multiple proxy options
+            const proxyUrls = [
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in`)}`,
+                `https://cors.bridged.cc/https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in`,
+                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in` // Direct call (might work in some environments)
+            ];
+
+            for (let url of proxyUrls) {
+                try {
+                    const res = await fetch(url, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'User-Agent': 'EVChargeHub/1.0 (https://github.com/your-repo)'
+                        }
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        return data.display_name || `Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+                    }
+                } catch (error) {
+                    console.log(`Proxy failed, trying next...`);
+                    continue;
+                }
+            }
+
+            throw new Error('All proxies failed');
+
         } catch (error) {
             console.error("Reverse geocoding error:", error);
-            return "Unknown Location";
+            // Return coordinates as fallback
+            return `Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
         }
     };
 
-    // Auto-suggest using OpenStreetMap for current location
+    const geocodeAddress = async (address) => {
+        try {
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(address)}&limit=1`)}`;
+
+            const response = await fetch(proxyUrl, {
+                headers: {
+                    'Accept': 'application/json',
+                    'User-Agent': 'EVChargeHub/1.0'
+                }
+            });
+
+            if (!response.ok) throw new Error('Network response was not ok');
+
+            const data = await response.json();
+
+            if (data && data.length > 0) {
+                return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+            }
+            return null;
+        } catch (error) {
+            console.error("Geocoding error:", error);
+            return null;
+        }
+    };
+
     const fetchLocationSuggestions = async (query) => {
         if (!query.trim()) {
             setSuggestions([]);
@@ -402,9 +616,17 @@ const EVChargeHub = () => {
         }
 
         try {
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${query}&addressdetails=1&limit=5`
-            );
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`)}`;
+
+            const res = await fetch(proxyUrl, {
+                headers: {
+                    'Accept': 'application/json',
+                    'User-Agent': 'EVChargeHub/1.0'
+                }
+            });
+
+            if (!res.ok) throw new Error('Network response was not ok');
+
             const data = await res.json();
 
             setSuggestions(
@@ -416,10 +638,10 @@ const EVChargeHub = () => {
             );
         } catch (err) {
             console.error("Auto-suggest error:", err);
+            setSuggestions([]);
         }
     };
 
-    // Auto-suggest using OpenStreetMap for destination
     const fetchDestinationSuggestions = async (query) => {
         if (!query.trim()) {
             setDestinationSuggestions([]);
@@ -427,9 +649,17 @@ const EVChargeHub = () => {
         }
 
         try {
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${query}&addressdetails=1&limit=5`
-            );
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`)}`;
+
+            const res = await fetch(proxyUrl, {
+                headers: {
+                    'Accept': 'application/json',
+                    'User-Agent': 'EVChargeHub/1.0'
+                }
+            });
+
+            if (!res.ok) throw new Error('Network response was not ok');
+
             const data = await res.json();
 
             setDestinationSuggestions(
@@ -441,6 +671,7 @@ const EVChargeHub = () => {
             );
         } catch (err) {
             console.error("Destination auto-suggest error:", err);
+            setDestinationSuggestions([]);
         }
     };
 
@@ -471,7 +702,7 @@ const EVChargeHub = () => {
         // Simulate random availability between 0 and total ports
         const availablePorts = Math.floor(Math.random() * (totalPorts + 1));
         const availability = totalPorts > 0 ? Math.round((availablePorts / totalPorts) * 100) : 0;
-        
+
         return {
             availablePorts,
             totalPorts,
@@ -519,6 +750,18 @@ const EVChargeHub = () => {
                             />
                         )}
 
+                        {/* Navigation Route */}
+                        {navigationRoute && navigationModalOpen && (
+                            <Polyline
+                                positions={navigationRoute.coordinates}
+                                pathOptions={{
+                                    color: 'green',
+                                    weight: 6,
+                                    opacity: 0.8
+                                }}
+                            />
+                        )}
+
                         {/* User Location */}
                         {userPosition && (
                             <>
@@ -541,12 +784,22 @@ const EVChargeHub = () => {
                         {destination && destinationCoords && (
                             <Marker
                                 position={destinationCoords}
-                                icon={new L.Icon({
-                                    iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-                                    iconSize: [25, 25],
-                                })}
+                                icon={destinationIcon}
                             >
                                 <Popup>Destination: {destination}</Popup>
+                            </Marker>
+                        )}
+
+                        {/* Selected Station Marker (for navigation) */}
+                        {navigationModalOpen && selectedStation && (
+                            <Marker
+                                position={[parseFloat(selectedStation.latitude), parseFloat(selectedStation.longitude)]}
+                                icon={stationIcon}
+                            >
+                                <Popup>
+                                    <b>{selectedStation.station}</b> <br />
+                                    Your destination
+                                </Popup>
                             </Marker>
                         )}
 
@@ -761,7 +1014,7 @@ const EVChargeHub = () => {
                                 {filteredStations.map((station, i) => {
                                     const availability = getStationAvailability(station);
                                     const distance = getStationDistance(station);
-                                    
+
                                     return (
                                         <div key={i} className={styles.stationCard}>
                                             <div className={styles.stationHeader}>
@@ -828,9 +1081,13 @@ const EVChargeHub = () => {
                                                 <button
                                                     className={styles.bookBtn}
                                                     onClick={() => handleBookClick(station)}
-                                                    disabled={availability.availablePorts === 0}
+                                                    disabled={availability.availablePorts === 0 || checkingLocation}
                                                 >
-                                                    {availability.availablePorts === 0 ? (
+                                                    {checkingLocation && selectedStation?._id === station._id ? (
+                                                        <>
+                                                            <FontAwesomeIcon icon={faSpinner} spin /> Checking Location...
+                                                        </>
+                                                    ) : availability.availablePorts === 0 ? (
                                                         <>
                                                             <FontAwesomeIcon icon={faExclamationTriangle} /> No Slots
                                                         </>
@@ -861,48 +1118,28 @@ const EVChargeHub = () => {
                 </section>
             )}
 
-            {/* Booking Modal */}
-            {modalOpen && selectedStation && (
-                <div className={styles.modal}>
-                    <div className={styles.modalContent}>
-                        <div className={styles.modalIcon}>
-                            <FontAwesomeIcon icon={faCheckCircle} />
-                        </div>
-                        <h3>Confirm Your Booking</h3>
-                        <p>
-                            You are about to book a charging slot at{" "}
-                            <strong>{selectedStation.station}</strong> ({selectedStation.brand})
-                        </p>
-                        <div className={styles.bookingDetails}>
-                            <div className={styles.bookingDetail}>
-                                <span>Power:</span>
-                                <span>{selectedStation.powerKW} kW</span>
-                            </div>
-                            <div className={styles.bookingDetail}>
-                                <span>Price:</span>
-                                <span>₹{selectedStation.pricePerKWh}/kWh</span>
-                            </div>
-                            <div className={styles.bookingDetail}>
-                                <span>Location:</span>
-                                <span>{selectedStation.station}</span>
-                            </div>
-                        </div>
-                        <div className={styles.modalButtons}>
-                            <button
-                                className={`${styles.modalBtn} ${styles.confirm}`}
-                                onClick={confirmBooking}
-                            >
-                                Confirm Booking
-                            </button>
-                            <button
-                                className={`${styles.modalBtn} ${styles.cancel}`}
-                                onClick={cancelBooking}
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            {/* Navigation Modal - Show when user is not at station */}
+            {navigationModalOpen && selectedStation && (
+                <NavigationModal
+                    station={selectedStation}
+                    userPosition={userPosition}
+                    distanceToStation={distanceToStation}
+                    userAtStation={userAtStation}
+                    navigationRoute={navigationRoute}
+                    navigationInstructions={navigationInstructions}
+                    onStartMonitoring={startLocationMonitoring}
+                    onCancel={cancelBooking}
+                />
+            )}
+
+            {/* Enhanced Booking Modal - Show when user is at station */}
+            {modalOpen && selectedStation && userAtStation && (
+                <EnhancedBookingModal
+                    station={selectedStation}
+                    onClose={cancelBooking}
+                    onConfirm={confirmBooking}
+                    user={user}
+                />
             )}
         </div>
     );
