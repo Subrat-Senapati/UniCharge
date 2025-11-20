@@ -13,6 +13,7 @@ const notificationRoutes = require("./routes/notification.routes");
 const vehicleRoutes = require("./routes/vehicle.routes");
 const paymentMethodRoutes = require("./routes/paymentMethod.routes");
 const stationRoutes = require("./routes/stations.routes");
+const bookingRoutes = require('./routes/booking.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,7 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api", vehicleRoutes);
 app.use("/api/payment-methods", paymentMethodRoutes);
 app.use("/api", stationRoutes);
+app.use('/api/bookings', bookingRoutes);
 
 
 app.listen(PORT, () => {

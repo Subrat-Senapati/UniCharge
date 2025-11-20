@@ -19,8 +19,8 @@
 .modal {
   width: 90%;
   height: 90%;
-  max-width: 800px;
-  max-height: 700px;
+  max-width: 900px;
+  max-height: 90vh;
   background: white;
   border-radius: 20px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
@@ -35,6 +35,7 @@
     opacity: 0;
     transform: scale(0.9) translateY(-50px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -113,6 +114,13 @@
   gap: 10px;
 }
 
+.vehicleNote {
+  margin: -10px 0 15px 0;
+  color: #666;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
 .stationInfo {
   background: white;
   padding: 20px;
@@ -130,6 +138,30 @@
 .stationInfo p strong {
   color: #2c3e50;
   font-weight: 600;
+}
+
+.bookingInfo {
+  background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+  padding: 25px;
+  border-radius: 15px;
+  border-left: 4px solid #007bff;
+}
+
+.bookingInfo h4 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.bookingDetails p {
+  margin: 12px 0;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .vehicleGrid {
@@ -169,9 +201,11 @@
   0% {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
   }
+
   70% {
     box-shadow: 0 0 0 15px rgba(0, 123, 255, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
@@ -264,43 +298,52 @@
   font-weight: bold;
 }
 
-/* Balance Alert Row */
-.balanceAlertRow {
+.balanceAlert {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.alertContent {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  margin-top: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 1rem;
 }
 
 .alertIcon {
   color: #ffd700;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
 }
 
 .alertText {
   flex: 1;
-  font-weight: 600;
-  color: #ffd700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .alertText strong {
-  color: #ff6b6b;
+  color: #ffd700;
+  font-size: 1.1rem;
+}
+
+.alertText span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
 }
 
 .addBalanceBtn {
   background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -315,6 +358,16 @@
   box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
 }
 
+.available {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.busy {
+  color: #dc3545;
+  font-weight: 600;
+}
+
 .modalActions {
   display: flex;
   gap: 15px;
@@ -323,7 +376,8 @@
   background: #f8f9fa;
 }
 
-.cancelBtn, .confirmBtn {
+.cancelBtn,
+.confirmBtn {
   flex: 1;
   padding: 16px 24px;
   border: none;
@@ -395,28 +449,23 @@
     width: 95%;
     height: 95%;
   }
-  
+
   .vehicleGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .modalBody {
     padding: 20px;
   }
-  
+
   .bookingSection {
     padding: 20px;
   }
-  
-  .balanceAlertRow {
+
+  .alertContent {
     flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
     text-align: center;
-  }
-  
-  .alertText {
-    text-align: center;
+    gap: 15px;
   }
 }
 
@@ -424,30 +473,30 @@
   .modalOverlay {
     padding: 10px;
   }
-  
+
   .modal {
     width: 100%;
     height: 100%;
     border-radius: 0;
   }
-  
+
   .modalHeader {
     padding: 20px;
   }
-  
+
   .modalHeader h3 {
     font-size: 1.5rem;
   }
-  
+
   .modalBody {
     padding: 15px;
     gap: 20px;
   }
-  
+
   .bookingSection {
     padding: 15px;
   }
-  
+
   .vehicleCard {
     padding: 15px;
     flex-direction: column;
@@ -455,23 +504,24 @@
     gap: 12px;
     min-height: auto;
   }
-  
+
   .checkIcon {
     position: absolute;
     top: 15px;
     right: 15px;
     margin-left: 0;
   }
-  
+
   .modalActions {
     padding: 20px;
     flex-direction: column;
   }
-  
-  .cancelBtn, .confirmBtn {
+
+  .cancelBtn,
+  .confirmBtn {
     min-height: 50px;
   }
-  
+
   .costSummary {
     padding: 20px;
   }

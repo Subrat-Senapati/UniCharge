@@ -1,23 +1,42 @@
 import { useState } from 'react';
-import { FaBell, FaExclamationCircle, FaWallet, FaTag } from "react-icons/fa"; // Icons
+import { FaBell, FaExclamationCircle, FaWallet, FaTag, FaCheckCircle } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 
-
 // --- Utility Function to format time elapsed ---
-const timeAgo = (date) => {
-  const seconds = Math.floor((new Date() - date) / 1000);
+const timeAgo = (dateString) => {
+  const date = new Date(dateString);
+  
+  if (isNaN(date.getTime())) {
+    return "recently";
+  }
+  
+  const now = new Date();
+  const seconds = Math.floor((now - date) / 1000);
+  
   let interval = Math.floor(seconds / 31536000);
-
-  if (interval > 1) return interval + " years ago";
+  if (interval >= 1) return interval === 1 ? "1 year ago" : interval + " years ago";
+  
   interval = Math.floor(seconds / 2592000);
-  if (interval > 1) return interval + " months ago";
+  if (interval >= 1) return interval === 1 ? "1 month ago" : interval + " months ago";
+  
   interval = Math.floor(seconds / 86400);
-  if (interval > 1) return interval + " days ago";
+  if (interval >= 1) return interval === 1 ? "1 day ago" : interval + " days ago";
+  
   interval = Math.floor(seconds / 3600);
-  if (interval > 1) return interval + " hours ago";
+  if (interval >= 1) return interval === 1 ? "1 hour ago" : interval + " hours ago";
+  
   interval = Math.floor(seconds / 60);
-  if (interval > 1) return interval + " minutes ago";
+  if (interval >= 1) return interval === 1 ? "1 minute ago" : interval + " minutes ago";
+  
   return "just now";
+};
+
+// --- Utility Function to check if notification is expired ---
+const isNotificationExpired = (notification) => {
+  if (!notification.expiresAt) return false;
+  const now = new Date();
+  const expiresAt = new Date(notification.expiresAt);
+  return now > expiresAt;
 };
 
 // --- Utility Function to Map Type to Icon/Color ---
@@ -29,6 +48,8 @@ const getNotificationVisuals = (type) => {
       return { icon: FaExclamationCircle, color: 'text-danger', badge: 'bg-danger' };
     case 'promo':
       return { icon: FaTag, color: 'text-success', badge: 'bg-success' };
+    case 'success':
+      return { icon: FaCheckCircle, color: 'text-success', badge: 'bg-success' };
     case 'info':
     default:
       return { icon: FaBell, color: 'text-info', badge: 'bg-info' };
@@ -41,6 +62,8 @@ const NotificationDetailModal = ({ notification, onClose }) => {
 
   const { icon: Icon, color, badge } = getNotificationVisuals(notification.type);
   const timeCreated = new Date(notification.createdAt).toLocaleString();
+  const expiresAt = new Date(notification.expiresAt).toLocaleString();
+  const isExpired = isNotificationExpired(notification);
 
   return (
     <div className="modal fade show" style={{ display: 'block', zIndex: 1060 }} tabIndex="-1" role="dialog" onClick={onClose}>
@@ -67,9 +90,19 @@ const NotificationDetailModal = ({ notification, onClose }) => {
                 {notification.isRead ? 'Read' : 'Unread'}
               </span>
             </div>
+            <div className="d-flex justify-content-between my-2 align-items-center">
+              <strong>Expiration:</strong>
+              <span className={`badge ${isExpired ? 'bg-danger' : 'bg-success'}`}>
+                {isExpired ? 'Expired' : 'Active'}
+              </span>
+            </div>
             <div className="d-flex justify-content-between my-2">
               <strong>Received:</strong>
               <span>{timeCreated}</span>
+            </div>
+            <div className="d-flex justify-content-between my-2">
+              <strong>Expires:</strong>
+              <span>{expiresAt}</span>
             </div>
           </div>
         </div>
@@ -78,12 +111,17 @@ const NotificationDetailModal = ({ notification, onClose }) => {
   );
 };
 
-
 // --- Main Notification Component ---
 const Notification = () => {
   const { user } = useAuth();
 
-  const notificationsData = user?.notifications || [];
+  // Filter out expired notifications and reverse for latest first
+  const notificationsData = user?.notifications 
+    ? [...user.notifications]
+        .filter(notification => !isNotificationExpired(notification))
+        .reverse()
+    : [];
+  
   const [selectedNotification, setSelectedNotification] = useState(null);
 
   const unreadCount = notificationsData.filter(n => !n.isRead).length;
@@ -106,7 +144,6 @@ const Notification = () => {
       }
     }
   };
-
 
   // Handler to close the modal
   const handleCloseModal = () => {
@@ -135,11 +172,14 @@ const Notification = () => {
           {notificationsData.map((notification) => {
             const { icon: Icon, color } = getNotificationVisuals(notification.type);
             const timeElapsed = timeAgo(notification.createdAt);
+            const isExpired = isNotificationExpired(notification);
+
+            // Don't render if expired (should be filtered already, but double check)
+            if (isExpired) return null;
 
             return (
               <div
                 key={notification._id}
-                // Call handler on click to open modal
                 onClick={(e) => { e.preventDefault(); handleNotificationClick(notification); }}
                 className={`list-group-item list-group-item-action ${!notification.isRead ? 'list-group-item-light fw-medium' : 'text-muted'}`}
               >

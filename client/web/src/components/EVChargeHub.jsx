@@ -32,6 +32,8 @@ import L from "leaflet";
 import EnhancedBookingModal from "./EnhancedBookingModal";
 import NavigationModal from './NavigationModal';
 import { useAuth } from "../context/AuthContext";
+import BookingConfirmation from "./BookingConfirmation";
+import ActiveChargingSession from "./ActiveChargingSession";
 
 // Marker icons
 const stationIcon = new L.Icon({
@@ -97,9 +99,274 @@ const EVChargeHub = () => {
     const [navigationInstructions, setNavigationInstructions] = useState([]);
     const [locationWatchId, setLocationWatchId] = useState(null);
 
+    const [selectedConnector, setSelectedConnector] = useState(null);
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const [bookingLoading, setBookingLoading] = useState(false);
+    const [confirmedBooking, setConfirmedBooking] = useState(null);
+    const [activeChargingSession, setActiveChargingSession] = useState(null);
+    const [showActiveSession, setShowActiveSession] = useState(false);
+    const [showTopBar, setShowTopBar] = useState(false);
+    const [currentChargingCost, setCurrentChargingCost] = useState(0);
+
     // Distance threshold for considering user "at station" (in meters)
     const LOCATION_THRESHOLD = 100; // 100 meters
-    const { user } = useAuth()
+    const { user, fetchProfile } = useAuth()
+
+    useEffect(() => {
+        if (activeChargingSession) {
+            setShowActiveSession(true);
+        }
+    }, [activeChargingSession]);
+
+
+
+    const handleCloseConfirmation = () => {
+        setConfirmedBooking(null);
+        setSelectedStation(null);
+        setSelectedConnector(null);
+    };
+
+    const handleCloseActiveSession = () => {
+        setShowActiveSession(false);
+    };
+
+
+    // Check for active sessions periodically
+    useEffect(() => {
+        loadUserBookings();
+
+        const interval = setInterval(() => {
+            loadUserBookings();
+        }, 30000); // Check every 30 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
+
+    const loadUserBookings = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            // 1️⃣ Fetch all bookings of user
+            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/bookings`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                console.error("Failed to load bookings");
+                return;
+            }
+
+            const data = await response.json();
+            const bookings = (data.bookings || []).filter(
+                (b) => b.status !== "completed"
+            );
+            console.log("User Bookings:", bookings);
+
+            // 2️⃣ Fetch stations
+            const stationsRes = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/stations`);
+            const stations = await stationsRes.json();
+
+            // Create lookup map (id → station)
+            const stationMap = {};
+            stations.forEach(s => stationMap[s.id] = s);
+
+            // 3️⃣ Get vehicles from AuthContext
+            const userVehicles = user?.vehicles || [];
+
+            // 4️⃣ Merge station + vehicle into each booking
+            const enrichedBookings = bookings.map(b => {
+                const vehicle = userVehicles.find(v => v._id === b.vehicleId) || null;
+                const station = stationMap[b.stationId] || null;
+
+                return {
+                    ...b,
+                    vehicleDetails: b.vehicleDetails || vehicle,
+                    stationDetails: b.stationDetails || station
+                };
+            });
+
+            console.log("Enriched Bookings:", enrichedBookings);
+
+            // 5️⃣ Find active session
+            const now = new Date();
+
+            const activeSession = enrichedBookings.find(b => {
+                const start = new Date(b.scheduledStart);
+                const end = new Date(b.scheduledEnd);
+
+                return (
+                    b.status === "active" ||
+                    b.status === "confirmed" ||
+                    (start <= now && end > now) ||
+                    (b.actualStart && !b.actualEnd)
+                );
+            });
+
+            // 6️⃣ Update state
+            if (activeSession) {
+                setActiveChargingSession(activeSession ? { ...activeSession } : null);
+                setShowActiveSession(true);
+                setShowTopBar(true);
+            } else {
+                setActiveChargingSession(null);
+                setShowActiveSession(false);
+                setShowTopBar(false);
+            }
+
+        } catch (err) {
+            console.error("Error loading bookings:", err);
+        }
+    };
+
+    const confirmBooking = async (bookingData) => {
+        try {
+            setBookingLoading(true);
+
+            if (!selectedStation || !selectedConnector) {
+                throw new Error("Missing station or connector");
+            }
+
+            if (!bookingData.vehicleId) {
+                throw new Error("Vehicle not selected");
+            }
+
+            // Charging NOW
+            const scheduledStart = new Date(Date.now() + 0.5 * 60000); // 2 minutes from now
+            const scheduledEnd = new Date(Date.now() + 60 * 60000);  // 65 minutes from now
+
+
+            const bookingPayload = {
+                stationId: selectedStation.id,
+                connectorId: selectedConnector.id,
+                vehicleId: bookingData.vehicleId,
+                scheduledStart: new Date(scheduledStart).toISOString(),
+                scheduledEnd: new Date(scheduledEnd).toISOString(),
+                estimatedDuration: 60,
+                estimatedCost: selectedConnector.pricePerKwh * 20
+            };
+
+            console.log("Booking payload:", bookingPayload);
+
+            const response = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/bookings`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify(bookingPayload)
+                }
+            );
+
+            const data = await response.json();
+            console.log("Booking response:", data);
+
+            if (!response.ok) {
+                throw new Error(data.error || data.details?.[0]?.message || "Booking failed");
+            }
+
+            // Update wallet if backend deducted money
+            if (data.walletUpdated) {
+                setUserWallet(data.newWalletBalance);
+            }
+
+            // Save the confirmed booking
+            setConfirmedBooking(data.booking);
+            setIsBookingModalOpen(false);
+
+            // Refresh list
+            await loadUserBookings();
+
+            // 👉 START CHARGING IMMEDIATELY using the new booking ID
+            await handleStartCharging(data.booking._id);
+
+        } catch (error) {
+            console.error("Booking error:", error);
+            alert(`❌ ${error.message}`);
+        } finally {
+            setBookingLoading(false);
+        }
+    };
+
+
+    const handleStartCharging = async (bookingId) => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/bookings/${bookingId}/start`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            );
+
+            const data = await response.json();
+            console.log("Start charging response:", data);
+
+            if (!response.ok) throw new Error(data.error);
+
+            await loadUserBookings();
+            alert('⚡ Charging started successfully!');
+
+        } catch (error) {
+            console.error("Error starting charging:", error);
+            alert("Unable to start charging.");
+        }
+    };
+
+    const handleStopCharging = async () => {
+        try {
+            if (!activeChargingSession) return;
+            console.log("Stopping charging for session:", activeChargingSession);
+
+            const bookingId = activeChargingSession._id;
+            const finalCost = currentChargingCost;
+
+            const response = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/bookings/${bookingId}/complete`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify({
+                        finalBatteryLevel: activeChargingSession.finalBattery || 80,
+                        energyConsumed: activeChargingSession.energyUsed || 25,
+                        totalCost: finalCost || 150
+                    })
+                }
+            );
+
+            const data = await response.json();
+            console.log("Complete session response:", data);
+
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to stop charging");
+            }
+
+            // FIX: Wallet update after stop charging  
+            if (data.walletUpdated) {
+                setUserWallet(data.newWalletBalance);
+            }
+
+            setActiveChargingSession(null);
+            setShowActiveSession(false);
+
+            await loadUserBookings();
+            await fetchProfile();
+            alert("Charging session completed successfully!");
+
+        } catch (error) {
+            console.error("Error stopping charging:", error);
+            alert("Failed to stop charging session");
+        }
+    };
 
     // Fetch stations from backend
     const fetchStations = async () => {
@@ -175,11 +442,26 @@ const EVChargeHub = () => {
     };
 
     // NEW: Enhanced booking logic with location verification
-    const handleBookClick = async (station) => {
+    const handleBookClick = async (station, connector = null) => {
+        // Check if user is authenticated
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Please login to book a charging station');
+            return;
+        }
+
         setSelectedStation(station);
+
+        // If no specific connector provided, use the first available one
+        if (!connector) {
+            const connectors = generateConnectors(station);
+            connector = connectors.find(c => c.status === 'available') || connectors[0];
+        }
+        setSelectedConnector(connector);
+
         setCheckingLocation(true);
 
-        // Get fresh user location
+        // Rest of the function remains the same...
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 async (pos) => {
@@ -192,7 +474,7 @@ const EVChargeHub = () => {
 
                     if (isAtStation) {
                         // User is at station - proceed to booking
-                        setModalOpen(true);
+                        setIsBookingModalOpen(true);
                     } else {
                         // User is not at station - show navigation
                         await generateNavigationRoute(station);
@@ -262,7 +544,7 @@ const EVChargeHub = () => {
                     navigator.geolocation.clearWatch(watchId);
                     setLocationWatchId(null);
                     setNavigationModalOpen(false);
-                    setModalOpen(true);
+                    setIsBookingModalOpen(true); // Changed from setModalOpen to setIsBookingModalOpen
                 }
             },
             (error) => {
@@ -286,50 +568,13 @@ const EVChargeHub = () => {
         }
     };
 
-    const confirmBooking = async (bookingData) => {
-        try {
-            setBookingLoading(true);
-
-            const bookingPayload = {
-                stationId: bookingData.station._id,
-                vehicleId: bookingData.vehicle._id,
-                scheduledStart: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes from now
-                scheduledEnd: new Date(Date.now() + 90 * 60 * 1000),   // 1.5 hours from now
-                estimatedKwh: bookingData.vehicle.batteryCapacityKwh * 0.8,
-                estimatedCost: bookingData.estimatedCost
-            };
-
-            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/bookings`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify(bookingPayload)
-            });
-
-            if (response.ok) {
-                const booking = await response.json();
-                alert(`Booking confirmed! Reference: ${booking._id}`);
-                setModalOpen(false);
-                setSelectedStation(null);
-            } else {
-                const error = await response.json();
-                alert(`Booking failed: ${error.message}`);
-            }
-        } catch (error) {
-            console.error('Booking error:', error);
-            alert('Booking failed. Please try again.');
-        } finally {
-            setBookingLoading(false);
-        }
-    };
-
     const cancelBooking = () => {
         stopLocationMonitoring();
         setModalOpen(false);
+        setIsBookingModalOpen(false);
         setNavigationModalOpen(false);
         setSelectedStation(null);
+        setSelectedConnector(null);
     };
 
     // Main search handler that decides which function to call
@@ -675,6 +920,29 @@ const EVChargeHub = () => {
         }
     };
 
+    // Generate connector data based on station
+    const generateConnectors = (station) => {
+        const portNum = parseInt(station.PortNum) || 1;
+        const powerKW = station.powerKW || "50";
+        const pricePerKWh = parseFloat(station.pricePerKWh) || 10;
+
+        const connectors = [];
+        const connectorTypes = ['Type2', 'CCS', 'CHAdeMO']; // Common connector types
+
+        for (let i = 0; i < portNum; i++) {
+            connectors.push({
+                id: `connector_${i + 1}`,
+                type: connectorTypes[i % connectorTypes.length],
+                power: parseFloat(powerKW) || 50,
+                status: Math.random() > 0.3 ? 'available' : 'charging', // Simulate availability
+                pricePerKwh: pricePerKWh,
+                output: i % 2 === 0 ? 'AC' : 'DC' // Alternate between AC and DC
+            });
+        }
+
+        return connectors;
+    };
+
     // Helper function to assign icons based on brand names
     const getBrandIcon = (brandName) => {
         const iconMap = {
@@ -699,9 +967,9 @@ const EVChargeHub = () => {
     // Simulate availability for each station
     const getStationAvailability = (station) => {
         const totalPorts = parseInt(station.PortNum) || 1;
-        // Simulate random availability between 0 and total ports
-        const availablePorts = Math.floor(Math.random() * (totalPorts + 1));
-        const availability = totalPorts > 0 ? Math.round((availablePorts / totalPorts) * 100) : 0;
+        // Ensure at least 1 available port for demo purposes
+        const availablePorts = Math.max(1, Math.floor(Math.random() * (totalPorts + 1)));
+        const availability = totalPorts > 0 ? Math.round((availablePorts / totalPorts) * 100) : 100;
 
         return {
             availablePorts,
@@ -712,6 +980,26 @@ const EVChargeHub = () => {
 
     return (
         <div className={styles.page}>
+            {showTopBar && activeChargingSession && (
+                <div className={styles.activeSessionBar}>
+                    <span className={styles.activeSessionText}>
+                        ⚡ Active Charging Session — Station #{activeChargingSession.stationId}
+                    </span>
+
+                    <div className={styles.activeSessionActions}>
+                        <button
+                            onClick={() => setShowActiveSession(true)}
+                            className={styles.viewDetailsBtn}
+                        >
+                            <span>View Details</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            )}
+
             {/* Map Section */}
             <section className={styles.mapSection}>
                 <div className={styles.mapContainer}>
@@ -1083,7 +1371,7 @@ const EVChargeHub = () => {
                                                     onClick={() => handleBookClick(station)}
                                                     disabled={availability.availablePorts === 0 || checkingLocation}
                                                 >
-                                                    {checkingLocation && selectedStation?._id === station._id ? (
+                                                    {checkingLocation && selectedStation?.id === station.id ? (
                                                         <>
                                                             <FontAwesomeIcon icon={faSpinner} spin /> Checking Location...
                                                         </>
@@ -1133,12 +1421,35 @@ const EVChargeHub = () => {
             )}
 
             {/* Enhanced Booking Modal - Show when user is at station */}
-            {modalOpen && selectedStation && userAtStation && (
+            {isBookingModalOpen && selectedStation && selectedConnector && (
                 <EnhancedBookingModal
                     station={selectedStation}
+                    connector={selectedConnector}
+                    isOpen={isBookingModalOpen}
                     onClose={cancelBooking}
                     onConfirm={confirmBooking}
+                    loading={bookingLoading}
                     user={user}
+                />
+            )}
+
+            {/* Booking Confirmation */}
+            {confirmedBooking && (
+                <BookingConfirmation
+                    booking={confirmedBooking}
+                    station={selectedStation}
+                    connector={selectedConnector}
+                    onClose={handleCloseConfirmation}
+                />
+            )}
+
+            {/* Active Charging Session */}
+            {!confirmedBooking && showActiveSession && activeChargingSession && (
+                <ActiveChargingSession
+                    activeBooking={activeChargingSession}
+                    onClose={handleCloseActiveSession}
+                    onStopCharging={handleStopCharging}
+                    onCostUpdate={(cost) => setCurrentChargingCost(cost)}
                 />
             )}
         </div>

@@ -274,7 +274,7 @@ const History = () => {
                         : styles.walletDanger
                       }`}
                   >
-                    {txn.type === "credit" ? "+" : "-"}₹{txn.amount}
+                    {txn.type === "credit" ? "+" : "-"}₹{txn.amount.toFixed(2)}
                   </span>
                 </div>
               </div>
