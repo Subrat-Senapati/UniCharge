@@ -1,0 +1,511 @@
+.bookingConfirmation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.confirmationOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.confirmationContent {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.confirmationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    position: relative;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1;
+}
+
+.successIcon {
+    font-size: 3rem;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.headerText h2 {
+    margin: 0 0 8px 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.headerText p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.closeButton {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.bookingDetails {
+    padding: 0;
+    max-height: calc(90vh - 200px);
+    overflow-y: auto;
+}
+
+.quickSummary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 30px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.summaryItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.summaryItem svg {
+    font-size: 1.5rem;
+    color: #28a745;
+    flex-shrink: 0;
+}
+
+.summaryLabel {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.summaryValue {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.copyButton {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+    background: #f8f9fa;
+    transform: scale(1.1);
+}
+
+.detailSection {
+    padding: 30px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.detailSection:last-of-type {
+    border-bottom: none;
+}
+
+.detailSection h3 {
+    margin: 0 0 20px 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detailSection h3 svg {
+    color: #007bff;
+}
+
+.detailGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.detailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.detailItem:last-child {
+    border-bottom: none;
+}
+
+.detailLabel {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detailValue {
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: right;
+}
+
+/* Schedule Styles */
+.scheduleGrid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.scheduleItem {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.timeSlot {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.timeLabel {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.timeValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.dateValue {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.scheduleDivider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.duration {
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Payment Styles */
+.paymentGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.paymentItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.paymentLabel {
+    font-weight: 600;
+    color: #555;
+}
+
+.paymentValue {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+/* Status Styles */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statusConfirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.statusPaid {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Notes Section */
+.notesSection {
+    padding: 30px;
+    background: #fff3cd;
+    border-radius: 12px;
+    margin: 20px 30px;
+}
+
+.notesSection h4 {
+    margin: 0 0 15px 0;
+    color: #856404;
+    font-size: 1.1rem;
+}
+
+.notesList {
+    margin: 0;
+    padding-left: 20px;
+    color: #856404;
+}
+
+.notesList li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.notesList li:last-child {
+    margin-bottom: 0;
+}
+
+/* Actions */
+.confirmationActions {
+    display: flex;
+    gap: 15px;
+    padding: 30px;
+    border-top: 1px solid #e9ecef;
+    background: #f8f9fa;
+}
+
+.primaryButton, .secondaryButton {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.primaryButton {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+}
+
+.primaryButton:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+.secondaryButton {
+    background: #6c757d;
+    color: white;
+}
+
+.secondaryButton:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+}
+
+/* Scrollbar */
+.bookingDetails::-webkit-scrollbar {
+    width: 8px;
+}
+
+.bookingDetails::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.bookingDetails::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.bookingDetails::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bookingConfirmation {
+        padding: 10px;
+    }
+    
+    .confirmationContent {
+        max-height: 95vh;
+    }
+    
+    .confirmationHeader {
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .headerLeft {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .headerText h2 {
+        font-size: 1.6rem;
+    }
+    
+    .quickSummary {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .detailSection {
+        padding: 20px;
+    }
+    
+    .scheduleGrid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .scheduleDivider {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .confirmationActions {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .notesSection {
+        margin: 15px 20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .confirmationContent {
+        border-radius: 0;
+        max-height: 100vh;
+    }
+    
+    .bookingConfirmation {
+        padding: 0;
+    }
+    
+    .detailGrid, .paymentGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .headerText h2 {
+        font-size: 1.4rem;
+    }
+    
+    .timeValue {
+        font-size: 1.3rem;
+    }
+}
+
+/* In bookingconfirmation.module.css
+.bookingConfirmation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10002; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+} */

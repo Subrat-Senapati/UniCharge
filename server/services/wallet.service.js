@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const razorpay = require("../config/razorpay");
 const User = require("../models/UserSchema");
+const { addNotification } = require("./notification.service");
 
 async function getWallet(userId) {
   const user = await User.findById(userId).select("wallet");
@@ -52,6 +53,15 @@ async function verifyAndAddBalance(userId, { razorpay_order_id, razorpay_payment
   });
 
   await user.save();
+
+  // Add wallet notification
+  await addNotification(userId, {
+    title: "Wallet Recharged",
+    message: `₹${amount.toFixed(2)} has been added to your wallet.`,
+    type: "transaction",
+    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // optional: expires in 7 days
+  });
+
   return user.wallet;
 }
 
@@ -73,6 +83,7 @@ const spendFromWallet = async (userId, amount, description, metadata = {}) => {
   user.paymentHistory.push({
     type: "debit",
     amount,
+    method: "Wallet",
     description: description || "Wallet spend",
     vehicleName: metadata.vehicleName || null,
     stationName: metadata.stationName || null,
@@ -80,6 +91,15 @@ const spendFromWallet = async (userId, amount, description, metadata = {}) => {
   });
 
   await user.save();
+
+  
+  // Add wallet notification
+  await addNotification(userId, {
+    title: "Wallet Used",
+    message: `₹${amount.toFixed(2)} has been spent from your wallet.`,
+    type: "transaction",
+    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  });
 
   return {
     message: `₹${amount} spent successfully`,

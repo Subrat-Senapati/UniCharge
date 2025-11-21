@@ -89,7 +89,7 @@ const Header = () => {
                     to="/home/wallet" className="wallet-link d-flex align-items-center py-1 px-2"
                   >
                     <FaWallet size={22} className="me-2 text-white" />
-                    <span className="fw-bold">₹{user.wallet.balance}</span>
+                    <span className="fw-bold">₹{user.wallet.balance.toFixed(2)}</span>
                   </NavLink>
                 </li>
 

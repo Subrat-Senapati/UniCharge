@@ -1,0 +1,562 @@
+.activeChargingSession {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10003;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.sessionOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+}
+
+.sessionContent {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    animation: slideInUp 0.4s ease-out;
+    overflow-y: auto;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.sessionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.headerLeft {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex: 1;
+}
+
+.chargingIcon {
+    font-size: 2.5rem;
+    color: #4cd964;
+    margin-top: 5px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.headerText h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.headerText p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.closeButton {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Progress Section */
+.progressSection {
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.progressHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.progressHeader h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.progressPercentage {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4cd964;
+}
+
+.progressBar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #4cd964, #34e89e);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progressFill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.progressLabels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Metrics Grid - KEEP ORIGINAL STYLING */
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 25px 30px;
+}
+
+.metricCard {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.metricIcon {
+    font-size: 1.8rem;
+    color: #4cd964;
+    flex-shrink: 0;
+}
+
+.metricInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.metricLabel {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.metricValue {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Details Grid Layout - NEW IMPROVED STYLING */
+.detailsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 0 30px 25px;
+}
+
+.detailCard {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.detailCard:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardIcon {
+    font-size: 1.4rem;
+    color: #4cd964;
+}
+
+.cardHeader h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+}
+
+.cardContent {
+    padding: 20px;
+}
+
+.detailRow {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.detailRow:last-child {
+    margin-bottom: 0;
+}
+
+.detailItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.itemIcon {
+    font-size: 1rem;
+    color: #4cd964;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 16px;
+}
+
+.itemContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.itemLabel {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.itemValue {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+}
+
+/* Vehicle Status */
+.vehicleStatus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statusItem {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.statusLabel {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.statusValueActive {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4cd964;
+    padding: 4px 8px;
+    background: rgba(76, 217, 100, 0.2);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.statusValueGood {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4cd964;
+    padding: 4px 8px;
+    background: rgba(76, 217, 100, 0.2);
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Session Summary */
+.sessionSummary {
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sessionSummary h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.summaryItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.summaryItem span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.summaryItem strong {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Actions */
+.sessionActions {
+    display: flex;
+    gap: 15px;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stopButton, .minimizeButton {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stopButton {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+}
+
+.stopButton:hover {
+    background: linear-gradient(135deg, #ff5252, #e53935);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 82, 82, 0.4);
+}
+
+.minimizeButton {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.minimizeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Scrollbar */
+.sessionContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sessionContent::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sessionContent::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.sessionContent::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .detailsGrid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .summaryGrid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .activeChargingSession {
+        padding: 10px;
+    }
+    
+    .sessionContent {
+        max-height: 95vh;
+    }
+    
+    .sessionHeader {
+        padding: 20px;
+    }
+    
+    .headerText h2 {
+        font-size: 1.5rem;
+    }
+    
+    .metricsGrid {
+        padding: 20px;
+    }
+    
+    .progressSection {
+        padding: 20px;
+    }
+    
+    .detailsGrid {
+        padding: 0 20px 20px;
+    }
+    
+    .sessionSummary {
+        padding: 20px;
+    }
+    
+    .cardContent {
+        padding: 15px;
+    }
+    
+    .vehicleStatus {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .sessionActions {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sessionContent {
+        border-radius: 0;
+        max-height: 100vh;
+    }
+    
+    .activeChargingSession {
+        padding: 0;
+    }
+    
+    .headerText h2 {
+        font-size: 1.3rem;
+    }
+    
+    .detailsGrid {
+        padding: 0 15px 15px;
+    }
+    
+    .metricCard {
+        padding: 15px;
+    }
+}

@@ -70,6 +70,13 @@ const UserSchema = new mongoose.Schema(
       },
     ],
 
+    bookings: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Booking"
+      }
+    ],
+
     notifications: [
       {
         _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
@@ -77,7 +84,7 @@ const UserSchema = new mongoose.Schema(
         message: { type: String, required: true },
         type: {
           type: String,
-          enum: ["info", "alert", "promo", "transaction"],
+          enum: ["info", "alert", "promo", "transaction", "success"],
           default: "info",
         },
         isRead: { type: Boolean, default: false },
