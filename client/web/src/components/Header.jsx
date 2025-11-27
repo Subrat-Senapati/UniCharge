@@ -29,7 +29,7 @@ const Header = () => {
                       `nav-link text-uppercase fw-medium ${isActive ? "text-success fw-bold" : ""}`
                     }
                   >
-                    Near Station
+                    Home
                   </NavLink>
                 </li>
 

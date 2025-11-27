@@ -7,7 +7,7 @@ const bookingSchema = new mongoose.Schema({
     required: true
   },
   stationId: {
-    type: Number, // Changed from ObjectId to Number to match CSV station IDs
+    type: String, // Changed from ObjectId to String to match CSV station IDs
     required: true
   },
   connectorId: {

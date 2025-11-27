@@ -179,3 +179,56 @@
     align-self: flex-start;
   }
 }
+
+/* RGB Border Animated Button */
+.rgbButton {
+  position: relative;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.rgbButton::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    red, orange, yellow, green, cyan, blue, violet, red
+  );
+  background-size: 300%;
+  z-index: -1;
+  border-radius: 8px;
+  animation: rgbAnimation 4s linear infinite;
+}
+
+@keyframes rgbAnimation {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 300%;
+  }
+}
+
+/* Box to display AI suggestion */
+.aiSuggestBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8f9fa;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border-left: 3px solid #0dcaf0;
+}

@@ -165,7 +165,7 @@ const EnhancedBookingModal = ({ station, connector, isOpen, onClose, onConfirm, 
                 <div className={styles.costRow}>
                   <span>Wallet Balance:</span>
                   <span className={hasSufficientBalance ? styles.sufficient : styles.insufficient}>
-                    ₹{currentUser.wallet.balance}
+                    ₹{currentUser.wallet.balance.toFixed(2)}
                   </span>
                 </div>
                 

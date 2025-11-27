@@ -29,7 +29,50 @@ const WalletCard = () => {
     nameOnCard: ""
   });
 
+
   const minBalance = 500;
+  const [aiSuggestion, setAiSuggestion] = useState(null);
+  const [loadingAi, setLoadingAi] = useState(false);
+
+  const getAiSuggestion = async () => {
+    setLoadingAi(true);
+    try {
+      const payload = {
+        month: 11,
+        year: 2025,
+        avg_wallet_balance: wallet.balance ?? 0,
+        avg_session_duration: 60,
+        peak_hour_ratio: 0,
+        avg_cost: 62,
+        avg_cost_efficiency: 0,
+        city: "Hyderabad",
+        vehicle_type: "4W",
+        subscription_type: "Premium",
+        payment_mode: "UPI",
+        charger_type: "Fast",
+        sessions_per_user_month: 7,
+        previous_month_spend: Math.random() * (500 - 250) + 250,
+        smoothing_factor: 0.5,
+      };
+
+      const res = await fetch(import.meta.env.VITE_WALLET_PREDICTION_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      setAiSuggestion(data);
+    } catch (err) {
+      console.error("AI fetch error", err);
+    } finally {
+      setLoadingAi(false);
+    }
+  };
+
+
 
   useEffect(() => {
     fetchWallet();
@@ -109,7 +152,7 @@ const WalletCard = () => {
 
     try {
       setLoading(true);
-      
+
       if (otherPaymentDetails.type === "razorpay") {
         // Use Razorpay for other payments
         const res = await fetch(
@@ -218,9 +261,9 @@ const WalletCard = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             amount: parseFloat(amount),
-            paymentMethodId: selectedMethod 
+            paymentMethodId: selectedMethod
           }),
         }
       );
@@ -397,6 +440,22 @@ const WalletCard = () => {
             </div>
             <span className="text-muted">{defaultPayment}</span>
           </div>
+
+          <div className="d-flex align-items-center gap-3 mt-2">
+            <button onClick={getAiSuggestion} className={styles.rgbButton} disabled={loadingAi}>
+              {loadingAi ? "Loading..." : "AI Suggest"}
+            </button>
+
+            {aiSuggestion && (
+              <div className={styles.aiSuggestBox}>
+                <Wallet2 size={16} className="text-info" />
+                <small className="fw-bold text-dark">
+                  Required This Month:
+                  <span className="text-success"> ₹{aiSuggestion.suggested_monthly_wallet.toFixed(2)}</span>
+                </small>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Right Section - Image */}
@@ -414,8 +473,8 @@ const WalletCard = () => {
         <>
           <div className="modal show fade d-block" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
-              <form 
-                className="modal-content" 
+              <form
+                className="modal-content"
                 onSubmit={showOtherOption ? handleOtherPayment : handleAddBalance}
               >
                 <div className="modal-header">
@@ -538,8 +597,8 @@ const WalletCard = () => {
                     className={`btn btn-success ${styles.saveBtn}`}
                     disabled={loading}
                   >
-                    {loading ? "Processing..." : 
-                     showOtherOption ? "Proceed with Other Payment" : "Proceed to Pay"}
+                    {loading ? "Processing..." :
+                      showOtherOption ? "Proceed with Other Payment" : "Proceed to Pay"}
                   </button>
                 </div>
               </form>
