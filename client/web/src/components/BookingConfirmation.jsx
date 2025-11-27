@@ -10,7 +10,6 @@ import {
     faWallet,
     faReceipt,
     faCopy,
-    faList
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "../css/bookingconfirmation.module.css";
 
@@ -19,7 +18,6 @@ const BookingConfirmation = ({
     station, 
     connector, 
     onClose, 
-    onViewAllBookings 
 }) => {
     // Enhanced debug logging
     console.log('🔍 BookingConfirmation rendered with:', {

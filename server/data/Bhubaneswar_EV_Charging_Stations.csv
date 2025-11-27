@@ -1,51 +1,1201 @@
-Station	Brand	Latitude	Longitude	Max_kW	Price_per_kWh_Rs	Num_Ports
-Bhubaneswar City Center Charging	Tata Power	20.296059	85.824539	60	14.5	4
-Infocity EV Station	Ather	20.35384	85.817268	25	15	6
-Nalco Square Charging Point	Jio BP	20.260901	85.854194	120	13.75	8
-KIIT University Charging Hub	Bolt	20.352482	85.816268	30	14	10
-Vani Vihar EV Point	Statique	20.288194	85.83356	45	15.25	4
-Janpath Charging Station	Tata Power	20.292041	85.833859	60	14.5	6
-Bhubaneswar Railway Station EV	Jio BP	20.260416	85.828553	90	13.75	8
-Nayapalli Charging Hub	Ather	20.305268	85.824539	25	15	6
-BDA Complex Charging Point	Bolt	20.321839	85.807268	30	14	4
-Patia Electric Zone	Statique	20.340268	85.807268	45	15.25	6
-Jagamara EV Station	Tata Power	20.332194	85.788553	60	14.5	4
-Bhubaneswar Airport Charging	Jio BP	20.244194	85.817759	120	13.75	8
-Saheed Nagar Charging Point	Ather	20.284839	85.828553	25	15	6
-IRC Village EV Hub	Bolt	20.299041	85.833859	30	14	4
-Bhubaneswar Golf Link Charging	Statique	20.268553	85.788553	45	15.25	4
-Esplanade One Mall Charging	Tata Power	20.322456	85.809123	60	14.5	6
-Odisha University Charging	Jio BP	20.289456	85.765432	90	13.75	4
-Rasulgarh EV Station	Bolt	20.315678	85.845678	30	14	4
-Bhubaneswar Industrial Estate	Statique	20.375432	85.798765	45	15.25	8
-SUM Hospital Charging Point	Ather	20.365432	85.812345	25	15	4
-Acharya Vihar EV Hub	Tata Power	20.285678	85.823456	60	14.5	6
-CRPF Square Charging Station	Jio BP	20.345678	85.832109	120	13.75	6
-Bhubaneswar Club Charging	Bolt	20.275432	85.84321	30	14	4
-Maitri Vihar EV Point	Statique	20.298765	85.798765	45	15.25	4
-Jaydev Vihar Charging Hub	Ather	20.312345	85.809876	25	15	6
-Bhubaneswar Development Authority	Tata Power	20.321098	85.821234	60	14.5	4
-Capital Hospital Charging	Jio BP	20.298765	85.832109	90	13.75	6
-Bapuji Nagar EV Station	Bolt	20.287654	85.84321	30	14	4
-Sahid Nagar Market Charging	Statique	20.284321	85.829876	45	15.25	4
-Bhubaneswar Sports Complex	Ather	20.276543	85.812345	25	15	6
-Kalpana Square Charging Hub	Tata Power	20.265432	85.798765	60	14.5	4
-Bhubaneswar Police Station EV	Jio BP	20.254321	85.809876	120	13.75	4
-Rail Sadan Charging Point	Bolt	20.263456	85.821098	30	14	6
-Bhubaneswar Metro Station	Statique	20.272345	85.832109	45	15.25	4
-Kalinga Hospital Charging	Ather	20.281234	85.798765	25	15	4
-Bhubaneswar Bus Stand EV	Tata Power	20.292109	85.809876	60	14.5	8
-Nandan Kanan Road Charging	Jio BP	20.302109	85.765432	90	13.75	6
-Bhubaneswar IT Park Station	Bolt	20.332109	85.798765	30	14	10
-Bhubaneswar Convention Center	Statique	20.312345	85.821098	45	15.25	6
-Bhubaneswar Golf Course EV	Ather	20.268765	85.787654	25	15	4
-Bhubaneswar Museum Charging	Tata Power	20.287654	85.84321	60	14.5	4
-Bhubaneswar Temple Point	Jio BP	20.276543	85.832109	120	13.75	6
-Bhubaneswar Park Charging	Bolt	20.298765	85.809876	30	14	4
-Bhubaneswar Market EV	Statique	20.302109	85.821098	45	15.25	6
-Bhubaneswar Residential Complex	Ather	20.315678	85.798765	25	15	4
-Bhubaneswar Tech Park Charging	Tata Power	20.325678	85.812345	60	14.5	8
-Bhubaneswar Shopping Mall EV	Jio BP	20.335678	85.823456	90	13.75	6
-Bhubaneswar Hotel Charging	Bolt	20.345678	85.834567	30	14	4
-Bhubaneswar Restaurant Point	Statique	20.355678	85.845678	45	15.25	4
-Bhubaneswar Corporate Park	Ather	20.365678	85.856789	25	15	6
+Station_id	Station_name	Brand	Max_kW	Price_per_kWh_Rs	ports	Latitude	Longitude	City	State
+OD-01179	Siemens Station 1179	Siemens	30	16.22	8	17.949579	81.308856	Baripada	Odisha
+OD-00866	Delta Station 866	Delta Electronics	22	33.41	2	20.740694	85.898089	Rourkela	Odisha
+OD-00102	Delta Station 102	Delta Electronics	22	26.81	8	19.640638	86.720769	Jagatsinghpur	Odisha
+OD-00440	Exicom Station 440	Exicom	30	20.1	2	20.154249	85.184874	Jajpur	Odisha
+OD-00059	AtherGrid Station 59	AtherGrid	25	9.22	2	19.447986	85.180331	Bhadrak	Odisha
+OD-01121	EVRE Station 1121	EVRE	30	31.96	1	18.213978	83.385344	Puri	Odisha
+OD-00324	ABB Station 324	ABB	60	22.85	2	19.520995	82.31484	Baripada	Odisha
+OD-00975	EESL Station 975	EESL	3.3	19.01	3	19.308468	81.434202	Kendrapara	Odisha
+OD-00412	ABB Station 412	ABB	50	12.64	2	20.816961	85.894084	Baripada	Odisha
+OD-00856	ABB Station 856	ABB	50	8.68	2	21.088244	83.259828	Dhenkanal	Odisha
+OD-00821	EVRE Station 821	EVRE	30	31.76	6	20.128708	84.448099	Cuttack	Odisha
+OD-00045	Delta Station 45	Delta Electronics	7.2	26.12	8	19.364963	82.875815	Keonjhar	Odisha
+OD-00050	Magenta Station 50	Magenta EV	30	17.73	6	18.160715	84.537908	Angul	Odisha
+OD-00850	EV Station 850	EV Motors India	11	24.97	6	20.792969	84.091751	Jagatsinghpur	Odisha
+OD-00241	Exicom Station 241	Exicom	25	16.78	3	21.52206	82.111417	Cuttack	Odisha
+OD-00171	ABB Station 171	ABB	7.2	17.3	3	19.328009	83.85932	Cuttack	Odisha
+OD-00524	ChargeGrid Station 524	ChargeGrid	30	12.84	8	21.660018	84.726784	Bhubaneswar	Odisha
+OD-00766	Delta Station 766	Delta Electronics	50	11.92	1	20.129623	81.684657	Jajpur	Odisha
+OD-00839	Tata Station 839	Tata Power EZ Charge	7.2	34.83	6	19.13607	85.478909	Cuttack	Odisha
+OD-00424	Exicom Station 424	Exicom	7.2	28.42	4	19.88432	83.093318	Bhadrak	Odisha
+OD-00381	Magenta Station 381	Magenta EV	120	16.24	6	18.605751	81.505774	Rourkela	Odisha
+OD-00610	Magenta Station 610	Magenta EV	22	31.84	6	20.927036	82.609637	Angul	Odisha
+OD-00677	ChargePoint Station 677	ChargePoint	22	13.94	3	20.195036	85.702712	Jagatsinghpur	Odisha
+OD-00345	ChargeGrid Station 345	ChargeGrid	120	17.78	2	19.239459	81.46242	Jagatsinghpur	Odisha
+OD-00110	ChargePoint Station 110	ChargePoint	50	30.7	1	17.963863	84.61908	Berhampur	Odisha
+OD-00278	Exicom Station 278	Exicom	30	27.38	3	21.100668	87.445787	Sonepur	Odisha
+OD-00678	AtherGrid Station 678	AtherGrid	60	34.15	8	18.864183	83.240911	Rourkela	Odisha
+OD-00571	Fortum Station 571	Fortum	25	32.18	1	18.562445	84.448391	Angul	Odisha
+OD-00359	ABB Station 359	ABB	50	22.82	4	20.687081	82.702112	Kendrapara	Odisha
+OD-00599	Fortum Station 599	Fortum	11	24.86	2	21.995053	84.939006	Sambalpur	Odisha
+OD-00391	AtherGrid Station 391	AtherGrid	120	13	8	17.91064	82.784963	Keonjhar	Odisha
+OD-00894	Exicom Station 894	Exicom	7.2	23.41	3	19.228619	83.256306	Rourkela	Odisha
+OD-00693	AtherGrid Station 693	AtherGrid	120	16.47	2	18.788941	85.625841	Jagatsinghpur	Odisha
+OD-00728	Blink Station 728	Blink	25	14.09	2	19.527479	84.276294	Cuttack	Odisha
+OD-00363	EV Station 363	EV Motors India	22	8.48	4	18.15652	85.389702	Sambalpur	Odisha
+OD-00597	Tata Station 597	Tata Power EZ Charge	11	32.08	2	21.915731	83.817273	Rayagada	Odisha
+OD-00428	AtherGrid Station 428	AtherGrid	25	30.64	2	19.352165	86.426253	Rayagada	Odisha
+OD-00071	ChargeGrid Station 71	ChargeGrid	25	24.27	2	20.379256	82.618913	Dhenkanal	Odisha
+OD-00322	Siemens Station 322	Siemens	25	15.91	2	22.595846	85.031666	Sonepur	Odisha
+OD-00653	ABB Station 653	ABB	22	15.37	8	18.421401	83.124454	Bhadrak	Odisha
+OD-01066	EVRE Station 1066	EVRE	120	26.45	4	18.454533	86.389699	Rayagada	Odisha
+OD-00108	Blink Station 108	Blink	60	27.26	2	22.155076	84.4724	Cuttack	Odisha
+OD-01109	Fortum Station 1109	Fortum	30	34.46	3	20.600545	85.70037	Malkangiri	Odisha
+OD-00356	Exicom Station 356	Exicom	50	13.16	1	19.258968	83.213932	Berhampur	Odisha
+OD-00951	Fortum Station 951	Fortum	7.2	21.29	4	22.629734	83.025259	Puri	Odisha
+OD-00343	Tata Station 343	Tata Power EZ Charge	120	16.08	2	18.402096	85.25283	Malkangiri	Odisha
+OD-00355	ChargeGrid Station 355	ChargeGrid	60	24.86	8	20.071302	87.373215	Puri	Odisha
+OD-00024	Magenta Station 24	Magenta EV	3.3	34.24	4	22.504726	82.86105	Baripada	Odisha
+OD-00044	Exicom Station 44	Exicom	7.2	18.66	1	21.889908	87.066104	Bhubaneswar	Odisha
+OD-00244	ChargePoint Station 244	ChargePoint	120	27.88	2	20.951784	84.242711	Malkangiri	Odisha
+OD-00738	EESL Station 738	EESL	11	18.78	8	20.612695	85.348288	Cuttack	Odisha
+OD-01136	OkinawaCharge Station 1136	OkinawaCharge	22	23.11	2	18.952595	83.462997	Rourkela	Odisha
+OD-00368	Delta Station 368	Delta Electronics	7.2	20.09	1	20.400665	82.329413	Keonjhar	Odisha
+OD-00164	ChargeGrid Station 164	ChargeGrid	120	30.4	4	18.573391	81.368174	Angul	Odisha
+OD-01116	Fortum Station 1116	Fortum	30	23.05	8	21.361707	83.034555	Puri	Odisha
+OD-00333	Siemens Station 333	Siemens	7.2	16.4	2	21.36021	86.353734	Rourkela	Odisha
+OD-00989	Siemens Station 989	Siemens	11	24.89	1	20.519931	85.898442	Rayagada	Odisha
+OD-01173	EV Station 1173	EV Motors India	50	15.86	8	21.515791	81.768268	Jagatsinghpur	Odisha
+OD-01002	Siemens Station 1002	Siemens	11	10.9	1	19.702106	84.104674	Jagatsinghpur	Odisha
+OD-00378	Exicom Station 378	Exicom	7.2	24.57	1	19.764628	84.878948	Baripada	Odisha
+OD-00310	Fortum Station 310	Fortum	25	11.43	1	21.996234	82.809563	Malkangiri	Odisha
+OD-00156	Fortum Station 156	Fortum	50	13.61	1	17.637967	82.4249	Sonepur	Odisha
+OD-00211	Fortum Station 211	Fortum	22	10.22	8	21.038596	85.35797	Dhenkanal	Odisha
+OD-00087	Blink Station 87	Blink	11	33.39	3	19.666523	84.903208	Jagatsinghpur	Odisha
+OD-00169	Delta Station 169	Delta Electronics	30	27.78	4	18.61769	81.493335	Dhenkanal	Odisha
+OD-00995	Fortum Station 995	Fortum	60	24.77	4	17.750011	84.298162	Keonjhar	Odisha
+OD-00052	Exicom Station 52	Exicom	50	27.6	8	22.574431	84.501062	Dhenkanal	Odisha
+OD-00439	OkinawaCharge Station 439	OkinawaCharge	120	31.06	8	19.783579	86.551207	Jagatsinghpur	Odisha
+OD-00550	Exicom Station 550	Exicom	30	14.84	1	22.63583	83.107274	Keonjhar	Odisha
+OD-00491	Siemens Station 491	Siemens	30	30.39	2	21.307038	83.501255	Sonepur	Odisha
+OD-00426	ChargePoint Station 426	ChargePoint	120	10.38	1	20.655762	82.239823	Sonepur	Odisha
+OD-00136	Delta Station 136	Delta Electronics	30	18.82	4	19.90243	87.173157	Bhadrak	Odisha
+OD-01192	EVRE Station 1192	EVRE	7.2	13.33	4	18.610395	85.491777	Balasore	Odisha
+OD-00055	ABB Station 55	ABB	60	15.56	3	22.465299	85.874961	Jagatsinghpur	Odisha
+OD-00079	Blink Station 79	Blink	120	28.14	6	20.533518	87.26547	Jajpur	Odisha
+OD-00431	EVRE Station 431	EVRE	22	29.12	2	21.319805	83.163034	Dhenkanal	Odisha
+OD-00185	ABB Station 185	ABB	60	34.57	2	21.495022	83.890154	Koraput	Odisha
+OD-00057	ChargePoint Station 57	ChargePoint	25	9.1	6	21.948395	85.662679	Keonjhar	Odisha
+OD-00943	Siemens Station 943	Siemens	50	21.85	2	21.892947	81.793551	Bhubaneswar	Odisha
+OD-00851	Fortum Station 851	Fortum	50	30.3	2	21.122119	87.029253	Baripada	Odisha
+OD-01164	Exicom Station 1164	Exicom	7.2	28.15	3	22.146252	85.992093	Bhubaneswar	Odisha
+OD-00219	Delta Station 219	Delta Electronics	60	34.58	2	18.277819	84.180511	Cuttack	Odisha
+OD-00845	EV Station 845	EV Motors India	50	26.66	8	18.371346	83.223913	Keonjhar	Odisha
+OD-00114	AtherGrid Station 114	AtherGrid	25	14.41	1	18.029269	82.247727	Rayagada	Odisha
+OD-00549	Fortum Station 549	Fortum	7.2	18.35	4	20.066205	83.05649	Jagatsinghpur	Odisha
+OD-01019	OkinawaCharge Station 1019	OkinawaCharge	7.2	21.41	8	21.883317	84.064497	Koraput	Odisha
+OD-01073	EESL Station 1073	EESL	60	10.93	1	22.054852	86.155592	Nayagarh	Odisha
+OD-00175	Delta Station 175	Delta Electronics	11	25.25	8	21.446986	85.789441	Jagatsinghpur	Odisha
+OD-01023	Siemens Station 1023	Siemens	7.2	24.92	3	17.649766	85.291063	Cuttack	Odisha
+OD-00616	Magenta Station 616	Magenta EV	25	34.27	2	21.448321	87.300121	Bhadrak	Odisha
+OD-00514	Fortum Station 514	Fortum	60	18.62	4	20.571317	85.398288	Sambalpur	Odisha
+OD-00462	OkinawaCharge Station 462	OkinawaCharge	50	27.25	3	20.965204	87.289495	Bhadrak	Odisha
+OD-00287	Delta Station 287	Delta Electronics	30	27.9	3	21.496719	82.810672	Nayagarh	Odisha
+OD-00382	Magenta Station 382	Magenta EV	22	14.28	2	21.698459	81.666382	Keonjhar	Odisha
+OD-01008	EESL Station 1008	EESL	25	18.34	1	20.779304	83.966885	Nayagarh	Odisha
+OD-00671	Fortum Station 671	Fortum	120	8.88	1	19.9731	83.828038	Angul	Odisha
+OD-00535	Siemens Station 535	Siemens	7.2	27.98	1	20.779642	84.707559	Rourkela	Odisha
+OD-00910	Exicom Station 910	Exicom	120	27.94	6	17.831732	83.700783	Berhampur	Odisha
+OD-00293	AtherGrid Station 293	AtherGrid	7.2	18.28	3	22.065466	86.681951	Bhadrak	Odisha
+OD-00124	EVRE Station 124	EVRE	25	34.76	8	18.566009	83.651217	Koraput	Odisha
+OD-00583	Siemens Station 583	Siemens	22	8.39	1	18.57766	85.722062	Puri	Odisha
+OD-00141	OkinawaCharge Station 141	OkinawaCharge	30	14.14	6	20.661051	83.651695	Bhubaneswar	Odisha
+OD-00736	Blink Station 736	Blink	120	25.6	2	21.828569	87.347933	Kendrapara	Odisha
+OD-00082	Exicom Station 82	Exicom	22	22.12	1	20.772873	85.613642	Rourkela	Odisha
+OD-00882	Blink Station 882	Blink	7.2	27.22	1	22.171447	84.912654	Bhadrak	Odisha
+OD-00740	Fortum Station 740	Fortum	22	26.91	1	21.506326	83.391278	Kendrapara	Odisha
+OD-01102	EESL Station 1102	EESL	60	22.2	1	21.705757	83.542964	Berhampur	Odisha
+OD-00909	Blink Station 909	Blink	30	24.97	2	18.618809	85.190301	Bhadrak	Odisha
+OD-01167	AtherGrid Station 1167	AtherGrid	3.3	28.31	1	17.591755	84.505439	Cuttack	Odisha
+OD-00937	Exicom Station 937	Exicom	3.3	34.88	3	18.995058	84.636965	Sambalpur	Odisha
+OD-00372	Tata Station 372	Tata Power EZ Charge	50	26.03	3	20.800291	82.32892	Jagatsinghpur	Odisha
+OD-00890	Delta Station 890	Delta Electronics	3.3	29.14	2	21.400797	84.13227	Puri	Odisha
+OD-00157	Blink Station 157	Blink	7.2	32.59	1	20.748759	83.382368	Sambalpur	Odisha
+OD-00992	AtherGrid Station 992	AtherGrid	30	29.1	3	21.157042	86.473641	Rourkela	Odisha
+OD-00622	Tata Station 622	Tata Power EZ Charge	50	16.27	6	21.776382	81.653268	Angul	Odisha
+OD-01038	Blink Station 1038	Blink	120	8.67	1	19.615872	82.668334	Koraput	Odisha
+OD-00245	Delta Station 245	Delta Electronics	60	31.33	2	20.402329	84.647416	Angul	Odisha
+OD-00159	EVRE Station 159	EVRE	25	13.93	2	22.567646	86.134504	Baripada	Odisha
+OD-00746	Siemens Station 746	Siemens	25	20.35	8	19.564129	84.123375	Balasore	Odisha
+OD-00193	Blink Station 193	Blink	11	21.26	1	22.680946	86.864104	Angul	Odisha
+OD-00534	Siemens Station 534	Siemens	22	13.52	1	20.202462	81.759062	Sonepur	Odisha
+OD-00904	Magenta Station 904	Magenta EV	25	20.8	4	18.674106	85.123056	Dhenkanal	Odisha
+OD-01004	EVRE Station 1004	EVRE	120	22.51	1	21.021046	85.532561	Sonepur	Odisha
+OD-01070	OkinawaCharge Station 1070	OkinawaCharge	3.3	24.28	8	21.283189	82.013966	Kendrapara	Odisha
+OD-00414	Fortum Station 414	Fortum	25	29.82	3	18.623467	84.192968	Bhubaneswar	Odisha
+OD-01187	ChargePoint Station 1187	ChargePoint	50	13.07	8	18.269911	81.911848	Angul	Odisha
+OD-00328	EESL Station 328	EESL	30	34.59	4	22.374418	81.567677	Koraput	Odisha
+OD-00129	OkinawaCharge Station 129	OkinawaCharge	50	22.68	1	22.213655	85.170276	Bhubaneswar	Odisha
+OD-00695	Fortum Station 695	Fortum	50	13.25	4	17.98462	83.845074	Jajpur	Odisha
+OD-00631	EV Station 631	EV Motors India	120	18.11	4	21.648208	83.577823	Jajpur	Odisha
+OD-00275	Tata Station 275	Tata Power EZ Charge	11	31.3	2	18.627047	81.89343	Dhenkanal	Odisha
+OD-01148	EV Station 1148	EV Motors India	60	25.19	2	22.568803	86.418741	Bhubaneswar	Odisha
+OD-00309	ChargeGrid Station 309	ChargeGrid	22	10.96	1	20.349389	84.117139	Sonepur	Odisha
+OD-00234	ChargeGrid Station 234	ChargeGrid	22	18.02	2	22.635778	81.548677	Malkangiri	Odisha
+OD-01048	Magenta Station 1048	Magenta EV	25	27.27	3	21.754357	85.437457	Berhampur	Odisha
+OD-00623	ABB Station 623	ABB	30	17.37	3	20.345635	87.448992	Cuttack	Odisha
+OD-00644	Fortum Station 644	Fortum	60	17.88	4	19.153858	85.946441	Jajpur	Odisha
+OD-00479	Blink Station 479	Blink	120	14.66	3	20.017201	85.934155	Rourkela	Odisha
+OD-00472	Exicom Station 472	Exicom	120	18.92	2	20.260876	84.989816	Bhadrak	Odisha
+OD-00926	ChargeGrid Station 926	ChargeGrid	60	27.45	1	18.96549	82.442669	Nayagarh	Odisha
+OD-01098	EESL Station 1098	EESL	22	20	1	18.23641	81.935477	Bhubaneswar	Odisha
+OD-00627	Blink Station 627	Blink	3.3	12.74	1	20.452182	84.89175	Rayagada	Odisha
+OD-00395	Delta Station 395	Delta Electronics	30	20.54	2	18.215124	83.413057	Dhenkanal	Odisha
+OD-00637	OkinawaCharge Station 637	OkinawaCharge	3.3	34.99	4	21.501134	83.766767	Sonepur	Odisha
+OD-00768	ChargeGrid Station 768	ChargeGrid	120	10.65	6	17.729142	82.448716	Rayagada	Odisha
+OD-00533	Tata Station 533	Tata Power EZ Charge	7.2	22.79	4	22.590579	84.744072	Bhadrak	Odisha
+OD-00718	EVRE Station 718	EVRE	25	12.48	2	17.628358	83.549072	Keonjhar	Odisha
+OD-00667	AtherGrid Station 667	AtherGrid	25	30.16	6	19.982222	83.475078	Bhadrak	Odisha
+OD-00598	ChargeGrid Station 598	ChargeGrid	11	8.39	4	21.474638	85.167207	Jagatsinghpur	Odisha
+OD-00482	EESL Station 482	EESL	11	34.5	2	20.241779	86.91981	Bhadrak	Odisha
+OD-01103	EV Station 1103	EV Motors India	22	15.27	4	18.943119	87.087161	Dhenkanal	Odisha
+OD-00315	Exicom Station 315	Exicom	25	34.68	8	19.80502	81.596551	Rayagada	Odisha
+OD-00729	Fortum Station 729	Fortum	50	34.37	6	19.60457	81.843429	Koraput	Odisha
+OD-00210	EV Station 210	EV Motors India	7.2	33.5	3	18.031407	86.596101	Cuttack	Odisha
+OD-00934	Magenta Station 934	Magenta EV	7.2	20.75	3	21.206988	83.736038	Malkangiri	Odisha
+OD-00434	Fortum Station 434	Fortum	25	26.38	1	19.927267	81.51366	Kendrapara	Odisha
+OD-00329	EVRE Station 329	EVRE	25	10.48	6	22.518675	84.328044	Sonepur	Odisha
+OD-00261	Tata Station 261	Tata Power EZ Charge	11	8.4	2	20.552721	82.344355	Angul	Odisha
+OD-01117	AtherGrid Station 1117	AtherGrid	60	27.64	1	20.795521	82.171145	Sonepur	Odisha
+OD-00307	EV Station 307	EV Motors India	25	29.34	4	20.527171	85.522044	Cuttack	Odisha
+OD-01067	Tata Station 1067	Tata Power EZ Charge	60	10.21	2	18.519097	87.151352	Bhadrak	Odisha
+OD-00928	AtherGrid Station 928	AtherGrid	11	23.17	2	18.08206	85.078937	Jajpur	Odisha
+OD-01025	ChargeGrid Station 1025	ChargeGrid	60	8.23	2	17.603859	84.936931	Nayagarh	Odisha
+OD-00271	Siemens Station 271	Siemens	50	30.12	4	22.097874	82.714095	Rayagada	Odisha
+OD-00291	Magenta Station 291	Magenta EV	50	24.22	1	20.181533	87.00023	Rourkela	Odisha
+OD-00813	Exicom Station 813	Exicom	11	16.29	4	21.970334	87.248728	Sambalpur	Odisha
+OD-00097	AtherGrid Station 97	AtherGrid	7.2	24.42	4	20.81055	84.739857	Puri	Odisha
+OD-00888	Siemens Station 888	Siemens	50	8.32	4	20.374637	85.892114	Koraput	Odisha
+OD-00819	EV Station 819	EV Motors India	120	28.94	1	19.544233	82.163375	Rourkela	Odisha
+OD-00032	Fortum Station 32	Fortum	11	25.82	6	21.749555	84.742245	Sonepur	Odisha
+OD-00763	AtherGrid Station 763	AtherGrid	25	29.27	6	18.973493	86.490871	Rayagada	Odisha
+OD-00954	Magenta Station 954	Magenta EV	50	14.45	8	18.610423	83.849095	Cuttack	Odisha
+OD-00320	ChargePoint Station 320	ChargePoint	3.3	29.13	6	18.684781	87.351143	Jagatsinghpur	Odisha
+OD-00299	OkinawaCharge Station 299	OkinawaCharge	22	15.5	1	21.927533	81.302062	Rayagada	Odisha
+OD-00200	AtherGrid Station 200	AtherGrid	60	31.44	2	18.775485	82.275512	Bhubaneswar	Odisha
+OD-00561	Tata Station 561	Tata Power EZ Charge	3.3	32.4	3	17.903732	86.439002	Puri	Odisha
+OD-00179	OkinawaCharge Station 179	OkinawaCharge	22	20.29	6	20.21666	85.296189	Sonepur	Odisha
+OD-01132	OkinawaCharge Station 1132	OkinawaCharge	30	21.27	8	22.442619	83.678376	Nayagarh	Odisha
+OD-00089	AtherGrid Station 89	AtherGrid	3.3	34.66	1	18.282168	84.98361	Bhubaneswar	Odisha
+OD-00788	AtherGrid Station 788	AtherGrid	7.2	11.47	8	20.484023	81.677592	Balasore	Odisha
+OD-00725	Fortum Station 725	Fortum	60	29.06	8	18.114737	81.30019	Malkangiri	Odisha
+OD-00827	EESL Station 827	EESL	22	30.78	4	21.35992	82.34045	Baripada	Odisha
+OD-00209	Tata Station 209	Tata Power EZ Charge	30	21.19	6	21.506119	85.536431	Kendrapara	Odisha
+OD-01040	ABB Station 1040	ABB	3.3	26.96	8	19.05718	82.966913	Bhadrak	Odisha
+OD-00297	ABB Station 297	ABB	30	25.99	1	18.133162	84.265051	Rourkela	Odisha
+OD-00998	ChargeGrid Station 998	ChargeGrid	11	34.57	3	19.019695	83.127867	Kendrapara	Odisha
+OD-00498	ABB Station 498	ABB	50	25.16	1	17.971753	81.502231	Bhubaneswar	Odisha
+OD-00835	EESL Station 835	EESL	25	17.33	1	17.536308	83.801582	Sonepur	Odisha
+OD-00430	Magenta Station 430	Magenta EV	11	23.67	1	18.223823	84.053071	Puri	Odisha
+OD-00507	OkinawaCharge Station 507	OkinawaCharge	60	30.57	2	19.227393	85.600432	Rourkela	Odisha
+OD-00831	Delta Station 831	Delta Electronics	60	18.58	1	21.672489	83.415716	Bhadrak	Odisha
+OD-00694	Magenta Station 694	Magenta EV	50	22.69	4	18.931244	85.698521	Rayagada	Odisha
+OD-00011	ChargeGrid Station 11	ChargeGrid	7.2	30.38	6	19.355117	83.041794	Jajpur	Odisha
+OD-00848	OkinawaCharge Station 848	OkinawaCharge	3.3	26.89	6	21.935217	82.018103	Puri	Odisha
+OD-00463	EESL Station 463	EESL	3.3	26.97	2	19.049871	81.953263	Koraput	Odisha
+OD-00199	Siemens Station 199	Siemens	11	25.88	8	20.32765	86.659856	Nayagarh	Odisha
+OD-00060	Delta Station 60	Delta Electronics	25	12.4	3	17.866957	85.283	Bhubaneswar	Odisha
+OD-00907	Siemens Station 907	Siemens	25	31.9	8	17.950874	84.637851	Koraput	Odisha
+OD-00997	AtherGrid Station 997	AtherGrid	120	24.03	1	21.425103	83.218668	Nayagarh	Odisha
+OD-00276	ChargeGrid Station 276	ChargeGrid	11	13.57	2	20.817396	82.89268	Jagatsinghpur	Odisha
+OD-00809	Fortum Station 809	Fortum	30	16.86	3	17.779616	85.450013	Sonepur	Odisha
+OD-00908	AtherGrid Station 908	AtherGrid	60	11.61	2	22.364051	85.958825	Malkangiri	Odisha
+OD-00658	Siemens Station 658	Siemens	22	19.71	6	18.354909	82.022815	Dhenkanal	Odisha
+OD-00957	ABB Station 957	ABB	60	31.17	3	21.893293	83.529988	Koraput	Odisha
+OD-00886	ChargeGrid Station 886	ChargeGrid	30	11.69	3	17.862541	86.839109	Sonepur	Odisha
+OD-00221	Delta Station 221	Delta Electronics	30	10.83	2	18.758634	87.417308	Baripada	Odisha
+OD-00789	EVRE Station 789	EVRE	3.3	19	2	20.211161	86.858763	Nayagarh	Odisha
+OD-00712	EESL Station 712	EESL	3.3	24.29	4	21.049169	84.867227	Bhadrak	Odisha
+OD-00714	Delta Station 714	Delta Electronics	120	13.91	4	17.811705	82.112037	Rayagada	Odisha
+OD-01113	OkinawaCharge Station 1113	OkinawaCharge	60	9.62	6	22.262862	85.115799	Dhenkanal	Odisha
+OD-01191	ABB Station 1191	ABB	30	29.6	6	22.347071	86.075418	Rourkela	Odisha
+OD-00790	ABB Station 790	ABB	3.3	11.29	2	20.558087	83.259682	Sambalpur	Odisha
+OD-00416	ChargeGrid Station 416	ChargeGrid	30	23.94	1	18.676651	83.682286	Baripada	Odisha
+OD-00899	Siemens Station 899	Siemens	60	10.76	2	21.409208	86.918648	Rourkela	Odisha
+OD-00935	Tata Station 935	Tata Power EZ Charge	50	8.17	1	21.715555	87.179891	Rayagada	Odisha
+OD-00266	ABB Station 266	ABB	22	18.26	2	18.525201	84.270936	Dhenkanal	Odisha
+OD-00632	Tata Station 632	Tata Power EZ Charge	25	34.69	4	17.631234	82.866405	Koraput	Odisha
+OD-00248	Siemens Station 248	Siemens	22	20.96	3	21.067032	81.407755	Koraput	Odisha
+OD-00683	ChargeGrid Station 683	ChargeGrid	22	16.78	4	17.704201	82.986391	Baripada	Odisha
+OD-00559	Fortum Station 559	Fortum	120	28.05	3	17.898506	86.710342	Bhadrak	Odisha
+OD-01137	Fortum Station 1137	Fortum	60	31.6	8	17.658381	81.863435	Berhampur	Odisha
+OD-00968	Fortum Station 968	Fortum	7.2	10.3	4	22.004155	84.394956	Berhampur	Odisha
+OD-01005	OkinawaCharge Station 1005	OkinawaCharge	50	9.05	3	19.868947	86.824038	Puri	Odisha
+OD-00985	AtherGrid Station 985	AtherGrid	25	27.46	8	20.172922	85.055673	Nayagarh	Odisha
+OD-00295	Exicom Station 295	Exicom	7.2	34.34	4	20.833055	86.399379	Cuttack	Odisha
+OD-00520	Tata Station 520	Tata Power EZ Charge	3.3	26.12	2	19.763686	84.705721	Rourkela	Odisha
+OD-00771	ABB Station 771	ABB	50	26.65	2	21.289688	81.591233	Sambalpur	Odisha
+OD-00084	Delta Station 84	Delta Electronics	30	10.88	2	19.245432	82.352015	Bhadrak	Odisha
+OD-00232	EESL Station 232	EESL	11	13.39	2	21.037187	81.74763	Baripada	Odisha
+OD-00621	Siemens Station 621	Siemens	60	11.89	8	20.744792	82.996571	Balasore	Odisha
+OD-00334	ABB Station 334	ABB	120	22.15	2	21.909849	86.507777	Cuttack	Odisha
+OD-00130	AtherGrid Station 130	AtherGrid	30	24.95	2	19.241509	82.163487	Nayagarh	Odisha
+OD-01012	EVRE Station 1012	EVRE	7.2	10.58	1	22.170362	87.099634	Sambalpur	Odisha
+OD-00645	AtherGrid Station 645	AtherGrid	60	15.64	1	19.676628	83.113602	Nayagarh	Odisha
+OD-00974	Magenta Station 974	Magenta EV	11	15.54	8	22.339496	81.452795	Puri	Odisha
+OD-00383	EVRE Station 383	EVRE	11	31.6	1	17.50098	82.348303	Dhenkanal	Odisha
+OD-00868	Siemens Station 868	Siemens	60	20.53	3	20.719862	84.277824	Jagatsinghpur	Odisha
+OD-00543	AtherGrid Station 543	AtherGrid	30	21.45	1	21.36269	83.327677	Bhadrak	Odisha
+OD-01194	AtherGrid Station 1194	AtherGrid	25	34.14	2	22.256697	82.335091	Dhenkanal	Odisha
+OD-00875	Blink Station 875	Blink	22	10.92	4	21.878956	85.107626	Balasore	Odisha
+OD-00332	Siemens Station 332	Siemens	60	28.03	1	22.083544	83.022993	Bhadrak	Odisha
+OD-00410	Tata Station 410	Tata Power EZ Charge	11	28.25	6	19.645912	85.305796	Angul	Odisha
+OD-00077	AtherGrid Station 77	AtherGrid	11	18.21	3	21.166439	82.84209	Sambalpur	Odisha
+OD-00869	ABB Station 869	ABB	50	28.21	1	20.009526	82.639395	Puri	Odisha
+OD-00139	Tata Station 139	Tata Power EZ Charge	120	10.09	4	18.042084	86.510726	Bhadrak	Odisha
+OD-00544	EESL Station 544	EESL	25	29.79	6	21.978862	86.366964	Malkangiri	Odisha
+OD-00674	Exicom Station 674	Exicom	11	22.87	2	19.59668	86.468593	Angul	Odisha
+OD-00921	OkinawaCharge Station 921	OkinawaCharge	50	23.06	4	17.783974	87.325441	Sambalpur	Odisha
+OD-00064	Blink Station 64	Blink	7.2	15.61	2	18.114457	85.61977	Jajpur	Odisha
+OD-00142	Siemens Station 142	Siemens	22	8.13	1	19.234196	83.768646	Baripada	Odisha
+OD-00717	Tata Station 717	Tata Power EZ Charge	11	27.55	2	20.061515	85.227153	Cuttack	Odisha
+OD-00377	ChargeGrid Station 377	ChargeGrid	60	10.72	1	18.747345	82.180226	Jagatsinghpur	Odisha
+OD-00364	ChargePoint Station 364	ChargePoint	120	34.59	8	21.514465	81.468438	Malkangiri	Odisha
+OD-00140	Fortum Station 140	Fortum	3.3	14.37	4	18.360707	82.455189	Kendrapara	Odisha
+OD-00885	Delta Station 885	Delta Electronics	22	18.41	3	20.134766	86.607207	Malkangiri	Odisha
+OD-01042	Tata Station 1042	Tata Power EZ Charge	25	25.09	2	22.174925	85.167211	Jagatsinghpur	Odisha
+OD-00225	Fortum Station 225	Fortum	3.3	25.18	8	21.173674	81.495834	Bhadrak	Odisha
+OD-00515	Siemens Station 515	Siemens	7.2	21.98	6	18.898003	85.196291	Bhadrak	Odisha
+OD-00267	EVRE Station 267	EVRE	22	22.12	8	20.984499	87.063556	Nayagarh	Odisha
+OD-01170	Fortum Station 1170	Fortum	22	16.17	2	19.888599	86.371374	Puri	Odisha
+OD-00487	Blink Station 487	Blink	11	31.33	4	20.002934	86.865583	Keonjhar	Odisha
+OD-00353	Magenta Station 353	Magenta EV	7.2	23.17	1	19.298786	83.254175	Kendrapara	Odisha
+OD-01006	ABB Station 1006	ABB	3.3	12.95	3	17.535572	84.195511	Nayagarh	Odisha
+OD-00618	Fortum Station 618	Fortum	3.3	26.2	2	17.825337	82.605143	Bhadrak	Odisha
+OD-00668	EV Station 668	EV Motors India	3.3	23.05	1	18.311386	86.474464	Jajpur	Odisha
+OD-00775	ChargeGrid Station 775	ChargeGrid	120	12.83	2	21.647073	85.500784	Rayagada	Odisha
+OD-00554	ChargePoint Station 554	ChargePoint	7.2	21.5	1	21.582508	85.012841	Dhenkanal	Odisha
+OD-00576	EVRE Station 576	EVRE	11	13.49	8	17.848263	86.739573	Jajpur	Odisha
+OD-00915	EESL Station 915	EESL	60	23.58	2	21.004997	81.403295	Angul	Odisha
+OD-00466	Blink Station 466	Blink	7.2	30.2	3	21.92181	82.614363	Baripada	Odisha
+OD-00591	Fortum Station 591	Fortum	50	29.24	4	21.523045	85.936599	Sambalpur	Odisha
+OD-00765	Exicom Station 765	Exicom	30	18.74	2	20.160879	84.296425	Dhenkanal	Odisha
+OD-00635	EVRE Station 635	EVRE	50	24.47	4	22.307517	86.172038	Jajpur	Odisha
+OD-00838	EV Station 838	EV Motors India	30	32.44	2	20.063376	83.346967	Rourkela	Odisha
+OD-00290	EVRE Station 290	EVRE	120	17.35	3	18.743088	84.46029	Rayagada	Odisha
+OD-00040	Exicom Station 40	Exicom	30	25.04	8	21.633019	84.41635	Rayagada	Odisha
+OD-00031	Delta Station 31	Delta Electronics	50	30.62	1	21.013589	85.85834	Bhubaneswar	Odisha
+OD-00243	Tata Station 243	Tata Power EZ Charge	25	23.87	2	22.432633	82.865672	Baripada	Odisha
+OD-00429	Exicom Station 429	Exicom	3.3	17.25	3	18.905288	87.291788	Rayagada	Odisha
+OD-00137	Siemens Station 137	Siemens	60	10.72	4	18.831281	85.801793	Koraput	Odisha
+OD-01101	AtherGrid Station 1101	AtherGrid	60	21.1	6	21.545129	83.670653	Keonjhar	Odisha
+OD-00865	Tata Station 865	Tata Power EZ Charge	3.3	29.92	2	19.277615	83.988905	Nayagarh	Odisha
+OD-00004	ABB Station 4	ABB	3.3	24.52	2	18.225368	83.111297	Koraput	Odisha
+OD-00833	EV Station 833	EV Motors India	7.2	9.02	1	21.701953	83.288492	Nayagarh	Odisha
+OD-00603	ABB Station 603	ABB	7.2	26.29	2	19.440238	87.13849	Balasore	Odisha
+OD-01034	OkinawaCharge Station 1034	OkinawaCharge	22	31.03	1	22.354618	87.082134	Baripada	Odisha
+OD-00655	EVRE Station 655	EVRE	50	17.63	6	21.438815	83.129449	Dhenkanal	Odisha
+OD-00844	ChargePoint Station 844	ChargePoint	25	21.6	6	22.067762	87.205604	Puri	Odisha
+OD-00784	ChargePoint Station 784	ChargePoint	7.2	28.04	8	17.631035	83.499958	Rayagada	Odisha
+OD-01074	EV Station 1074	EV Motors India	30	24.88	1	22.420172	84.894583	Sonepur	Odisha
+OD-00443	Exicom Station 443	Exicom	11	26.27	1	21.80804	83.12664	Dhenkanal	Odisha
+OD-01178	Siemens Station 1178	Siemens	25	10	1	22.662727	83.828944	Bhubaneswar	Odisha
+OD-00436	OkinawaCharge Station 436	OkinawaCharge	50	21.27	1	20.21671	84.788813	Balasore	Odisha
+OD-01169	EESL Station 1169	EESL	11	17.6	1	21.706064	83.127148	Bhadrak	Odisha
+OD-00101	EESL Station 101	EESL	11	11.48	6	18.165838	82.241797	Kendrapara	Odisha
+OD-00773	ABB Station 773	ABB	60	8.65	8	19.243932	82.39791	Dhenkanal	Odisha
+OD-00495	ChargeGrid Station 495	ChargeGrid	25	29.82	8	18.425018	84.491038	Sambalpur	Odisha
+OD-01028	Tata Station 1028	Tata Power EZ Charge	25	27.95	4	17.651683	84.655677	Berhampur	Odisha
+OD-00807	Exicom Station 807	Exicom	60	16.56	1	21.705897	86.72803	Jajpur	Odisha
+OD-01142	Blink Station 1142	Blink	50	24.39	1	18.480199	86.290794	Kendrapara	Odisha
+OD-00846	ChargePoint Station 846	ChargePoint	30	27.97	4	20.856779	82.265794	Berhampur	Odisha
+OD-00987	Magenta Station 987	Magenta EV	30	9.54	3	20.556552	86.510159	Sambalpur	Odisha
+OD-00228	Magenta Station 228	Magenta EV	30	29.16	1	20.0007	81.552675	Jagatsinghpur	Odisha
+OD-01193	EVRE Station 1193	EVRE	25	32.8	2	22.201391	82.270481	Jajpur	Odisha
+OD-00672	EESL Station 672	EESL	7.2	16.97	1	22.32613	86.538146	Balasore	Odisha
+OD-00859	Magenta Station 859	Magenta EV	3.3	12.37	1	22.522328	82.575925	Baripada	Odisha
+OD-00925	ABB Station 925	ABB	50	20.16	3	18.824693	83.481686	Bhadrak	Odisha
+OD-00067	Fortum Station 67	Fortum	60	33.13	6	21.963746	83.959763	Angul	Odisha
+OD-00068	Fortum Station 68	Fortum	120	10.78	2	22.193275	84.432565	Rayagada	Odisha
+OD-00817	ChargePoint Station 817	ChargePoint	60	11.04	2	19.620446	86.795558	Angul	Odisha
+OD-00212	Tata Station 212	Tata Power EZ Charge	60	27.74	2	22.229527	86.615633	Rourkela	Odisha
+OD-00013	Exicom Station 13	Exicom	3.3	27.68	8	21.510606	81.759077	Kendrapara	Odisha
+OD-00494	Delta Station 494	Delta Electronics	7.2	31.09	4	20.635934	86.479529	Malkangiri	Odisha
+OD-01165	AtherGrid Station 1165	AtherGrid	22	29.4	1	18.951549	85.307464	Koraput	Odisha
+OD-00300	EV Station 300	EV Motors India	7.2	17.85	2	19.509596	84.799535	Kendrapara	Odisha
+OD-00411	EVRE Station 411	EVRE	11	24.16	2	20.111199	82.161002	Bhadrak	Odisha
+OD-00757	ABB Station 757	ABB	30	8.35	3	18.678791	84.814735	Puri	Odisha
+OD-01075	Exicom Station 1075	Exicom	25	9.7	6	18.474203	81.501319	Koraput	Odisha
+OD-00696	Tata Station 696	Tata Power EZ Charge	3.3	15	8	17.955475	81.857481	Kendrapara	Odisha
+OD-01151	EESL Station 1151	EESL	120	12.78	8	21.114623	85.120692	Rayagada	Odisha
+OD-00724	ChargePoint Station 724	ChargePoint	3.3	20.44	1	20.09465	83.273225	Dhenkanal	Odisha
+OD-01016	ABB Station 1016	ABB	3.3	22.09	4	18.60866	86.14672	Rayagada	Odisha
+OD-00528	ChargePoint Station 528	ChargePoint	25	13.17	2	19.640608	87.096965	Angul	Odisha
+OD-00600	Blink Station 600	Blink	11	26.26	2	18.219865	84.888809	Sambalpur	Odisha
+OD-01120	Magenta Station 1120	Magenta EV	50	11.39	1	19.117236	86.792717	Baripada	Odisha
+OD-00567	ABB Station 567	ABB	50	14.58	6	18.891524	83.381178	Cuttack	Odisha
+OD-00731	Tata Station 731	Tata Power EZ Charge	7.2	31.21	3	20.579967	85.606853	Bhubaneswar	Odisha
+OD-00274	ABB Station 274	ABB	7.2	24.84	2	19.849192	84.936972	Bhadrak	Odisha
+OD-00967	Blink Station 967	Blink	60	28.65	3	18.8809	86.301996	Angul	Odisha
+OD-00238	EV Station 238	EV Motors India	50	14.41	1	22.551254	82.422057	Sambalpur	Odisha
+OD-00406	Exicom Station 406	Exicom	60	26.12	8	18.842501	85.482569	Koraput	Odisha
+OD-00003	EV Station 3	EV Motors India	30	12.91	1	18.453703	83.186302	Koraput	Odisha
+OD-00007	Siemens Station 7	Siemens	120	10.64	1	21.058012	84.028945	Sonepur	Odisha
+OD-00312	Blink Station 312	Blink	3.3	10.76	1	20.925199	87.145553	Bhadrak	Odisha
+OD-01091	Siemens Station 1091	Siemens	11	21.51	1	19.65881	82.349059	Cuttack	Odisha
+OD-00452	ChargeGrid Station 452	ChargeGrid	11	28.51	1	18.476783	85.762707	Nayagarh	Odisha
+OD-00722	EESL Station 722	EESL	25	16.8	2	18.164428	84.042673	Jagatsinghpur	Odisha
+OD-00216	EESL Station 216	EESL	7.2	8.48	2	21.643349	83.123841	Dhenkanal	Odisha
+OD-01086	ChargeGrid Station 1086	ChargeGrid	60	17.47	2	21.518768	86.279657	Rayagada	Odisha
+OD-00028	OkinawaCharge Station 28	OkinawaCharge	30	20.7	8	22.6138	83.772712	Angul	Odisha
+OD-01158	Siemens Station 1158	Siemens	7.2	19.83	6	21.7525	84.705823	Koraput	Odisha
+OD-00362	Exicom Station 362	Exicom	11	21.43	6	19.266843	86.707241	Bhadrak	Odisha
+OD-00823	ChargeGrid Station 823	ChargeGrid	25	13.28	4	21.765317	85.322232	Malkangiri	Odisha
+OD-00781	EV Station 781	EV Motors India	60	27.71	2	20.473304	83.991123	Rayagada	Odisha
+OD-00629	OkinawaCharge Station 629	OkinawaCharge	30	13	8	18.948944	82.656001	Balasore	Odisha
+OD-00454	ChargePoint Station 454	ChargePoint	22	29.71	3	20.373005	84.525053	Sonepur	Odisha
+OD-00739	Exicom Station 739	Exicom	60	23.74	8	21.297153	83.561899	Bhubaneswar	Odisha
+OD-00536	AtherGrid Station 536	AtherGrid	50	12.65	6	22.312715	81.723671	Balasore	Odisha
+OD-01050	Exicom Station 1050	Exicom	120	33.98	1	20.1955	81.75197	Rayagada	Odisha
+OD-00399	AtherGrid Station 399	AtherGrid	30	8.08	1	17.706783	85.045244	Balasore	Odisha
+OD-00257	OkinawaCharge Station 257	OkinawaCharge	120	31.72	2	19.60153	83.327606	Rayagada	Odisha
+OD-00292	OkinawaCharge Station 292	OkinawaCharge	30	30.99	2	18.584255	87.06969	Kendrapara	Odisha
+OD-00026	ChargePoint Station 26	ChargePoint	30	15.52	6	22.222983	82.785284	Cuttack	Odisha
+OD-00337	Delta Station 337	Delta Electronics	30	11.72	2	20.947818	81.311655	Bhadrak	Odisha
+OD-00585	ChargeGrid Station 585	ChargeGrid	22	23.63	1	20.788435	82.270156	Rourkela	Odisha
+OD-00048	Blink Station 48	Blink	22	9.92	1	19.563276	81.614765	Sambalpur	Odisha
+OD-00319	EV Station 319	EV Motors India	30	9.86	8	19.706344	81.81223	Berhampur	Odisha
+OD-00107	OkinawaCharge Station 107	OkinawaCharge	60	14.38	4	21.451768	84.593848	Malkangiri	Odisha
+OD-00799	Magenta Station 799	Magenta EV	60	26.22	3	18.743145	85.999851	Rayagada	Odisha
+OD-00056	AtherGrid Station 56	AtherGrid	50	14.69	2	19.351058	85.998646	Berhampur	Odisha
+OD-00523	Delta Station 523	Delta Electronics	11	22.75	4	22.528583	81.620346	Sambalpur	Odisha
+OD-00214	OkinawaCharge Station 214	OkinawaCharge	7.2	13.41	3	22.014239	85.732529	Balasore	Odisha
+OD-00121	AtherGrid Station 121	AtherGrid	7.2	11.63	8	17.82955	87.437753	Bhubaneswar	Odisha
+OD-00918	Exicom Station 918	Exicom	7.2	32.57	6	21.229762	84.908835	Jajpur	Odisha
+OD-01068	EVRE Station 1068	EVRE	7.2	26.96	3	20.926289	87.432577	Malkangiri	Odisha
+OD-01118	EV Station 1118	EV Motors India	60	32.81	6	19.789946	84.702435	Koraput	Odisha
+OD-00073	Exicom Station 73	Exicom	50	17.47	3	18.108748	82.186548	Berhampur	Odisha
+OD-00948	Magenta Station 948	Magenta EV	30	9.33	6	19.508696	83.491534	Jagatsinghpur	Odisha
+OD-00747	Fortum Station 747	Fortum	30	33.77	1	18.287448	84.25998	Bhadrak	Odisha
+OD-00716	ABB Station 716	ABB	120	10.2	1	18.844676	81.472684	Jajpur	Odisha
+OD-00558	OkinawaCharge Station 558	OkinawaCharge	22	10.98	2	19.003775	83.220803	Rayagada	Odisha
+OD-01082	Delta Station 1082	Delta Electronics	25	25.36	8	21.570278	87.112383	Sonepur	Odisha
+OD-01046	Fortum Station 1046	Fortum	25	33.93	2	17.731858	82.186984	Bhubaneswar	Odisha
+OD-00553	EESL Station 553	EESL	30	21.48	1	20.282133	82.195203	Kendrapara	Odisha
+OD-00562	AtherGrid Station 562	AtherGrid	120	29.45	4	22.098758	83.437645	Puri	Odisha
+OD-00425	Siemens Station 425	Siemens	25	18.12	1	19.964833	84.053592	Berhampur	Odisha
+OD-01014	Siemens Station 1014	Siemens	120	13.71	1	18.878888	85.409731	Malkangiri	Odisha
+OD-00326	Siemens Station 326	Siemens	50	30.86	6	22.278418	82.863894	Rourkela	Odisha
+OD-00924	ChargeGrid Station 924	ChargeGrid	22	33.38	2	19.283739	87.426369	Koraput	Odisha
+OD-00317	ChargeGrid Station 317	ChargeGrid	22	18.47	3	19.902124	87.447848	Angul	Odisha
+OD-00804	Exicom Station 804	Exicom	30	8.18	2	20.221717	87.013383	Berhampur	Odisha
+OD-01163	EESL Station 1163	EESL	50	9.77	4	21.29296	84.770248	Cuttack	Odisha
+OD-00529	ABB Station 529	ABB	25	14.67	4	19.350445	81.820301	Berhampur	Odisha
+OD-00837	AtherGrid Station 837	AtherGrid	3.3	14.31	1	17.85457	82.46017	Bhubaneswar	Odisha
+OD-00715	EVRE Station 715	EVRE	120	17.22	8	19.988348	87.058929	Malkangiri	Odisha
+OD-00901	Siemens Station 901	Siemens	60	11.41	2	20.524952	86.051353	Puri	Odisha
+OD-00061	ChargePoint Station 61	ChargePoint	22	26.28	8	20.481509	82.096702	Angul	Odisha
+OD-00723	AtherGrid Station 723	AtherGrid	3.3	30.61	3	18.162321	82.082881	Keonjhar	Odisha
+OD-00093	Tata Station 93	Tata Power EZ Charge	11	24.37	3	18.688943	85.464544	Keonjhar	Odisha
+OD-00858	EV Station 858	EV Motors India	60	10.42	1	22.236297	81.337492	Jajpur	Odisha
+OD-00619	OkinawaCharge Station 619	OkinawaCharge	7.2	10.06	8	22.630991	82.982469	Sambalpur	Odisha
+OD-00352	AtherGrid Station 352	AtherGrid	120	15.24	3	18.313185	86.589156	Bhadrak	Odisha
+OD-00933	ABB Station 933	ABB	60	27.71	2	19.360325	81.696186	Rourkela	Odisha
+OD-00281	ABB Station 281	ABB	50	19.95	2	21.825688	85.451536	Balasore	Odisha
+OD-00421	AtherGrid Station 421	AtherGrid	25	17.84	8	18.633041	87.425823	Angul	Odisha
+OD-01115	AtherGrid Station 1115	AtherGrid	25	22.31	3	17.644773	82.82927	Kendrapara	Odisha
+OD-00360	Tata Station 360	Tata Power EZ Charge	25	33.53	3	21.919872	85.447938	Cuttack	Odisha
+OD-00423	EESL Station 423	EESL	22	9.05	1	17.66097	83.705518	Rourkela	Odisha
+OD-00679	Delta Station 679	Delta Electronics	50	20.54	8	19.474007	83.262838	Cuttack	Odisha
+OD-00527	Fortum Station 527	Fortum	11	8.33	2	21.004904	81.621382	Jagatsinghpur	Odisha
+OD-00478	Fortum Station 478	Fortum	120	20.37	8	19.569628	83.178078	Bhubaneswar	Odisha
+OD-01095	EVRE Station 1095	EVRE	7.2	34.5	2	18.006359	83.179008	Baripada	Odisha
+OD-00183	Siemens Station 183	Siemens	7.2	8.01	4	18.464459	83.680576	Rourkela	Odisha
+OD-01092	Siemens Station 1092	Siemens	120	10.47	2	20.395561	86.829613	Rayagada	Odisha
+OD-00433	OkinawaCharge Station 433	OkinawaCharge	25	27.5	1	20.27361	86.693809	Nayagarh	Odisha
+OD-00111	Blink Station 111	Blink	22	26.34	1	21.60369	84.390342	Angul	Odisha
+OD-00371	EV Station 371	EV Motors India	30	31.83	2	21.678738	84.432282	Balasore	Odisha
+OD-00240	ABB Station 240	ABB	22	10.57	1	20.891041	83.235318	Puri	Odisha
+OD-00709	Fortum Station 709	Fortum	7.2	9.08	2	22.12755	87.450169	Sambalpur	Odisha
+OD-00630	AtherGrid Station 630	AtherGrid	7.2	15.71	8	22.321044	87.313544	Rayagada	Odisha
+OD-00594	EESL Station 594	EESL	60	27.88	8	19.769382	85.433986	Keonjhar	Odisha
+OD-00486	ChargeGrid Station 486	ChargeGrid	30	33.07	4	21.456443	84.69053	Keonjhar	Odisha
+OD-00701	EVRE Station 701	EVRE	25	8.94	4	19.537935	85.622415	Jagatsinghpur	Odisha
+OD-00262	Siemens Station 262	Siemens	7.2	21.51	4	20.320291	87.199167	Keonjhar	Odisha
+OD-00480	Siemens Station 480	Siemens	22	34.74	1	18.743626	84.590572	Koraput	Odisha
+OD-00650	Siemens Station 650	Siemens	7.2	30.53	8	22.364519	82.451545	Bhubaneswar	Odisha
+OD-00340	EV Station 340	EV Motors India	7.2	15.29	2	21.790257	84.389185	Cuttack	Odisha
+OD-00669	EV Station 669	EV Motors India	30	13.97	2	19.481155	86.312116	Jagatsinghpur	Odisha
+OD-00552	AtherGrid Station 552	AtherGrid	25	8.95	1	21.594341	83.850305	Bhubaneswar	Odisha
+OD-00459	EESL Station 459	EESL	11	30.75	1	19.129409	86.191381	Bhubaneswar	Odisha
+OD-00184	EESL Station 184	EESL	50	17.47	4	21.489379	83.791972	Rourkela	Odisha
+OD-00138	ChargePoint Station 138	ChargePoint	22	26.81	8	22.296997	85.68488	Kendrapara	Odisha
+OD-01161	OkinawaCharge Station 1161	OkinawaCharge	22	32.2	2	21.065706	86.625679	Kendrapara	Odisha
+OD-00707	OkinawaCharge Station 707	OkinawaCharge	25	24.72	8	19.63819	83.950416	Nayagarh	Odisha
+OD-00582	ABB Station 582	ABB	22	19.5	8	20.349768	84.530654	Dhenkanal	Odisha
+OD-00081	Blink Station 81	Blink	25	22.25	8	22.663417	81.757539	Rayagada	Odisha
+OD-00769	ChargeGrid Station 769	ChargeGrid	3.3	33.54	1	21.87926	83.138997	Angul	Odisha
+OD-00870	Magenta Station 870	Magenta EV	7.2	29.75	4	19.058277	87.265033	Malkangiri	Odisha
+OD-00762	OkinawaCharge Station 762	OkinawaCharge	50	19.21	2	17.574521	84.26568	Jagatsinghpur	Odisha
+OD-00030	Exicom Station 30	Exicom	11	14.12	6	20.854899	82.381072	Sambalpur	Odisha
+OD-00542	ABB Station 542	ABB	22	33.85	2	19.574984	86.50677	Angul	Odisha
+OD-00166	Tata Station 166	Tata Power EZ Charge	25	28.81	2	19.694588	83.494003	Rayagada	Odisha
+OD-00249	Blink Station 249	Blink	120	20.28	6	20.181099	84.330849	Sonepur	Odisha
+OD-00308	ChargeGrid Station 308	ChargeGrid	3.3	8.33	3	18.754248	87.350417	Puri	Odisha
+OD-00448	Blink Station 448	Blink	11	31.46	2	21.045093	82.000176	Cuttack	Odisha
+OD-00347	Siemens Station 347	Siemens	11	14.09	4	19.459954	84.162743	Nayagarh	Odisha
+OD-00335	Tata Station 335	Tata Power EZ Charge	120	28.48	1	21.02757	85.988841	Koraput	Odisha
+OD-00286	Tata Station 286	Tata Power EZ Charge	60	20.82	2	19.489137	82.04294	Koraput	Odisha
+OD-00950	EVRE Station 950	EVRE	3.3	18.94	2	17.514082	86.569668	Sonepur	Odisha
+OD-00098	OkinawaCharge Station 98	OkinawaCharge	7.2	22.78	2	19.844734	86.944922	Nayagarh	Odisha
+OD-00468	EVRE Station 468	EVRE	120	33.13	8	18.153766	85.869999	Rayagada	Odisha
+OD-01037	ABB Station 1037	ABB	22	34.27	3	17.525316	83.858605	Kendrapara	Odisha
+OD-00913	EV Station 913	EV Motors India	120	15.4	6	20.583892	84.333209	Rourkela	Odisha
+OD-00756	EV Station 756	EV Motors India	120	20.99	1	21.71031	87.193303	Berhampur	Odisha
+OD-00945	Fortum Station 945	Fortum	22	11.55	1	18.864922	84.903536	Cuttack	Odisha
+OD-00614	Tata Station 614	Tata Power EZ Charge	3.3	32.08	8	19.091468	84.721638	Koraput	Odisha
+OD-00802	Magenta Station 802	Magenta EV	50	12.93	1	22.51909	83.95474	Sonepur	Odisha
+OD-00758	EVRE Station 758	EVRE	22	18.29	6	17.78374	85.016659	Dhenkanal	Odisha
+OD-00689	ABB Station 689	ABB	120	18.61	4	18.021277	81.402873	Dhenkanal	Odisha
+OD-00066	ABB Station 66	ABB	60	23.55	8	21.304568	82.091676	Berhampur	Odisha
+OD-00794	Siemens Station 794	Siemens	120	23.63	2	17.575967	83.534328	Bhadrak	Odisha
+OD-00744	Tata Station 744	Tata Power EZ Charge	22	12.37	4	20.922132	87.486046	Nayagarh	Odisha
+OD-00568	EESL Station 568	EESL	120	28.35	6	22.031636	85.509667	Jajpur	Odisha
+OD-01084	ChargePoint Station 1084	ChargePoint	50	32.14	6	20.212901	82.928552	Jajpur	Odisha
+OD-01099	ABB Station 1099	ABB	7.2	11.86	1	19.52506	87.200555	Jajpur	Odisha
+OD-00303	Exicom Station 303	Exicom	50	26.67	8	20.713869	85.225776	Keonjhar	Odisha
+OD-00255	EV Station 255	EV Motors India	25	25.58	8	18.054284	85.378641	Jagatsinghpur	Odisha
+OD-00959	EVRE Station 959	EVRE	22	26.72	2	21.484476	83.185387	Malkangiri	Odisha
+OD-01024	EESL Station 1024	EESL	60	12.39	1	22.490678	86.579805	Sonepur	Odisha
+OD-00313	ChargePoint Station 313	ChargePoint	3.3	33.12	1	18.815904	86.143257	Cuttack	Odisha
+OD-00530	Exicom Station 530	Exicom	30	9.95	3	18.568087	83.664934	Baripada	Odisha
+OD-00222	AtherGrid Station 222	AtherGrid	30	26.97	2	20.410173	81.360579	Dhenkanal	Odisha
+OD-00389	EV Station 389	EV Motors India	120	23.31	8	18.975908	86.412116	Angul	Odisha
+OD-00236	EVRE Station 236	EVRE	22	25.69	4	22.659093	83.059898	Dhenkanal	Odisha
+OD-00810	Siemens Station 810	Siemens	11	16.43	4	21.672459	86.640792	Kendrapara	Odisha
+OD-00483	EESL Station 483	EESL	3.3	33.58	1	19.254169	85.794883	Kendrapara	Odisha
+OD-00713	AtherGrid Station 713	AtherGrid	120	14.11	8	21.100242	82.746664	Malkangiri	Odisha
+OD-00306	Fortum Station 306	Fortum	30	12.78	4	19.51281	87.275698	Rourkela	Odisha
+OD-01111	ABB Station 1111	ABB	120	33.52	1	21.002771	81.702376	Jajpur	Odisha
+OD-01090	ChargePoint Station 1090	ChargePoint	60	18.55	2	20.96232	82.63618	Nayagarh	Odisha
+OD-00772	EESL Station 772	EESL	7.2	8.11	2	20.986259	85.279281	Rayagada	Odisha
+OD-00917	Tata Station 917	Tata Power EZ Charge	60	25.86	8	17.699685	83.583151	Cuttack	Odisha
+OD-01139	Blink Station 1139	Blink	7.2	13.05	3	17.846631	87.491077	Kendrapara	Odisha
+OD-00250	AtherGrid Station 250	AtherGrid	22	8.81	6	19.101236	85.669021	Koraput	Odisha
+OD-00760	Magenta Station 760	Magenta EV	7.2	17.53	2	21.658873	84.73906	Kendrapara	Odisha
+OD-00595	EVRE Station 595	EVRE	60	29.94	2	21.175557	87.297034	Sonepur	Odisha
+OD-00072	ABB Station 72	ABB	50	33.14	3	22.566091	87.474774	Jagatsinghpur	Odisha
+OD-00095	ChargePoint Station 95	ChargePoint	3.3	34.14	4	17.959723	86.209271	Sonepur	Odisha
+OD-00546	Magenta Station 546	Magenta EV	60	13.38	6	22.062844	85.880084	Sonepur	Odisha
+OD-00034	ABB Station 34	ABB	11	27.6	2	22.164973	86.799936	Baripada	Odisha
+OD-00862	EVRE Station 862	EVRE	22	24.13	8	22.080655	81.607557	Sambalpur	Odisha
+OD-00579	Blink Station 579	Blink	11	9.89	2	21.292021	85.072135	Bhadrak	Odisha
+OD-00449	Siemens Station 449	Siemens	30	11.92	2	21.192572	85.434497	Cuttack	Odisha
+OD-00446	OkinawaCharge Station 446	OkinawaCharge	60	21.17	6	17.903777	83.826767	Cuttack	Odisha
+OD-00260	Siemens Station 260	Siemens	50	26.78	6	19.520502	84.0819	Koraput	Odisha
+OD-00205	Exicom Station 205	Exicom	30	28.55	2	20.314586	87.27055	Rayagada	Odisha
+OD-00573	Siemens Station 573	Siemens	120	27.53	4	20.285414	86.48393	Kendrapara	Odisha
+OD-00824	EESL Station 824	EESL	3.3	14.93	8	21.410995	84.479823	Angul	Odisha
+OD-00586	Blink Station 586	Blink	30	13.46	8	19.131899	82.797304	Bhadrak	Odisha
+OD-00366	EESL Station 366	EESL	11	34.04	3	18.559586	84.544644	Sonepur	Odisha
+OD-00812	AtherGrid Station 812	AtherGrid	50	34.64	1	20.608768	81.808188	Malkangiri	Odisha
+OD-00078	Fortum Station 78	Fortum	11	8.31	3	19.937035	81.64908	Nayagarh	Odisha
+OD-00085	Siemens Station 85	Siemens	60	14.19	1	18.882877	83.53414	Sambalpur	Odisha
+OD-00539	AtherGrid Station 539	AtherGrid	120	15.32	2	20.607875	86.669793	Jagatsinghpur	Odisha
+OD-00083	ChargeGrid Station 83	ChargeGrid	30	18.37	4	21.332924	86.974577	Bhubaneswar	Odisha
+OD-00458	ABB Station 458	ABB	30	33.39	3	17.93012	87.071502	Jajpur	Odisha
+OD-01138	OkinawaCharge Station 1138	OkinawaCharge	7.2	34.48	6	18.309602	82.69912	Rayagada	Odisha
+OD-00615	EVRE Station 615	EVRE	50	12.54	2	19.969745	81.64238	Cuttack	Odisha
+OD-01186	Blink Station 1186	Blink	30	18.76	2	19.147948	84.197801	Puri	Odisha
+OD-01076	EESL Station 1076	EESL	11	30.57	8	18.304887	83.167289	Bhadrak	Odisha
+OD-00737	OkinawaCharge Station 737	OkinawaCharge	50	9.3	4	19.037458	87.081776	Dhenkanal	Odisha
+OD-00437	EESL Station 437	EESL	120	23.59	2	22.001001	87.380584	Dhenkanal	Odisha
+OD-00555	Magenta Station 555	Magenta EV	30	19.01	8	19.941533	81.47553	Rayagada	Odisha
+OD-01080	EVRE Station 1080	EVRE	7.2	24.02	6	18.592612	82.021257	Rayagada	Odisha
+OD-01062	EESL Station 1062	EESL	3.3	26.62	8	22.062011	83.100244	Kendrapara	Odisha
+OD-00351	Siemens Station 351	Siemens	30	15.44	2	18.933184	86.180185	Koraput	Odisha
+OD-00197	AtherGrid Station 197	AtherGrid	60	27.53	2	20.078554	81.802487	Dhenkanal	Odisha
+OD-00465	Exicom Station 465	Exicom	7.2	17.96	8	19.423029	81.624601	Baripada	Odisha
+OD-00589	EV Station 589	EV Motors India	3.3	15.28	4	18.492818	85.606774	Rourkela	Odisha
+OD-00006	Fortum Station 6	Fortum	25	9.76	1	22.434205	87.286919	Nayagarh	Odisha
+OD-00311	Delta Station 311	Delta Electronics	11	24.58	1	21.969739	83.732841	Sonepur	Odisha
+OD-00662	ChargeGrid Station 662	ChargeGrid	50	11.21	3	22.598955	82.631115	Rayagada	Odisha
+OD-00405	EV Station 405	EV Motors India	11	11.55	2	18.928604	83.746372	Kendrapara	Odisha
+OD-01196	EV Station 1196	EV Motors India	22	19.66	1	19.507716	85.576907	Balasore	Odisha
+OD-01044	Siemens Station 1044	Siemens	22	30.29	2	21.614816	82.54565	Jajpur	Odisha
+OD-01058	Fortum Station 1058	Fortum	120	33.66	2	20.285583	83.743981	Angul	Odisha
+OD-00105	EESL Station 105	EESL	120	29.58	1	20.765082	81.806906	Rayagada	Odisha
+OD-00537	AtherGrid Station 537	AtherGrid	22	20.37	2	17.978895	84.73095	Baripada	Odisha
+OD-00606	OkinawaCharge Station 606	OkinawaCharge	3.3	33.62	3	17.815146	85.549451	Sonepur	Odisha
+OD-00063	Blink Station 63	Blink	7.2	10.55	3	21.051635	81.74137	Koraput	Odisha
+OD-00282	EESL Station 282	EESL	25	31.76	8	20.884562	84.604338	Koraput	Odisha
+OD-01056	Tata Station 1056	Tata Power EZ Charge	7.2	19.28	6	17.731447	83.092648	Sonepur	Odisha
+OD-00239	AtherGrid Station 239	AtherGrid	120	10.63	4	19.606108	84.976094	Berhampur	Odisha
+OD-00224	EVRE Station 224	EVRE	30	13.42	6	21.104608	86.392933	Puri	Odisha
+OD-00146	ABB Station 146	ABB	3.3	19.19	2	17.943818	87.48062	Malkangiri	Odisha
+OD-01119	Magenta Station 1119	Magenta EV	3.3	31.99	8	19.211184	83.250443	Sonepur	Odisha
+OD-00374	EVRE Station 374	EVRE	25	13.06	2	21.962521	86.378194	Malkangiri	Odisha
+OD-00119	Exicom Station 119	Exicom	22	27.88	1	20.255168	85.684827	Sambalpur	Odisha
+OD-00803	Fortum Station 803	Fortum	30	16.43	2	19.722826	85.300355	Bhadrak	Odisha
+OD-00251	ChargePoint Station 251	ChargePoint	50	34.19	8	17.988284	85.470133	Bhadrak	Odisha
+OD-01157	Siemens Station 1157	Siemens	3.3	34.26	2	18.986376	81.740886	Rourkela	Odisha
+OD-00010	EVRE Station 10	EVRE	22	27.64	4	19.198012	84.836753	Koraput	Odisha
+OD-00450	Fortum Station 450	Fortum	11	15.9	8	18.292114	82.950242	Cuttack	Odisha
+OD-00874	EVRE Station 874	EVRE	22	23.49	4	19.276534	85.32048	Jajpur	Odisha
+OD-00390	ABB Station 390	ABB	120	9.74	2	22.061645	86.739023	Rourkela	Odisha
+OD-00966	AtherGrid Station 966	AtherGrid	30	32.29	1	20.767716	84.019624	Keonjhar	Odisha
+OD-00461	Siemens Station 461	Siemens	50	23.24	1	22.336889	86.534342	Angul	Odisha
+OD-01147	ChargeGrid Station 1147	ChargeGrid	30	17.21	3	21.387067	84.70854	Malkangiri	Odisha
+OD-00145	Tata Station 145	Tata Power EZ Charge	30	8.35	1	20.950394	82.403823	Bhubaneswar	Odisha
+OD-00502	Tata Station 502	Tata Power EZ Charge	30	26.35	1	18.669429	83.97456	Bhubaneswar	Odisha
+OD-01108	Delta Station 1108	Delta Electronics	11	26.14	3	20.804225	86.295736	Koraput	Odisha
+OD-00540	Exicom Station 540	Exicom	120	24.53	1	18.608042	87.122154	Bhubaneswar	Odisha
+OD-00178	OkinawaCharge Station 178	OkinawaCharge	25	16.03	6	22.30686	87.320561	Keonjhar	Odisha
+OD-01159	EVRE Station 1159	EVRE	120	9.87	1	19.87335	85.080072	Rayagada	Odisha
+OD-01051	Blink Station 1051	Blink	120	11.23	6	20.735975	87.093405	Puri	Odisha
+OD-00584	ChargePoint Station 584	ChargePoint	120	32.04	6	21.399885	86.931017	Puri	Odisha
+OD-01195	EVRE Station 1195	EVRE	120	13.23	4	19.664682	84.082878	Bhadrak	Odisha
+OD-00008	ChargePoint Station 8	ChargePoint	60	12.68	6	19.533515	82.429864	Puri	Odisha
+OD-00574	ABB Station 574	ABB	11	17.01	2	21.616103	84.098024	Jagatsinghpur	Odisha
+OD-00843	Siemens Station 843	Siemens	3.3	33.24	2	22.227851	86.381674	Jajpur	Odisha
+OD-00358	AtherGrid Station 358	AtherGrid	50	22.13	1	18.096798	86.632866	Puri	Odisha
+OD-00330	Blink Station 330	Blink	30	28.47	2	21.365804	85.094031	Koraput	Odisha
+OD-00705	AtherGrid Station 705	AtherGrid	22	34.72	3	17.656111	84.056075	Berhampur	Odisha
+OD-00830	Fortum Station 830	Fortum	22	34.85	2	18.710187	81.633749	Baripada	Odisha
+OD-00259	Tata Station 259	Tata Power EZ Charge	60	22.7	4	17.529945	83.312432	Kendrapara	Odisha
+OD-00891	Siemens Station 891	Siemens	120	18.21	2	22.602144	84.19077	Koraput	Odisha
+OD-00834	Delta Station 834	Delta Electronics	30	29.13	4	22.109813	83.771583	Puri	Odisha
+OD-01188	EESL Station 1188	EESL	11	19.7	3	21.658398	85.884743	Keonjhar	Odisha
+OD-00905	Fortum Station 905	Fortum	25	14.82	8	19.802713	86.55307	Berhampur	Odisha
+OD-00526	ABB Station 526	ABB	25	14.76	8	20.749345	84.844825	Nayagarh	Odisha
+OD-00814	AtherGrid Station 814	AtherGrid	50	13.25	2	21.766871	85.495197	Jagatsinghpur	Odisha
+OD-00732	Exicom Station 732	Exicom	11	23.62	3	21.105795	85.643791	Bhubaneswar	Odisha
+OD-01032	EV Station 1032	EV Motors India	30	33.71	4	20.271888	85.215575	Balasore	Odisha
+OD-01141	Delta Station 1141	Delta Electronics	30	13.95	3	22.311499	86.681393	Kendrapara	Odisha
+OD-00441	EVRE Station 441	EVRE	30	8.82	3	22.034651	84.568802	Jagatsinghpur	Odisha
+OD-00532	Blink Station 532	Blink	60	33.41	1	22.256602	81.37118	Malkangiri	Odisha
+OD-00960	Exicom Station 960	Exicom	60	26.71	3	22.634316	82.695998	Rourkela	Odisha
+OD-00229	EV Station 229	EV Motors India	7.2	24.02	4	20.88153	84.271529	Bhadrak	Odisha
+OD-01041	AtherGrid Station 1041	AtherGrid	11	11.96	8	18.330265	86.198516	Cuttack	Odisha
+OD-00213	AtherGrid Station 213	AtherGrid	11	19.94	1	19.12215	83.288605	Malkangiri	Odisha
+OD-00080	ABB Station 80	ABB	60	14.04	1	22.508757	81.375358	Angul	Odisha
+OD-00149	EV Station 149	EV Motors India	11	22.25	6	20.279171	84.282745	Bhubaneswar	Odisha
+OD-00592	ChargePoint Station 592	ChargePoint	60	20.53	1	18.872823	83.874494	Bhubaneswar	Odisha
+OD-00708	EV Station 708	EV Motors India	50	19.6	3	18.950478	82.100882	Angul	Odisha
+OD-00590	EESL Station 590	EESL	22	15.15	6	20.942239	86.352626	Rayagada	Odisha
+OD-00134	Delta Station 134	Delta Electronics	60	21.13	3	19.626567	86.085668	Malkangiri	Odisha
+OD-00782	Tata Station 782	Tata Power EZ Charge	30	16.18	6	21.300574	85.644498	Baripada	Odisha
+OD-00409	OkinawaCharge Station 409	OkinawaCharge	22	10.49	1	20.600872	84.707419	Bhubaneswar	Odisha
+OD-00970	EV Station 970	EV Motors India	120	10.88	8	20.877691	86.681597	Cuttack	Odisha
+OD-00508	Magenta Station 508	Magenta EV	11	31.65	1	20.303292	83.051329	Bhadrak	Odisha
+OD-00877	ChargeGrid Station 877	ChargeGrid	50	26.37	2	18.925426	86.431586	Kendrapara	Odisha
+OD-00505	Magenta Station 505	Magenta EV	7.2	13.52	2	18.827607	83.133307	Bhadrak	Odisha
+OD-00719	EV Station 719	EV Motors India	25	11.44	1	21.661073	86.650656	Keonjhar	Odisha
+OD-00348	Tata Station 348	Tata Power EZ Charge	25	33.31	1	21.171299	85.213258	Malkangiri	Odisha
+OD-00387	Blink Station 387	Blink	50	27.62	4	19.084706	86.442247	Malkangiri	Odisha
+OD-00001	Magenta Station 1	Magenta EV	60	24.11	3	19.81833	81.919844	Puri	Odisha
+OD-00361	Exicom Station 361	Exicom	50	15.85	4	21.592245	81.994003	Cuttack	Odisha
+OD-01134	Magenta Station 1134	Magenta EV	25	32.07	3	19.638918	82.200395	Angul	Odisha
+OD-00476	Fortum Station 476	Fortum	50	25.33	2	20.467378	84.822174	Bhubaneswar	Odisha
+OD-00778	EVRE Station 778	EVRE	50	19.34	2	20.507471	86.462193	Nayagarh	Odisha
+OD-00754	Blink Station 754	Blink	3.3	31.63	6	22.548889	82.398352	Puri	Odisha
+OD-00173	EV Station 173	EV Motors India	30	10.78	1	19.135902	86.306068	Nayagarh	Odisha
+OD-00451	ChargeGrid Station 451	ChargeGrid	50	22.82	1	18.640225	81.508749	Puri	Odisha
+OD-00126	ChargePoint Station 126	ChargePoint	11	13.03	3	18.725597	85.229303	Keonjhar	Odisha
+OD-00931	AtherGrid Station 931	AtherGrid	30	33.89	1	18.242634	84.894943	Malkangiri	Odisha
+OD-00531	Blink Station 531	Blink	22	27.8	4	18.104193	86.142175	Bhubaneswar	Odisha
+OD-00091	ChargePoint Station 91	ChargePoint	3.3	34.99	3	22.682512	84.743677	Balasore	Odisha
+OD-01162	OkinawaCharge Station 1162	OkinawaCharge	7.2	16.66	1	18.427324	82.784093	Puri	Odisha
+OD-00182	EVRE Station 182	EVRE	3.3	19.52	8	22.05866	83.888538	Rayagada	Odisha
+OD-01027	Fortum Station 1027	Fortum	50	12.8	1	19.328945	84.029118	Dhenkanal	Odisha
+OD-01000	ChargeGrid Station 1000	ChargeGrid	7.2	24.57	1	18.660049	84.683146	Bhubaneswar	Odisha
+OD-00252	ChargeGrid Station 252	ChargeGrid	30	26.7	6	21.8582	87.156608	Balasore	Odisha
+OD-00070	Exicom Station 70	Exicom	120	33.83	6	21.019204	84.29163	Baripada	Odisha
+OD-00132	Blink Station 132	Blink	25	28.09	2	17.674369	84.833316	Bhubaneswar	Odisha
+OD-00301	Siemens Station 301	Siemens	120	21.08	1	21.422118	85.140886	Cuttack	Odisha
+OD-01133	Tata Station 1133	Tata Power EZ Charge	3.3	9.78	2	21.171123	82.776898	Puri	Odisha
+OD-00327	EV Station 327	EV Motors India	25	30.73	4	21.288152	86.113974	Rayagada	Odisha
+OD-01020	Siemens Station 1020	Siemens	60	17.74	2	21.414807	84.40021	Koraput	Odisha
+OD-00500	ChargeGrid Station 500	ChargeGrid	7.2	30.88	2	22.191629	86.739605	Malkangiri	Odisha
+OD-00666	Tata Station 666	Tata Power EZ Charge	50	14.12	4	20.692646	82.86772	Koraput	Odisha
+OD-00919	Blink Station 919	Blink	22	20.83	8	19.507465	87.293578	Dhenkanal	Odisha
+OD-00496	EESL Station 496	EESL	30	14.64	3	19.594375	86.846785	Jagatsinghpur	Odisha
+OD-00339	Magenta Station 339	Magenta EV	11	10.81	8	18.672282	85.658249	Puri	Odisha
+OD-00964	EVRE Station 964	EVRE	30	11.36	1	20.892875	81.626863	Rayagada	Odisha
+OD-00165	EESL Station 165	EESL	60	24.21	1	20.958191	82.387302	Balasore	Odisha
+OD-00029	Tata Station 29	Tata Power EZ Charge	120	21.72	2	21.118227	86.621825	Jagatsinghpur	Odisha
+OD-00517	OkinawaCharge Station 517	OkinawaCharge	120	17.97	2	22.351209	86.430539	Bhubaneswar	Odisha
+OD-00194	AtherGrid Station 194	AtherGrid	60	22.5	3	20.583288	84.896534	Rourkela	Odisha
+OD-01104	ChargeGrid Station 1104	ChargeGrid	25	8.79	3	20.714135	84.458955	Rayagada	Odisha
+OD-00170	Exicom Station 170	Exicom	11	9.39	2	20.081104	85.000426	Malkangiri	Odisha
+OD-01059	ChargeGrid Station 1059	ChargeGrid	50	20.74	8	20.049625	86.550067	Nayagarh	Odisha
+OD-00174	Blink Station 174	Blink	3.3	26.65	1	20.210763	81.837572	Angul	Odisha
+OD-00519	EVRE Station 519	EVRE	120	11.84	3	18.609645	85.423906	Angul	Odisha
+OD-00969	OkinawaCharge Station 969	OkinawaCharge	7.2	12.41	6	18.042428	82.202196	Bhadrak	Odisha
+OD-00702	EESL Station 702	EESL	30	17.31	3	19.254017	83.233854	Rayagada	Odisha
+OD-00492	EESL Station 492	EESL	25	34.39	8	21.438013	82.302363	Angul	Odisha
+OD-00074	Siemens Station 74	Siemens	3.3	30.64	3	19.715676	82.679974	Bhadrak	Odisha
+OD-00981	Siemens Station 981	Siemens	60	11.38	3	20.908652	81.546742	Koraput	Odisha
+OD-00588	EV Station 588	EV Motors India	3.3	22.83	8	20.272907	85.247923	Sonepur	Odisha
+OD-00235	Exicom Station 235	Exicom	120	8.79	2	19.556679	85.05837	Angul	Odisha
+OD-00215	OkinawaCharge Station 215	OkinawaCharge	60	13.01	2	22.01684	86.1149	Sonepur	Odisha
+OD-00947	Fortum Station 947	Fortum	22	19.97	8	19.169185	84.561783	Sambalpur	Odisha
+OD-00133	ChargeGrid Station 133	ChargeGrid	3.3	30.17	4	18.075285	86.548004	Bhadrak	Odisha
+OD-01156	Siemens Station 1156	Siemens	60	16.25	2	20.227403	85.341582	Dhenkanal	Odisha
+OD-00733	Fortum Station 733	Fortum	22	21.5	2	21.297296	85.138871	Baripada	Odisha
+OD-00941	Fortum Station 941	Fortum	3.3	17.37	1	19.745397	86.147035	Rourkela	Odisha
+OD-00186	Magenta Station 186	Magenta EV	25	14.45	1	18.074465	83.498657	Puri	Odisha
+OD-00042	Tata Station 42	Tata Power EZ Charge	25	17.99	4	17.580374	87.055575	Angul	Odisha
+OD-00109	ChargePoint Station 109	ChargePoint	7.2	17.56	1	19.565252	81.950189	Dhenkanal	Odisha
+OD-00849	Blink Station 849	Blink	7.2	30.39	6	20.142337	85.145496	Berhampur	Odisha
+OD-00569	OkinawaCharge Station 569	OkinawaCharge	3.3	21.5	3	19.642182	86.697267	Jajpur	Odisha
+OD-00651	EVRE Station 651	EVRE	22	9.67	4	17.980275	82.309304	Jagatsinghpur	Odisha
+OD-01001	ChargePoint Station 1001	ChargePoint	3.3	13.08	2	19.079422	81.876708	Sambalpur	Odisha
+OD-01166	ChargeGrid Station 1166	ChargeGrid	60	11.56	2	21.965474	85.229456	Sambalpur	Odisha
+OD-00484	OkinawaCharge Station 484	OkinawaCharge	120	9.68	4	18.265976	81.348618	Dhenkanal	Odisha
+OD-00469	ChargePoint Station 469	ChargePoint	25	27.26	2	18.535919	86.819333	Balasore	Odisha
+OD-00025	Exicom Station 25	Exicom	3.3	15.69	3	17.691812	85.079299	Cuttack	Odisha
+OD-00661	ABB Station 661	ABB	22	10.23	1	18.820476	86.135928	Bhadrak	Odisha
+OD-00680	Exicom Station 680	Exicom	30	9.16	1	21.561012	83.769012	Jagatsinghpur	Odisha
+OD-00753	EV Station 753	EV Motors India	30	29.37	2	22.262099	83.530723	Sambalpur	Odisha
+OD-00994	EESL Station 994	EESL	3.3	8.9	3	20.514923	82.332322	Angul	Odisha
+OD-00367	Magenta Station 367	Magenta EV	25	16.43	3	20.841908	82.514213	Baripada	Odisha
+OD-00840	EV Station 840	EV Motors India	60	27.38	4	18.974761	83.322949	Dhenkanal	Odisha
+OD-01053	EVRE Station 1053	EVRE	22	16.02	2	17.503263	87.271184	Jagatsinghpur	Odisha
+OD-00384	Delta Station 384	Delta Electronics	30	31.34	4	20.342571	83.658483	Cuttack	Odisha
+OD-00455	EESL Station 455	EESL	50	15.33	8	20.082816	83.062499	Rayagada	Odisha
+OD-00265	EESL Station 265	EESL	25	19.63	6	22.162914	81.741938	Koraput	Odisha
+OD-00761	OkinawaCharge Station 761	OkinawaCharge	30	29.18	1	20.612528	83.867675	Koraput	Odisha
+OD-00980	Siemens Station 980	Siemens	25	30.06	4	21.397637	85.637112	Rourkela	Odisha
+OD-00445	Delta Station 445	Delta Electronics	25	25.78	2	21.483803	86.544713	Jajpur	Odisha
+OD-00396	Blink Station 396	Blink	30	33.6	8	19.81528	86.190574	Malkangiri	Odisha
+OD-00742	AtherGrid Station 742	AtherGrid	22	33.13	2	21.015746	83.204882	Malkangiri	Odisha
+OD-00177	Blink Station 177	Blink	50	12.88	1	20.453315	86.976027	Baripada	Odisha
+OD-00019	OkinawaCharge Station 19	OkinawaCharge	22	10.08	3	19.006708	82.299572	Rayagada	Odisha
+OD-00949	Siemens Station 949	Siemens	25	13.19	2	19.109242	87.344406	Koraput	Odisha
+OD-00815	EVRE Station 815	EVRE	22	21.8	3	20.642428	84.15757	Bhubaneswar	Odisha
+OD-00596	ChargePoint Station 596	ChargePoint	11	20.58	3	20.470044	83.184988	Malkangiri	Odisha
+OD-00062	EESL Station 62	EESL	25	18.42	2	22.498191	86.913174	Nayagarh	Odisha
+OD-00273	Siemens Station 273	Siemens	25	15.42	2	21.777594	83.927177	Angul	Odisha
+OD-01126	Tata Station 1126	Tata Power EZ Charge	30	30.71	2	22.683616	83.968128	Jajpur	Odisha
+OD-00279	Exicom Station 279	Exicom	22	17.11	1	22.208729	86.090261	Keonjhar	Odisha
+OD-00842	Exicom Station 842	Exicom	3.3	27.92	2	18.222811	84.028441	Bhubaneswar	Odisha
+OD-00369	Exicom Station 369	Exicom	11	15.48	2	22.614312	82.172411	Jagatsinghpur	Odisha
+OD-00887	ABB Station 887	ABB	3.3	27.9	1	17.690907	84.243568	Puri	Odisha
+OD-01015	ChargeGrid Station 1015	ChargeGrid	60	28.79	2	20.77691	87.428641	Malkangiri	Odisha
+OD-00860	ChargeGrid Station 860	ChargeGrid	25	31.88	1	20.380765	84.614267	Kendrapara	Odisha
+OD-00721	Blink Station 721	Blink	22	33.54	2	19.038285	81.306895	Bhubaneswar	Odisha
+OD-00826	Exicom Station 826	Exicom	120	13.51	3	19.677215	82.661737	Jagatsinghpur	Odisha
+OD-00548	Blink Station 548	Blink	7.2	13.81	2	20.604898	84.98778	Kendrapara	Odisha
+OD-00880	Fortum Station 880	Fortum	30	10.5	2	20.267559	86.394178	Keonjhar	Odisha
+OD-00900	ChargePoint Station 900	ChargePoint	7.2	31.24	3	21.113576	81.365417	Koraput	Odisha
+OD-00457	Siemens Station 457	Siemens	7.2	24.02	8	22.157779	84.916252	Angul	Odisha
+OD-00394	Magenta Station 394	Magenta EV	11	9.75	1	22.470287	81.45588	Baripada	Odisha
+OD-00676	AtherGrid Station 676	AtherGrid	25	13.86	8	18.997628	84.749234	Rayagada	Odisha
+OD-00912	EVRE Station 912	EVRE	22	19.73	3	22.021575	82.420077	Koraput	Odisha
+OD-00965	ABB Station 965	ABB	50	33.05	6	22.012051	85.687248	Jagatsinghpur	Odisha
+OD-00376	ABB Station 376	ABB	25	21.34	8	21.806896	83.37829	Koraput	Odisha
+OD-00413	Exicom Station 413	Exicom	60	8.32	1	19.694578	83.129252	Balasore	Odisha
+OD-00075	EVRE Station 75	EVRE	7.2	21.86	3	18.712786	84.904094	Baripada	Odisha
+OD-01122	EVRE Station 1122	EVRE	60	15.24	1	20.572184	85.772985	Berhampur	Odisha
+OD-00863	EESL Station 863	EESL	25	28.09	6	22.279882	83.927375	Dhenkanal	Odisha
+OD-00501	Magenta Station 501	Magenta EV	50	30.68	1	21.409215	82.717905	Malkangiri	Odisha
+OD-00942	AtherGrid Station 942	AtherGrid	11	29.87	3	18.739106	82.691174	Rourkela	Odisha
+OD-00617	ChargePoint Station 617	ChargePoint	60	29.55	6	19.19652	83.156177	Jajpur	Odisha
+OD-00115	Magenta Station 115	Magenta EV	60	30.74	6	17.768504	81.413103	Jagatsinghpur	Odisha
+OD-00418	ChargePoint Station 418	ChargePoint	3.3	18.11	8	18.367673	83.969282	Sambalpur	Odisha
+OD-00602	Exicom Station 602	Exicom	25	21.34	2	21.977436	84.159235	Berhampur	Odisha
+OD-00605	Tata Station 605	Tata Power EZ Charge	50	19.17	2	18.561666	81.562522	Nayagarh	Odisha
+OD-00090	Blink Station 90	Blink	3.3	8.99	1	18.196031	81.384766	Angul	Odisha
+OD-01149	Blink Station 1149	Blink	60	21.58	8	20.942981	86.958116	Malkangiri	Odisha
+OD-00499	Tata Station 499	Tata Power EZ Charge	50	15.44	2	20.734606	87.453142	Rourkela	Odisha
+OD-00876	Delta Station 876	Delta Electronics	50	31.07	8	19.268023	86.691828	Nayagarh	Odisha
+OD-00927	ABB Station 927	ABB	3.3	8.53	3	18.481729	83.869332	Angul	Odisha
+OD-00999	EVRE Station 999	EVRE	50	14.81	6	22.259508	82.947251	Bhadrak	Odisha
+OD-00012	ABB Station 12	ABB	3.3	34.65	1	21.515673	82.532037	Rayagada	Odisha
+OD-00397	Magenta Station 397	Magenta EV	50	11.56	6	18.717759	86.177852	Nayagarh	Odisha
+OD-00755	ChargePoint Station 755	ChargePoint	60	18.95	8	20.184673	84.9	Balasore	Odisha
+OD-00556	Tata Station 556	Tata Power EZ Charge	50	19.06	2	20.906903	82.913467	Dhenkanal	Odisha
+OD-00043	EV Station 43	EV Motors India	25	34.02	6	21.935649	83.125583	Angul	Odisha
+OD-00168	EESL Station 168	EESL	22	27.48	1	20.674104	87.185702	Jajpur	Odisha
+OD-00417	ChargePoint Station 417	ChargePoint	120	10.67	6	22.126191	81.37632	Rourkela	Odisha
+OD-00577	OkinawaCharge Station 577	OkinawaCharge	120	34.14	8	17.846137	85.319572	Koraput	Odisha
+OD-00268	Delta Station 268	Delta Electronics	22	27.34	4	18.917645	83.864004	Rourkela	Odisha
+OD-00808	Blink Station 808	Blink	50	29.2	2	18.923232	86.953275	Rayagada	Odisha
+OD-00427	Blink Station 427	Blink	30	34.46	2	19.984968	84.599997	Angul	Odisha
+OD-00691	Fortum Station 691	Fortum	50	14.25	1	22.01573	87.044076	Rayagada	Odisha
+OD-00545	EESL Station 545	EESL	11	14.19	8	20.343755	85.458188	Baripada	Odisha
+OD-01123	Siemens Station 1123	Siemens	60	21.91	1	21.528194	84.785297	Kendrapara	Odisha
+OD-00675	Delta Station 675	Delta Electronics	3.3	14.89	6	18.050546	83.500366	Jajpur	Odisha
+OD-00690	Exicom Station 690	Exicom	22	12.4	8	18.715827	81.446988	Keonjhar	Odisha
+OD-01055	OkinawaCharge Station 1055	OkinawaCharge	22	25.26	1	18.725549	85.724694	Sonepur	Odisha
+OD-01177	Tata Station 1177	Tata Power EZ Charge	11	23.4	1	21.981588	84.258081	Cuttack	Odisha
+OD-01033	Fortum Station 1033	Fortum	50	10.68	8	20.739361	84.07062	Nayagarh	Odisha
+OD-01035	AtherGrid Station 1035	AtherGrid	11	8.76	6	21.94686	83.524286	Rourkela	Odisha
+OD-00258	Exicom Station 258	Exicom	30	28.58	1	21.648631	84.000617	Balasore	Odisha
+OD-00336	Delta Station 336	Delta Electronics	11	11.37	3	19.503955	85.288864	Balasore	Odisha
+OD-00016	Tata Station 16	Tata Power EZ Charge	11	34.24	3	21.914352	85.774723	Rourkela	Odisha
+OD-00902	ChargeGrid Station 902	ChargeGrid	25	32.28	2	20.742228	82.113985	Dhenkanal	Odisha
+OD-00325	EV Station 325	EV Motors India	22	26.25	3	20.079449	81.378832	Malkangiri	Odisha
+OD-00608	Blink Station 608	Blink	7.2	30.51	3	20.841404	81.787059	Rayagada	Odisha
+OD-01054	OkinawaCharge Station 1054	OkinawaCharge	120	27.44	8	18.026061	85.163455	Jagatsinghpur	Odisha
+OD-00791	Fortum Station 791	Fortum	11	28.25	1	22.247816	84.847162	Nayagarh	Odisha
+OD-00223	EVRE Station 223	EVRE	3.3	31.83	1	17.929044	86.411987	Bhubaneswar	Odisha
+OD-00180	OkinawaCharge Station 180	OkinawaCharge	60	23.14	2	20.001522	86.78699	Keonjhar	Odisha
+OD-00100	ChargePoint Station 100	ChargePoint	22	9.24	8	20.72819	83.453963	Angul	Odisha
+OD-00522	Magenta Station 522	Magenta EV	11	29.53	8	20.702742	86.528324	Kendrapara	Odisha
+OD-00023	Tata Station 23	Tata Power EZ Charge	11	17.12	1	22.40313	83.303858	Berhampur	Odisha
+OD-00357	ABB Station 357	ABB	120	12.08	1	18.671648	82.855993	Koraput	Odisha
+OD-00734	Blink Station 734	Blink	120	16.3	4	20.058683	86.238353	Rayagada	Odisha
+OD-01094	EV Station 1094	EV Motors India	3.3	11.25	8	21.927993	82.270999	Dhenkanal	Odisha
+OD-01112	Tata Station 1112	Tata Power EZ Charge	7.2	24.99	3	18.835954	86.264977	Koraput	Odisha
+OD-00612	Exicom Station 612	Exicom	11	13.84	2	21.094301	85.038845	Baripada	Odisha
+OD-01010	Blink Station 1010	Blink	120	14.83	1	17.84988	82.961583	Berhampur	Odisha
+OD-00341	Exicom Station 341	Exicom	30	17.02	8	21.581464	85.687622	Keonjhar	Odisha
+OD-00432	ChargeGrid Station 432	ChargeGrid	50	12	3	21.9333	85.707485	Nayagarh	Odisha
+OD-00962	Exicom Station 962	Exicom	11	17.01	8	20.51243	86.811804	Rayagada	Odisha
+OD-00218	ABB Station 218	ABB	30	21.27	8	17.833886	84.908223	Sambalpur	Odisha
+OD-00204	Blink Station 204	Blink	3.3	25.06	1	18.850979	85.230835	Cuttack	Odisha
+OD-00906	Fortum Station 906	Fortum	22	23.27	8	17.609248	81.513474	Rayagada	Odisha
+OD-00923	EV Station 923	EV Motors India	22	27.32	2	22.560957	82.548719	Keonjhar	Odisha
+OD-00094	ChargePoint Station 94	ChargePoint	60	26.13	6	20.2056	86.088374	Cuttack	Odisha
+OD-00911	Siemens Station 911	Siemens	30	32.8	2	17.744361	83.400641	Nayagarh	Odisha
+OD-00069	ABB Station 69	ABB	30	32.18	3	19.523849	81.367193	Jagatsinghpur	Odisha
+OD-00895	ChargeGrid Station 895	ChargeGrid	50	34.82	2	22.016497	84.800767	Koraput	Odisha
+OD-00285	ABB Station 285	ABB	50	19.06	8	19.697983	86.3952	Dhenkanal	Odisha
+OD-00697	ChargePoint Station 697	ChargePoint	30	24.91	3	18.994099	83.034425	Sambalpur	Odisha
+OD-00086	EESL Station 86	EESL	30	22.47	6	19.109544	86.345529	Sambalpur	Odisha
+OD-00435	Tata Station 435	Tata Power EZ Charge	11	21.85	2	17.987097	85.978652	Balasore	Odisha
+OD-00797	EVRE Station 797	EVRE	22	27.87	1	18.583678	82.124154	Dhenkanal	Odisha
+OD-00154	EVRE Station 154	EVRE	11	34.7	8	20.636626	86.302471	Jajpur	Odisha
+OD-00076	Tata Station 76	Tata Power EZ Charge	30	14.39	2	22.220007	84.96971	Rayagada	Odisha
+OD-01043	ChargeGrid Station 1043	ChargeGrid	30	28.84	6	20.016162	86.8647	Bhubaneswar	Odisha
+OD-00581	EVRE Station 581	EVRE	3.3	8.14	1	21.683372	86.091419	Kendrapara	Odisha
+OD-00447	EESL Station 447	EESL	11	11	8	21.702823	87.175666	Balasore	Odisha
+OD-00704	ABB Station 704	ABB	22	18.72	1	18.312848	85.875296	Malkangiri	Odisha
+OD-00189	EESL Station 189	EESL	30	31.74	6	22.412607	84.197889	Berhampur	Odisha
+OD-00272	OkinawaCharge Station 272	OkinawaCharge	60	17.74	1	22.210634	86.073657	Baripada	Odisha
+OD-00237	Exicom Station 237	Exicom	7.2	30.57	8	18.726119	86.111201	Koraput	Odisha
+OD-00488	Tata Station 488	Tata Power EZ Charge	3.3	34.86	8	20.24161	83.729521	Koraput	Odisha
+OD-01160	Siemens Station 1160	Siemens	7.2	14.12	4	20.630303	85.624177	Baripada	Odisha
+OD-00560	Fortum Station 560	Fortum	50	29.23	8	20.787526	83.615825	Rayagada	Odisha
+OD-00118	OkinawaCharge Station 118	OkinawaCharge	60	15.56	1	21.501363	82.459671	Cuttack	Odisha
+OD-00638	Blink Station 638	Blink	25	13.52	4	19.27014	84.465601	Sonepur	Odisha
+OD-01128	Tata Station 1128	Tata Power EZ Charge	3.3	15.24	2	21.719623	81.643231	Cuttack	Odisha
+OD-00751	EESL Station 751	EESL	120	12.65	1	22.0696	84.761784	Kendrapara	Odisha
+OD-00513	ABB Station 513	ABB	11	11.38	4	19.252217	87.497172	Berhampur	Odisha
+OD-00634	Magenta Station 634	Magenta EV	3.3	15.16	4	20.382555	82.536933	Malkangiri	Odisha
+OD-00786	Blink Station 786	Blink	3.3	16.57	6	22.24219	81.677758	Jajpur	Odisha
+OD-01007	Exicom Station 1007	Exicom	50	14.58	1	21.65249	81.963581	Bhubaneswar	Odisha
+OD-00853	ChargeGrid Station 853	ChargeGrid	3.3	13.31	1	18.734913	83.159365	Sambalpur	Odisha
+OD-00127	ABB Station 127	ABB	120	30.05	1	19.783502	83.637055	Sambalpur	Odisha
+OD-00117	AtherGrid Station 117	AtherGrid	30	21.25	1	21.25906	86.389341	Dhenkanal	Odisha
+OD-00474	OkinawaCharge Station 474	OkinawaCharge	3.3	11.55	8	21.957074	84.867204	Jagatsinghpur	Odisha
+OD-00741	ChargeGrid Station 741	ChargeGrid	25	27.77	4	22.30536	87.346116	Nayagarh	Odisha
+OD-00993	AtherGrid Station 993	AtherGrid	25	30.97	2	18.987902	85.270773	Koraput	Odisha
+OD-00058	Siemens Station 58	Siemens	25	17.35	6	19.916304	85.328597	Koraput	Odisha
+OD-00604	ChargeGrid Station 604	ChargeGrid	50	25.39	1	22.566088	81.732764	Koraput	Odisha
+OD-00787	EVRE Station 787	EVRE	120	8.17	1	20.080444	83.070881	Baripada	Odisha
+OD-00971	Magenta Station 971	Magenta EV	60	10.03	3	18.084465	81.605716	Rayagada	Odisha
+OD-00657	Tata Station 657	Tata Power EZ Charge	22	12.68	4	20.026251	82.024926	Malkangiri	Odisha
+OD-00903	OkinawaCharge Station 903	OkinawaCharge	60	26.08	6	19.59234	83.147643	Sonepur	Odisha
+OD-00922	ChargeGrid Station 922	ChargeGrid	3.3	30.67	1	20.884333	85.113401	Berhampur	Odisha
+OD-00106	OkinawaCharge Station 106	OkinawaCharge	3.3	31.44	1	17.939488	85.003124	Kendrapara	Odisha
+OD-00636	Fortum Station 636	Fortum	25	28.86	1	21.152939	85.114573	Rayagada	Odisha
+OD-00370	Fortum Station 370	Fortum	60	27.78	3	21.765963	83.241604	Bhubaneswar	Odisha
+OD-00269	Fortum Station 269	Fortum	50	12.98	3	19.035447	86.219125	Kendrapara	Odisha
+OD-00656	Fortum Station 656	Fortum	3.3	13.15	4	18.460089	83.421067	Jagatsinghpur	Odisha
+OD-00047	Fortum Station 47	Fortum	11	31.41	1	22.248851	84.470323	Bhadrak	Odisha
+OD-00350	ChargePoint Station 350	ChargePoint	120	32.91	6	19.954714	81.383096	Keonjhar	Odisha
+OD-00774	Exicom Station 774	Exicom	60	27.67	4	19.139891	83.737512	Cuttack	Odisha
+OD-00196	ChargePoint Station 196	ChargePoint	120	25.69	6	20.364458	81.839318	Cuttack	Odisha
+OD-00103	Blink Station 103	Blink	11	30.19	2	19.29443	83.455239	Sonepur	Odisha
+OD-00005	OkinawaCharge Station 5	OkinawaCharge	11	21.88	2	20.580556	81.587993	Jagatsinghpur	Odisha
+OD-00620	OkinawaCharge Station 620	OkinawaCharge	50	23.21	2	21.679785	82.150321	Cuttack	Odisha
+OD-00991	ChargeGrid Station 991	ChargeGrid	3.3	24.97	6	18.457327	81.955032	Baripada	Odisha
+OD-00053	Tata Station 53	Tata Power EZ Charge	60	19.71	6	21.369022	82.855335	Nayagarh	Odisha
+OD-00264	OkinawaCharge Station 264	OkinawaCharge	22	18.65	6	20.356954	85.930629	Berhampur	Odisha
+OD-01093	EESL Station 1093	EESL	60	18.81	1	20.35936	85.141412	Dhenkanal	Odisha
+OD-00444	Exicom Station 444	Exicom	3.3	30.52	2	21.350476	82.185672	Puri	Odisha
+OD-00972	Siemens Station 972	Siemens	25	18.4	2	22.40351	85.084332	Puri	Odisha
+OD-00783	EESL Station 783	EESL	7.2	14.58	6	20.910697	82.532647	Rayagada	Odisha
+OD-00847	Exicom Station 847	Exicom	7.2	19.16	4	17.707019	82.998726	Balasore	Odisha
+OD-00692	EVRE Station 692	EVRE	30	9.06	2	20.484539	83.73595	Bhadrak	Odisha
+OD-00305	Fortum Station 305	Fortum	7.2	29.39	6	19.604952	85.35527	Balasore	Odisha
+OD-00342	Exicom Station 342	Exicom	22	16.86	4	19.756901	81.849323	Sambalpur	Odisha
+OD-00867	Delta Station 867	Delta Electronics	30	20.04	4	17.604121	81.687543	Jagatsinghpur	Odisha
+OD-00314	Fortum Station 314	Fortum	7.2	32.17	8	20.810682	85.106388	Kendrapara	Odisha
+OD-00150	Exicom Station 150	Exicom	22	17.03	1	17.892617	85.970127	Balasore	Odisha
+OD-00125	Delta Station 125	Delta Electronics	30	30.73	2	18.226816	86.230657	Bhubaneswar	Odisha
+OD-01063	Exicom Station 1063	Exicom	3.3	34.07	3	19.462212	82.901006	Koraput	Odisha
+OD-00575	Exicom Station 575	Exicom	7.2	31.83	1	19.924811	81.769338	Nayagarh	Odisha
+OD-00698	Siemens Station 698	Siemens	50	31.51	3	21.447252	85.810681	Keonjhar	Odisha
+OD-00665	Fortum Station 665	Fortum	25	17.38	8	17.761818	81.627145	Baripada	Odisha
+OD-00051	ChargePoint Station 51	ChargePoint	25	10.3	6	17.768745	84.594399	Koraput	Odisha
+OD-00727	Exicom Station 727	Exicom	25	22.93	1	21.723742	83.681064	Malkangiri	Odisha
+OD-00800	Fortum Station 800	Fortum	7.2	19.09	4	18.590389	87.354678	Malkangiri	Odisha
+OD-00354	AtherGrid Station 354	AtherGrid	7.2	25.92	8	22.509651	84.773043	Puri	Odisha
+OD-01153	Tata Station 1153	Tata Power EZ Charge	60	22.87	1	22.411211	82.616121	Kendrapara	Odisha
+OD-00143	AtherGrid Station 143	AtherGrid	7.2	17.37	6	21.335006	84.103751	Kendrapara	Odisha
+OD-00471	EV Station 471	EV Motors India	25	17.11	4	17.600504	82.071084	Bhadrak	Odisha
+OD-00654	Siemens Station 654	Siemens	3.3	20.48	6	21.997806	82.846641	Rourkela	Odisha
+OD-00400	Exicom Station 400	Exicom	3.3	16.95	1	20.006614	82.515806	Jajpur	Odisha
+OD-01154	Siemens Station 1154	Siemens	30	33.29	2	19.103431	86.691155	Cuttack	Odisha
+OD-00938	Fortum Station 938	Fortum	22	12.57	8	22.582774	86.590567	Angul	Odisha
+OD-00321	EVRE Station 321	EVRE	11	14.9	1	18.855709	81.729377	Dhenkanal	Odisha
+OD-00020	Siemens Station 20	Siemens	120	31.53	3	21.679095	82.456734	Cuttack	Odisha
+OD-00685	AtherGrid Station 685	AtherGrid	60	19.9	4	18.188504	83.669964	Berhampur	Odisha
+OD-00036	EV Station 36	EV Motors India	120	34.29	2	18.976389	83.193256	Rourkela	Odisha
+OD-00825	EV Station 825	EV Motors India	30	34.88	1	19.763364	87.008287	Cuttack	Odisha
+OD-00506	Fortum Station 506	Fortum	120	9.86	2	22.39208	84.442907	Jagatsinghpur	Odisha
+OD-00828	EESL Station 828	EESL	3.3	27.52	1	18.705575	85.674489	Balasore	Odisha
+OD-01071	OkinawaCharge Station 1071	OkinawaCharge	25	28.42	3	20.306241	81.780398	Dhenkanal	Odisha
+OD-00408	OkinawaCharge Station 408	OkinawaCharge	50	24.3	1	21.070268	82.009823	Rayagada	Odisha
+OD-00818	OkinawaCharge Station 818	OkinawaCharge	30	26.34	2	20.783155	82.977467	Dhenkanal	Odisha
+OD-00538	AtherGrid Station 538	AtherGrid	11	14.77	4	21.015337	85.681105	Cuttack	Odisha
+OD-00759	EVRE Station 759	EVRE	30	32.45	3	21.843937	82.520705	Kendrapara	Odisha
+OD-01069	AtherGrid Station 1069	AtherGrid	30	13.46	2	18.072384	83.677005	Malkangiri	Odisha
+OD-00893	Tata Station 893	Tata Power EZ Charge	25	15.09	1	19.692906	81.54752	Jajpur	Odisha
+OD-00039	ChargePoint Station 39	ChargePoint	11	15.16	4	18.768746	87.332665	Bhubaneswar	Odisha
+OD-00176	AtherGrid Station 176	AtherGrid	60	32.39	1	20.862658	85.597686	Jagatsinghpur	Odisha
+OD-00246	EVRE Station 246	EVRE	7.2	22.34	1	22.37035	81.54393	Malkangiri	Odisha
+OD-00811	Exicom Station 811	Exicom	25	25.88	4	21.409491	86.334067	Keonjhar	Odisha
+OD-01085	Blink Station 1085	Blink	7.2	18.86	4	17.766366	84.378396	Malkangiri	Odisha
+OD-01078	ChargeGrid Station 1078	ChargeGrid	25	16.17	1	19.891905	83.031905	Rourkela	Odisha
+OD-00785	Magenta Station 785	Magenta EV	30	26.76	2	20.450433	86.23671	Sonepur	Odisha
+OD-01185	Siemens Station 1185	Siemens	50	33.41	1	21.981778	84.798558	Malkangiri	Odisha
+OD-00490	EESL Station 490	EESL	25	32.82	1	18.415696	82.626534	Koraput	Odisha
+OD-00155	Magenta Station 155	Magenta EV	22	11.81	3	19.61324	83.308738	Jagatsinghpur	Odisha
+OD-00639	OkinawaCharge Station 639	OkinawaCharge	120	21.77	2	20.106633	81.611507	Malkangiri	Odisha
+OD-00663	EESL Station 663	EESL	7.2	26.89	1	20.708109	86.653488	Baripada	Odisha
+OD-00854	Delta Station 854	Delta Electronics	120	17.79	8	21.784788	82.565343	Koraput	Odisha
+OD-00288	AtherGrid Station 288	AtherGrid	30	29.27	1	21.996368	85.072616	Malkangiri	Odisha
+OD-00626	EVRE Station 626	EVRE	50	20.26	6	21.464724	82.081213	Rourkela	Odisha
+OD-01200	Blink Station 1200	Blink	25	17.19	8	21.950811	83.995005	Baripada	Odisha
+OD-00686	Blink Station 686	Blink	11	24.3	1	20.929431	85.565882	Kendrapara	Odisha
+OD-00873	ChargePoint Station 873	ChargePoint	7.2	31.14	2	22.381316	84.352646	Jagatsinghpur	Odisha
+OD-00570	Blink Station 570	Blink	3.3	11.16	3	19.253474	82.18562	Cuttack	Odisha
+OD-01144	Siemens Station 1144	Siemens	3.3	22.09	1	20.545403	81.352673	Sonepur	Odisha
+OD-00735	Exicom Station 735	Exicom	60	22.88	2	20.222531	83.050027	Kendrapara	Odisha
+OD-00793	AtherGrid Station 793	AtherGrid	25	9.82	1	21.824012	82.399425	Rayagada	Odisha
+OD-00018	Tata Station 18	Tata Power EZ Charge	22	21.73	3	22.219346	82.845612	Puri	Odisha
+OD-00128	Blink Station 128	Blink	30	28.19	1	20.114146	82.739719	Nayagarh	Odisha
+OD-00323	ChargePoint Station 323	ChargePoint	7.2	9.18	2	18.076201	85.010896	Jagatsinghpur	Odisha
+OD-00256	AtherGrid Station 256	AtherGrid	120	18.99	1	22.027918	86.15079	Sonepur	Odisha
+OD-00944	EESL Station 944	EESL	50	23.37	1	22.013494	84.915256	Sonepur	Odisha
+OD-01180	AtherGrid Station 1180	AtherGrid	50	34.98	1	18.991603	83.038821	Baripada	Odisha
+OD-00191	Blink Station 191	Blink	7.2	13.95	1	18.469479	86.133424	Nayagarh	Odisha
+OD-00116	Magenta Station 116	Magenta EV	60	32.21	6	20.495192	86.987853	Berhampur	Odisha
+OD-01174	AtherGrid Station 1174	AtherGrid	25	24.09	3	17.966192	83.391626	Nayagarh	Odisha
+OD-00889	Siemens Station 889	Siemens	60	17.11	8	18.433919	83.044374	Nayagarh	Odisha
+OD-00607	Fortum Station 607	Fortum	60	26.51	4	22.233108	85.261999	Bhubaneswar	Odisha
+OD-00181	Delta Station 181	Delta Electronics	50	9.76	6	19.13951	84.644846	Kendrapara	Odisha
+OD-00302	ABB Station 302	ABB	50	12.61	2	17.888075	86.152715	Dhenkanal	Odisha
+OD-00497	Siemens Station 497	Siemens	22	12.15	1	22.648449	87.220051	Rayagada	Odisha
+OD-00349	Fortum Station 349	Fortum	7.2	19.79	2	21.293443	86.04618	Puri	Odisha
+OD-01036	Exicom Station 1036	Exicom	11	34.08	1	18.408882	85.317788	Angul	Odisha
+OD-00983	AtherGrid Station 983	AtherGrid	30	14.61	1	19.690765	86.500804	Cuttack	Odisha
+OD-00745	EV Station 745	EV Motors India	22	31.56	3	19.85085	87.411993	Jagatsinghpur	Odisha
+OD-01152	EV Station 1152	EV Motors India	11	32.54	8	17.651444	86.068468	Angul	Odisha
+OD-00518	OkinawaCharge Station 518	OkinawaCharge	50	29.69	2	18.134559	82.075777	Jajpur	Odisha
+OD-00373	Siemens Station 373	Siemens	50	8.34	8	20.41073	84.569878	Balasore	Odisha
+OD-00046	EVRE Station 46	EVRE	3.3	26.82	8	21.152917	83.528845	Bhadrak	Odisha
+OD-00477	Blink Station 477	Blink	50	30.87	2	17.622694	86.871076	Sambalpur	Odisha
+OD-00158	Exicom Station 158	Exicom	50	15.24	6	20.745574	83.838352	Cuttack	Odisha
+OD-01047	Delta Station 1047	Delta Electronics	120	33.17	2	20.962925	86.400476	Cuttack	Odisha
+OD-00172	Delta Station 172	Delta Electronics	120	10.05	6	17.90438	81.314504	Kendrapara	Odisha
+OD-00017	Fortum Station 17	Fortum	120	19.54	6	17.632179	81.968927	Keonjhar	Odisha
+OD-00512	OkinawaCharge Station 512	OkinawaCharge	120	28.49	3	20.670081	86.855453	Sambalpur	Odisha
+OD-00049	Fortum Station 49	Fortum	7.2	19.84	1	20.994536	83.334547	Nayagarh	Odisha
+OD-00192	ChargeGrid Station 192	ChargeGrid	25	34.17	4	22.095687	87.052064	Balasore	Odisha
+OD-00547	OkinawaCharge Station 547	OkinawaCharge	3.3	8.43	1	17.901155	86.949243	Dhenkanal	Odisha
+OD-00516	Magenta Station 516	Magenta EV	22	27.29	6	21.446827	81.935599	Angul	Odisha
+OD-00978	EV Station 978	EV Motors India	25	19.53	1	19.93893	87.057044	Sonepur	Odisha
+OD-00939	Magenta Station 939	Magenta EV	60	14.14	3	20.327693	85.608815	Koraput	Odisha
+OD-00829	Magenta Station 829	Magenta EV	7.2	18.12	2	20.730919	85.756052	Sambalpur	Odisha
+OD-00984	Delta Station 984	Delta Electronics	60	22.87	1	18.500964	81.931648	Kendrapara	Odisha
+OD-00481	EVRE Station 481	EVRE	30	13.53	1	21.273261	85.142354	Malkangiri	Odisha
+OD-01129	EESL Station 1129	EESL	3.3	27.61	2	18.642347	84.084317	Koraput	Odisha
+OD-00284	Fortum Station 284	Fortum	22	23.67	8	17.96159	87.262328	Cuttack	Odisha
+OD-01030	Siemens Station 1030	Siemens	3.3	23.28	1	22.267131	86.265072	Bhubaneswar	Odisha
+OD-00798	OkinawaCharge Station 798	OkinawaCharge	120	14.92	4	18.647386	82.156377	Rourkela	Odisha
+OD-00940	Siemens Station 940	Siemens	120	24.51	2	19.429063	86.087343	Sonepur	Odisha
+OD-00226	ABB Station 226	ABB	50	22.62	6	21.187115	86.700009	Balasore	Odisha
+OD-00027	ChargeGrid Station 27	ChargeGrid	30	24	8	17.920437	83.591858	Cuttack	Odisha
+OD-00283	AtherGrid Station 283	AtherGrid	30	34.84	1	20.941564	84.758257	Rourkela	Odisha
+OD-01150	EVRE Station 1150	EVRE	30	17.17	4	21.238901	83.079318	Bhadrak	Odisha
+OD-00438	ChargePoint Station 438	ChargePoint	11	28.64	6	20.482351	87.227492	Sonepur	Odisha
+OD-01168	Siemens Station 1168	Siemens	30	16.03	6	21.044969	82.588301	Angul	Odisha
+OD-00365	Delta Station 365	Delta Electronics	3.3	21.44	1	18.048463	85.372037	Rourkela	Odisha
+OD-00230	Siemens Station 230	Siemens	11	20.69	6	21.370251	86.705363	Nayagarh	Odisha
+OD-00038	ChargeGrid Station 38	ChargeGrid	22	25.54	8	21.915962	85.3772	Keonjhar	Odisha
+OD-00670	Tata Station 670	Tata Power EZ Charge	25	33.18	8	18.116948	87.089246	Rayagada	Odisha
+OD-00750	ABB Station 750	ABB	11	17.33	8	21.675662	84.649729	Sonepur	Odisha
+OD-01181	ChargePoint Station 1181	ChargePoint	30	15.7	3	21.622768	86.915692	Nayagarh	Odisha
+OD-00375	AtherGrid Station 375	AtherGrid	11	16.49	2	19.950073	86.394149	Sonepur	Odisha
+OD-00470	Exicom Station 470	Exicom	120	11.01	1	20.182482	82.959075	Kendrapara	Odisha
+OD-00883	EVRE Station 883	EVRE	3.3	23.98	1	18.498522	85.433451	Nayagarh	Odisha
+OD-01182	Magenta Station 1182	Magenta EV	22	31.8	3	19.206926	81.999611	Keonjhar	Odisha
+OD-00688	Magenta Station 688	Magenta EV	50	28.96	4	18.178607	84.805604	Dhenkanal	Odisha
+OD-00033	EVRE Station 33	EVRE	3.3	34.07	8	20.403126	86.772345	Angul	Odisha
+OD-01011	EV Station 1011	EV Motors India	120	16.52	6	21.615087	85.519476	Sonepur	Odisha
+OD-01176	ChargeGrid Station 1176	ChargeGrid	22	33.48	3	17.519918	82.776374	Sambalpur	Odisha
+OD-00195	EESL Station 195	EESL	120	15.17	8	18.173478	86.810238	Cuttack	Odisha
+OD-01106	EESL Station 1106	EESL	120	9.01	1	21.229344	84.636187	Rourkela	Odisha
+OD-01114	EV Station 1114	EV Motors India	120	27.39	3	20.523561	87.176171	Jajpur	Odisha
+OD-01064	AtherGrid Station 1064	AtherGrid	60	28.51	2	18.571139	85.697636	Baripada	Odisha
+OD-00504	OkinawaCharge Station 504	OkinawaCharge	50	30.84	6	19.584897	86.031272	Puri	Odisha
+OD-00916	Fortum Station 916	Fortum	30	26.93	2	19.635804	84.428751	Balasore	Odisha
+OD-00977	Tata Station 977	Tata Power EZ Charge	120	19.86	2	17.707729	83.54622	Puri	Odisha
+OD-01183	EV Station 1183	EV Motors India	30	19.61	2	18.99374	85.868126	Sambalpur	Odisha
+OD-01088	ChargePoint Station 1088	ChargePoint	25	33.81	1	17.866108	83.500573	Puri	Odisha
+OD-00801	ChargeGrid Station 801	ChargeGrid	50	16.19	3	21.565833	86.048324	Puri	Odisha
+OD-00580	EESL Station 580	EESL	22	25.73	2	21.185581	81.351855	Sambalpur	Odisha
+OD-00161	Tata Station 161	Tata Power EZ Charge	120	26.87	8	19.59326	82.651743	Nayagarh	Odisha
+OD-00681	EESL Station 681	EESL	50	8.22	3	22.404509	82.770296	Cuttack	Odisha
+OD-01198	Fortum Station 1198	Fortum	60	31.57	4	21.735739	82.750321	Kendrapara	Odisha
+OD-00163	AtherGrid Station 163	AtherGrid	7.2	11.18	8	20.497886	82.999142	Kendrapara	Odisha
+OD-00822	EV Station 822	EV Motors India	60	14.75	2	17.881493	85.411507	Balasore	Odisha
+OD-00706	Magenta Station 706	Magenta EV	11	29.43	1	20.928999	84.882404	Puri	Odisha
+OD-01009	Exicom Station 1009	Exicom	25	10.66	1	19.836228	87.131083	Koraput	Odisha
+OD-00878	Fortum Station 878	Fortum	25	11.22	3	18.230845	83.076137	Berhampur	Odisha
+OD-00896	OkinawaCharge Station 896	OkinawaCharge	60	15.7	1	20.780006	84.125027	Bhubaneswar	Odisha
+OD-00914	EVRE Station 914	EVRE	22	15.81	3	19.420641	85.415205	Rayagada	Odisha
+OD-01199	Fortum Station 1199	Fortum	120	16.27	1	18.291909	82.936648	Sambalpur	Odisha
+OD-00153	AtherGrid Station 153	AtherGrid	120	23.37	6	22.114795	84.751674	Jajpur	Odisha
+OD-00979	EVRE Station 979	EVRE	22	33.15	4	19.258801	86.966033	Bhadrak	Odisha
+OD-01003	Magenta Station 1003	Magenta EV	25	22.71	3	17.951271	82.768467	Rayagada	Odisha
+OD-00510	ChargeGrid Station 510	ChargeGrid	120	13.42	1	18.558608	81.362562	Balasore	Odisha
+OD-00112	Magenta Station 112	Magenta EV	30	23.06	1	20.549984	84.799643	Dhenkanal	Odisha
+OD-00227	ChargePoint Station 227	ChargePoint	22	24.53	4	20.018872	85.397085	Sonepur	Odisha
+OD-00986	ABB Station 986	ABB	120	26.46	6	21.416218	85.810205	Sonepur	Odisha
+OD-00852	Tata Station 852	Tata Power EZ Charge	22	33.01	8	20.719674	86.413803	Baripada	Odisha
+OD-00104	Tata Station 104	Tata Power EZ Charge	25	17.61	1	22.14993	82.09824	Balasore	Odisha
+OD-00422	OkinawaCharge Station 422	OkinawaCharge	22	11.79	1	20.025066	81.470728	Bhubaneswar	Odisha
+OD-00420	ChargePoint Station 420	ChargePoint	11	18.42	2	21.616945	84.995131	Sonepur	Odisha
+OD-00625	Blink Station 625	Blink	120	23.11	6	21.072604	85.380112	Sonepur	Odisha
+OD-00587	EV Station 587	EV Motors India	3.3	26.8	1	19.490554	86.395352	Cuttack	Odisha
+OD-01061	Exicom Station 1061	Exicom	60	22.25	3	20.398693	87.365651	Balasore	Odisha
+OD-00920	AtherGrid Station 920	AtherGrid	7.2	34.91	1	19.719663	81.989135	Angul	Odisha
+OD-00673	ChargePoint Station 673	ChargePoint	50	24.55	6	22.380107	85.403022	Puri	Odisha
+OD-00120	AtherGrid Station 120	AtherGrid	25	12.17	4	20.001929	84.602054	Keonjhar	Odisha
+OD-00054	ChargePoint Station 54	ChargePoint	25	12.68	1	18.313473	82.851506	Baripada	Odisha
+OD-00152	Fortum Station 152	Fortum	60	22.9	1	18.820221	82.515901	Sonepur	Odisha
+OD-00404	Delta Station 404	Delta Electronics	25	31.76	2	20.488854	81.483943	Angul	Odisha
+OD-01189	Delta Station 1189	Delta Electronics	25	16.54	3	21.524774	81.622849	Bhadrak	Odisha
+OD-00208	EVRE Station 208	EVRE	22	11.51	2	21.442969	81.452439	Sonepur	Odisha
+OD-01135	Tata Station 1135	Tata Power EZ Charge	50	34.55	1	21.873758	81.522988	Bhadrak	Odisha
+OD-00659	AtherGrid Station 659	AtherGrid	3.3	17.29	2	21.311601	85.3837	Berhampur	Odisha
+OD-01097	AtherGrid Station 1097	AtherGrid	3.3	30.94	6	20.31426	86.283931	Berhampur	Odisha
+OD-00233	Tata Station 233	Tata Power EZ Charge	50	12.7	2	22.496059	83.878626	Dhenkanal	Odisha
+OD-00009	EVRE Station 9	EVRE	30	22.76	4	18.461243	87.311425	Sambalpur	Odisha
+OD-00160	Siemens Station 160	Siemens	60	32.15	2	21.659247	83.936324	Angul	Odisha
+OD-00037	AtherGrid Station 37	AtherGrid	11	34.85	8	18.414811	81.412067	Cuttack	Odisha
+OD-00453	Siemens Station 453	Siemens	22	22.98	8	20.812872	84.562926	Bhadrak	Odisha
+OD-00652	OkinawaCharge Station 652	OkinawaCharge	60	34.14	6	19.822916	84.409411	Koraput	Odisha
+OD-00254	EESL Station 254	EESL	60	26.62	1	21.01787	82.637186	Koraput	Odisha
+OD-00304	Tata Station 304	Tata Power EZ Charge	25	13.96	6	18.403513	85.365487	Jajpur	Odisha
+OD-00897	Siemens Station 897	Siemens	50	15.61	2	19.153806	87.032779	Nayagarh	Odisha
+OD-01049	ABB Station 1049	ABB	30	12.03	1	20.870936	82.368795	Cuttack	Odisha
+OD-00881	Tata Station 881	Tata Power EZ Charge	11	29.91	4	20.007825	81.655324	Angul	Odisha
+OD-00572	Tata Station 572	Tata Power EZ Charge	3.3	9.86	2	19.966126	84.776205	Bhubaneswar	Odisha
+OD-00624	OkinawaCharge Station 624	OkinawaCharge	50	23.19	6	21.478834	87.130599	Angul	Odisha
+OD-01145	ABB Station 1145	ABB	3.3	8.04	6	18.972739	86.764744	Sonepur	Odisha
+OD-01031	Siemens Station 1031	Siemens	60	23.83	1	20.060309	82.492358	Balasore	Odisha
+OD-01146	AtherGrid Station 1146	AtherGrid	120	23.58	1	18.305175	83.508402	Angul	Odisha
+OD-00263	AtherGrid Station 263	AtherGrid	25	17.21	3	19.477017	83.772701	Cuttack	Odisha
+OD-00611	EESL Station 611	EESL	60	18.14	8	21.660382	86.784416	Rayagada	Odisha
+OD-00298	ABB Station 298	ABB	22	22.84	3	22.522275	83.981487	Sambalpur	Odisha
+OD-00990	Siemens Station 990	Siemens	50	17.52	1	18.155773	82.105113	Berhampur	Odisha
+OD-00415	ChargePoint Station 415	ChargePoint	25	31	4	19.600269	81.781211	Balasore	Odisha
+OD-00151	Siemens Station 151	Siemens	11	22.22	4	21.663899	87.369375	Bhadrak	Odisha
+OD-00946	EV Station 946	EV Motors India	60	24.19	6	20.361827	84.486524	Baripada	Odisha
+OD-00473	ABB Station 473	ABB	22	22.01	1	21.02322	83.233556	Kendrapara	Odisha
+OD-00953	Exicom Station 953	Exicom	11	13.38	3	19.308676	85.145456	Bhadrak	Odisha
+OD-00988	AtherGrid Station 988	AtherGrid	30	30.13	6	19.199042	83.467609	Jagatsinghpur	Odisha
+OD-00779	Blink Station 779	Blink	3.3	26.69	3	18.227934	83.878075	Malkangiri	Odisha
+OD-00641	EESL Station 641	EESL	7.2	14.41	8	17.757995	85.792509	Rourkela	Odisha
+OD-01190	EESL Station 1190	EESL	22	20.88	8	18.180582	82.760509	Angul	Odisha
+OD-01143	Blink Station 1143	Blink	50	10.33	1	20.407511	84.417257	Berhampur	Odisha
+OD-00551	Siemens Station 551	Siemens	3.3	13.57	1	21.658538	83.368362	Keonjhar	Odisha
+OD-00640	EV Station 640	EV Motors India	3.3	19.83	1	21.863738	82.296213	Malkangiri	Odisha
+OD-00936	AtherGrid Station 936	AtherGrid	22	8.38	1	18.839686	84.089651	Puri	Odisha
+OD-00929	Tata Station 929	Tata Power EZ Charge	22	14.77	1	20.150214	86.934966	Kendrapara	Odisha
+OD-00489	AtherGrid Station 489	AtherGrid	120	25.19	8	20.090827	83.821379	Koraput	Odisha
+OD-00820	Tata Station 820	Tata Power EZ Charge	3.3	17.97	1	19.3574	83.433368	Malkangiri	Odisha
+OD-00711	Siemens Station 711	Siemens	60	26.19	1	21.903814	83.310842	Nayagarh	Odisha
+OD-01081	ChargePoint Station 1081	ChargePoint	3.3	29.28	8	19.045513	82.140885	Keonjhar	Odisha
+OD-00148	EV Station 148	EV Motors India	3.3	18.2	3	21.850137	84.942212	Nayagarh	Odisha
+OD-00147	Fortum Station 147	Fortum	3.3	9.81	8	21.399794	82.601415	Angul	Odisha
+OD-01175	EVRE Station 1175	EVRE	22	14.04	2	22.353967	83.436499	Bhubaneswar	Odisha
+OD-00963	Siemens Station 963	Siemens	22	20	1	17.640822	84.085463	Bhadrak	Odisha
+OD-00346	EV Station 346	EV Motors India	30	26.84	3	22.334008	86.152008	Angul	Odisha
+OD-00403	EV Station 403	EV Motors India	30	15.5	4	21.746747	83.064286	Angul	Odisha
+OD-00932	ABB Station 932	ABB	11	27.14	8	20.55566	86.387669	Balasore	Odisha
+OD-00955	ABB Station 955	ABB	11	18.55	3	22.577574	87.218931	Bhadrak	Odisha
+OD-01125	EESL Station 1125	EESL	22	13.35	2	18.248817	87.496701	Jajpur	Odisha
+OD-00660	ChargeGrid Station 660	ChargeGrid	11	22.12	4	21.138388	83.847314	Sonepur	Odisha
+OD-00464	Exicom Station 464	Exicom	25	10.83	1	20.092568	83.687745	Nayagarh	Odisha
+OD-00187	Magenta Station 187	Magenta EV	7.2	23.91	4	18.941781	86.944102	Sonepur	Odisha
+OD-00609	Delta Station 609	Delta Electronics	60	9.4	2	17.665068	83.924678	Kendrapara	Odisha
+OD-00144	EESL Station 144	EESL	11	12.76	4	20.091512	83.897338	Kendrapara	Odisha
+OD-00752	ChargeGrid Station 752	ChargeGrid	3.3	33.37	6	21.426695	84.937068	Sambalpur	Odisha
+OD-00982	Exicom Station 982	Exicom	22	32.05	6	19.834996	84.147683	Berhampur	Odisha
+OD-00198	Blink Station 198	Blink	25	30.98	3	20.074762	84.279637	Jagatsinghpur	Odisha
+OD-00884	ABB Station 884	ABB	7.2	15.55	8	18.209126	85.813676	Koraput	Odisha
+OD-00280	Delta Station 280	Delta Electronics	25	24.09	1	19.586177	83.575128	Sambalpur	Odisha
+OD-00294	Exicom Station 294	Exicom	50	30.11	2	19.177145	81.441942	Balasore	Odisha
+OD-01089	AtherGrid Station 1089	AtherGrid	25	21.53	2	19.495617	87.326892	Puri	Odisha
+OD-00401	Blink Station 401	Blink	22	23.95	8	20.292439	86.595643	Rourkela	Odisha
+OD-00123	OkinawaCharge Station 123	OkinawaCharge	60	19.12	4	19.314115	87.063081	Kendrapara	Odisha
+OD-00203	OkinawaCharge Station 203	OkinawaCharge	7.2	23.02	2	21.434506	82.903868	Puri	Odisha
+OD-00836	Delta Station 836	Delta Electronics	11	17.11	4	21.803123	81.303707	Nayagarh	Odisha
+OD-00247	AtherGrid Station 247	AtherGrid	25	10.39	3	18.037207	84.924958	Rourkela	Odisha
+OD-01140	ChargePoint Station 1140	ChargePoint	11	17.86	6	21.8764	84.738647	Koraput	Odisha
+OD-00385	EESL Station 385	EESL	22	9.13	1	21.347501	86.992075	Keonjhar	Odisha
+OD-00855	EESL Station 855	EESL	7.2	12.86	1	18.071288	86.778841	Keonjhar	Odisha
+OD-00220	EV Station 220	EV Motors India	30	25.74	8	21.436708	87.206422	Sonepur	Odisha
+OD-00642	ABB Station 642	ABB	120	15.59	8	18.402179	83.654459	Keonjhar	Odisha
+OD-00002	Delta Station 2	Delta Electronics	25	11.86	2	20.88462	81.649752	Kendrapara	Odisha
+OD-00113	ABB Station 113	ABB	25	32.29	4	20.659287	82.81499	Bhadrak	Odisha
+OD-00699	Magenta Station 699	Magenta EV	22	13.84	2	18.58466	83.13763	Dhenkanal	Odisha
+OD-00952	ChargePoint Station 952	ChargePoint	30	19.27	1	19.110278	87.11452	Cuttack	Odisha
+OD-01079	EESL Station 1079	EESL	7.2	22.23	4	20.420291	82.359045	Angul	Odisha
+OD-00442	ChargePoint Station 442	ChargePoint	7.2	15.53	1	18.595666	87.236178	Jagatsinghpur	Odisha
+OD-00664	ChargePoint Station 664	ChargePoint	50	29.32	1	21.390436	84.779785	Koraput	Odisha
+OD-01197	Tata Station 1197	Tata Power EZ Charge	30	21.72	6	21.324488	87.450864	Nayagarh	Odisha
+OD-00318	OkinawaCharge Station 318	OkinawaCharge	11	29.16	6	19.345175	83.855212	Malkangiri	Odisha
+OD-00649	Fortum Station 649	Fortum	11	15.51	1	18.239727	83.241612	Sambalpur	Odisha
+OD-00710	OkinawaCharge Station 710	OkinawaCharge	25	29.37	1	20.632843	84.472159	Bhubaneswar	Odisha
+OD-00973	Siemens Station 973	Siemens	11	33.17	1	21.962675	82.357727	Dhenkanal	Odisha
+OD-00628	OkinawaCharge Station 628	OkinawaCharge	30	34.2	2	22.348078	85.897936	Keonjhar	Odisha
+OD-00633	Fortum Station 633	Fortum	30	8.02	2	22.027479	86.214088	Malkangiri	Odisha
+OD-01172	AtherGrid Station 1172	AtherGrid	7.2	11.52	2	17.565405	82.254572	Baripada	Odisha
+OD-01107	ChargeGrid Station 1107	ChargeGrid	50	12.54	8	18.487661	84.156415	Puri	Odisha
+OD-00796	Exicom Station 796	Exicom	120	27.09	2	20.945353	86.30785	Dhenkanal	Odisha
+OD-00646	EVRE Station 646	EVRE	60	25.2	2	20.605921	85.350978	Nayagarh	Odisha
+OD-01013	Exicom Station 1013	Exicom	7.2	12.7	4	17.740222	84.8935	Rourkela	Odisha
+OD-00557	ChargeGrid Station 557	ChargeGrid	25	13.01	1	20.953941	86.766482	Balasore	Odisha
+OD-00682	Magenta Station 682	Magenta EV	50	14.78	4	21.889904	84.300928	Koraput	Odisha
+OD-00578	EVRE Station 578	EVRE	7.2	29.7	3	19.754056	87.482531	Rayagada	Odisha
+OD-00525	EESL Station 525	EESL	120	26.28	2	20.750152	83.262608	Koraput	Odisha
+OD-01060	Delta Station 1060	Delta Electronics	7.2	17	1	20.058026	84.85119	Puri	Odisha
+OD-00541	EVRE Station 541	EVRE	120	19.02	3	17.580053	84.914142	Sambalpur	Odisha
+OD-00749	Magenta Station 749	Magenta EV	3.3	13.64	2	17.80454	84.72467	Cuttack	Odisha
+OD-01110	ChargePoint Station 1110	ChargePoint	50	12.02	8	21.534536	84.070059	Puri	Odisha
+OD-00485	ABB Station 485	ABB	60	19.22	4	19.069967	86.018747	Malkangiri	Odisha
+OD-00096	OkinawaCharge Station 96	OkinawaCharge	50	29.19	6	20.824679	86.291277	Angul	Odisha
+OD-01021	AtherGrid Station 1021	AtherGrid	50	34.9	2	19.967575	86.359552	Balasore	Odisha
+OD-00564	EV Station 564	EV Motors India	22	21.21	6	19.733965	85.891882	Rayagada	Odisha
+OD-00743	Fortum Station 743	Fortum	50	23.78	1	22.540473	83.642603	Baripada	Odisha
+OD-00864	ChargePoint Station 864	ChargePoint	3.3	30.39	1	18.489752	86.986768	Keonjhar	Odisha
+OD-00892	ABB Station 892	ABB	22	30.52	8	18.113457	81.579938	Cuttack	Odisha
+OD-01039	EESL Station 1039	EESL	50	13.73	1	18.742788	83.043964	Sambalpur	Odisha
+OD-00207	EESL Station 207	EESL	3.3	9.82	2	20.527286	83.444475	Sambalpur	Odisha
+OD-00393	Magenta Station 393	Magenta EV	25	21.19	2	21.335342	84.556486	Berhampur	Odisha
+OD-00795	Magenta Station 795	Magenta EV	60	16.34	1	19.026381	82.949186	Dhenkanal	Odisha
+OD-00871	Blink Station 871	Blink	60	20.06	4	18.141939	82.577076	Bhubaneswar	Odisha
+OD-00398	AtherGrid Station 398	AtherGrid	7.2	24.22	8	21.366688	84.43885	Rourkela	Odisha
+OD-00767	Delta Station 767	Delta Electronics	50	23.28	8	22.065774	84.758817	Rayagada	Odisha
+OD-01100	EVRE Station 1100	EVRE	120	17.46	2	17.93294	85.792259	Malkangiri	Odisha
+OD-01029	EESL Station 1029	EESL	7.2	9.5	1	22.240985	85.652912	Bhubaneswar	Odisha
+OD-00643	Siemens Station 643	Siemens	11	23.35	2	20.887882	82.606845	Jajpur	Odisha
+OD-00613	OkinawaCharge Station 613	OkinawaCharge	25	11.45	4	19.307037	83.999441	Jajpur	Odisha
+OD-00961	ChargePoint Station 961	ChargePoint	60	12.22	1	21.40935	84.823265	Rayagada	Odisha
+OD-00726	Tata Station 726	Tata Power EZ Charge	11	8.35	4	20.309557	86.577135	Rourkela	Odisha
+OD-00684	EESL Station 684	EESL	3.3	34.08	8	19.554808	85.815899	Kendrapara	Odisha
+OD-00099	Exicom Station 99	Exicom	3.3	29.5	3	19.888603	86.520967	Bhadrak	Odisha
+OD-00805	Magenta Station 805	Magenta EV	120	32.22	2	21.899846	82.433443	Baripada	Odisha
+OD-00407	Blink Station 407	Blink	50	30.17	2	17.508139	85.245688	Bhubaneswar	Odisha
+OD-00503	Delta Station 503	Delta Electronics	11	21.95	3	21.445637	83.051476	Kendrapara	Odisha
+OD-01072	Magenta Station 1072	Magenta EV	22	26.88	2	18.082461	86.566679	Cuttack	Odisha
+OD-01057	Siemens Station 1057	Siemens	7.2	28.49	3	18.050142	84.438067	Rourkela	Odisha
+OD-00930	Siemens Station 930	Siemens	25	33.03	2	22.502704	84.455546	Puri	Odisha
+OD-00780	AtherGrid Station 780	AtherGrid	50	34.91	2	18.20313	85.487827	Jagatsinghpur	Odisha
+OD-00201	ABB Station 201	ABB	120	26.36	3	20.716779	85.966843	Jagatsinghpur	Odisha
+OD-00135	Exicom Station 135	Exicom	22	27.34	2	20.614953	86.426153	Nayagarh	Odisha
+OD-01052	Delta Station 1052	Delta Electronics	60	31.39	4	20.208587	85.449448	Berhampur	Odisha
+OD-00041	Tata Station 41	Tata Power EZ Charge	25	27.51	2	18.960016	81.450759	Dhenkanal	Odisha
+OD-01018	ChargePoint Station 1018	ChargePoint	11	9.47	6	17.596362	82.190453	Puri	Odisha
+OD-00231	ChargePoint Station 231	ChargePoint	7.2	27.42	4	18.687965	87.47727	Nayagarh	Odisha
+OD-00379	ChargeGrid Station 379	ChargeGrid	11	11.41	1	21.016123	83.315645	Angul	Odisha
+OD-00289	AtherGrid Station 289	AtherGrid	22	9.7	1	18.111775	82.709615	Koraput	Odisha
+OD-00419	ChargeGrid Station 419	ChargeGrid	60	17.34	1	18.303191	81.457776	Sambalpur	Odisha
+OD-00392	EV Station 392	EV Motors India	11	34.88	2	21.94962	84.532963	Angul	Odisha
+OD-00593	OkinawaCharge Station 593	OkinawaCharge	25	9.05	2	20.967606	83.30277	Rourkela	Odisha
+OD-01087	Fortum Station 1087	Fortum	120	29.56	3	21.177587	82.480367	Jajpur	Odisha
+OD-00648	EESL Station 648	EESL	22	20.3	1	21.026192	84.666733	Angul	Odisha
+OD-00521	Exicom Station 521	Exicom	22	18.46	8	22.214175	81.399584	Angul	Odisha
+OD-00065	EESL Station 65	EESL	60	19.28	2	22.531419	84.697426	Rayagada	Odisha
+OD-00015	Fortum Station 15	Fortum	50	16.78	4	21.293952	85.252856	Jagatsinghpur	Odisha
+OD-01065	Exicom Station 1065	Exicom	22	15.72	4	21.258397	87.160904	Balasore	Odisha
+OD-00493	EV Station 493	EV Motors India	22	14.27	6	19.88282	86.144363	Jajpur	Odisha
+OD-00380	Delta Station 380	Delta Electronics	50	31.1	4	18.681334	86.489655	Jajpur	Odisha
+OD-00188	ABB Station 188	ABB	3.3	26.35	1	18.63492	87.189759	Dhenkanal	Odisha
+OD-00764	Siemens Station 764	Siemens	50	8.33	3	18.243397	85.90222	Puri	Odisha
+OD-00217	Magenta Station 217	Magenta EV	120	11.17	4	18.150966	85.550505	Rourkela	Odisha
+OD-00792	Tata Station 792	Tata Power EZ Charge	7.2	13.36	8	18.783657	83.199776	Nayagarh	Odisha
+OD-01077	Fortum Station 1077	Fortum	25	9.67	2	19.840334	82.569261	Sonepur	Odisha
+OD-00879	ChargeGrid Station 879	ChargeGrid	120	27.02	2	22.328704	85.88021	Jajpur	Odisha
+OD-00338	ChargeGrid Station 338	ChargeGrid	30	17.6	4	21.629826	81.876542	Puri	Odisha
+OD-00720	Magenta Station 720	Magenta EV	22	22.19	4	21.12873	86.881637	Balasore	Odisha
+OD-00296	Magenta Station 296	Magenta EV	3.3	32.25	4	21.812529	83.268695	Bhubaneswar	Odisha
+OD-01017	Siemens Station 1017	Siemens	7.2	19.31	4	20.175721	85.695578	Baripada	Odisha
+OD-00456	Delta Station 456	Delta Electronics	7.2	9.47	6	21.392955	83.269038	Sonepur	Odisha
+OD-00816	Exicom Station 816	Exicom	22	10.85	6	21.86204	85.46028	Berhampur	Odisha
+OD-00270	Delta Station 270	Delta Electronics	22	21.06	2	21.691161	84.711405	Bhadrak	Odisha
+OD-00996	Exicom Station 996	Exicom	60	14	2	18.582151	85.973065	Bhadrak	Odisha
+OD-00202	ChargeGrid Station 202	ChargeGrid	120	31.73	2	17.526755	86.383671	Puri	Odisha
+OD-00162	EV Station 162	EV Motors India	22	22.19	1	18.392732	82.988305	Kendrapara	Odisha
+OD-00730	Exicom Station 730	Exicom	22	20.52	4	19.164142	84.25406	Jagatsinghpur	Odisha
+OD-00402	EV Station 402	EV Motors India	60	30.79	2	18.981522	84.169682	Angul	Odisha
+OD-00703	Fortum Station 703	Fortum	11	25.5	2	22.050614	86.201227	Baripada	Odisha
+OD-01130	EESL Station 1130	EESL	120	25.55	4	21.419595	85.156457	Balasore	Odisha
+OD-00566	EV Station 566	EV Motors India	11	11.28	4	20.800124	84.909292	Angul	Odisha
+OD-01022	EESL Station 1022	EESL	3.3	29.97	1	21.217755	82.842542	Balasore	Odisha
+OD-01026	EVRE Station 1026	EVRE	50	27.39	2	19.802007	85.839759	Nayagarh	Odisha
+OD-01105	Magenta Station 1105	Magenta EV	120	10.2	6	18.505364	87.194617	Bhubaneswar	Odisha
+OD-00206	EV Station 206	EV Motors India	25	29.3	3	18.403518	86.079295	Dhenkanal	Odisha
+OD-00035	Delta Station 35	Delta Electronics	22	33.26	2	21.583771	85.447727	Bhubaneswar	Odisha
+OD-00776	EVRE Station 776	EVRE	7.2	17.45	6	21.568614	87.453591	Rayagada	Odisha
+OD-00509	ChargeGrid Station 509	ChargeGrid	25	22.36	4	20.570242	81.680252	Rayagada	Odisha
+OD-01184	Siemens Station 1184	Siemens	50	19.51	1	20.372072	85.013075	Sonepur	Odisha
+OD-00092	ChargeGrid Station 92	ChargeGrid	25	30.94	1	18.78621	84.093374	Berhampur	Odisha
+OD-00898	EVRE Station 898	EVRE	120	24.48	8	20.341317	82.848414	Jajpur	Odisha
+OD-00565	ChargeGrid Station 565	ChargeGrid	30	21.9	2	18.339087	81.818037	Cuttack	Odisha
+OD-00777	EV Station 777	EV Motors India	30	14.07	3	19.576529	83.839972	Keonjhar	Odisha
+OD-00242	Fortum Station 242	Fortum	11	12.58	4	20.202825	83.38942	Rayagada	Odisha
+OD-00014	Siemens Station 14	Siemens	120	31.3	2	20.74115	83.351568	Puri	Odisha
+OD-00316	ABB Station 316	ABB	50	25.79	2	21.671079	81.953279	Jajpur	Odisha
+OD-00601	Exicom Station 601	Exicom	50	18.24	8	19.431727	85.134868	Jagatsinghpur	Odisha
+OD-00388	OkinawaCharge Station 388	OkinawaCharge	22	13.9	4	18.125286	81.723714	Nayagarh	Odisha
+OD-00167	Tata Station 167	Tata Power EZ Charge	11	24.29	3	18.775815	83.713633	Kendrapara	Odisha
+OD-00841	Exicom Station 841	Exicom	7.2	9.15	3	21.996192	82.035696	Cuttack	Odisha
+OD-00021	Siemens Station 21	Siemens	50	17.62	2	22.215508	82.98722	Kendrapara	Odisha
+OD-00647	ChargePoint Station 647	ChargePoint	7.2	33.57	4	22.101247	85.882215	Balasore	Odisha
+OD-01155	ChargeGrid Station 1155	ChargeGrid	30	10.75	1	21.288168	82.537952	Rayagada	Odisha
+OD-00832	EESL Station 832	EESL	50	21.74	3	21.979518	86.669421	Berhampur	Odisha
+OD-00563	Exicom Station 563	Exicom	120	24.48	6	18.3339	85.476602	Jagatsinghpur	Odisha
+OD-01171	Magenta Station 1171	Magenta EV	25	25.86	2	22.197023	81.91099	Baripada	Odisha
+OD-00687	EESL Station 687	EESL	120	12.89	1	20.738318	82.680592	Angul	Odisha
+OD-00958	Magenta Station 958	Magenta EV	60	9.64	1	21.148139	81.360931	Angul	Odisha
+OD-00190	EVRE Station 190	EVRE	120	34.76	6	18.704693	87.144937	Rayagada	Odisha
+OD-00976	EESL Station 976	EESL	7.2	25.48	2	18.16742	85.33116	Sambalpur	Odisha
+OD-00700	Blink Station 700	Blink	22	15.24	1	19.377589	83.832425	Malkangiri	Odisha
+OD-00511	Exicom Station 511	Exicom	11	27.69	4	22.527597	82.69062	Malkangiri	Odisha
+OD-01083	AtherGrid Station 1083	AtherGrid	30	14.57	8	21.879407	82.597698	Kendrapara	Odisha
+OD-00475	EESL Station 475	EESL	120	12.91	1	19.76464	83.359016	Bhadrak	Odisha
+OD-00857	ABB Station 857	ABB	25	14.5	8	19.511398	81.799601	Bhadrak	Odisha
+OD-00748	Blink Station 748	Blink	7.2	31.44	4	19.04628	82.307736	Puri	Odisha
+OD-00253	EV Station 253	EV Motors India	7.2	24.68	1	22.018306	84.83778	Bhadrak	Odisha
+OD-00022	Blink Station 22	Blink	120	8.19	2	20.155886	83.887948	Malkangiri	Odisha
+OD-00460	Exicom Station 460	Exicom	11	18.19	1	22.36887	85.485868	Dhenkanal	Odisha
+OD-00277	Blink Station 277	Blink	120	11.83	4	18.927609	85.001691	Rayagada	Odisha
+OD-00956	Magenta Station 956	Magenta EV	120	9.84	3	19.147902	82.954126	Rourkela	Odisha
+OD-00386	ABB Station 386	ABB	11	32.59	4	21.420602	86.290422	Jagatsinghpur	Odisha
+OD-00806	Magenta Station 806	Magenta EV	50	17.16	4	17.824643	84.314277	Balasore	Odisha
+OD-00344	OkinawaCharge Station 344	OkinawaCharge	30	30.67	6	19.495931	84.845608	Malkangiri	Odisha
+OD-00770	ChargePoint Station 770	ChargePoint	120	29.51	1	21.435142	85.519461	Sonepur	Odisha
+OD-00131	OkinawaCharge Station 131	OkinawaCharge	3.3	28.02	2	20.480384	87.485694	Dhenkanal	Odisha
+OD-00872	Delta Station 872	Delta Electronics	7.2	34.39	1	18.760239	85.412526	Sambalpur	Odisha
+OD-01124	Fortum Station 1124	Fortum	120	11.41	1	20.253575	82.966942	Berhampur	Odisha
+OD-00088	Siemens Station 88	Siemens	60	31.38	4	17.735137	81.463475	Cuttack	Odisha
+OD-00331	Fortum Station 331	Fortum	50	25.18	2	21.457832	82.292444	Nayagarh	Odisha
+OD-00467	AtherGrid Station 467	AtherGrid	30	25.49	8	21.640451	85.974943	Baripada	Odisha
+OD-00122	Delta Station 122	Delta Electronics	7.2	14.88	2	21.043814	86.013413	Rayagada	Odisha
+OD-01045	ABB Station 1045	ABB	25	12.94	2	20.450705	83.637448	Berhampur	Odisha
+OD-01096	ABB Station 1096	ABB	7.2	22.83	3	20.572505	85.346914	Cuttack	Odisha
+OD-01131	AtherGrid Station 1131	AtherGrid	25	24	8	20.008964	85.159967	Jajpur	Odisha
+OD-00861	Siemens Station 861	Siemens	22	24.18	3	18.546572	86.819467	Sonepur	Odisha
+OD-01127	Delta Station 1127	Delta Electronics	50	24.62	4	19.609715	81.554711	Keonjhar	Odisha

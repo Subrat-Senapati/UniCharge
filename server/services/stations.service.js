@@ -25,20 +25,20 @@ const loadStationsFromCSV = () => {
 
     stationsCache = parsed.data
       .filter((row) => row["Latitude"] && row["Longitude"])
-      .map((row, index) => ({
-        id: index + 1,
+      .map((row) => ({
+        id: row["Station_id"],
         city: row["City"] || "",
-        station: row["Station"] || "Unknown Station",
+        station: row["Station_name"] || "Unknown Station",
         brand: row["Brand"] || "Unknown",
         latitude: parseFloat(row["Latitude"]),
         longitude: parseFloat(row["Longitude"]),
         powerKW: row["Max_kW"] || "N/A",
         pricePerKWh: parseFloat(row["Price_per_kWh_Rs"]) || 0,
-        portNum: parseInt(row["Num_Ports"]) || 1,
+        portNum: parseInt(row["ports"]) || 1,
         address: row["Address"] || "",
         operator: row["Operator"] || "Unknown",
         status: 'active', // Default status
-        connectors: generateConnectors(row) // Generate connectors based on CSV data
+        connectors: generateConnectors(row)
       }));
 
     console.log(`✅ Loaded ${stationsCache.length} stations`);

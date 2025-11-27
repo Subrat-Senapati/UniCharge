@@ -113,7 +113,7 @@ const NotificationDetailModal = ({ notification, onClose }) => {
 
 // --- Main Notification Component ---
 const Notification = () => {
-  const { user } = useAuth();
+  const { user, fetchProfile } = useAuth();
 
   // Filter out expired notifications and reverse for latest first
   const notificationsData = user?.notifications 
@@ -139,6 +139,7 @@ const Notification = () => {
 
         // Update UI instantly
         notification.isRead = true;
+        fetchProfile();
       } catch (err) {
         console.error("Failed to mark notification as read:", err);
       }

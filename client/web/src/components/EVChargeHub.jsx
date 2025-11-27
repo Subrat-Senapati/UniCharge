@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "../css/evchargehub.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,13 +18,6 @@ import {
     faMapPin,
     faExclamationTriangle,
     faInfoCircle,
-    faRoute,
-    faLocationArrow,
-    faWalking,
-    faCar,
-    faDirections,
-    faCompass,
-    faCreditCard
 } from "@fortawesome/free-solid-svg-icons";
 
 import { MapContainer, TileLayer, Marker, Popup, Circle, useMap, Polyline } from "react-leaflet";
@@ -72,7 +65,6 @@ const EVChargeHub = () => {
     const [location, setLocation] = useState("");
     const [loading, setLoading] = useState(false);
     const [loadingLocation, setLoadingLocation] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
     const [selectedStation, setSelectedStation] = useState(null);
     const [userPosition, setUserPosition] = useState(null);
     const [destination, setDestination] = useState("");
@@ -111,6 +103,8 @@ const EVChargeHub = () => {
     // Distance threshold for considering user "at station" (in meters)
     const LOCATION_THRESHOLD = 100; // 100 meters
     const { user, fetchProfile } = useAuth()
+    const locationTimerRef = useRef(null);
+    const destinationTimerRef = useRef(null);
 
     useEffect(() => {
         if (activeChargingSession) {
@@ -570,7 +564,6 @@ const EVChargeHub = () => {
 
     const cancelBooking = () => {
         stopLocationMonitoring();
-        setModalOpen(false);
         setIsBookingModalOpen(false);
         setNavigationModalOpen(false);
         setSelectedStation(null);
@@ -711,7 +704,6 @@ const EVChargeHub = () => {
 
             // Store route for map display
             setRoutePath(route.coordinates);
-            setLoading(false);
 
         } catch (error) {
             console.error("Route search error:", error);
@@ -720,6 +712,8 @@ const EVChargeHub = () => {
             setFilteredStations(allStations);
             setSearchRadius("route");
             setShowBrands(true);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -855,70 +849,73 @@ const EVChargeHub = () => {
     };
 
     const fetchLocationSuggestions = async (query) => {
+        clearTimeout(locationTimerRef.current);
+
         if (!query.trim()) {
             setSuggestions([]);
             return;
         }
 
-        try {
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`)}`;
+        locationTimerRef.current = setTimeout(async () => {
+            try {
+                const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
 
-            const res = await fetch(proxyUrl, {
-                headers: {
-                    'Accept': 'application/json',
-                    'User-Agent': 'EVChargeHub/1.0'
-                }
-            });
+                const res = await fetch(proxyUrl, {
+                    headers: { 'Accept': 'application/json' }
+                });
 
-            if (!res.ok) throw new Error('Network response was not ok');
+                if (!res.ok) throw new Error("Network error");
 
-            const data = await res.json();
-
-            setSuggestions(
-                data.map((item) => ({
-                    name: item.display_name,
-                    lat: item.lat,
-                    lon: item.lon,
-                }))
-            );
-        } catch (err) {
-            console.error("Auto-suggest error:", err);
-            setSuggestions([]);
-        }
+                const data = await res.json();
+                setSuggestions(
+                    data.map(item => ({
+                        name: item.display_name,
+                        lat: item.lat,
+                        lon: item.lon,
+                    }))
+                );
+            } catch (err) {
+                console.error("Auto-suggest error:", err);
+                setSuggestions([]);
+            }
+        }, 1000);
     };
 
     const fetchDestinationSuggestions = async (query) => {
+        clearTimeout(destinationTimerRef.current);
+
         if (!query.trim()) {
             setDestinationSuggestions([]);
             return;
         }
 
-        try {
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`)}`;
+        destinationTimerRef.current = setTimeout(async () => {
+            try {
+                const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
 
-            const res = await fetch(proxyUrl, {
-                headers: {
-                    'Accept': 'application/json',
-                    'User-Agent': 'EVChargeHub/1.0'
-                }
-            });
+                const res = await fetch(proxyUrl, {
+                    headers: { 'Accept': 'application/json' }
+                });
 
-            if (!res.ok) throw new Error('Network response was not ok');
+                if (!res.ok) throw new Error("Network error");
 
-            const data = await res.json();
-
-            setDestinationSuggestions(
-                data.map((item) => ({
-                    name: item.display_name,
-                    lat: item.lat,
-                    lon: item.lon,
-                }))
-            );
-        } catch (err) {
-            console.error("Destination auto-suggest error:", err);
-            setDestinationSuggestions([]);
-        }
+                const data = await res.json();
+                setDestinationSuggestions(
+                    data.map(item => ({
+                        name: item.display_name,
+                        lat: item.lat,
+                        lon: item.lon,
+                    }))
+                );
+            } catch (err) {
+                console.error("Destination suggest error:", err);
+                setDestinationSuggestions([]);
+            }
+        }, 1000);
     };
+
 
     // Generate connector data based on station
     const generateConnectors = (station) => {
