@@ -36,7 +36,10 @@ const Login = () => {
         return;
       }
 
-      localStorage.setItem("token", data.token);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        document.cookie = `token=${data.token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=None; Secure`;
+      }
       setUser(data.user);
 
       navigate("/home");
@@ -46,8 +49,10 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = `${import.meta.env.VITE_SERVER_URL}/api/users/google`;
+  const handleGoogleLogin = async () => {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/profile`, {
+      credentials: "include",
+    });
   };
 
   return (
