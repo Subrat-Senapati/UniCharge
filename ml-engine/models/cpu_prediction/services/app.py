@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 # Load trained model
-with open("model.pkl", "rb") as f:
+with open(r"C:\Users\RAJIB\Desktop\UniCharge\ml-engine\models\cpu_prediction\pickle_files\model_before.pkl", "rb") as f:
     model = pickle.load(f)
 
 app = Flask(__name__)
@@ -39,4 +39,3 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
-s
