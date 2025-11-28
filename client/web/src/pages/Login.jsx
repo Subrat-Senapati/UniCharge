@@ -49,10 +49,8 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/profile`, {
-      credentials: "include",
-    });
+  const handleGoogleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_SERVER_URL}/api/users/google`;
   };
 
   return (
