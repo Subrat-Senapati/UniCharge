@@ -6,12 +6,13 @@ import pickle
 import pandas as pd
 
 # Load trained model
-MODEL_PATH = r"..\pickle_files\model_before.pkl"
+# Load trained model
+MODEL_PATH = r"pickle_files\model_before.pkl"
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
 # Load dataset once to get dummy column structure
-df = pd.read_csv(r"..\datasets\cpu_before.csv")
+df = pd.read_csv(r"datasets\cpu_before.csv")
 numerical_features = [
     "AC_Charging_kW","DC_Charging_kW","AC_FullCharge_hr","DC_10_80_min",
     "Battery_Capacity_kWh","Range_km","Launch_Year"
