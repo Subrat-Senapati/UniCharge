@@ -1,5 +1,4 @@
 import Slider from "react-slick";
-import { Link, NavLink } from 'react-router-dom';
 
 import '../css/plugin.css';
 import '../css/default.css';
