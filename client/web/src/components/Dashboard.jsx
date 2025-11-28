@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Button, ListGroup, Badge } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
-import styles from "../css/Dashboard.module.css";
+import styles from "../css/dashboard.module.css";
 
 const Dashboard = () => {
   const { user } = useAuth();
