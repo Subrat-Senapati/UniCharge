@@ -4,15 +4,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated, Literal
 import pickle
 import pandas as pd
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Load trained model
 # Load trained model
-MODEL_PATH = r"pickle_files\model_before.pkl"
+MODEL_PATH = os.path.join(BASE_DIR, "pickle_files", "model_before.pkl")
+DATASET_PATH = os.path.join(BASE_DIR, "datasets", "cpu_before.csv")
+
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
 # Load dataset once to get dummy column structure
-df = pd.read_csv(r"datasets\cpu_before.csv")
+df = pd.read_csv(DATASET_PATH)
 numerical_features = [
     "AC_Charging_kW","DC_Charging_kW","AC_FullCharge_hr","DC_10_80_min",
     "Battery_Capacity_kWh","Range_km","Launch_Year"
