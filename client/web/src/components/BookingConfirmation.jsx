@@ -19,22 +19,6 @@ const BookingConfirmation = ({
     connector, 
     onClose, 
 }) => {
-    // Enhanced debug logging
-    console.log('🔍 BookingConfirmation rendered with:', {
-        hasBooking: !!booking,
-        booking: booking,
-        hasStation: !!station,
-        station: station,
-        hasConnector: !!connector,
-        connector: connector
-    });
-
-    if (!booking) {
-        console.log('❌ No booking data, returning null');
-        return null;
-    }
-
-    console.log('✅ Rendering BookingConfirmation with data');
 
     const handleCopyBookingId = () => {
         navigator.clipboard.writeText(booking._id);
@@ -69,7 +53,7 @@ const BookingConfirmation = ({
                     <div className={styles.headerLeft}>
                         <FontAwesomeIcon icon={faCheckCircle} className={styles.successIcon} />
                         <div className={styles.headerText}>
-                            <h2>Booking Confirmed!</h2>
+                            <h2 className="text-white">Booking Confirmed!</h2>
                             <p>Your charging session has been successfully booked</p>
                         </div>
                     </div>
@@ -141,13 +125,7 @@ const BookingConfirmation = ({
                                     Connector
                                 </span>
                                 <span className={styles.detailValue}>
-                                    {connector?.type || 'Unknown'} • {connector?.power || '0'}kW
-                                </span>
-                            </div>
-                            <div className={styles.detailItem}>
-                                <span className={styles.detailLabel}>Power</span>
-                                <span className={styles.detailValue}>
-                                    {station?.powerKW || '0'} kW
+                                    {connector?.power || '0'}kW
                                 </span>
                             </div>
                         </div>
@@ -208,24 +186,7 @@ const BookingConfirmation = ({
                                 <span className={styles.paymentLabel}>Payment Method</span>
                                 <span className={styles.paymentValue}>Wallet</span>
                             </div>
-                            <div className={styles.paymentItem}>
-                                <span className={styles.paymentLabel}>Payment Status</span>
-                                <span className={`${styles.status} ${styles.statusPaid}`}>
-                                    Paid
-                                </span>
-                            </div>
                         </div>
-                    </div>
-
-                    {/* Important Notes */}
-                    <div className={styles.notesSection}>
-                        <h4>Important Information</h4>
-                        <ul className={styles.notesList}>
-                            <li>📍 Arrive at the station 5 minutes before your scheduled time</li>
-                            <li>⚡ Your session will start automatically when you plug in</li>
-                            <li>💰 You'll only be charged for the actual energy consumed</li>
-                            <li>⏰ Session will automatically end at the scheduled time</li>
-                        </ul>
                     </div>
                 </div>
             </div>

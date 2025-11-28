@@ -7,11 +7,7 @@ const bookingSchema = new mongoose.Schema({
     required: true
   },
   stationId: {
-    type: String, // Changed from ObjectId to String to match CSV station IDs
-    required: true
-  },
-  connectorId: {
-    type: String,
+    type: Number, // Changed from ObjectId to Number to match CSV station IDs
     required: true
   },
   vehicleId: {
@@ -56,6 +52,10 @@ const bookingSchema = new mongoose.Schema({
     min: 0
   },
   totalCost: {
+    type: Number, // in rupees
+    min: 0
+  },
+  estimatedCost: {
     type: Number, // in rupees
     min: 0
   },

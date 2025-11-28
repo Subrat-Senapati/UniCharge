@@ -25,10 +25,10 @@ const loadStationsFromCSV = () => {
 
     stationsCache = parsed.data
       .filter((row) => row["Latitude"] && row["Longitude"])
-      .map((row) => ({
-        id: row["Station_id"],
+      .map((row, index) => ({
+        id: index + 1,
         city: row["City"] || "",
-        station: row["Station_name"] || "Unknown Station",
+        station: row["Station_Name"] || "Unknown Station",
         brand: row["Brand"] || "Unknown",
         latitude: parseFloat(row["Latitude"]),
         longitude: parseFloat(row["Longitude"]),

@@ -100,7 +100,7 @@ const EVChargeHub = () => {
     const [showTopBar, setShowTopBar] = useState(false);
     const [currentChargingCost, setCurrentChargingCost] = useState(0);
 
-    // Distance threshold for considering user "at station" (in meters)
+    const defaultCenter = [20.2961, 85.8245]; // Bhubaneswar fallback
     const LOCATION_THRESHOLD = 100; // 100 meters
     const { user, fetchProfile } = useAuth()
     const locationTimerRef = useRef(null);
@@ -142,7 +142,7 @@ const EVChargeHub = () => {
             const token = localStorage.getItem('token');
             if (!token) return;
 
-            // 1️⃣ Fetch all bookings of user
+            // Fetch all bookings of user
             const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/bookings`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -156,9 +156,7 @@ const EVChargeHub = () => {
             const bookings = (data.bookings || []).filter(
                 (b) => b.status !== "completed"
             );
-            console.log("User Bookings:", bookings);
-
-            // 2️⃣ Fetch stations
+            // Fetch stations
             const stationsRes = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/stations`);
             const stations = await stationsRes.json();
 
@@ -166,10 +164,10 @@ const EVChargeHub = () => {
             const stationMap = {};
             stations.forEach(s => stationMap[s.id] = s);
 
-            // 3️⃣ Get vehicles from AuthContext
+            // Get vehicles from AuthContext
             const userVehicles = user?.vehicles || [];
 
-            // 4️⃣ Merge station + vehicle into each booking
+            // Merge station + vehicle into each booking
             const enrichedBookings = bookings.map(b => {
                 const vehicle = userVehicles.find(v => v._id === b.vehicleId) || null;
                 const station = stationMap[b.stationId] || null;
@@ -183,7 +181,7 @@ const EVChargeHub = () => {
 
             console.log("Enriched Bookings:", enrichedBookings);
 
-            // 5️⃣ Find active session
+            // Find active session
             const now = new Date();
 
             const activeSession = enrichedBookings.find(b => {
@@ -198,7 +196,7 @@ const EVChargeHub = () => {
                 );
             });
 
-            // 6️⃣ Update state
+            // Update state
             if (activeSession) {
                 setActiveChargingSession(activeSession ? { ...activeSession } : null);
                 setShowActiveSession(true);
@@ -227,7 +225,7 @@ const EVChargeHub = () => {
             }
 
             // Charging NOW
-            const scheduledStart = new Date(Date.now() + 0.5 * 60000); // 2 minutes from now
+            const scheduledStart = new Date(Date.now() + 0.5 * 60000); // 5 sec from now
             const scheduledEnd = new Date(Date.now() + 60 * 60000);  // 65 minutes from now
 
 
@@ -238,10 +236,8 @@ const EVChargeHub = () => {
                 scheduledStart: new Date(scheduledStart).toISOString(),
                 scheduledEnd: new Date(scheduledEnd).toISOString(),
                 estimatedDuration: 60,
-                estimatedCost: selectedConnector.pricePerKwh * 20
+                estimatedCost: bookingData.estimatedCost || 225,
             };
-
-            console.log("Booking payload:", bookingPayload);
 
             const response = await fetch(
                 `${import.meta.env.VITE_SERVER_URL}/api/bookings`,
@@ -256,16 +252,11 @@ const EVChargeHub = () => {
             );
 
             const data = await response.json();
-            console.log("Booking response:", data);
 
             if (!response.ok) {
                 throw new Error(data.error || data.details?.[0]?.message || "Booking failed");
             }
 
-            // Update wallet if backend deducted money
-            if (data.walletUpdated) {
-                setUserWallet(data.newWalletBalance);
-            }
 
             // Save the confirmed booking
             setConfirmedBooking(data.booking);
@@ -274,7 +265,7 @@ const EVChargeHub = () => {
             // Refresh list
             await loadUserBookings();
 
-            // 👉 START CHARGING IMMEDIATELY using the new booking ID
+            // START CHARGING IMMEDIATELY using the new booking ID
             await handleStartCharging(data.booking._id);
 
         } catch (error) {
@@ -417,8 +408,6 @@ const EVChargeHub = () => {
         }
     }, []);
 
-    const defaultCenter = [20.2961, 85.8245]; // Bhubaneswar fallback
-
     // NEW: Check if user is at station location
     const checkUserAtStation = (station) => {
         if (!userPosition || !station) return false;
@@ -435,7 +424,30 @@ const EVChargeHub = () => {
         return distance * 1000 <= LOCATION_THRESHOLD; // Convert to meters and check
     };
 
-    // NEW: Enhanced booking logic with location verification
+    // Generate connector data based on station
+    const generateConnectors = (station) => {
+        const portNum = parseInt(station.PortNum) || 1;
+        const powerKW = station.powerKW || "50";
+        const pricePerKWh = parseFloat(station.pricePerKWh) || 10;
+
+        const connectors = [];
+        const connectorTypes = ['Type2', 'CCS', 'CHAdeMO'];
+
+        for (let i = 0; i < portNum; i++) {
+            connectors.push({
+                id: `connector_${i + 1}`,
+                type: connectorTypes[i % connectorTypes.length],
+                power: parseFloat(powerKW) || 50,
+                status: Math.random() > 0.3 ? 'available' : 'charging',
+                pricePerKwh: pricePerKWh,
+                output: i % 2 === 0 ? 'AC' : 'DC' // Alternate between AC and DC
+            });
+        }
+
+        return connectors;
+    };
+
+    // Enhanced booking logic with location verification
     const handleBookClick = async (station, connector = null) => {
         // Check if user is authenticated
         const token = localStorage.getItem('token');
@@ -452,41 +464,30 @@ const EVChargeHub = () => {
             connector = connectors.find(c => c.status === 'available') || connectors[0];
         }
         setSelectedConnector(connector);
-
         setCheckingLocation(true);
 
-        // Rest of the function remains the same...
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                async (pos) => {
-                    const lat = pos.coords.latitude;
-                    const lng = pos.coords.longitude;
-                    setUserPosition([lat, lng]);
-
-                    const isAtStation = checkUserAtStation(station);
-                    setUserAtStation(isAtStation);
-
-                    if (isAtStation) {
-                        // User is at station - proceed to booking
-                        setIsBookingModalOpen(true);
-                    } else {
-                        // User is not at station - show navigation
-                        await generateNavigationRoute(station);
-                        setNavigationModalOpen(true);
-                    }
-                    setCheckingLocation(false);
-                },
-                (error) => {
-                    console.error("Error getting location:", error);
-                    alert("Unable to verify your location. Please enable location services.");
-                    setCheckingLocation(false);
-                },
-                { enableHighAccuracy: true, timeout: 10000 }
-            );
+        // Use existing userPosition without refetching
+        if (!userPosition) {
+            alert("Your location is not available. Please enable location services.");
+            setCheckingLocation(false);
+            return;
         }
+
+        const isAtStation = checkUserAtStation(station);
+        setUserAtStation(isAtStation);
+
+        if (isAtStation) {
+            // User is at station - proceed to booking
+            setIsBookingModalOpen(true);
+        } else {
+            // User is not at station - show navigation
+            await generateNavigationRoute(station);
+            setNavigationModalOpen(true);
+        }
+        setCheckingLocation(false);
     };
 
-    // NEW: Generate navigation route to station
+    //Generate navigation route to station
     const generateNavigationRoute = async (station) => {
         if (!userPosition) return;
 
@@ -515,7 +516,7 @@ const EVChargeHub = () => {
         setNavigationInstructions(instructions);
     };
 
-    // NEW: Continuous location monitoring for navigation
+    //Continuous location monitoring for navigation
     const startLocationMonitoring = () => {
         if (!selectedStation) return;
 
@@ -554,7 +555,7 @@ const EVChargeHub = () => {
         setLocationWatchId(watchId);
     };
 
-    // NEW: Stop location monitoring
+    // Stop location monitoring
     const stopLocationMonitoring = () => {
         if (locationWatchId) {
             navigator.geolocation.clearWatch(locationWatchId);
@@ -612,11 +613,25 @@ const EVChargeHub = () => {
             return distance <= 5; // 5km radius
         });
 
-        if (stations5km.length > 0) {
-            console.log(`Found ${stations5km.length} stations within 5km`);
-            setFilteredStations(stations5km);
+        // Sort stations by distance
+        const sortedStations5km = stations5km.sort((a, b) => {
+            const distanceA = calculateDistance(
+                userPosition[0], userPosition[1],
+                parseFloat(a.latitude), parseFloat(a.longitude)
+            );
+            const distanceB = calculateDistance(
+                userPosition[0], userPosition[1],
+                parseFloat(b.latitude), parseFloat(b.longitude)
+            );
+            return distanceA - distanceB;
+        });
+
+        if (sortedStations5km.length > 0) {
+            console.log(`Found ${sortedStations5km.length} stations within 5km`);
+            setFilteredStations(sortedStations5km);
             setSearchRadius("5km");
             setShowBrands(true);
+            setLoading(false);
             return;
         }
 
@@ -635,11 +650,25 @@ const EVChargeHub = () => {
             return distance <= 10; // 10km radius
         });
 
-        if (stations10km.length > 0) {
-            console.log(`Found ${stations10km.length} stations within 10km (no stations in 5km)`);
-            setFilteredStations(stations10km);
+        // Sort stations by distance
+        const sortedStations10km = stations10km.sort((a, b) => {
+            const distanceA = calculateDistance(
+                userPosition[0], userPosition[1],
+                parseFloat(a.latitude), parseFloat(a.longitude)
+            );
+            const distanceB = calculateDistance(
+                userPosition[0], userPosition[1],
+                parseFloat(b.latitude), parseFloat(b.longitude)
+            );
+            return distanceA - distanceB;
+        });
+
+        if (sortedStations10km.length > 0) {
+            console.log(`Found ${sortedStations10km.length} stations within 10km (no stations in 5km)`);
+            setFilteredStations(sortedStations10km);
             setSearchRadius("10km");
             setShowBrands(true);
+            setLoading(false);
             return;
         }
 
@@ -697,8 +726,22 @@ const EVChargeHub = () => {
                 return isStationNearRoute([stationLat, stationLng], route.coordinates, 1);
             });
 
-            console.log(` Found ${stationsAlongRoute.length} stations along the route to ${destination}`);
-            setFilteredStations(stationsAlongRoute);
+            // Sort stations by distance from user
+            const sortedStations = stationsAlongRoute.sort((a, b) => {
+                const distanceA = calculateDistance(
+                    userPosition[0], userPosition[1],
+                    parseFloat(a.latitude), parseFloat(a.longitude)
+                );
+                const distanceB = calculateDistance(
+                    userPosition[0], userPosition[1],
+                    parseFloat(b.latitude), parseFloat(b.longitude)
+                );
+                return distanceA - distanceB;
+            });
+
+
+            console.log(` Found ${sortedStations.length} stations along the route to ${destination}`);
+            setFilteredStations(sortedStations);
             setSearchRadius("route");
             setShowBrands(true);
 
@@ -914,30 +957,6 @@ const EVChargeHub = () => {
                 setDestinationSuggestions([]);
             }
         }, 1000);
-    };
-
-
-    // Generate connector data based on station
-    const generateConnectors = (station) => {
-        const portNum = parseInt(station.PortNum) || 1;
-        const powerKW = station.powerKW || "50";
-        const pricePerKWh = parseFloat(station.pricePerKWh) || 10;
-
-        const connectors = [];
-        const connectorTypes = ['Type2', 'CCS', 'CHAdeMO']; // Common connector types
-
-        for (let i = 0; i < portNum; i++) {
-            connectors.push({
-                id: `connector_${i + 1}`,
-                type: connectorTypes[i % connectorTypes.length],
-                power: parseFloat(powerKW) || 50,
-                status: Math.random() > 0.3 ? 'available' : 'charging', // Simulate availability
-                pricePerKwh: pricePerKWh,
-                output: i % 2 === 0 ? 'AC' : 'DC' // Alternate between AC and DC
-            });
-        }
-
-        return connectors;
     };
 
     // Helper function to assign icons based on brand names

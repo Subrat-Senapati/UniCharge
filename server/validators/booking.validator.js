@@ -29,25 +29,6 @@ const validateCreateBooking = [
       }
       return true;
     }),
-  
-  // body('connectorId')
-  //   .notEmpty()
-  //   .withMessage('Connector ID is required')
-  //   .custom((value, { req }) => {
-  //     const station = stationService.getStationById(req.body.stationId);
-  //     if (station) {
-  //       const connector = stationService.getConnectorById(req.body.stationId, value);
-  //       if (!connector) {
-  //         throw new Error('Connector not found for this station');
-  //       }
-  //       if (connector.status !== 'available') {
-  //         throw new Error('Connector is not available');
-  //       }
-  //     }
-  //     return true;
-  //   }),
-  
-  // ... rest of the validators remain the same
   body('scheduledStart')
     .isISO8601()
     .withMessage('Scheduled start must be a valid date')

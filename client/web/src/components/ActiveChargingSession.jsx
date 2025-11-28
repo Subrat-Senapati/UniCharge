@@ -5,14 +5,11 @@ import {
     faPlug,
     faClock,
     faBatteryThreeQuarters,
-    faMoneyBillWave,
     faTimes,
     faCar,
     faMapMarkerAlt,
     faStopCircle,
-    faGaugeHigh,
     faIdCard,
-    faLocationDot,
     faIndustry,
     faCreditCard
 } from "@fortawesome/free-solid-svg-icons";
@@ -217,14 +214,6 @@ const ActiveChargingSession = ({
                                         <span className={styles.itemValue}>{connector?.power || station?.powerKW || "N/A"} kW</span>
                                     </div>
                                 </div>
-
-                                <div className={styles.detailItem}>
-                                    <FontAwesomeIcon icon={faPlug} className={styles.itemIcon} />
-                                    <div className={styles.itemContent}>
-                                        <span className={styles.itemLabel}>Connector Type</span>
-                                        <span className={styles.itemValue}>{connector?.type || "N/A"}</span>
-                                    </div>
-                                </div>
                             </div>
 
                             <div className={styles.detailRow}>
@@ -235,14 +224,6 @@ const ActiveChargingSession = ({
                                         <span className={styles.itemValue}>
                                             ₹{connector?.pricePerKwh || station?.pricePerKWh || "N/A"}/kWh
                                         </span>
-                                    </div>
-                                </div>
-
-                                <div className={styles.detailItem}>
-                                    <FontAwesomeIcon icon={faGaugeHigh} className={styles.itemIcon} />
-                                    <div className={styles.itemContent}>
-                                        <span className={styles.itemLabel}>Output Type</span>
-                                        <span className={styles.itemValue}>{connector?.output || "AC/DC"}</span>
                                     </div>
                                 </div>
                             </div>
@@ -275,16 +256,6 @@ const ActiveChargingSession = ({
                                     <div className={styles.itemContent}>
                                         <span className={styles.itemLabel}>Battery Capacity</span>
                                         <span className={styles.itemValue}>{vehicle?.batteryCapacityKwh || "N/A"} kWh</span>
-                                    </div>
-                                </div>
-
-                                <div className={styles.detailItem}>
-                                    <FontAwesomeIcon icon={faBolt} className={styles.itemIcon} />
-                                    <div className={styles.itemContent}>
-                                        <span className={styles.itemLabel}>Charging Speed</span>
-                                        <span className={styles.itemValue}>
-                                            {((energyConsumed / (timeElapsed / 3600)) || 0).toFixed(1)} kW
-                                        </span>
                                     </div>
                                 </div>
                             </div>

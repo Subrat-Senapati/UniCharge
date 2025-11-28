@@ -182,43 +182,31 @@
 
 /* RGB Border Animated Button */
 .rgbButton {
-  position: relative;
   padding: 6px 14px;
   font-size: 13px;
   font-weight: 600;
   color: #222;
-  background: white;
+  background: #f8f9fa;
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
-  overflow: hidden;
-  z-index: 1;
-  transition: 0.3s;
+  position: relative;
+
+  /* Magic for colorful border only */
+  background-image: linear-gradient(white, white), 
+    linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet, red);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 100% 100%, 300% 300%;
+  animation: rgbBorder 4s linear infinite;
 }
 
-.rgbButton::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(
-    45deg,
-    red, orange, yellow, green, cyan, blue, violet, red
-  );
-  background-size: 300%;
-  z-index: -1;
-  border-radius: 8px;
-  animation: rgbAnimation 4s linear infinite;
-}
-
-@keyframes rgbAnimation {
+@keyframes rgbBorder {
   0% {
-    background-position: 0%;
+    background-position: 0% 50%, 0% 50%;
   }
   100% {
-    background-position: 300%;
+    background-position: 300% 50%, 300% 50%;
   }
 }
 
@@ -231,4 +219,8 @@
   padding: 6px 10px;
   border-radius: 5px;
   border-left: 3px solid #0dcaf0;
+}
+
+.textSuccess{
+  color: green !important;
 }

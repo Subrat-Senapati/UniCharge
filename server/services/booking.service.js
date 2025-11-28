@@ -4,9 +4,6 @@ const User = require("../models/UserSchema");
 
 const {
   getStationById,
-  getConnectorById,
-  isStationAvailable,
-  updateConnectorStatus
 } = require("./stations.service");
 
 /**
@@ -20,11 +17,10 @@ const createBooking = async (data) => {
     const {
       userId,
       stationId,
-      connectorId,
       vehicleId,
       scheduledStart,
       scheduledEnd,
-      estimatedCost = 0,
+      estimatedCost,
       estimatedKwh = 0
     } = data;
 
@@ -40,44 +36,17 @@ const createBooking = async (data) => {
     const station = getStationById(stationId);
     if (!station) throw new Error("Charging station not found");
 
-    // Fetch connector
-    const connector = getConnectorById(stationId, connectorId);
-    if (!connector) throw new Error("Connector not found");
-
-    // Check availability
-    if (!isStationAvailable(stationId, connectorId)) {
-      throw new Error("Station or connector not available");
-    }
-
-    // Check wallet
-    if (user.wallet.balance < estimatedCost) {
-      throw new Error("Insufficient wallet balance");
-    }
-
-    // Deduct estimated cost
-    user.wallet.balance -= estimatedCost;
-
-    user.paymentHistory.push({
-      type: "debit",
-      amount: estimatedCost,
-      method: "Wallet",
-      description: `Charging booking at ${station.station}`,
-      status: "completed",
-      createdAt: new Date()
-    });
-
     // Create booking
     const booking = new Booking({
       userId,
       stationId,
-      connectorId,
       vehicleId,
       scheduledStart,
       scheduledEnd,
       estimatedCost,
       estimatedKwh,
       status: "confirmed",
-      paymentStatus: "paid",
+      paymentStatus: "pending",
 
       stationDetails: {
         id: station.id,
@@ -91,8 +60,6 @@ const createBooking = async (data) => {
         powerKW: station.powerKW
       },
 
-      connectorDetails: connector,
-
       vehicleDetails: {
         make: vehicle.make,
         model: vehicle.model,
@@ -101,9 +68,6 @@ const createBooking = async (data) => {
     });
 
     await booking.save({ session });
-
-    // Mark connector as "occupied"
-    updateConnectorStatus(stationId, connectorId, "occupied");
 
     user.bookings.push(booking._id);
 
@@ -230,42 +194,26 @@ const completeChargingSession = async (bookingId, userId, data) => {
     if (!user) throw new Error("User not found");
 
     booking.status = "completed";
+    booking.paymentStatus = "completed";
     booking.actualEnd = new Date();
     booking.consumedKwh = data.consumedKwh || booking.estimatedKwh;
     booking.finalCost = data.finalCost || booking.estimatedCost;
 
-    const diff = Number((booking.finalCost - booking.estimatedCost).toFixed(2));
+    user.wallet.balance -= finalCost.toFixed(2);
 
-    if (diff > 0) {
-      // Extra charge
-      if (user.wallet.balance < diff) {
-        throw new Error("Insufficient balance for final settlement");
-      }
-      user.wallet.balance -= diff;
+    if (finalCost > user.wallet.balance) {
+      throw new Error("Insufficient balance for final settlement");
+    } else if (diff < 0) {
+      user.wallet.balance -= finalCost.toFixed(2);
 
       user.paymentHistory.push({
         type: "debit",
-        amount: diff,
+        amount: finalCost.toFixed(2),
         method: "Wallet",
-        description: "Extra charging cost",
-        createdAt: new Date()
-      });
-
-    } else if (diff < 0) {
-      // Refund
-      const refund = Math.abs(diff);
-      user.wallet.balance += refund;
-
-      user.paymentHistory.push({
-        type: "credit",
-        amount: refund,
-        method: "Wallet Refund",
-        description: "Refund for overestimated cost",
+        description: "Charging Session Payment",
         createdAt: new Date()
       });
     }
-
-    updateConnectorStatus(booking.stationId, booking.connectorId, "available");
 
     await booking.save({ session });
     await user.save({ session });

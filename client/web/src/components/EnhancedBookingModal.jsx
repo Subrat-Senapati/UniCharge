@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faCheckCircle, 
     faSpinner, 
-    faExclamationTriangle,
     faTimes,
     faWallet,
     faBolt
@@ -13,214 +12,249 @@ import {
 
 // Enhanced booking modal without duration selection
 const EnhancedBookingModal = ({ station, connector, isOpen, onClose, onConfirm, loading = false, user }) => {
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
-  const [estimatedCost, setEstimatedCost] = useState(0);
-  const navigate = useNavigate();
-  
-  // Calculate estimated cost based on vehicle battery (80% charging)
-  const calculateEstimatedCost = (vehicle, stationPrice) => {
-    if (!vehicle) return 0;
-    const estimatedKwh = vehicle.batteryCapacityKwh * 0.8;
-    return estimatedKwh * stationPrice;
-  };
+    const [selectedVehicle, setSelectedVehicle] = useState(null);
+    const [estimatedCost, setEstimatedCost] = useState(0);
+    const navigate = useNavigate();
 
-  // Update cost when vehicle changes
-  useEffect(() => {
-    if (selectedVehicle && station) {
-      const cost = calculateEstimatedCost(selectedVehicle, station.pricePerKWh);
-      setEstimatedCost(cost);
-    } else if (station) {
-      // Default cost if no vehicle selected
-      const defaultKwh = 40 * 0.8; // Assume 40kWh battery
-      setEstimatedCost(defaultKwh * station.pricePerKWh);
-    }
-  }, [selectedVehicle, station]);
+    const vehicles = user?.vehicles || [];
+    const walletBalance = user?.wallet?.balance || 0;
+    const stationRate = station?.pricePerKWh || 0;
+    const minBalanceRequired = 500;
+    const isBelowMinBalance = walletBalance < minBalanceRequired;
 
-  const handleConfirm = async () => {
-    // Auto-calculate times: start 30 minutes from now, end based on estimated charging
-    const scheduledStart = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes from now
-    
-    // Estimate charging time based on vehicle battery or default
-    const batteryCapacity = selectedVehicle?.batteryCapacityKwh || 40;
-    const estimatedKwh = batteryCapacity * 0.8;
-    const chargingTimeHours = estimatedKwh / (connector?.power || 50); // hours to charge
-    const chargingTimeMinutes = Math.ceil(chargingTimeHours * 60);
-    
-    const scheduledEnd = new Date(scheduledStart.getTime() + chargingTimeMinutes * 60 * 1000);
+    const [chargeCost, setChargeCost] = useState(null);
+    const [loadingCost, setLoadingCost] = useState(false);
 
-    const bookingData = {
-      stationId: station.id,
-      connectorId: connector.id,
-      scheduledStart: scheduledStart.toISOString(),
-      scheduledEnd: scheduledEnd.toISOString(),
-      estimatedDuration: chargingTimeMinutes,
-      vehicleId: selectedVehicle?._id || "",
-      estimatedCost: estimatedCost
+    const createPayload = (vehicle) => {
+        if (!vehicle) return null;
+
+        const {
+            make = "Unknown",
+            model = "Standard",
+            batteryCapacityKwh = 40,
+            preferredConnector = "AC"
+        } = vehicle;
+
+        // Calculate dynamic values based on available data
+        const isDC = preferredConnector.includes('DC') || preferredConnector.includes('CCS') || preferredConnector.includes('CHAdeMO');
+        
+        // Default charging power based on connector type
+        const defaultACCharging = 7.2; // kW
+        const defaultDCCharging = 50; // kW
+        
+        // Estimate range based on battery capacity (assuming 5-6 km per kWh)
+        const estimatedRange = Math.round(batteryCapacityKwh * 5.5);
+        
+        // Calculate charge times based on battery capacity and connector type
+        const acChargingPower = defaultACCharging;
+        const dcChargingPower = isDC ? defaultDCCharging : 50;
+        
+        const acFullChargeHours = Math.ceil(batteryCapacityKwh / acChargingPower);
+        const dc10to80Minutes = Math.ceil((batteryCapacityKwh * 0.7) / dcChargingPower * 60);
+
+        return {
+            Brand: make,
+            Segment: model,
+            Battery_Capacity_kWh: batteryCapacityKwh,
+            Range_km: estimatedRange,
+            AC_Charging_kW: acChargingPower,
+            DC_Charging_kW: dcChargingPower,
+            AC_FullCharge_hr: acFullChargeHours,
+            DC_10_80_min: dc10to80Minutes,
+            Launch_Year: new Date().getFullYear() - 2,
+            Connector_Type: preferredConnector
+        };
     };
 
-    await onConfirm(bookingData);
-  };
+    const getPredictedCost = async () => {
+        setLoadingCost(true);
+        try {
+            const payload = createPayload(selectedVehicle);
 
-  const handleAddBalance = () => {
-    onClose();
-    navigate('/home/wallet');
-  };
+            if (!payload) {
+                console.error("No payload created for selected vehicle");
+                return;
+            }
 
-  // Mock user data if not provided (for testing)
-  const currentUser = user || {
-    vehicles: [
-      { _id: '1', make: 'Tesla', model: 'Model 3', batteryCapacityKwh: 75, preferredConnector: 'CCS' },
-      { _id: '2', make: 'Tata', model: 'Nexon EV', batteryCapacityKwh: 40, preferredConnector: 'Type2' }
-    ],
-    wallet: { balance: 500 }
-  };
+            const res = await fetch(import.meta.env.VITE_CPU_PREDICTION_API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                mode: "cors",
+                body: JSON.stringify(payload)
+            });
 
-  const hasSufficientBalance = currentUser.wallet.balance >= estimatedCost;
-  const balanceShortage = estimatedCost - currentUser.wallet.balance;
+            const data = await res.json();
+            setChargeCost(data.Predicted_FullChargeCost_Rs);
+        } catch (err) {
+            console.error("Cost fetch error", err);
+        } finally {
+            setLoadingCost(false);
+        }
+    };
 
-  if (!isOpen) return null;
+    useEffect(() => {
+        if (selectedVehicle && chargeCost) {
+            const bookingCost = (selectedVehicle.batteryCapacityKwh * 0.8) * stationRate;
+            setEstimatedCost(bookingCost);
+        }
+    }, [chargeCost, selectedVehicle, stationRate]);
 
-  return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal}>
-        <div className={styles.modalContent}>
-          <div className={styles.modalHeader}>
-            <h3>Book Charging Session</h3>
-            <button onClick={onClose} className={styles.closeBtn}>
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
-          </div>
+    useEffect(() => {
+        if (selectedVehicle && station?.id) {
+            getPredictedCost(); 
+        }
+    }, [selectedVehicle, station?.id]);
 
-          <div className={styles.modalBody}>
-            {/* Station & Connector Details */}
-            <div className={styles.bookingSection}>
-              <h4>
-                <FontAwesomeIcon icon={faBolt} />
-                Station Details
-              </h4>
-              <div className={styles.stationInfo}>
-                <p><strong>{station.station}</strong> ({station.brand})</p>
-                <p>Power: {station.powerKW} kW</p>
-                <p>Price: ₹{station.pricePerKWh}/kWh</p>
-                <p>Connector: {connector?.type} • {connector?.power}kW • {connector?.output}</p>
-                <p>Status: <span className={connector?.status === 'available' ? styles.available : styles.busy}>
-                  {connector?.status}
-                </span></p>
-              </div>
-            </div>
+    const handleConfirm = async () => {
+        const start = new Date(Date.now() + 30 * 60 * 1000);
+        const battery = selectedVehicle?.batteryCapacityKwh || 40;
+        const kwh = battery * 0.8;
+        const minutes = Math.ceil((kwh / (connector?.power || 50)) * 60);
+        const end = new Date(start.getTime() + minutes * 60 * 1000);
 
-            {/* Vehicle Selection */}
-            <div className={styles.bookingSection}>
-              <h4>Select Your Vehicle (Optional)</h4>
-              <p className={styles.vehicleNote}>Select your vehicle for accurate cost estimation</p>
-              <div className={styles.vehicleGrid}>
-                {currentUser.vehicles.map(vehicle => (
-                  <div 
-                    key={vehicle._id}
-                    className={`${styles.vehicleCard} ${selectedVehicle?._id === vehicle._id ? styles.selected : ''}`}
-                    onClick={() => setSelectedVehicle(vehicle)}
-                  >
-                    <div className={styles.vehicleInfo}>
-                      <strong>{vehicle.make} {vehicle.model}</strong>
-                      <span>Battery: {vehicle.batteryCapacityKwh} kWh</span>
-                      <span>Connector: {vehicle.preferredConnector}</span>
+        await onConfirm({
+            stationId: station.id,
+            connectorId: connector.id,
+            scheduledStart: start.toISOString(),
+            scheduledEnd: end.toISOString(),
+            estimatedDuration: minutes,
+            vehicleId: selectedVehicle._id,
+            estimatedCost : chargeCost
+        });
+    };
+
+    const handleAddBalance = () => {
+        onClose();
+        navigate('/home/wallet');
+    };
+
+    const isFormValid = station?.id && connector?.id && selectedVehicle?._id && !isBelowMinBalance && !loadingCost && !loading;
+    
+    if (!isOpen) return null;
+
+    return (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modal}>
+                <div className={styles.modalContent}>
+                    <div className={styles.modalHeader}>
+                        <h3>Book Charging Session</h3>
+                        <button onClick={onClose} className={styles.closeBtn}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </button>
                     </div>
-                    {selectedVehicle?._id === vehicle._id && (
-                      <FontAwesomeIcon icon={faCheckCircle} className={styles.checkIcon} />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Booking Information */}
-            <div className={styles.bookingInfo}>
-              <h4>Booking Information</h4>
-              <div className={styles.bookingDetails}>
-                <p>⏰ Your session will start automatically when you arrive at the station</p>
-                <p>⚡ Charging will continue until your vehicle reaches 80% capacity</p>
-                <p>💰 You only pay for the actual energy consumed</p>
-                {selectedVehicle && (
-                  <p>🔋 Estimated charging time: ~{Math.ceil((selectedVehicle.batteryCapacityKwh * 0.8) / (connector?.power || 50) * 60)} minutes</p>
-                )}
-              </div>
-            </div>
+                    <div className={styles.modalBody}>
+                        {/* Station & Connector Details */}
+                        <div className={styles.bookingSection}>
+                            <h4>
+                                <FontAwesomeIcon icon={faBolt} />
+                                Station Details
+                            </h4>
+                            <div className={styles.stationInfo}>
+                                <p><strong>{station.station}</strong> ({station.brand})</p>
+                                <p>Power: {station.powerKW} kW</p>
+                                <p>Price: ₹{station.pricePerKWh}/kWh</p>
+                                <p>Connector: {connector?.power}kW • {connector?.output}</p>
+                                <p>Status: <span className={connector?.status === 'available' ? styles.available : styles.busy}>
+                                    {connector?.status}
+                                </span></p>
+                            </div>
+                        </div>
 
-            {/* Cost Summary */}
-            <div className={styles.costSummary}>
-              <h4>Payment Summary</h4>
-              <div className={styles.costDetails}>
-                <div className={styles.costRow}>
-                  <span>Estimated Energy:</span>
-                  <span>{selectedVehicle ? (selectedVehicle.batteryCapacityKwh * 0.8).toFixed(1) : '32.0'} kWh</span>
-                </div>
-                <div className={styles.costRow}>
-                  <span>Rate:</span>
-                  <span>₹{station.pricePerKWh}/kWh</span>
-                </div>
-                <div className={styles.costRow}>
-                  <span>Estimated Cost:</span>
-                  <span className={styles.totalCost}>₹{estimatedCost.toFixed(2)}</span>
-                </div>
-                <div className={styles.costRow}>
-                  <span>Wallet Balance:</span>
-                  <span className={hasSufficientBalance ? styles.sufficient : styles.insufficient}>
-                    ₹{currentUser.wallet.balance.toFixed(2)}
-                  </span>
-                </div>
-                
-                {/* Balance Alert */}
-                {!hasSufficientBalance && (
-                  <div className={styles.balanceAlert}>
-                    <div className={styles.alertContent}>
-                      <div className={styles.alertIcon}>
-                        <FontAwesomeIcon icon={faExclamationTriangle} />
-                      </div>
-                      <div className={styles.alertText}>
-                        <strong>Insufficient Balance</strong>
-                        <span>Shortage: ₹{balanceShortage.toFixed(2)}</span>
-                      </div>
-                      <button 
-                        className={styles.addBalanceBtn}
-                        onClick={handleAddBalance}
-                      >
-                        <FontAwesomeIcon icon={faWallet} />
-                        Add Balance
-                      </button>
+                        {/* Vehicle Selection */}
+                        <div className={styles.bookingSection}>
+                            <h4>Vehicle</h4>
+                            <div className={styles.vehicleGrid}>
+                                {vehicles.map(v => (
+                                    <div
+                                        key={v._id}
+                                        className={`${styles.vehicleCard} ${selectedVehicle?._id === v._id ? styles.selected : ''}`}
+                                        onClick={() => setSelectedVehicle(v)}
+                                    >
+                                        <div className={styles.vehicleInfo}>
+                                            <strong>{v.make} {v.model}</strong>
+                                            <span>{v.batteryCapacityKwh}kWh • {v.preferredConnector}</span>
+                                        </div>
+                                        {selectedVehicle?._id === v._id && <FontAwesomeIcon icon={faCheckCircle} className={styles.checkIcon} />}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Cost Summary */}
+                        <div className={styles.costSummary}>
+                            <h4>Payment Summary</h4>
+                            <div className={styles.costDetails}>
+                                <div className={styles.costRow}>
+                                    <span>Estimated Energy:</span>
+                                    <span>{selectedVehicle ? (selectedVehicle.batteryCapacityKwh * 0.8).toFixed(1) : '32.0'} kWh</span>
+                                </div>
+                                <div className={styles.costRow}>
+                                    <span>Rate:</span>
+                                    <span>₹{station.pricePerKWh}/kWh</span>
+                                </div>
+                                <div className={styles.costRow}>
+                                    <span>Estimated Cost:</span>
+                                    <span className={styles.totalCost}>
+                                        {loadingCost ? (
+                                            <>
+                                                <FontAwesomeIcon icon={faSpinner} spin /> Calculating...
+                                            </>
+                                        ) : (
+                                            `₹${estimatedCost.toFixed(2)}`
+                                        )}
+                                    </span>
+                                </div>
+                                <div className={styles.costRow}>
+                                    <span>Wallet Balance:</span>
+                                    <span className={!isBelowMinBalance ? styles.sufficient : styles.insufficient}>
+                                        ₹{walletBalance.toFixed(2)}
+                                    </span>
+                                </div>
+                                
+                                {/* Balance Alert */}
+                                {isBelowMinBalance && (
+                                    <div className={styles.balanceAlert}>
+                                        <FontAwesomeIcon icon={faWallet} />
+                                        <span> Minimum wallet balance must be ₹500</span>
+                                        <button onClick={handleAddBalance} className={styles.addBalanceBtn}>
+                                            Add Money
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
 
-          {/* Booking Actions */}
-          <div className={styles.modalActions}>
-            <button 
-              className={styles.cancelBtn}
-              onClick={onClose}
-              disabled={loading}
-            >
-              Cancel
-            </button>
-            <button 
-              className={styles.confirmBtn}
-              disabled={loading || !hasSufficientBalance}
-              onClick={handleConfirm}
-            >
-              {loading ? (
-                <>
-                  <FontAwesomeIcon icon={faSpinner} spin /> Processing...
-                </>
-              ) : (
-                `Confirm Booking - ₹${estimatedCost.toFixed(2)}`
-              )}
-            </button>
-          </div>
+                    {/* Booking Actions */}
+                    <div className={styles.modalActions}>
+                        <button 
+                            className={styles.cancelBtn}
+                            onClick={onClose}
+                            disabled={loading}
+                        >
+                            Cancel
+                        </button>
+                        <button 
+                            className={styles.confirmBtn}
+                            onClick={handleConfirm}
+                            disabled={!isFormValid}
+                        >
+                            {loading ? (
+                                <>
+                                    <FontAwesomeIcon icon={faSpinner} spin /> Processing...
+                                </>
+                            ) : (
+                                "Confirm Booking"
+                            )}
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default EnhancedBookingModal;

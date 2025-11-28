@@ -9,13 +9,8 @@ const bookingController = {
   // ===========================
   createBooking: async (req, res) => {
     try {
-      const { stationId, connectorId, vehicleId, scheduledStart, scheduledEnd, estimatedDuration } = req.body;
+      const { stationId, vehicleId, scheduledStart, scheduledEnd, estimatedDuration, estimatedCost } = req.body;
       const userId = req.user.id;
-
-      const isAvailable = stationService.isStationAvailable(stationId, connectorId);
-      if (!isAvailable) {
-        return res.status(404).json({ error: 'Charging station not found or connector not available' });
-      }
 
       const conflictingBooking = await Booking.findConflictingBookings(
         stationId,
@@ -30,17 +25,15 @@ const bookingController = {
       const booking = new Booking({
         userId,
         stationId: parseInt(stationId),
-        connectorId,
         vehicleId,
         scheduledStart: new Date(scheduledStart),
         scheduledEnd: new Date(scheduledEnd),
         estimatedDuration,
+        estimatedCost,
         status: 'confirmed'
       });
 
       await booking.save();
-
-      stationService.updateConnectorStatus(stationId, connectorId, 'charging');
 
       res.status(201).json({
         message: 'Booking created successfully',
@@ -138,8 +131,6 @@ const bookingController = {
       booking.cancelledAt = new Date();
       await booking.save();
 
-      stationService.updateConnectorStatus(booking.stationId, booking.connectorId, 'available');
-
       res.json({ message: 'Booking cancelled', booking });
 
     } catch (err) {
@@ -206,8 +197,6 @@ const bookingController = {
       booking.paymentStatus = 'paid';
 
       await booking.save();
-
-      stationService.updateConnectorStatus(booking.stationId, booking.connectorId, 'available');
 
       res.json({
         message: 'Charging completed & money deducted successfully',

@@ -51,7 +51,7 @@ const WalletCard = () => {
         payment_mode: "UPI",
         charger_type: "Fast",
         sessions_per_user_month: 7,
-        previous_month_spend: Math.random() * (500 - 250) + 250,
+        previous_month_spend: 450,
         smoothing_factor: 0.5,
       };
 
@@ -450,8 +450,8 @@ const WalletCard = () => {
               <div className={styles.aiSuggestBox}>
                 <Wallet2 size={16} className="text-info" />
                 <small className="fw-bold text-dark">
-                  Required This Month:
-                  <span className="text-success"> ₹{aiSuggestion.suggested_monthly_wallet.toFixed(2)}</span>
+                  Required Addition This Month: 
+                  <span className={styles.textSuccess}> ₹{aiSuggestion.suggested_monthly_wallet.toFixed(2)}</span>
                 </small>
               </div>
             )}
