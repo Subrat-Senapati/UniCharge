@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import pickle
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 # Paths (must stay in sync with 03_Model_Training.ipynb)
 BASE_DIR = Path(__file__).resolve().parent
@@ -86,6 +87,14 @@ def preprocess_input(data: InputData) -> np.ndarray:
     return X.values
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],     # Allow all domains (or specify ["http://localhost:3000"])
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
