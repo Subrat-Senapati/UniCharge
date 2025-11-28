@@ -2,7 +2,7 @@ import Slider from "react-slick";
 
 import '../css/plugin.css';
 import '../css/default.css';
-import '../css/landing.css';
+import '../css/Landing.css';
 import LandingHeader from "../components/LandingHeader";
 import Footer from "../components/Footer";
 
