@@ -10,7 +10,6 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 
 import Dashboard from './components/Dashboard'
-import Location from './components/Location'
 import Vehicle from './components/Vehicle'
 import Wallet from './components/Wallet'
 import History from './components/History'
@@ -35,30 +34,29 @@ function App() {
       <Route path="/contact" element={<Contact />} />
 
       {/* Protected/Home routes */}
-      <Route
-        path="/home"
-        element={
-          <ProtectedRoute>
-            <Header />
-            <main className="main-content">
-              <Home />
-              <ChatbotButton />
-            </main>
-            <Footer />
-          </ProtectedRoute>
-        }
-      >
-        {/* Default redirect to /home/location */}
-        <Route index element={<Navigate to="chargehub" replace />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Header />
+              <main className="main-content">
+                <Home />
+                <ChatbotButton />
+              </main>
+              <Footer />
+            </ProtectedRoute>
+          }
+        >
+          {/* Default redirect to /home/location */}
+          <Route index element={<Navigate to="chargehub" replace />} />
 
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="chargehub" element={<EVChargeHub />} />
-        <Route path="location" element={<Location />} />
-        <Route path="vehicle" element={<Vehicle />} />
-        <Route path="wallet" element={<Wallet />} />
-        <Route path="history" element={<History />} />
-        <Route path="notifications" element={<Notification />} />
-      </Route>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="chargehub" element={<EVChargeHub />} />
+          <Route path="vehicle" element={<Vehicle />} />
+          <Route path="wallet" element={<Wallet />} />
+          <Route path="history" element={<History />} />
+          <Route path="notifications" element={<Notification />} />
+        </Route>
     </Routes>
   )
 }

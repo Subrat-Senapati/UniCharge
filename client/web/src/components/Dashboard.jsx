@@ -41,7 +41,7 @@ const Dashboard = () => {
         <Card className={styles.card}>
           <Card.Header className={styles.cardHeader}>Wallet</Card.Header>
           <Card.Body>
-            <h4 className={styles.walletBalance}>₹{user.wallet?.balance || 0}</h4>
+            <h4 className={styles.walletBalance}>₹{user.wallet?.balance.toFixed(2) || 0}</h4>
             <p className={styles.walletSub}>Loyalty Points: {user.wallet?.loyaltyPoints}</p>
             <hr />
             <p>
@@ -109,54 +109,6 @@ const Dashboard = () => {
                 )}
               </ListGroup.Item>
             ))}
-          </ListGroup>
-        </Card>
-
-        {/* ===== PAYMENT HISTORY ===== */}
-        <Card className={styles.card}>
-          <Card.Header className={styles.cardHeader}>Recent Transaction</Card.Header>
-          {latestTransaction ? (
-            <Card.Body>
-              <p><strong>Type:</strong> {latestTransaction.type}</p>
-              <p><strong>Amount:</strong> ₹{latestTransaction.amount}</p>
-              <p><strong>Method:</strong> {latestTransaction.method}</p>
-              <p><strong>Vehicle:</strong> {latestTransaction.vehicleName}</p>
-              <p><strong>Station:</strong> {latestTransaction.stationName}</p>
-              <p><strong>Status:</strong> <Badge bg="info">{latestTransaction.status}</Badge></p>
-              <p><small>{new Date(latestTransaction.createdAt).toLocaleString()}</small></p>
-            </Card.Body>
-          ) : (
-            <Card.Body>No recent transactions.</Card.Body>
-          )}
-        </Card>
-
-        {/* ===== NOTIFICATIONS ===== */}
-        <Card className={styles.card}>
-          <Card.Header className={styles.cardHeader}>Notifications</Card.Header>
-          <ListGroup variant="flush">
-            {user.notifications?.length > 0 ? (
-              user.notifications.map((n) => (
-                <ListGroup.Item
-                  key={n._id}
-                  className={n.isRead ? styles.readNotification : styles.unreadNotification}
-                >
-                  <div className="d-flex justify-content-between align-items-start">
-                    <div>
-                      <strong>{n.title}</strong>
-                      <div>{n.message}</div>
-                    </div>
-                    <Badge bg={n.isRead ? "secondary" : "primary"}>
-                      {n.type}
-                    </Badge>
-                  </div>
-                  <small className="text-muted">
-                    {new Date(n.createdAt).toLocaleString()}
-                  </small>
-                </ListGroup.Item>
-              ))
-            ) : (
-              <ListGroup.Item>No notifications available.</ListGroup.Item>
-            )}
           </ListGroup>
         </Card>
       </div>

@@ -831,62 +831,46 @@ const EVChargeHub = () => {
     // Updated geocoding functions with working proxies
     const getPlaceNameFromCoords = async (lat, lng) => {
         try {
-            // Try multiple proxy options
-            const proxyUrls = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in`)}`,
-                `https://cors.bridged.cc/https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in`,
-                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&countrycodes=in` // Direct call (might work in some environments)
-            ];
-
-            for (let url of proxyUrls) {
-                try {
-                    const res = await fetch(url, {
-                        headers: {
-                            'Accept': 'application/json',
-                            'User-Agent': 'EVChargeHub/1.0 (https://github.com/your-repo)'
-                        }
-                    });
-
-                    if (res.ok) {
-                        const data = await res.json();
-                        return data.display_name || `Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+            const res = await fetch(
+                `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/reverse-geocode?lat=${lat}&lon=${lng}`,
+                {
+                    headers: {
+                        'Accept': 'application/json'
                     }
-                } catch (error) {
-                    console.log(`Proxy failed, trying next...`);
-                    continue;
                 }
-            }
+            );
 
-            throw new Error('All proxies failed');
+            if (!res.ok) throw new Error("Reverse geocoding failed at backend");
 
+            const data = await res.json();
+            return data.name || `Location (${data.lat.toFixed(4)}, ${data.lon.toFixed(4)})`;
         } catch (error) {
             console.error("Reverse geocoding error:", error);
-            // Return coordinates as fallback
             return `Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
         }
     };
 
+
     const geocodeAddress = async (address) => {
         try {
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(address)}&limit=1`)}`;
-
-            const response = await fetch(proxyUrl, {
-                headers: {
-                    'Accept': 'application/json',
-                    'User-Agent': 'EVChargeHub/1.0'
+            const res = await fetch(
+                `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/geocode?q=${encodeURIComponent(address)}`,
+                {
+                    headers: { 'Accept': 'application/json' }
                 }
-            });
+            );
 
-            if (!response.ok) throw new Error('Network response was not ok');
+            if (!res.ok) throw new Error("Network error");
 
-            const data = await response.json();
+            const data = await res.json();
 
-            if (data && data.length > 0) {
-                return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+            if (data.found) {
+                return [data.lat, data.lon];
             }
+
             return null;
-        } catch (error) {
-            console.error("Geocoding error:", error);
+        } catch (err) {
+            console.error("Geocoding error:", err);
             return null;
         }
     };
@@ -901,19 +885,21 @@ const EVChargeHub = () => {
 
         locationTimerRef.current = setTimeout(async () => {
             try {
-                const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`;
-                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-
-                const res = await fetch(proxyUrl, {
-                    headers: { 'Accept': 'application/json' }
-                });
+                const res = await fetch(
+                    `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/suggest?q=${encodeURIComponent(query)}`,
+                    {
+                        headers: { 'Accept': 'application/json' }
+                    }
+                );
 
                 if (!res.ok) throw new Error("Network error");
 
                 const data = await res.json();
+                console.log("Auto-suggest data:", data);
+
                 setSuggestions(
-                    data.map(item => ({
-                        name: item.display_name,
+                    data.suggestions.map(item => ({
+                        name: item.name,
                         lat: item.lat,
                         lon: item.lon,
                     }))
@@ -935,19 +921,20 @@ const EVChargeHub = () => {
 
         destinationTimerRef.current = setTimeout(async () => {
             try {
-                const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=in&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`;
-                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-
-                const res = await fetch(proxyUrl, {
-                    headers: { 'Accept': 'application/json' }
-                });
+                const res = await fetch(
+                    `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/suggest?q=${encodeURIComponent(query)}`,
+                    {
+                        headers: { 'Accept': 'application/json' }
+                    }
+                );
 
                 if (!res.ok) throw new Error("Network error");
 
                 const data = await res.json();
+
                 setDestinationSuggestions(
-                    data.map(item => ({
-                        name: item.display_name,
+                    data.suggestions.map(item => ({
+                        name: item.name,
                         lat: item.lat,
                         lon: item.lon,
                     }))

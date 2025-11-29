@@ -91,36 +91,34 @@ const Landing = () => {
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="section-title-right text-center position-relative">
-                                        <a href="service-list.html">
-                                            <div className="spin-demo-main position-relative">
-                                                <img src="images/top-right.png" alt="" />
-                                                <svg
-                                                    id="rotatingText"
-                                                    viewBox="0 0 200 200"
-                                                    width={150}
-                                                    height={150}
-                                                >
-                                                    <defs>
-                                                        <path
-                                                            id="circle"
-                                                            d="M 100, 100
+                                        <div className="spin-demo-main position-relative">
+                                            <img src="Unicharge_logo_rounded.png" alt="" />
+                                            <svg
+                                                id="rotatingText"
+                                                viewBox="0 0 200 200"
+                                                width={150}
+                                                height={150}
+                                            >
+                                                <defs>
+                                                    <path
+                                                        id="circle"
+                                                        d="M 100, 100
                                m -75, 0
                                a 75, 75 0 1, 0 150, 0
                                a 75, 75 0 1, 0 -150, 0"
-                                                        ></path>
-                                                    </defs>
-                                                    <text>
-                                                        <textPath
-                                                            alignmentBaseline="hanging"
-                                                            xlinkHref="#circle"
-                                                            className="text"
-                                                        >
-                                                            Explore Catalog &nbsp; Explore Catalog
-                                                        </textPath>
-                                                    </text>
-                                                </svg>
-                                            </div>
-                                        </a>
+                                                    ></path>
+                                                </defs>
+                                                <text>
+                                                    <textPath
+                                                        alignmentBaseline="hanging"
+                                                        xlinkHref="#circle"
+                                                        className="text"
+                                                    >
+                                                        Many Stations &nbsp; &nbsp; &nbsp; One  Destination
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -154,9 +152,7 @@ const Landing = () => {
                                                 <div className="banner-info-right">
                                                     <h3 className="text-white mb-2">Tesla Model 3</h3>
                                                     <p className="mb-4">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Beatae est voluptas excepturi labore numquam aspernatur
-                                                        ullam officiis eum ea quaerat.
+                                                        The Tesla Model 3 is a benchmark electric sedan, renowned for its impressive range and instant acceleration. Its minimalist cabin features a central touchscreen, and access to the extensive Supercharger network makes it a complete, high-tech package for modern EV drivers
                                                     </p>
                                                     <div className="feature-list mb-11">
                                                         <div className="row gy-4">
@@ -219,9 +215,7 @@ const Landing = () => {
                                                 <div className="banner-info-right">
                                                     <h3 className="text-white mb-2">Hyundai Ioniq 6</h3>
                                                     <p className="mb-4">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Beatae est voluptas excepturi labore numquam aspernatur
-                                                        ullam officiis eum ea quaerat.
+                                                        The Hyundai Ioniq 6 is a head-turning electric sedan with a streamlined design that maximizes efficiency and range. Its tech-filled, minimalist interior and ultra-fast 800V charging make it a compelling choice. It successfully blends bold aesthetics with practical, long-distance electric mobility
                                                     </p>
                                                     <div className="feature-list mb-11">
                                                         <div className="row gy-4">
@@ -283,9 +277,7 @@ const Landing = () => {
                                     </div>
                                     <div className="section-body">
                                         <p className="mb-4">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Similique recusandae id nihil, enim magni tempora quo!
-                                            Officiis, maxime accusamus. voluptatum adipisci.
+                                            Unicharge brings every charging app and station network under one simple, unified platform. No more switching apps or hunting for compatible stations. We streamline the entire EV-charging experience so drivers, businesses, and fleets can charge faster, smarter, and with zero hassle.
                                         </p>
                                         <div className="service-list text-start">
                                             <div className="service-progress-list mb-6">
@@ -408,20 +400,9 @@ const Landing = () => {
                                             Our Services
                                         </h6>
                                         <h2 className="ps-4 border-start border-3 border-green">
-                                            Best EV <span className="green">charging service</span> for
+                                            Best <span className="green">Unified Charging Platform</span> for
                                             your electric vehicle
                                         </h2>
-                                    </div>
-                                </div>
-                                <div className="col-lg-5">
-                                    <div className="section-title-right">
-                                        <p className="mb-3">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                                            dolor architecto molestias aritatis minima accusamus.
-                                        </p>
-                                        <a href="service-list.html" className="btn btn2">
-                                            More Servicess
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -438,16 +419,15 @@ const Landing = () => {
                                         </div>
                                         <div className="service-info">
                                             <h4>
-                                                <a href="service-detail.html" className="black">
-                                                    Home Charging
+                                                <a href="#" className="black">
+                                                    Stations Discovery
                                                 </a>
                                             </h4>
                                             <p className="mt-2 mb-4">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Nulla voluptate amet enim atque impedit inventore.
+                                                Find nearby charging stations from every provider on one unified map.
                                             </p>
                                             <a
-                                                href="service-detail.html"
+                                                href="#"
                                                 className="btn border border-1 border-green"
                                             >
                                                 Learn More
@@ -462,16 +442,15 @@ const Landing = () => {
                                         </div>
                                         <div className="service-info">
                                             <h4>
-                                                <a href="service-detail.html" className="black">
-                                                    Renewable Energy
+                                                <a href="#" className="black">
+                                                    Unified Payment
                                                 </a>
                                             </h4>
                                             <p className="mt-2 mb-4">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Nulla voluptate amet enim atque impedit inventore.
+                                                Pay across all charging networks using a single seamless wallet.
                                             </p>
                                             <a
-                                                href="service-detail.html"
+                                                href="#"
                                                 className="btn border border-1 border-green"
                                             >
                                                 Learn More
@@ -486,16 +465,15 @@ const Landing = () => {
                                         </div>
                                         <div className="service-info">
                                             <h4>
-                                                <a href="service-detail.html" className="black">
-                                                    EV Drivers
+                                                <a href="#" className="black">
+                                                    Smart AI Recommendations
                                                 </a>
                                             </h4>
                                             <p className="mt-2 mb-4">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Nulla voluptate amet enim atque impedit inventore.
+                                                Get personalized station suggestions based on location, traffic, battery level, and patterns.
                                             </p>
                                             <a
-                                                href="service-detail.html"
+                                                href="#"
                                                 className="btn border border-1 border-green"
                                             >
                                                 Learn More
@@ -510,16 +488,15 @@ const Landing = () => {
                                         </div>
                                         <div className="service-info">
                                             <h4>
-                                                <a href="service-detail.html" className="black">
-                                                    AC Charger
+                                                <a href="#" className="black">
+                                                    Advanced Slot Bookings
                                                 </a>
                                             </h4>
                                             <p className="mt-2 mb-4">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Nulla voluptate amet enim atque impedit inventore.
+                                                Reserve charging slots in advance across multiple networks without switching apps.
                                             </p>
                                             <a
-                                                href="service-detail.html"
+                                                href="#"
                                                 className="btn border border-1 border-green"
                                             >
                                                 Learn More
@@ -534,16 +511,15 @@ const Landing = () => {
                                         </div>
                                         <div className="service-info">
                                             <h4>
-                                                <a href="service-detail.html" className="black">
-                                                    DC Charger
+                                                <a href="#" className="black">
+                                                    Smart AI ChatBot
                                                 </a>
                                             </h4>
                                             <p className="mt-2 mb-4">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Nulla voluptate amet enim atque impedit inventore.
+                                                Instant support for station help, payments, routes, and troubleshooting—powered by AI.
                                             </p>
                                             <a
-                                                href="service-detail.html"
+                                                href="#"
                                                 className="btn border border-1 border-green"
                                             >
                                                 Learn More
@@ -558,16 +534,15 @@ const Landing = () => {
                                         </div>
                                         <div className="service-info">
                                             <h4>
-                                                <a href="service-detail.html" className="black">
+                                                <a href="#" className="black">
                                                     24/7 Support
                                                 </a>
                                             </h4>
                                             <p className="mt-2 mb-4">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Nulla voluptate amet enim atque impedit inventore.
+                                                Get round-the-clock help for station access, payments, and charging issues.
                                             </p>
                                             <a
-                                                href="service-detail.html"
+                                                href="#"
                                                 className="btn border border-1 border-green"
                                             >
                                                 Learn More
@@ -599,17 +574,12 @@ const Landing = () => {
                                     </div>
                                     <div className="section-body text-white position-relative">
                                         <p className="mb-4">
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                            occaecat cupidatat non proident, sunt in culpa qui officia
-                                            deserunt mollit anim id est laborum.
+                                            Power your electric journey with fast, reliable, and intelligent charging solutions designed for modern businesses and everyday drivers.
                                         </p>
                                         <p className="mb-4">
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. sunt in culpa qui
-                                            officia deserunt mollit anim id est laborum.
+                                            We deliver seamless EV charging experiences through advanced technology, strategic locations, and customer-first service—so you spend less time waiting and more time moving.
                                         </p>
-                                        <a href="about.html" className="btn btn2 mb-7">
+                                        <a href="#" className="btn btn2 mb-7">
                                             Discover More
                                         </a>
                                         <div className="about-counter text-center text-xl-start">
@@ -676,11 +646,10 @@ const Landing = () => {
             </section>
             {/* More About Section Ends */}
             {/* Pricing Section Starts */}
-            <section className="pricing pt-11 position-relative">
+            {/* <section className="pricing pt-11 position-relative">
                 <div className="container">
                     <div className="pricing-inner">
                         <div className="row align-items-center gy-5">
-                            {/* Left Side Title */}
                             <div className="col-lg-4">
                                 <div className="section-title text-center text-lg-start">
                                     <h6 className="text-uppercase fw-medium green1 mb-1">Pricing</h6>
@@ -697,12 +666,10 @@ const Landing = () => {
                                 </div>
                             </div>
 
-                            {/* Right Side Slider */}
                             <div className="col-lg-8">
                                 <div className="section-body text-center">
                                     <Slider {...priceSlider_settings} className="price-slider">
 
-                                        {/* Slide 1 */}
                                         <div className="slide mx-2">
                                             <div className="pricing-box bg-white py-4 px-5 mx-2 rounded2 border border-2 border-lightgreen">
                                                 <div className="price-title">
@@ -748,7 +715,6 @@ const Landing = () => {
                                             </div>
                                         </div>
 
-                                        {/* Slide 2 */}
                                         <div className="slide mx-2">
                                             <div className="pricing-box position-relative overflow-hidden bg-white py-4 px-5 mx-2 rounded2 border border-2 border-lightgreen">
                                                 <div className="price-title">
@@ -797,7 +763,6 @@ const Landing = () => {
                                             </div>
                                         </div>
 
-                                        {/* Slide 3 */}
                                         <div className="slide mx-2">
                                             <div className="pricing-box bg-white py-4 px-5 mx-2 rounded2 border border-2 border-lightgreen">
                                                 <div className="price-title">
@@ -850,7 +815,7 @@ const Landing = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             {/* Pricing Section Ends */}
             {/* How we work Section Starts */}
             <section className="how-work bg-lightgreen py-10">
@@ -870,10 +835,9 @@ const Landing = () => {
                                         <h4 className="text-white">01.</h4>
                                     </div>
                                     <div className="work-info position-relative p-4 border-3 border border-white bg-lightgreen1 me-9 rounded2">
-                                        <h4 className="mb-3">Fast Charging</h4>
+                                        <h4 className="mb-3">All-in-One Map</h4>
                                         <p>
-                                            Lorem ipsum dolor sit consectetur adipiscing elit, sed do
-                                            eiusmod tempor amet.
+                                            Locate EV charging stations from multiple providers with live availability.
                                         </p>
                                     </div>
                                 </div>
@@ -882,10 +846,9 @@ const Landing = () => {
                                         <h4 className="text-white">02.</h4>
                                     </div>
                                     <div className="work-info position-relative p-4 border-3 border border-white bg-lightgreen1 ms-9 rounded2">
-                                        <h4 className="mb-3">Good Management</h4>
+                                        <h4 className="mb-3">Smart Booking</h4>
                                         <p>
-                                            Lorem ipsum dolor sit consectetur adipiscing elit, sed do
-                                            eiusmod tempor amet.
+                                            Reserve slots in advance with real-time traffic & queue insights.
                                         </p>
                                     </div>
                                 </div>
@@ -894,10 +857,9 @@ const Landing = () => {
                                         <h4 className="text-white">03.</h4>
                                     </div>
                                     <div className="work-info position-relative p-4 border-3 border border-white bg-lightgreen1 me-9 rounded2">
-                                        <h4 className="mb-3">Renewable Energy</h4>
+                                        <h4 className="mb-3">Seamless Payments</h4>
                                         <p>
-                                            Lorem ipsum dolor sit consectetur adipiscing elit, sed do
-                                            eiusmod tempor amet.
+                                            Pay across all networks using a single wallet (UPI/Cards), no minimum balance, no trapped money.
                                         </p>
                                     </div>
                                 </div>
@@ -906,10 +868,9 @@ const Landing = () => {
                                         <h4 className="text-white">04.</h4>
                                     </div>
                                     <div className="work-info position-relative p-4 border-3 border border-white bg-lightgreen1 ms-9 rounded2">
-                                        <h4 className="mb-3">Quality Charger</h4>
+                                        <h4 className="mb-3">AI Guidance</h4>
                                         <p>
-                                            Lorem ipsum dolor sit consectetur adipiscing elit, sed do
-                                            eiusmod tempor amet.
+                                            Get the best station match based on distance, plug type, and fastest access.
                                         </p>
                                     </div>
                                 </div>
@@ -934,17 +895,6 @@ const Landing = () => {
                                             Take a look at some of our ongoing{" "}
                                             <span className="green">EV Projects</span>
                                         </h2>
-                                    </div>
-                                </div>
-                                <div className="col-lg-5">
-                                    <div className="section-title-right">
-                                        <p className="mb-3">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                                            dolor architecto molestias a quodritatis minima accusamus.
-                                        </p>
-                                        <a href="project-list.html" className="btn btn2">
-                                            All Projects
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -1155,7 +1105,7 @@ const Landing = () => {
             </section>
             {/* Testimonial Section Ends */}
             {/* Blog Section Starts */}
-            <section className="blog py-10 m-0">
+            {/* <section className="blog py-10 m-0">
                 <div className="container">
                     <div className="blog-inner">
                         <div className="blog-title mb-6 text-center text-lg-start">
@@ -1168,17 +1118,6 @@ const Landing = () => {
                                         <h2 className="ps-4 border-start border-3 border-green">
                                             Latest Buzz <span className="green">what's new?</span>
                                         </h2>
-                                    </div>
-                                </div>
-                                <div className="col-lg-5">
-                                    <div className="blog-title-right">
-                                        <p className="mb-3">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                                            dolor archite ea veritatis minima accusamus.
-                                        </p>
-                                        <a href="blog-list.html" className="btn btn2">
-                                            All Blogs
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -1336,10 +1275,10 @@ const Landing = () => {
 
                     </div>
                 </div>
-            </section>
+            </section> */}
             {/* Blog Section Ends */}
             {/* Contact Us section Starts */}
-            <section className="contact-mobile pb-10">
+            <section className="contact-mobile pb-10 mt-8">
                 <div className="container">
                     <div className="contact-mobile-inner">
                         <div className="row gy-5 align-items-center">
@@ -1347,7 +1286,7 @@ const Landing = () => {
                                 <div className="mobile-app1">
                                     <div className="mobile-app1-title mb-6 text-center">
                                         <h6 className="text-uppercase fw-medium green1 mb-1">
-                                            Download evcharge app
+                                            Download unicharge app
                                         </h6>
                                         <h2>
                                             Discover Nearby{" "}

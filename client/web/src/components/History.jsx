@@ -158,12 +158,6 @@ const History = () => {
   };
 
 
-  // Extract unique payment methods
-  const uniqueMethods = [
-    "all",
-    ...new Set(paymentHistory.map((txn) => txn.method)),
-  ];
-
   // Filter logic
   useEffect(() => {
     const filtered = paymentHistory.filter((txn) => {
@@ -171,9 +165,7 @@ const History = () => {
         filters.type === "all" || txn.type === filters.type;
       const matchStatus =
         filters.status === "all" || txn.status === filters.status;
-      const matchMethod =
-        filters.method === "all" || txn.method === filters.method;
-      return matchType && matchStatus && matchMethod;
+      return matchType && matchStatus;
     });
     setFilteredTransactions(filtered);
   }, [filters, paymentHistory]);
@@ -184,7 +176,7 @@ const History = () => {
       <hr className="mb-4" />
 
       {/* 🔍 Filter Section */}
-      <div className="row mb-4 g-3">
+      <div className="row mb-4 g-5">
         <div className="col-md-4">
           <label className="form-label fw-semibold">Type</label>
           <select
@@ -213,23 +205,6 @@ const History = () => {
             <option value="completed">Completed</option>
             <option value="pending">Pending</option>
             <option value="failed">Failed</option>
-          </select>
-        </div>
-
-        <div className="col-md-4">
-          <label className="form-label fw-semibold">Method</label>
-          <select
-            className="form-select"
-            value={filters.method}
-            onChange={(e) =>
-              setFilters({ ...filters, method: e.target.value })
-            }
-          >
-            {uniqueMethods.map((method) => (
-              <option key={method} value={method}>
-                {method === "all" ? "All" : method}
-              </option>
-            ))}
           </select>
         </div>
       </div>

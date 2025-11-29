@@ -199,7 +199,7 @@ const Payment = () => {
                     No payment methods added yet. Click "Add New Payment" to get started!
                 </div>
             ) : (
-                <div className="row g-3">
+                <div className="row g-4">
                     {payments.map((p) => (
                         <div
                             key={p._id}

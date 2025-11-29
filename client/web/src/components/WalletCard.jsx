@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Wallet2,
   Gift,
@@ -9,6 +9,59 @@ import {
 } from "lucide-react";
 import styles from "../css/walletcard.module.css";
 import { useAuth } from "../context/AuthContext";
+
+const useLastMonthSpend = (userData) => {
+  const lastMonthSpend = useMemo(() => {
+    const paymentHistory = userData?.user?.paymentHistory || [];
+    const now = new Date();
+    
+    // Calculate the start and end date for the last full month (e.g., if today is Nov 30, use Oct 1 to Oct 31)
+    const currentMonth = now.getUTCMonth();
+    const currentYear = now.getUTCFullYear();
+    
+    const endDate = new Date(Date.UTC(currentYear, currentMonth, 1, 0, 0, 0, 0));
+    
+    let lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    let lastMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
+    const startDate = new Date(Date.UTC(lastMonthYear, lastMonth, 1, 0, 0, 0, 0));
+
+    const totalSpend = paymentHistory
+      .filter(transaction => {
+        if (transaction.type !== 'debit') {
+          return false;
+        }
+
+        const transactionDate = new Date(transaction.createdAt);
+
+        return transactionDate >= startDate && transactionDate < endDate;
+      })
+      .reduce((sum, transaction) => sum + transaction.amount, 0);
+
+    return parseFloat(totalSpend.toFixed(2));
+  }, [userData]);
+
+  return lastMonthSpend;
+};
+
+const calculateAverageWalletBalance = (usersDataArray) => {
+  if (!Array.isArray(usersDataArray) || usersDataArray.length === 0) {
+    return 0.00;
+  }
+
+  const validBalances = usersDataArray
+    .map(data => data?.user?.wallet?.balance) // ✅ fixed path
+    .filter(balance => typeof balance === 'number' && balance >= 0);
+
+  if (validBalances.length === 0) {
+    return 0.00;
+  }
+
+  const totalBalance = validBalances.reduce((sum, bal) => sum + bal, 0);
+  const avg = totalBalance / validBalances.length;
+
+  return parseFloat(avg.toFixed(2));
+};
 
 const WalletCard = () => {
   const { user, fetchProfile } = useAuth()
@@ -40,7 +93,7 @@ const WalletCard = () => {
       const payload = {
         month: 11,
         year: 2025,
-        avg_wallet_balance: wallet.balance ?? 0,
+        avg_wallet_balance: calculateAverageWalletBalance([user]),
         avg_session_duration: 60,
         peak_hour_ratio: 0,
         avg_cost: 62,
@@ -51,7 +104,7 @@ const WalletCard = () => {
         payment_mode: "UPI",
         charger_type: "Fast",
         sessions_per_user_month: 7,
-        previous_month_spend: 450,
+        previous_month_spend: useLastMonthSpend,
         smoothing_factor: 0.5,
       };
 

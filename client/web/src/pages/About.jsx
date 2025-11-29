@@ -54,16 +54,10 @@ const About = () => {
                         <div className="col-lg-6 mb-5 mb-lg-0">
                             <h2 className={styles.sectionTitle}>Our Story</h2>
                             <p>
-                                Founded in 2025, UniCharge began with a simple vision: to make EV
-                                charging accessible, reliable, and convenient for everyone in India.
+                                Subham’s EV road trip turned stressful—he juggled 5 provider apps, registrations, and separate wallets, with money stuck in each.
                             </p>
                             <p>
-                                From 3 charging stations in Bangalore, we’ve grown into 500+ stations
-                                across 25 cities.
-                            </p>
-                            <p>
-                                Our team of engineers, sustainability experts, and service
-                                professionals ensure a seamless charging experience.
+                                UniCharge changed it: one map to discover stations, book any slot, and pay through a single wallet using UPI/cards. EV charging became simple again.
                             </p>
                             <a href="#" className={`btn mt-5 ${styles.btnPrimary}`}>
                                 Learn More About Our Journey
@@ -81,7 +75,7 @@ const About = () => {
             </section>
 
             {/* All Station */}
-            <section className={styles.allStationSection}>
+            <section id="our-stations" className={styles.allStationSection}>
                 <div className="container text-center">
                     <h2 className={`${styles.sectionTitle} ${styles.center}`}>
                         Our Charging Network

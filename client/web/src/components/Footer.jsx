@@ -1,5 +1,6 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
 import '../css/footer.css';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -31,39 +32,35 @@ const Footer = () => {
             <h5>Quick Links</h5>
             <ul className="footerLinks">
               <li>
-                <a href="#">Home</a>
+                {/* Use NavLink instead of <a>. The 'to' prop replaces 'href' */}
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a href="#">About</a>
+                <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <a href="#">Services</a>
+                <NavLink to="/services">Services</NavLink>
               </li>
               <li>
-                <a href="#">Stations</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
+                <NavLink to="/contact">Contact</NavLink>
               </li>
             </ul>
           </div>
           <div className="footerHead col-lg-3">
             <h5>Services</h5>
             <ul className="footerLinks">
+              
               <li>
-                <a href="#">Home Charging</a>
+                Public Stations
               </li>
               <li>
-                <a href="#">Public Stations</a>
+                Fleet Solutions
               </li>
               <li>
-                <a href="#">Fleet Solutions</a>
+                Commercial Hubs
               </li>
               <li>
-                <a href="#">Commercial Hubs</a>
-              </li>
-              <li>
-                <a href="#">Maintenance</a>
+                Maintenance
               </li>
             </ul>
           </div>
@@ -71,13 +68,13 @@ const Footer = () => {
             <h5>Contact</h5>
             <ul className="footerLinks">
               <li>
-                <FaMapMarkerAlt /> New Delhi, India
+                <FaMapMarkerAlt /> Bhubaneswar, India
               </li>
               <li>
-                <FaPhone /> +91 9876543321
+                <FaPhone /> +91 6370788763
               </li>
               <li>
-                <FaEnvelope /> info@unicharge.in
+                <FaEnvelope /> unichargeofficial@gmail.com
               </li>
             </ul>
           </div>

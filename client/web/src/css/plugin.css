@@ -391,10 +391,6 @@ Change the following styles to modify the appearance of the menu.
     .nav-link {
         color: #1F1D26;
     }
-    .nav-link:hover {
-        background-color: #e91e63;
-        color: white;
-    }
     .dropdown-menu>li>a {
         padding: 10px 15px;
         font-size: 11px;
@@ -422,10 +418,6 @@ Change the following styles to modify the appearance of the menu.
     }
     .nav-link {
         color: #1F1D26;
-    }
-    .nav-link:hover {
-        background-color: #e91e63;
-        color: white;
     }
     .dropdown-menu>li>a {
         padding: 10px 15px;
@@ -455,10 +447,6 @@ Change the following styles to modify the appearance of the menu.
     }
     .nav-link {
         color: #1F1D26;
-    }
-    .nav-link:hover {
-        background-color: #e91e63 !important;
-        color: white;
     }
     .dropdown-menu>li>a {
         padding: 10px 15px;

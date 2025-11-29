@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
       console.log("Profile status:", res.status);
 
       // If Unauthorized, redirect to login
-      if (res.status === 401) {
-        setUser(null);
-        navigate("/login");
-        return;
-      }
+      // if (res.status === 401) {
+      //   setUser(null);
+      //   navigate("/login");
+      //   return;
+      // }
 
       if (!res.ok) throw new Error("Not authenticated");
       const data = await res.json();
