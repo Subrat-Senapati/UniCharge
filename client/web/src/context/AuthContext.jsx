@@ -11,9 +11,14 @@ export const AuthProvider = ({ children }) => {
 
   const fetchProfile = async () => {
     try {
+      const token = localStorage.getItem("token");
+
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/profile`, {
         method: "GET",
         credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
       console.log("Profile status:", res.status);
 

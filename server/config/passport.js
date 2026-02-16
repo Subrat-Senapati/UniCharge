@@ -8,7 +8,9 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL
+      callbackURL: process.env.NODE_ENV === "production"
+        ? process.env.GOOGLE_CALLBACK_URL
+        : "http://localhost:5000/api/users/google/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -25,7 +27,7 @@ passport.use(
           user = await User.create({
             fullName: profile.displayName,
             email: profile.emails[0].value.toLowerCase(),
-            phoneNumber: "N/A",
+            phoneNumber: null,
             passwordHash: "GOOGLE_OAUTH",
             authProvider: "google",
             providerUid: profile.id,

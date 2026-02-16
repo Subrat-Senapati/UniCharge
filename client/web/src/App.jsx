@@ -20,6 +20,7 @@ import Notification from './components/Notification'
 import ProtectedRoute from './components/ProtectedRoute'
 import ChatbotButton from './components/ChatbotButton'
 import EVChargeHub from './components/EVChargeHub'
+import GoogleSuccess from './utils/GoogleSuccess'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/services" element={<Service />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/google-success" element={<GoogleSuccess />} />
 
       {/* Protected/Home routes */}
         <Route

@@ -30,7 +30,9 @@ router.get(
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
-    res.redirect(`${process.env.CLIENT_URL}/home`);
+    res.redirect(
+      `${process.env.CLIENT_URL}/google-success?token=${token}`
+    );
   }
 );
 
