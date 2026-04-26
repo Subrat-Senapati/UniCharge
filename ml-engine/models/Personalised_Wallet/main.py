@@ -1,10 +1,13 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-import numpy as np
-import pandas as pd
+import logging
+import os
 import pickle
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
 # Paths (must stay in sync with 03_Model_Training.ipynb)
 BASE_DIR = Path(__file__).resolve().parent
@@ -15,25 +18,53 @@ ENCODERS_PATH = ARTIFACTS_DIR / "label_encoders.pkl"
 FEATURE_COLUMNS_PATH = ARTIFACTS_DIR / "feature_columns.pkl"
 NUMERIC_COLS_PATH = ARTIFACTS_DIR / "numeric_cols.pkl"
 
-def load_pickle(path: str):
+logger = logging.getLogger("personalised_wallet_api")
+
+
+def load_pickle(path: Path):
+    if not path.exists():
+        raise FileNotFoundError(f"Missing required artifact: {path}")
     with open(path, "rb") as f:
         return pickle.load(f)
 
-model = load_pickle(MODEL_PATH)
-scaler = load_pickle(SCALER_PATH)
-le_dict = load_pickle(ENCODERS_PATH)
-feature_columns = load_pickle(FEATURE_COLUMNS_PATH)
-numeric_cols = load_pickle(NUMERIC_COLS_PATH)
+
+def parse_allowed_origins() -> list[str]:
+    raw_origins = os.getenv("ALLOWED_ORIGINS", "*")
+    origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+    return origins or ["*"]
+
+
+try:
+    model = load_pickle(MODEL_PATH)
+    scaler = load_pickle(SCALER_PATH)
+    le_dict = load_pickle(ENCODERS_PATH)
+    feature_columns = load_pickle(FEATURE_COLUMNS_PATH)
+    numeric_cols = load_pickle(NUMERIC_COLS_PATH)
+except Exception as exc:
+    logger.exception("Failed to initialize model artifacts")
+    raise RuntimeError("Model initialization failed") from exc
+
+
+def encode_or_raise_unknown(column: str, values: pd.Series):
+    encoder = le_dict[column]
+    allowed_values = set(encoder.classes_)
+    incoming_values = set(values.astype(str))
+    unknown_values = sorted(incoming_values - allowed_values)
+    if unknown_values:
+        preview = ", ".join(unknown_values[:3])
+        raise ValueError(f"Unsupported value(s) for {column}: {preview}")
+    return encoder.transform(values.astype(str))
+
 
 class InputData(BaseModel):
-    month: int
-    year: int
-    avg_wallet_balance: float
-    avg_session_duration: float = 60.0
-    peak_hour_ratio: float = 0.0
+    month: int = Field(..., ge=1, le=12)
+    year: int = Field(..., ge=2000, le=2100)
+    avg_wallet_balance: float = Field(..., ge=0)
+    avg_session_duration: float = Field(default=60.0, ge=0)
+    peak_hour_ratio: float = Field(default=0.0, ge=0, le=1)
 
-    avg_cost: float
-    avg_cost_efficiency: float
+    avg_cost: float = Field(..., ge=0)
+    avg_cost_efficiency: float = Field(..., ge=0)
 
     city: str
     vehicle_type: str
@@ -41,17 +72,18 @@ class InputData(BaseModel):
     payment_mode: str
     charger_type: str
 
-    sessions_per_user_month: float
+    sessions_per_user_month: float = Field(..., ge=0)
+
+    model_config = {"extra": "forbid"}
+
+
+class WalletSuggestionRequest(InputData):
+    previous_month_spend: float | None = None
+    smoothing_factor: float = Field(default=0.5, ge=0, le=1)
+
 
 def preprocess_input(data: InputData) -> np.ndarray:
-    """Reproduce the notebook preprocessing for a single record.
-
-    This function assumes that 03_Model_Training.ipynb saved:
-    - label_encoders.pkl  (dict[col_name -> fitted LabelEncoder])
-    - feature_columns.pkl (list of column names of X after preprocessing)
-    - numeric_cols.pkl    (list of numeric columns scaled by StandardScaler)
-    """
-
+    """Reproduce notebook preprocessing for a single request record."""
     cost_per_kwh_est = data.avg_cost_efficiency * data.peak_hour_ratio
     wallet_to_cost_ratio = data.avg_wallet_balance / (data.avg_cost + 1e-6)
 
@@ -75,65 +107,82 @@ def preprocess_input(data: InputData) -> np.ndarray:
 
     X = pd.DataFrame([raw])
 
-    for col, encoder in le_dict.items():
+    for col in le_dict.keys():
         if col in X.columns:
-            X[col] = encoder.transform(X[col].astype(str))
+            X[col] = encode_or_raise_unknown(col, X[col])
 
     X_numeric = X[numeric_cols]
     X[numeric_cols] = scaler.transform(X_numeric)
 
     X = X.reindex(columns=feature_columns, fill_value=0)
-
     return X.values
 
-app = FastAPI()
+
+allowed_origins = parse_allowed_origins()
+allow_credentials = allowed_origins != ["*"]
+
+app = FastAPI(title="Personalised Wallet API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],     # Allow all domains (or specify ["http://localhost:3000"])
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/")
 def root():
     return {"message": "Personalised Wallet Prediction API is running"}
 
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "artifacts_loaded": True}
+
+
 @app.post("/predict")
 def predict(data: InputData):
-    features = preprocess_input(data)
-    prediction = model.predict(features)
-    return {"prediction": float(prediction[0])}
+    try:
+        features = preprocess_input(data)
+        prediction = model.predict(features)
+        return {"prediction": float(prediction[0])}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Prediction failed")
+        raise HTTPException(status_code=500, detail="Prediction failed") from exc
 
-class WalletSuggestionRequest(InputData):
-    previous_month_spend: float | None = None
-    smoothing_factor: float = 0.5
 
 @app.post("/suggest_wallet")
 def suggest_wallet(data: WalletSuggestionRequest):
-    """Return raw prediction and a smoothed suggested monthly wallet amount.
+    """Return raw prediction and a smoothed suggested monthly wallet amount."""
+    try:
+        features = preprocess_input(data)
+        prediction = float(model.predict(features)[0])
 
-    If previous_month_spend is provided, we apply simple exponential smoothing:
+        if data.previous_month_spend is not None:
+            alpha = data.smoothing_factor
+            suggested = alpha * prediction + (1 - alpha) * data.previous_month_spend
+        else:
+            suggested = prediction
 
-        suggested = smoothing_factor * prediction \
-                    + (1 - smoothing_factor) * previous_month_spend
+        return {
+            "prediction": prediction,
+            "suggested_monthly_wallet": suggested,
+            "previous_month_spend": data.previous_month_spend,
+            "smoothing_factor": data.smoothing_factor,
+        }
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Wallet suggestion failed")
+        raise HTTPException(status_code=500, detail="Wallet suggestion failed") from exc
 
-    Otherwise, suggested == prediction.
-    """
 
-    features = preprocess_input(data)
-    prediction = float(model.predict(features)[0])
+if __name__ == "__main__":
+    import uvicorn
 
-    if data.previous_month_spend is not None:
-        alpha = max(0.0, min(1.0, data.smoothing_factor))
-        suggested = alpha * prediction + (1 - alpha) * data.previous_month_spend
-    else:
-        suggested = prediction
-
-    return {
-        "prediction": prediction,
-        "suggested_monthly_wallet": suggested,
-        "previous_month_spend": data.previous_month_spend,
-        "smoothing_factor": data.smoothing_factor,
-    }
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
