@@ -1,12 +1,42 @@
-# React + Vite
+# UniCharge Web Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for UniCharge, developed with React 19 and Vite. It serves a highly responsive user interface with built-in integrations for dynamic maps, media viewing, and fast client-side routing.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework & Build**: React (v19) & Vite for optimized, speedy development.
+- **Routing**: React Router DOM for structured UI navigation.
+- **Styling**: Bootstrap 5, React-Bootstrap, FontAwesome, and Lucide React.
+- **Maps Integrations**: Leaflet, React-Leaflet, and `@react-google-maps/api` for comprehensive location tracking and interactive map interfaces.
+- **Media & Components**: LightGallery for media viewing, Slick Carousel for slider components.
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js (v18+ or v22.x recommended)
+
+## Setup & Installation
+
+1. Navigate to the `client/web` directory (if you aren't already there):
+   ```bash
+   cd client/web
+   ```
+
+2. Install all the necessary dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Environment Setup: 
+   Review or create the `.env` file to include necessary keys, such as backend API URLs and Google Maps API keys.
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Scripts
+
+- `npm run dev`: Starts the local Vite development server.
+- `npm run build`: Bundles the app for production.
+- `npm run preview`: Previews the minified production build locally.
+- `npm run lint`: Runs ESLint to check for code issues.
