@@ -80,7 +80,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="copyright">
-          <p>© 2025 UniCharge. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()} UniCharge. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
