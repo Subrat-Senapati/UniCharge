@@ -13,7 +13,7 @@ const Landing = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,       // 5s per slide
-        speed: 2000,                // transition speed
+        speed: 2000,               // transition speed
         arrows: false,
         pauseOnHover: false,
     };
@@ -24,7 +24,7 @@ const Landing = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,     // time between slides (3 second)
-        speed: 500,               // animation speed (0.5 second)
+        speed: 500,              // animation speed (0.5 second)
         arrows: false,
         dots: false,
         pauseOnHover: false,
@@ -124,7 +124,7 @@ const Landing = () => {
                             </div>
                         </div>
 
-                        {/* ✅ Slider Section */}
+                        {/* Slider Section */}
                         <div className="section-body position-relative overflow-visible">
                             <Slider {...banner_settings} className="banner-slider">
                                 {/* Slide 1 */}
@@ -645,178 +645,7 @@ const Landing = () => {
                 </div>
             </section>
             {/* More About Section Ends */}
-            {/* Pricing Section Starts */}
-            {/* <section className="pricing pt-11 position-relative">
-                <div className="container">
-                    <div className="pricing-inner">
-                        <div className="row align-items-center gy-5">
-                            <div className="col-lg-4">
-                                <div className="section-title text-center text-lg-start">
-                                    <h6 className="text-uppercase fw-medium green1 mb-1">Pricing</h6>
-                                    <h2 className="ps-4 border-start border-3 border-green mb-4">
-                                        Explore our charging<span className="green"> Plans</span>
-                                    </h2>
-                                    <p className="mb-4">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-                                        expedita temporibus dolore, minus perspiciatis porro et modi.
-                                    </p>
-                                    <a href="price.html" className="btn btn2">
-                                        View Plans
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-8">
-                                <div className="section-body text-center">
-                                    <Slider {...priceSlider_settings} className="price-slider">
-
-                                        <div className="slide mx-2">
-                                            <div className="pricing-box bg-white py-4 px-5 mx-2 rounded2 border border-2 border-lightgreen">
-                                                <div className="price-title">
-                                                    <h4 className="green1 text-uppercase mb-1">Business</h4>
-                                                    <span className="fw-medium">Stander Package</span>
-                                                </div>
-                                                <div className="plan-price py-6 green1">
-                                                    <div className="plan-price inter text-uppercase d-flex align-items-center justify-content-center">
-                                                        <span className="currency fw-bold align-self-start lh-lg h5">$</span>
-                                                        <span className="h1 fw-bold mb-0 lh-1">19</span>
-                                                        <span className="currency align-self-start fw-bold lh-lg h5">99</span>
-                                                    </div>
-                                                    <span>per Month</span>
-                                                </div>
-                                                <div className="plan-listing mb-6">
-                                                    <ul className="list-unstyled">
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Availability Status
-                                                        </li>
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Booking & Reservation
-                                                        </li>
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Mobile App Linking
-                                                        </li>
-                                                        <li>
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            One-Click Checkout
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="pricing-btn">
-                                                    <a href="" className="btn btn2 mb-2">
-                                                        Choose Plan
-                                                    </a>
-                                                    <p className="small">
-                                                        *Please read our term and condition before ordering a Package
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="slide mx-2">
-                                            <div className="pricing-box position-relative overflow-hidden bg-white py-4 px-5 mx-2 rounded2 border border-2 border-lightgreen">
-                                                <div className="price-title">
-                                                    <h4 className="green1 text-uppercase mb-1">Premium</h4>
-                                                    <span className="fw-medium">Pro Package</span>
-                                                </div>
-                                                <div className="plan-price py-6 green1">
-                                                    <div className="plan-price inter text-uppercase d-flex align-items-center justify-content-center">
-                                                        <span className="currency fw-bold align-self-start lh-lg h5">$</span>
-                                                        <span className="h1 fw-bold mb-0 lh-1">39</span>
-                                                        <span className="currency align-self-start fw-bold lh-lg h5">99</span>
-                                                    </div>
-                                                    <span>per Month</span>
-                                                </div>
-                                                <div className="plan-listing mb-6">
-                                                    <ul className="list-unstyled">
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Availability Status
-                                                        </li>
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Booking & Reservation
-                                                        </li>
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Mobile App Linking
-                                                        </li>
-                                                        <li>
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            One-Click Checkout
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="pricing-btn">
-                                                    <a href="" className="btn btn2 mb-2">
-                                                        Choose Plan
-                                                    </a>
-                                                    <p className="small">
-                                                        *Please read our term and condition before ordering a Package
-                                                    </p>
-                                                </div>
-                                                <div className="popular-tag px-8 py-1 bg-green small text-white text-uppercase position-absolute">
-                                                    Trending
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="slide mx-2">
-                                            <div className="pricing-box bg-white py-4 px-5 mx-2 rounded2 border border-2 border-lightgreen">
-                                                <div className="price-title">
-                                                    <h4 className="green1 text-uppercase mb-1">Enterprise</h4>
-                                                    <span className="fw-medium">Pro Package</span>
-                                                </div>
-                                                <div className="plan-price py-6 green1">
-                                                    <div className="plan-price inter text-uppercase d-flex align-items-center justify-content-center">
-                                                        <span className="currency fw-bold align-self-start lh-lg h5">$</span>
-                                                        <span className="h1 fw-bold mb-0 lh-1">79</span>
-                                                        <span className="currency align-self-start fw-bold lh-lg h5">99</span>
-                                                    </div>
-                                                    <span>per Month</span>
-                                                </div>
-                                                <div className="plan-listing mb-6">
-                                                    <ul className="list-unstyled">
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Availability Status
-                                                        </li>
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Booking & Reservation
-                                                        </li>
-                                                        <li className="mb-1 border-dashed border-1 border-start-0 border-end-0 border-top-0 mb-2 pb-2">
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            Mobile App Linking
-                                                        </li>
-                                                        <li>
-                                                            <i className="fa fa-check green1 me-1" aria-hidden="true"></i>
-                                                            One-Click Checkout
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="pricing-btn">
-                                                    <a href="" className="btn btn2 mb-2">
-                                                        Choose Plan
-                                                    </a>
-                                                    <p className="small">
-                                                        *Please read our term and condition before ordering a Package
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </Slider>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-            {/* Pricing Section Ends */}
+            
             {/* How we work Section Starts */}
             <section className="how-work bg-lightgreen py-10">
                 <div className="container">
@@ -1103,181 +932,7 @@ const Landing = () => {
                     </div>
                 </div>
             </section>
-            {/* Testimonial Section Ends */}
-            {/* Blog Section Starts */}
-            {/* <section className="blog py-10 m-0">
-                <div className="container">
-                    <div className="blog-inner">
-                        <div className="blog-title mb-6 text-center text-lg-start">
-                            <div className="row align-items-center gy-4">
-                                <div className="col-lg-7">
-                                    <div className="blog-title-left">
-                                        <h6 className="mb-2 green1 text-uppercase fw-medium">
-                                            Our News &amp; articles
-                                        </h6>
-                                        <h2 className="ps-4 border-start border-3 border-green">
-                                            Latest Buzz <span className="green">what's new?</span>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="blog-body">
-                            <div className="row align-items-stretch gy-4">
-                                <div className="col-lg-8">
-                                    <div className="blog-body-left h-100">
-                                        <Slider {...blogSlider_settings} className="news-slider h-100 p-6 px-2  rounded2 border border-2 border-lightgreen bg-white">
-
-                                            <div className="slide px-5 mx-1">
-                                                <div className="blog-box">
-                                                    <div className="row align-items-center gy-4">
-                                                        <div className="col-md-5 order-2 order-md-1">
-                                                            <div className="blog-info">
-                                                                <div className="blog-tag px-2 py-1 rounded2 bg-lightgreen black small d-inline-block mb-2">
-                                                                    <span className="fw-medium">Electric</span>
-                                                                </div>
-                                                                <h4 className="mb-4">
-                                                                    <a href="blog-detail.html" className="black">
-                                                                        Business benefits from EV management software
-                                                                    </a>
-                                                                </h4>
-                                                                <p className="mb-2">
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi dolor archite ea veritatis.
-                                                                </p>
-                                                                <div className="blog-data pt-2 border-top border-1 border-grey2">
-                                                                    <span className="small">January 10, 2025 | 1 Comment</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-7 order-1 order-md-2">
-                                                            <div className="blog-image position-relative">
-                                                                <a href="blog-detail.html">
-                                                                    <img
-                                                                        src="images/electric-car-charging-connected-to-the-grid-2023-02-07-21-01-15-utc.jpg"
-                                                                        alt=""
-                                                                        className="w-100 rounded1"
-                                                                    />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="slide px-5 mx-1">
-                                                <div className="blog-box">
-                                                    <div className="row align-items-center gy-4">
-                                                        <div className="col-md-5 order-2 order-md-1">
-                                                            <div className="blog-info">
-                                                                <div className="blog-tag px-2 py-1 rounded2 bg-lightgreen black small d-inline-block mb-2">
-                                                                    <span className="fw-medium">Electric</span>
-                                                                </div>
-                                                                <h4 className="mb-4">
-                                                                    <a href="blog-detail.html" className="black">
-                                                                        Solar cells for electric charge appeared on sale
-                                                                    </a>
-                                                                </h4>
-                                                                <p className="mb-2">
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi dolor archite ea veritatis.
-                                                                </p>
-                                                                <div className="blog-data pt-2 border-top border-1 border-grey2">
-                                                                    <span className="small">January 10, 2025 | 1 Comment</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-7 order-1 order-md-2">
-                                                            <div className="blog-image position-relative">
-                                                                <a href="blog-detail.html">
-                                                                    <img
-                                                                        src="images/rearview-car-parked-in-luxury-showroom-car-dealer-2023-03-30-01-57-28-utc.JPG"
-                                                                        alt=""
-                                                                        className="w-100 rounded1"
-                                                                    />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="slide px-5 mx-1">
-                                                <div className="blog-box">
-                                                    <div className="row align-items-center gy-4">
-                                                        <div className="col-md-5 order-2 order-md-1">
-                                                            <div className="blog-info">
-                                                                <div className="blog-tag px-2 py-1 rounded2 bg-lightgreen black small d-inline-block mb-2">
-                                                                    <span className="fw-medium">Electric</span>
-                                                                </div>
-                                                                <h4 className="mb-4">
-                                                                    <a href="blog-detail.html" className="black">
-                                                                        Auto dealership need EV charging station
-                                                                    </a>
-                                                                </h4>
-                                                                <p className="mb-2">
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi dolor archite ea veritatis.
-                                                                </p>
-                                                                <div className="blog-data pt-2 border-top border-1 border-grey2">
-                                                                    <span className="small">January 10, 2025 | 1 Comment</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-7 order-1 order-md-2">
-                                                            <div className="blog-image position-relative">
-                                                                <a href="blog-detail.html">
-                                                                    <img
-                                                                        src="images/hand-holding-electric-car-charger-electric-vehicl-2022-11-16-14-02-45-utc.jpg"
-                                                                        alt=""
-                                                                        className="w-100 rounded1"
-                                                                    />
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </Slider>
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-4 d-flex">
-                                    <div className="blog-body-right h-100 p-6 py-4 rounded2 border border-2 border-lightgreen bg-white">
-                                        <div className="blog-box">
-                                            <div className="blog-image mb-4 position-relative">
-                                                <a href="blog-detail.html">
-                                                    <img
-                                                        src="images/indian-businessman-charging-car-at-outdoor-ev-stat-2023-03-17-23-18-50-utc.jpg"
-                                                        alt="blog image"
-                                                        className="w-100 rounded1"
-                                                    />
-                                                </a>
-                                            </div>
-                                            <div className="blog-info">
-                                                <h5 className="mb-3">
-                                                    <a href="blog-detail.html" className="black">
-                                                        what is EV charging loading management
-                                                    </a>
-                                                </h5>
-                                                <ul className="list-unstyled d-flex align-items-center justify-content-between">
-                                                    <li className="blog-tag px-2 py-1 rounded2 bg-lightgreen black small">
-                                                        <span className="fw-medium">Charger</span>
-                                                    </li>
-                                                    <li className="small">January 10, 2025</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section> */}
-            {/* Blog Section Ends */}
-            {/* Contact Us section Starts */}
+            
             <section className="contact-mobile pb-10 mt-8">
                 <div className="container">
                     <div className="contact-mobile-inner">
@@ -1366,9 +1021,11 @@ const Landing = () => {
                 </div>
             </section>
             {/* Contact Us section Ends */}
+
             {/* Footer Section Starts */}
             <Footer />
             {/* Footer Section Starts */}
+            
             {/*Back-to-top Button start*/}
             <div id="back-to-top">
                 <a

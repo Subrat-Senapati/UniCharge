@@ -6,10 +6,11 @@ import {
 import styles from "../css/about.module.css";
 import LandingHeader from "../components/LandingHeader";
 
-import ThakurImg from "../assets/thakur.jpg";
-import SubratImg from "../assets/subrat.jpg";
+import ThakurImg from "../assets/thakur.jpeg";
+import SubratImg from "../assets/subrat.jpeg";
 import RajibImg from "../assets/rajib.jpg";
 import SkdImg from "../assets/skd.jpg";
+import SubhamImg from "../assets/subham.jpeg";
 import Footer from "../components/Footer";
 import AllStation from "../components/AllStation";
 
@@ -17,8 +18,9 @@ const About = () => {
     const teamMembers = [
         { name: "Thakur Ashutosh Dash", role: "CEO", img: ThakurImg },
         { name: "Subrat Senapati", role: "Founder", img: SubratImg },
+        { name: "Subham Kumar Das", role: "Co-Founder", img: SkdImg },
         { name: "Rajib Kumar Maharana", role: "Head of Operations", img: RajibImg },
-        { name: "Subham Kumar Das", role: "Marketing Director", img: SkdImg },
+        { name: "Subham Sahoo", role: "Marketing Director", img: SubhamImg },
     ];
 
     const stats = [
@@ -133,9 +135,9 @@ const About = () => {
                     <h2 className={`${styles.sectionTitle} ${styles.center} text-center`}>
                         Meet Our Team
                     </h2>
-                    <div className="row mt-4">
+                    <div className="row mt-5 justify-content-evenly gx-9 gx-lg-10">
                         {teamMembers.map((m, i) => (
-                            <div key={i} className="col-lg-3 col-md-6">
+                            <div key={i} className="col-lg-2 col-md-4 col-5 mb-5">
                                 <div className={styles.teamMember}>
                                     <img src={m.img} alt={m.name} />
                                     <h5>{m.name}</h5>

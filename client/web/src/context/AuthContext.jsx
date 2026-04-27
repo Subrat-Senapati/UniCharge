@@ -13,21 +13,30 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
 
+      if (!token) {
+        setUser(null);
+        navigate("/login");
+        setLoading(false);
+        return;
+      }
+
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/profile`, {
         method: "GET",
         credentials: "include",
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         }
       });
       console.log("Profile status:", res.status);
 
       // If Unauthorized, redirect to login
-      // if (res.status === 401) {
-      //   setUser(null);
-      //   navigate("/login");
-      //   return;
-      // }
+      if (res.status === 401) {
+        setUser(null);
+        navigate("/login");
+        return;
+      }
 
       if (!res.ok) throw new Error("Not authenticated");
       const data = await res.json();

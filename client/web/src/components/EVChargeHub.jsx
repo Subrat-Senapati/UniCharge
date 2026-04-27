@@ -54,10 +54,10 @@ const RecenterMap = ({ center, routePath }) => {
                 bounds.extend(center);
             }
             map.fitBounds(bounds, { padding: [20, 20] });
-        } else if (center) {
-            map.setView(center, 12, { animate: true });
+        } else if (center && center[0] && center[1]) {
+            map.flyTo(center, 12, { animate: true, duration: 1.5 });
         }
-    }, [center, routePath, map]);
+    }, [center ? center[0] : null, center ? center[1] : null, routePath, map]);
     return null;
 };
 
@@ -828,11 +828,11 @@ const EVChargeHub = () => {
         return R * c; // Distance in km
     };
 
-    // Updated geocoding functions with working proxies
+    // Geocoding functions using local backend proxy
     const getPlaceNameFromCoords = async (lat, lng) => {
         try {
             const res = await fetch(
-                `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/reverse-geocode?lat=${lat}&lon=${lng}`,
+                `${import.meta.env.VITE_SERVER_URL}/api/location/reverse-geocode?lat=${lat}&lon=${lng}`,
                 {
                     headers: {
                         'Accept': 'application/json'
@@ -840,10 +840,17 @@ const EVChargeHub = () => {
                 }
             );
 
-            if (!res.ok) throw new Error("Reverse geocoding failed at backend");
+            if (!res.ok) throw new Error("Reverse geocoding failed");
 
             const data = await res.json();
-            return data.name || `Location (${data.lat.toFixed(4)}, ${data.lon.toFixed(4)})`;
+            // Build a concise place name from the address components
+            const addr = data.address || {};
+            const parts = [
+                addr.suburb || addr.neighbourhood || addr.village || '',
+                addr.city || addr.town || addr.county || '',
+                addr.state || ''
+            ].filter(Boolean);
+            return parts.join(', ') || data.display_name || `Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
         } catch (error) {
             console.error("Reverse geocoding error:", error);
             return `Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
@@ -854,7 +861,7 @@ const EVChargeHub = () => {
     const geocodeAddress = async (address) => {
         try {
             const res = await fetch(
-                `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/geocode?q=${encodeURIComponent(address)}`,
+                `${import.meta.env.VITE_SERVER_URL}/api/location/geocode?q=${encodeURIComponent(address)}`,
                 {
                     headers: { 'Accept': 'application/json' }
                 }
@@ -864,8 +871,8 @@ const EVChargeHub = () => {
 
             const data = await res.json();
 
-            if (data.found) {
-                return [data.lat, data.lon];
+            if (data && data.length > 0) {
+                return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
             }
 
             return null;
@@ -886,7 +893,7 @@ const EVChargeHub = () => {
         locationTimerRef.current = setTimeout(async () => {
             try {
                 const res = await fetch(
-                    `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/suggest?q=${encodeURIComponent(query)}`,
+                    `${import.meta.env.VITE_SERVER_URL}/api/location/suggest?q=${encodeURIComponent(query)}`,
                     {
                         headers: { 'Accept': 'application/json' }
                     }
@@ -895,20 +902,27 @@ const EVChargeHub = () => {
                 if (!res.ok) throw new Error("Network error");
 
                 const data = await res.json();
-                console.log("Auto-suggest data:", data);
 
-                setSuggestions(
-                    data.suggestions.map(item => ({
-                        name: item.name,
-                        lat: item.lat,
-                        lon: item.lon,
-                    }))
-                );
+                let parsedSuggestions = data.suggestions.map(item => ({
+                    name: item.name,
+                    lat: item.lat,
+                    lon: item.lon,
+                }));
+
+                if (userPosition) {
+                    parsedSuggestions.sort((a, b) => {
+                        const distA = calculateDistance(userPosition[0], userPosition[1], parseFloat(a.lat), parseFloat(a.lon));
+                        const distB = calculateDistance(userPosition[0], userPosition[1], parseFloat(b.lat), parseFloat(b.lon));
+                        return distA - distB;
+                    });
+                }
+
+                setSuggestions(parsedSuggestions);
             } catch (err) {
                 console.error("Auto-suggest error:", err);
                 setSuggestions([]);
             }
-        }, 1000);
+        }, 500);
     };
 
     const fetchDestinationSuggestions = async (query) => {
@@ -922,7 +936,7 @@ const EVChargeHub = () => {
         destinationTimerRef.current = setTimeout(async () => {
             try {
                 const res = await fetch(
-                    `${import.meta.env.VITE_LOCATION_SERVICES_API}/api/suggest?q=${encodeURIComponent(query)}`,
+                    `${import.meta.env.VITE_SERVER_URL}/api/location/suggest?q=${encodeURIComponent(query)}`,
                     {
                         headers: { 'Accept': 'application/json' }
                     }
@@ -932,18 +946,26 @@ const EVChargeHub = () => {
 
                 const data = await res.json();
 
-                setDestinationSuggestions(
-                    data.suggestions.map(item => ({
-                        name: item.name,
-                        lat: item.lat,
-                        lon: item.lon,
-                    }))
-                );
+                let parsedDestinations = data.suggestions.map(item => ({
+                    name: item.name,
+                    lat: item.lat,
+                    lon: item.lon,
+                }));
+
+                if (userPosition) {
+                    parsedDestinations.sort((a, b) => {
+                        const distA = calculateDistance(userPosition[0], userPosition[1], parseFloat(a.lat), parseFloat(a.lon));
+                        const distB = calculateDistance(userPosition[0], userPosition[1], parseFloat(b.lat), parseFloat(b.lon));
+                        return distA - distB;
+                    });
+                }
+
+                setDestinationSuggestions(parsedDestinations);
             } catch (err) {
                 console.error("Destination suggest error:", err);
                 setDestinationSuggestions([]);
             }
-        }, 1000);
+        }, 500);
     };
 
     // Helper function to assign icons based on brand names

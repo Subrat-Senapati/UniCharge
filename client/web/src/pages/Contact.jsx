@@ -97,9 +97,9 @@ const Contact = () => {
                     <div className="col-md-3">
                         <div className={`${styles.contactCard} card shadow-sm border-0 rounded-4 p-4`}>
                             <h6 className="fw-bold">📞 Call us</h6>
-                            <p className="text-muted">Mon–Fri 8am–5pm</p>
-                            <a href="tel:+15581000000" className="text-primary">
-                                +1 (558) 100-0000
+                            <p className="text-muted">Mon-Fri 8am-5pm</p>
+                            <a href="tel:+91 6370788763" className="text-primary">
+                                +91 6370788763
                             </a>
                         </div>
                     </div>
