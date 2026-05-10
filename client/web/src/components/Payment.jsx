@@ -2,18 +2,6 @@ import { useState, useEffect } from "react";
 import { Edit3, Plus, CreditCard, Wallet, Trash2 } from "lucide-react";
 import styles from "../css/payment.module.css";
 
-// Badge for payment type
-const PaymentTypeBadge = ({ type }) => {
-    return (
-        <span
-            className={`${styles.typeBadge} ${type === "upi" ? styles.upi : styles.card
-                }`}
-        >
-            {type.toUpperCase()}
-        </span>
-    );
-};
-
 const PaymentCard = ({ payment, onEdit, onDelete }) => {
     return (
         <div className={`card shadow-sm w-100 ${styles.cardContainer}`}>
@@ -27,9 +15,6 @@ const PaymentCard = ({ payment, onEdit, onDelete }) => {
                             <CreditCard size={22} className="text-primary" />
                         )}
                         {payment.type === "upi" ? "UPI Payment" : "Card Payment"}
-                        {payment.isDefault && (
-                            <span className="badge bg-success ms-2">Default</span>
-                        )}
                     </h5>
 
                     <div className="d-flex gap-2">
@@ -62,7 +47,9 @@ const PaymentCard = ({ payment, onEdit, onDelete }) => {
                         </small>
                     )}
                     <div className="align-self-end">
-                        <PaymentTypeBadge type={payment.type} />
+                        {payment.isDefault && (
+                            <span className="badge bg-success">Default</span>
+                        )}
                     </div>
                 </div>
             </div>
@@ -182,7 +169,7 @@ const Payment = () => {
     };
 
     return (
-        <div className="container mx-auto mt-8 px-4">
+        <div className="container mx-auto mt-8">
             <h2 className="mb-4">Payment Methods</h2>
             <hr className="mb-4" />
 

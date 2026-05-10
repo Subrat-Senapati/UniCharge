@@ -17,6 +17,14 @@ const Header = () => {
     .filter(n => !n.isRead)
     .length;
 
+  const handleNavCollapse = () => {
+    const navItem = document.getElementById("navbarNav");
+    const toggler = document.querySelector(".navbar-toggler");
+    if (navItem && navItem.classList.contains("show") && toggler) {
+      toggler.click();
+    }
+  };
+
   return (
     <header className="position-relative z-3 shadow-sm">
       <div className="header-nav-menu navbar-sticky-in text-white" id="header-nav-menu">
@@ -151,12 +159,12 @@ const Header = () => {
               <div className="d-flex d-xl-none flex-column w-100">
                 {/* User Profile & Wallet Section */}
                 <div className="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
-                  <NavLink to="/home/dashboard" className="nav-link d-flex align-items-center">
+                  <NavLink to="/home/dashboard" className="nav-link d-flex align-items-center" onClick={handleNavCollapse}>
                     <FaUserCircle size={32} className="text-white me-2" />
                     <span className="text-white">Profile</span>
                   </NavLink>
                   
-                  <NavLink to="/home/wallet" className="wallet-link d-flex align-items-center">
+                  <NavLink to="/home/wallet" className="wallet-link d-flex align-items-center" onClick={handleNavCollapse}>
                     <FaWallet size={24} className="me-2 text-white" />
                     <span className="fw-bold text-white">₹{user?.wallet?.balance?.toFixed(2) || '0.00'}</span>
                   </NavLink>
@@ -170,6 +178,7 @@ const Header = () => {
                       className={({ isActive }) =>
                         `nav-link text-uppercase fw-medium px-0 py-2 ${isActive ? "text-success fw-bold" : "text-white"}`
                       }
+                      onClick={handleNavCollapse}
                     >
                       Home
                     </NavLink>
@@ -181,6 +190,7 @@ const Header = () => {
                       className={({ isActive }) =>
                         `nav-link text-uppercase fw-medium px-0 py-2 ${isActive ? "text-success fw-bold" : "text-white"}`
                       }
+                      onClick={handleNavCollapse}
                     >
                       Vehicle
                     </NavLink>
@@ -192,6 +202,7 @@ const Header = () => {
                       className={({ isActive }) =>
                         `nav-link text-uppercase fw-medium px-0 py-2 ${isActive ? "text-success fw-bold" : "text-white"}`
                       }
+                      onClick={handleNavCollapse}
                     >
                       Wallet
                     </NavLink>
@@ -203,6 +214,7 @@ const Header = () => {
                       className={({ isActive }) =>
                         `nav-link text-uppercase fw-medium px-0 py-2 ${isActive ? "text-success fw-bold" : "text-white"}`
                       }
+                      onClick={handleNavCollapse}
                     >
                       History
                     </NavLink>
@@ -214,6 +226,7 @@ const Header = () => {
                   <NavLink 
                     to="/home/notifications" 
                     className="nav-link d-flex align-items-center justify-content-between px-0 py-2"
+                    onClick={handleNavCollapse}
                   >
                     <div className="d-flex align-items-center">
                       <FaBell size={20} className="text-white me-2" />
