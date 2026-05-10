@@ -1,14 +1,14 @@
 # UniCharge Web Client
 
-This is the frontend application for UniCharge, developed with React 19 and Vite. It serves a highly responsive user interface with built-in integrations for dynamic maps, media viewing, and fast client-side routing.
+This is the frontend application for UniCharge, a unified EV charging platform. It serves a highly responsive user interface with built-in integrations for dynamic maps, media viewing, and fast client-side routing. It solves the fragmentation in the EV charging ecosystem by providing a single map and interface for discovering stations, booking slots, and unified payments.
 
 ## Tech Stack
 
 - **Framework & Build**: React (v19) & Vite for optimized, speedy development.
-- **Routing**: React Router DOM for structured UI navigation.
+- **Routing**: React Router DOM (v7) for structured UI navigation.
 - **Styling**: Bootstrap 5, React-Bootstrap, FontAwesome, and Lucide React.
 - **Maps Integrations**: Leaflet, React-Leaflet, and `@react-google-maps/api` for comprehensive location tracking and interactive map interfaces.
-- **Media & Components**: LightGallery for media viewing, Slick Carousel for slider components.
+- **Media & Components**: LightGallery for media viewing, Slick Carousel and React-Slick for slider components, and Marked for markdown parsing.
 
 ## Prerequisites
 

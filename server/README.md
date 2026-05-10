@@ -1,14 +1,14 @@
 # UniCharge Server
 
-This is the secure backend HTTP API for the UniCharge application. Built using Node.js and Express, it acts as the data hub, effectively connecting to MongoDB.
+This is the secure backend HTTP API for the UniCharge application, a unified EV charging platform designed to solve the fragmentation of provider apps and payment systems. Built using Node.js and Express, it acts as the data hub, effectively connecting to MongoDB to manage station data, unified user wallets, slot bookings, and cross-provider integrations.
 
 ## Tech Stack
 
 - **Runtime & Framework**: Node.js `(v22.x)` & Express.js `(v5.x)`
-- **Database**: MongoDB & Mongoose ORM
+- **Database**: MongoDB & Mongoose ORM `(v8.x)`
 - **Authentication**: JWT (JSON Web Tokens), Passport.js, Passport Google OAuth 2.0
-- **Payments Processing**: Razorpay Node SDK
-- **Utilities**: Bcrypt (hashing), CORS, Cookie-parser, Express-validator (input validation), and PapaParse.
+- **Payments Processing**: Razorpay Node SDK `(v2.9)`
+- **Security & Utilities**: Bcrypt `(v6)` for hashing, CORS, Cookie-parser, Express-validator `(v7)` for input validation, Express-rate-limit `(v8)` for API rate limiting, and PapaParse.
 
 ## Folder Structure
 
