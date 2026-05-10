@@ -65,7 +65,6 @@ This repository contains the following main components:
 - **`/client/web`**: The frontend web application built with React, Vite, and Bootstrap. Features interactive maps configured with Leaflet and Google Maps API.
 - **`/server`**: The backend API powered by Node.js and Express. It connects to a MongoDB database and handles authentication (JWT/Passport) and payments (Razorpay).
 - **`/ml-engine`**: Machine Learning engine (Python/Data processing services).
-- **`/APIs_CORS`**: Directory containing API schemas, CORS configurations, or related testing resources.
 
 ## Getting Started
 
