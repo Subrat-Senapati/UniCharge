@@ -13,12 +13,12 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
 
-      if (!token) {
-        setUser(null);
-        navigate("/login");
-        setLoading(false);
-        return;
-      }
+      // if (!token) {
+      //   setUser(null);
+      //   navigate("/login");
+      //   setLoading(false);
+      //   return;
+      // }
 
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/profile`, {
         method: "GET",
